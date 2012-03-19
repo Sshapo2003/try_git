@@ -1,0 +1,8 @@
+account_management: -f pretty -t @account_management
+wip: -f pretty -t @wip
+complete: -f pretty -t @complete -t ~@not_implemented
+failing: -f pretty -t @complete -t @failing
+complete_no_failing: -f pretty -t @complete -t ~@failing
+custom: -f pretty <%= ENV["TAGS"] %>
+specific: -f pretty --tags <%= ENV['TAGS'] %>
+

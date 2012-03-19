@@ -1,0 +1,6 @@
+require './ext/capybara'
+require './ext/driver'
+require './ext/integer'
+require './ext/matchers'
+require './ext/string'
+require './ext/time'

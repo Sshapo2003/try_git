@@ -1,0 +1,10 @@
+defaults: &execution_defaults
+  default_config: live
+  default_browser: firefox
+live:
+  <<: *execution_defaults
+  #capybara settings
+  default_wait_time: 5
+  #urls
+  wildfire_site_root: https://account.wildfireapp.com
+  
