@@ -7,4 +7,12 @@ live:
   default_wait_time: 5
   #urls
   wildfire_site_root: https://account.wildfireapp.com
+  messenger_admin_root: https://messenger.wildfireapp.com/admin
   
+am-test:
+  <<: *execution_defaults
+  #capybara settings
+  default_wait_time: 15
+  #urls
+  wildfire_site_root: https://account.am-test.wfhack.com
+  messenger_admin_root: https://messenger.am-test.wfhack.com/admin

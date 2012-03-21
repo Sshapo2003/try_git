@@ -6,10 +6,7 @@ class Model::Section::SignupRegisterUserForm < SitePrism::Section
   element :password_field, "input#user_password"
   element :user_terms_checkbox, "input#user_terms"
   element :create_account_button, "button.wf_submit"
-
-  element :login_div, "div.login"
-  element :terms_link, "label.terms a"
-  element :existing_login_link, "div.login a"
+  element :terms_of_service_link, "label.terms a"
 
   element :terms_validation_error, "div.submission div.formError"
   elements :registration_validation_errors, "fieldset div.required:not(.hidden) div"
@@ -18,14 +15,12 @@ class Model::Section::SignupRegisterUserForm < SitePrism::Section
     firstname_field.set "firstname"
     lastname_field.set "lastname"
     companyname_field.set "companyname"
-    email_address_field.set "my@email.com"
+    email_address_field.set "#{String.random}my@email.com"
     password_field.set "pa55w0rd"
   end
 
-  def use_existing_login_link
-    p login_div
-    p terms_link
-    #p existing_login_link
+  def set_email(email_address)
+    email_address_field.set email_address
   end
 
   def accept_terms
@@ -40,7 +35,7 @@ class Model::Section::SignupRegisterUserForm < SitePrism::Section
     create_account_button.click
   end
 
-  def validation_error_message_is_displayed? (message)
+  def validation_error_message_is_displayed?(message)
     registration_validation_errors.select {|a| a.text == message}.size > 0
   end
 end

@@ -5,3 +5,7 @@ end
 Then /^the login page should display the message "(.*)"$/ do |message|
   @wildfire.login.login_error_message.text.should eql message
 end
+
+Then /^the login page should be loaded$/ do
+  @wildfire.login.is_loaded?.should be_true
+end

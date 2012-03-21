@@ -18,3 +18,15 @@ Feature: Login to Wildfire
   Scenario: Unsuccesful Login - Wrong Password  
     When I login with email "notregistered@mailinator.com" and password "n0tmypassword"
     Then the login page should display the message "Invalid email or password provided."
+
+  @not_started
+  Scenario: View Privacy Policy
+
+  @not_started
+  Scenario: Go to Forgotten Password page
+
+  @not_started
+  Scenario: Go to Forgotten Password page
+
+  @not_started
+  Scenario: Go to Sign Up for an Account page

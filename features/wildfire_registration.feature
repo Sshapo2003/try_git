@@ -8,6 +8,13 @@ Feature: Register with Wildfire
   Scenario: Invalid Registration
     When I Create Account
     Then the registration page should display the signup error message "We were unable to create your account. Please review the errors below and try again."
+
+  @complete
+  Scenario: Hide Error Message
+    When I Create Account
+    And the registration page should display the signup error message "We were unable to create your account. Please review the errors below and try again."
+    When I dismiss the error message on the registration page
+    Then the registration page should not display the signup error message "We were unable to create your account. Please review the errors below and try again."
     
   @complete
   Scenario: Blank First Name
@@ -38,6 +45,13 @@ Feature: Register with Wildfire
     Then the registration page should display the validation error message "Email can't be blank"
 
   @complete
+  Scenario: Email Address Already Taken
+    When I complete the registration form
+    But the email address has already been reqistered
+    When I Create Account 
+    Then the registration page should display the validation error message "Email has already been taken"
+
+  @complete
   Scenario: Blank Password
     When I complete the registration form
     But I leave the password value blank
@@ -51,16 +65,11 @@ Feature: Register with Wildfire
     When I Create Account
     Then the registration page should display the terms validation error message "Terms must be accepted"
 
-  # The terms open in a new windoe and it is difficult to go to new window with Capybara
-  @notstarted
-  Scenario: View Terms of Service
-    When I view the terms of service
-    Then the terms and conditions page should be loaded
+  @complete
+  Scenario: Has Terms of Service link
+    Then the registration page should have a link to the terms of service page
 
-  @wip
+  @complete
   Scenario: Go to Existing Login page
     When I click the "Use your existing login" link
     Then the login page should be loaded
-
-  @otstarted
-  Scenario: Hide Error Message
