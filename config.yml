@@ -16,3 +16,14 @@ am-test:
   #urls
   wildfire_site_root: https://account.am-test.wfhack.com
   messenger_admin_root: https://messenger.am-test.wfhack.com/admin
+  authentication_login: wildfire
+  authentication_password: A1wNXX4YufOpPI
+
+staging:
+  <<: *execution_defaults
+  #capybara settings
+  default_wait_time: 15
+  #urls
+  wildfire_site_root: https://messenger.wildfirestaging.com/admin
+  authentication_login: wildfire
+  authentication_password: A1wNXX4YufOpPI
