@@ -2,7 +2,7 @@
 Feature: Messenger Inbox
 
   Background:
-    Given I am logged in as "some.name.demo"
+    Given I am logged in as "redwoodcityfoodie"
     And I navigate to the wildfire app messenger page
 
   @complete @US5483

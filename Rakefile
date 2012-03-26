@@ -54,7 +54,7 @@ task :default => [:doco]
 task :doco do |t|
   message = <<-MESSAGE
 Optional flags:
-  CONFIG=local,demo (default),stage
+  CONFIG=am-test,staging, live (default)
   BROWSER=firefox (default),chrome
   SAUCE=true
     SAUCE_OS=LINUX,XP,VISTA

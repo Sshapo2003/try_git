@@ -1,7 +1,7 @@
 Given /^I am logged in as "(.*)"$/ do |username|
   step("I navigate to the login page")
   case username
-  when "some.name.demo" then step("I login with email \"some.name.demo@wildfireapp.com\" and password \"th1sismypassword\"")
+  when "redwoodcityfoodie" then step("I login with email \"#{Helpers::Config['default_user_facebook_address']}\" and password \"#{Helpers::Config['default_user_facebook_password']}\"")
   else raise "Unknown user '#{username}' - please add a case to login_steps.rb"
   end
 end
