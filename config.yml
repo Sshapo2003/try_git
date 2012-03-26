@@ -7,6 +7,7 @@ live:
   default_wait_time: 5
   #urls
   wildfire_site_root: https://account.wildfireapp.com
+  wildfire_messenger_root: https://messenger.wildfireapp.com/
   messenger_admin_root: https://messenger.wildfireapp.com/admin
   
 am-test:
@@ -15,6 +16,7 @@ am-test:
   default_wait_time: 15
   #urls
   wildfire_site_root: https://account.am-test.wfhack.com
+  wildfire_messenger_root: https://messenger.am-test.wfhack.com/
   messenger_admin_root: https://messenger.am-test.wfhack.com/admin
   authentication_login: wildfire
   authentication_password: A1wNXX4YufOpPI
@@ -24,6 +26,8 @@ staging:
   #capybara settings
   default_wait_time: 15
   #urls
-  wildfire_site_root: https://messenger.wildfirestaging.com/admin
+  wildfire_site_root: https://account.wildfirestaging.com
+  wildfire_messenger_root: https://messenger.wildfirestaging.com
+  messenger_admin_root: https://account.wildfirestaging.com/admin
   authentication_login: wildfire
   authentication_password: A1wNXX4YufOpPI
