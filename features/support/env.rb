@@ -10,6 +10,7 @@ require 'active_support/dependencies'
 require 'timeout'
 require 'time'
 require 'json'
+require 'ruby-debug'
 
 #setting 'lib' to be the root of active support's autoloader
 ActiveSupport::Dependencies.autoload_paths << File.expand_path(File.join(Dir.pwd, 'lib'))
