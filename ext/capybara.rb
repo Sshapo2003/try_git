@@ -1,4 +1,10 @@
 module Capybara
+  class Session
+    def accept_alert
+      driver.browser.switch_to.alert.accept
+    end
+  end
+  
   module Node
     class Element < Base
       #Returns the full css locator used to fine this element

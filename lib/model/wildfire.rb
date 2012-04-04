@@ -11,4 +11,7 @@ class Model::Wildfire
   def wildfireapp_messenger
     Model::Page::WildfireappMessenger.new
   end
+  def account_management
+    Model::Page::AccountManagement.new
+  end
 end

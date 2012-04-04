@@ -6,6 +6,16 @@ Given /^I am logged in as "(.*)"$/ do |username|
   end
 end
 
+Given /^I am logged in to Wildfire as "([^"]*)"$/ do |email|
+  @wildfire ||= Model::Wildfire.new
+  @wildfire.login.load
+  @wildfire.login.login(email, 'password1') #TODO: Password goes in config
+end
+
+Given /^I am logged in to Wildfire as a new user$/ do
+  Helpers::AccountManagementHelper.register_and_login_new_user
+end
+
 When /^I login with email "(.*)" and password "(.*)"$/ do |email, password|
   @wildfire.login.login_user_credentials_form.login_with_credentials(email, password)
 end
