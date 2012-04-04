@@ -1,10 +1,11 @@
 require 'cucumber/rake/task'
 require 'rspec/core/rake_task'
 require 'yaml'
-
+require 'erb'
 
 namespace :cuke do
-  profiles = YAML::load(File.open(File.join(Dir.pwd, 'cucumber.yml'))).keys
+  template = File.open(File.join(Dir.pwd, 'cucumber.yml')) {|f| f.read}
+  profiles = YAML::load(ERB.new(template).result).keys
   profiles.each do |profile|
     Cucumber::Rake::Task.new(profile.to_sym) do |t|
       t.profile = profile
