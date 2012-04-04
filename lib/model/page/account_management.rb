@@ -3,4 +3,17 @@ class Model::Page::AccountManagement < SitePrism::Page
   
   section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
   section :your_properties, Model::Section::AccountManagement::YourProperties, 'div.body_content'
+  
+  def load_section(name)
+    load
+    sidebar.navigate_to(name)
+  end
+  
+  def locations
+    Model::Page::AccountManagement::Locations.new
+  end
+  
+  def basic_info
+    Model::Page::AccountManagement::BasicInfo.new
+  end
 end
