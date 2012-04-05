@@ -1,12 +1,13 @@
 source "http://rubygems.org"
 
-gem "rake", "0.9.2.2"
-gem "cucumber", "~> 1.1"
-gem "rspec", "~> 2.0"
-gem "activesupport", "3.1.3"
-gem "capybara", "1.1.2"
-gem "site_prism", "~> 0.9"
-gem "i18n", "0.6.0"
-gem "sauce", "1.0.2"
-gem "ruby-debug19"
+gem "rake"
+gem "cucumber"
+gem "rspec"
+gem "activesupport"
+gem "capybara"
+gem "site_prism"
+gem "i18n"
+gem "sauce"
+gem "ruby-debug19", :platforms => :mri_19
+gem "ruby-debug", :platforms => :mri_18
 gem "chromedriver-helper"
