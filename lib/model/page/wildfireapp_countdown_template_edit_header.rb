@@ -19,7 +19,17 @@ class Model::Page::WildfireappCountdownTemplateEditHeader < SitePrism::Page
   end
 
   def body_contains?(text)
-    return page.html.include?(text)
+    attempts = 0
+    got_text = false
+    while attempts < 30 && !got_text
+      begin
+        attempts += 1
+        got_text = page.html != nil
+      rescue Exception => e
+        sleep 0.5
+        # Keep trying until timeout is reached
+      end
+    end
   end
 
   def is_loaded?
