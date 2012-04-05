@@ -2,7 +2,7 @@ Given /^I navigate to the (.*) page$/ do |page_name|
   @wildfire = Model::Wildfire.new
   @messengeradmin = Model::Messengeradmin.new
   @facebook = Model::Facebook.new
-  case page_name
+  case page_name.downcase
   when 'login'
     visit "#{Helpers::Config['wildfire_site_root']}/logout" unless @wildfire.login.is_loaded?
     @wildfire.login.load
@@ -21,6 +21,12 @@ Given /^I navigate to the (.*) page$/ do |page_name|
   when 'messenger admin dashboard' then @messengeradmin.dashboard.load
   when 'palo alto foodies countdown app'
     visit('http://www.facebook.com/PaloAltoFoodies/app_364041783617057')
+  when 'account management' then @wildfire.account_management.load
   else raise "Haven't mapped the '#{page_name}' page"
   end
+end
+
+When /^I view "([^"]*)" in Account Management$/ do |section|
+  @wildfire.account_management.load
+  @wildfire.account_management.sidebar.navigate_to(section)
 end
