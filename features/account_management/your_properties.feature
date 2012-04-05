@@ -13,7 +13,7 @@ Feature: Your Properties
 		 | Alistairwf | Twitter Account |
 		 | MyTestPage | Facebook Page   |
 
-	@wip
+	@pending
 	Scenario: Add a new Facebook property to Wildfire
 		Given I am logged in to Wildfire as a new user
 		When I add the Facebook page "MyFooPage" to Wildfire
