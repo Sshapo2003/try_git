@@ -4,8 +4,8 @@ require 'yaml'
 require 'erb'
 
 namespace :cuke do
-  template = File.open(File.join(Dir.pwd, 'cucumber.yml')) {|f| f.read}
-  profiles = YAML::load(ERB.new(template).result).keys
+  template = File.open('cucumber.yml') {|f| f.read}
+  profiles = YAML.load(ERB.new(template).result).keys
   profiles.each do |profile|
     Cucumber::Rake::Task.new(profile.to_sym) do |t|
       t.profile = profile
@@ -17,9 +17,9 @@ end
 namespace :config do
   desc "List available configs"
   task :list do
-   config_yaml = File.join(Dir.pwd, 'config.yml')
+   config_yaml = File.expand_path('config.yml')
     raise "the config yaml file could not be found" unless File.exists?(config_yaml)
-    config_yaml_file = YAML::load(File.open(config_yaml))
+    config_yaml_file = YAML.load_file(config_yaml)
     puts "Known configurations are are:"
     config_yaml_file.keys.each do |key|
       puts "  - #{key}"
@@ -30,7 +30,7 @@ end
 namespace :sauce do
   require 'active_support/deprecation'
   require 'active_support/dependencies'
-  ActiveSupport::Dependencies.autoload_paths << File.expand_path(File.join(Dir.pwd, 'lib'))
+  ActiveSupport::Dependencies.autoload_paths << File.expand_path('lib')
 
   cuke_task = ENV["TAGS"] ? "cuke:custom" : "cuke:complete"
 
