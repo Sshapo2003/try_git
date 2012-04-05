@@ -11,4 +11,16 @@ class Model::Wildfire
   def wildfireapp_messenger
     Model::Page::WildfireappMessenger.new
   end
+  def wildfireapp_analytics
+    Model::Page::WildfireappAnalytics.new
+  end
+  def wildfireapp_page_manager
+    Model::Page::WildfireappPageManager.new
+  end
+  def wildfireapp_page_manager_edit_mode
+    Model::Page::WildfireappPageManagerEditMode.new
+  end
+  def wildfireapp_countdown_template_edit_header
+    Model::Page::WildfireappCountdownTemplateEditHeader.new
+  end
 end

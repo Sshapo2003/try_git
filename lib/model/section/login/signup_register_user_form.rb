@@ -1,4 +1,4 @@
-class Model::Section::SignupRegisterUserForm < SitePrism::Section
+class Model::Section::Login::SignupRegisterUserForm < SitePrism::Section
   element :firstname_field, "input#user_first_name"
   element :lastname_field, "input#user_last_name"
   element :companyname_field, "input#company_name"

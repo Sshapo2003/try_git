@@ -8,11 +8,14 @@ live:
   #urls
   wildfire_site_root: https://account.wildfireapp.com
   wildfire_messenger_root: https://messenger.wildfireapp.com/
+  wildfire_analytics_root: https://dashboard.wildfireapp.com/
+  wildfire_page_manager_root: https://apps.wildfireapp.com/pages/states/published
   messenger_admin_root: https://messenger.wildfireapp.com/admin
   crystal_ball_root: https://promos.wildfireapp.com/crystal_ball/
   #credentials
-  default_user_facebook_address: redwoodcityfoodie@gmail.com
+  default_user_facebook_address: paloaltofoodie@gmail.com
   default_user_facebook_password: th1sismypassword
+  default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   
 am-test:
   <<: *execution_defaults
@@ -23,6 +26,7 @@ am-test:
   wildfire_messenger_root: https://messenger.am-test.wfhack.com/
   messenger_admin_root: https://messenger.am-test.wfhack.com/admin
   crystal_ball_root: https://promos.am-test.wfhack.com/crystal_ball/
+  #credentials
   #authentication
   authentication_login: wildfire
   authentication_password: A1wNXX4YufOpPI
@@ -37,8 +41,6 @@ staging:
   messenger_admin_root: https://account.wildfirestaging.com/admin
   crystal_ball_root: https://promos.wildfirestaging.com/crystal_ball/
   #credentials
-  default_user_facebook_address: paloaltofoodie@gmail.com
-  default_user_facebook_password: th1sismypassword
   #authentication
   authentication_login: wildfire
   authentication_password: A1wNXX4YufOpPI

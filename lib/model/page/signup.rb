@@ -1,7 +1,7 @@
 class Model::Page::Signup < SitePrism::Page
   set_url "#{Helpers::Config['wildfire_site_root']}/signup/"
 
-  section :signup_register_user_form, Model::Section::SignupRegisterUserForm, 'form'
+  section :signup_register_user_form, Model::Section::Login::SignupRegisterUserForm, 'form'
 
   element :signup_error_message, 'span.flash_contents'
   element :signup_error_message_close_button, 'div.flash_liner a.flash_close'

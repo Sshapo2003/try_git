@@ -1,4 +1,4 @@
-class Model::Section::WildfireAppMessengerSidebar < SitePrism::Section
+class Model::Section::Messenger::WildfireappMessengerSidebar < SitePrism::Section
   element :messages_link, 'li.inbox a'
   element :flagged_messages_link, 'li.flagged a'
   element :assigned_messages_link, 'li.assigned a'

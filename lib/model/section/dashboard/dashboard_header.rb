@@ -1,4 +1,4 @@
-class Model::Section::DashboardHeader < SitePrism::Section
+class Model::Section::Dashboard::DashboardHeader < SitePrism::Section
   element :company_id, "form.select_form_company_id div.multiuser_company_selector a span"
   element :company_select_button, "form.select_form_company_id a.select_button"
   element :company_selection_drop_down, "select#company_id"

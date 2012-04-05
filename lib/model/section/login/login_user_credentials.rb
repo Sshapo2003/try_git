@@ -1,4 +1,4 @@
-class Model::Section::LoginUserCredentials < SitePrism::Section
+class Model::Section::Login::LoginUserCredentials < SitePrism::Section
   element :email_field, "input#email"
   element :password_field, "input#password"
   element :login_button, "button.login"
