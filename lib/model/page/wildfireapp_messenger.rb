@@ -7,4 +7,8 @@ class Model::Page::WildfireappMessenger < SitePrism::Page
   def is_loaded?
     page.current_url.include? 'messenger'
   end
+  
+  def active?
+    using_wait_time(1) { page.has_no_content?('This product is locked') }
+  end
 end

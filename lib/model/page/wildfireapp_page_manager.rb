@@ -6,4 +6,8 @@ class Model::Page::WildfireappPageManager < SitePrism::Page
   def is_loaded?
     page.current_url.include? 'pages/states/published'
   end
+  
+  def active?
+    using_wait_time(1) { page.has_no_content?('This product is locked') }
+  end
 end
