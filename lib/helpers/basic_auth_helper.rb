@@ -7,7 +7,7 @@ class Helpers::BasicAuthHelper
       rescue
         raise "Basic auth credentials have not been configured for this environment"
       end
-      ['wildfire_site_root', 'wildfire_messenger_root', 'messenger_admin_root', 'crystal_ball_root', 'wildfire_promotions_root'].each do |site|
+      ['wildfire_site_root', 'wildfire_messenger_root', 'wildfire_promotions_root', 'wildfire_page_manager_root', 'wildfire_analytics_root'].each do |site|
         uri = URI.parse(Helpers::Config[site])
         path = "#{uri.scheme}://#{user}:#{password}@#{uri.host}#{uri.path}"
         Capybara.current_session.visit(path)
