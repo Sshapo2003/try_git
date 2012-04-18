@@ -3,6 +3,7 @@ class Model::Page::AccountManagement < SitePrism::Page
   
   section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
   section :your_properties, Model::Section::AccountManagement::YourProperties, 'div.body_content'
+  section :header, Model::Section::Generic::Header, 'div.head'
   
   def load_section(name)
     load

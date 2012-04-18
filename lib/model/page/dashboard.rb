@@ -5,7 +5,7 @@ class Model::Page::Dashboard < SitePrism::Page
   element :account_button, ''
   
 
-  section :dashboard_header, Model::Section::Dashboard::DashboardHeader, 'div.head'
+  section :dashboard_header, Model::Section::Generic::Header, 'div.head'
 
   def logout
 
