@@ -27,7 +27,7 @@ am-test:
   wildfire_site_root: https://account.am-test.wfhack.com
   wildfire_messenger_root: https://messenger.am-test.wfhack.com/
   wildfire_analytics_root: https://dashboard.am-test.wfhack.com/
-  wildfire_page_manager_root: https://appsuite.am-test.wfhack.com/pages/states/published
+  wildfire_page_manager_root: https://apps.am-test.wfhack.com/pages/states/published
   messenger_admin_root: https://messenger.am-test.wfhack.com/admin
   wildfire_promotions_root: https://promos.am-test.wfhack.com
   crystal_ball_root: https://promos.am-test.wfhack.com/crystal_ball/
