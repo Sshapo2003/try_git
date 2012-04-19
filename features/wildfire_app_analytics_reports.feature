@@ -1,11 +1,11 @@
-@messenger
+@analytics @production
 Feature: Analytics Reports
 
   Background:
     Given I am logged in as "default"
     And I navigate to the wildfire app analytics page
 
-  @not_started
+  @wip
   Scenario: View Each Report Type
     Then the "Overview" panel should be highlighted and displayed
     When I click the "Industry Benchmarks" tab on the left navigation menu on wildfire app analytics page

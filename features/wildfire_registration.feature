@@ -1,4 +1,4 @@
-@account_management
+@account_management @production @staging @amtest
 Feature: Register with Wildfire
 
   Background:
