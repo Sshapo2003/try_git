@@ -4,7 +4,7 @@ Feature: Locations
 	As a Wildfire App user
 	I want to be able to add company locations to Wildfire
 	
-	@complete
+	@complete @staging @amtest
 	Scenario: Add a new company location
 		Given I am logged in to Wildfire as a new user
 		And I navigate to the Account Management page

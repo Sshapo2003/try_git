@@ -4,7 +4,7 @@ Feature: Your Properties
 	As a Wildfire app user
 	I want to be able to view and add properties I own to Wildfire
 
-	@complete
+	@complete @staging
 	Scenario: View details of existing social properties already added to Wildfire
 		Given I am logged in to Wildfire as a user with existing properties
 		When I view "Your Properties" in Account Management
@@ -19,7 +19,7 @@ Feature: Your Properties
 		When I add the Facebook page "MyFooPage" to Wildfire
 		Then I should see Facebook page "MyFooPage" in Your Properties
 	
-	@complete
+	@complete @staging @amtest
 	Scenario: Add a new Twitter property to Wildfire
 		Given I am logged in to Wildfire as a new user
 		When I add the twitter account "alistairwf" to Wildfire
