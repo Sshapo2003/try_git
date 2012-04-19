@@ -6,3 +6,12 @@ failing: -f pretty -t @complete -t @failing
 complete_no_failing: -f pretty -t @complete -t ~@failing
 custom: -f pretty <%= ENV["TAGS"] %>
 specific: -f pretty --tags <%= ENV['TAGS'] %>
+productionwip: -f pretty -t @wip -t @production
+productioncomplete: -f pretty -t @complete -t ~@not_implemented -t @production
+productionfailing: -f pretty -t @complete -t @failing -t @production
+stagingwip: -f pretty -t @wip -t @staging
+stagingcomplete: -f pretty -t @complete -t ~@not_implemented -t @staging
+stagingfailing: -f pretty -t @complete -t @failing -t @staging
+amtestwip: -f pretty -t @wip -t @amtest
+amtestcomplete: -f pretty -t @complete -t ~@not_implemented -t @amtest
+stagingfailing: -f pretty -t @complete -t @failing -t @amtest

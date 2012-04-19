@@ -32,6 +32,9 @@ am-test:
   wildfire_promotions_root: https://promos.am-test.wfhack.com
   crystal_ball_root: https://promos.am-test.wfhack.com/crystal_ball/
   #credentials
+  default_user_facebook_address: paloaltofoodie@gmail.com
+  default_user_facebook_password: th1sismypassword
+  default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   #authentication
   authentication_login: wildfire
   authentication_password: A1wNXX4YufOpPI
@@ -50,6 +53,9 @@ staging:
   wildfire_promotions_root: https://promos.wildfirestaging.com
   crystal_ball_root: https://promos.wildfirestaging.com/crystal_ball/
   #credentials
+  default_user_facebook_address: paloaltofoodie@gmail.com
+  default_user_facebook_password: th1sismypassword
+  default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   #authentication
   authentication_login: wildfire
   authentication_password: A1wNXX4YufOpPI

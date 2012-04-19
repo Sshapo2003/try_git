@@ -5,7 +5,7 @@ Feature: Update Page
    Given I am logged in as "default"
    And I navigate to the wildfire app page manager page
 
-  @complete
+  @complete @production
   Scenario: Publish an update to an App in Page Manager
     When I update and publish the Countdown App
     And I navigate to the palo alto foodies countdown app page
