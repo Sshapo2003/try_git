@@ -26,6 +26,15 @@ Given /^I navigate to the (.*) page$/ do |page_name|
   end
 end
 
+Given /^I am in the "([^"]*)" application$/ do |application|
+  case application.downcase
+  when 'messenger' then @wildfire.wildfireapp_messenger.load
+  when 'analytics' then @wildfire.wildfireapp_analytics.load
+  when 'page manager' then @wildfire.wildfireapp_page_manager.load
+  else raise "not implemented for '#{application}'"
+  end
+end
+
 When /^I view "([^"]*)" in Account Management$/ do |section|
   @wildfire.account_management.load
   @wildfire.account_management.sidebar.navigate_to(section)

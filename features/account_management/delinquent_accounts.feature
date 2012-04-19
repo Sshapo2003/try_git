@@ -44,3 +44,17 @@ Feature: Delinquent Accounts
 		 | Tracked Properties |
 		 | Applications       |
 		 | Services           |
+		
+	@US6192
+	Scenario Outline: Delinquent account switching in any app
+		Given I am logged in to Wildfire as a user with a delinquent account
+		And I switch to a non-delinquent account
+		And I am in the "<application>" application
+		When I switch to a delinquent account
+		Then I should be redirected to Account Management
+		And I should see the delinquent account flash message
+		Examples:
+		 | application  |
+		 | messenger    |
+		 | analytics    |
+		 | page manager |
