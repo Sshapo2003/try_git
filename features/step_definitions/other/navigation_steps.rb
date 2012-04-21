@@ -13,7 +13,7 @@ Given /^I navigate to the (.*) page$/ do |page_name|
     @wildfire.wildfireapp_messenger.is_loaded?.should be_true
   when 'wildfire app analytics'
     @wildfire.wildfireapp_analytics.load
-    @wildfire.wildfireapp_analytics.is_loaded?.should be_true
+    @wildfire.wildfireapp_analytics.should be_displayed
   when 'wildfire app page manager'
     @wildfire.wildfireapp_page_manager.load
     @wildfire.wildfireapp_page_manager.is_loaded?.should be_true

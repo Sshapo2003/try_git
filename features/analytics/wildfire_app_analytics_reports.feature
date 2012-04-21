@@ -5,23 +5,27 @@ Feature: Analytics Reports
     Given I am logged in as "default"
     And I navigate to the wildfire app analytics page
 
-  @wip
+  @complete
   Scenario: View Each Report Type
-    Then the "Overview" panel should be highlighted and displayed
+    Then the "Overview" tab should be highlighted
+    And the "Promotions" panel should be visible in the main page area on wildfire app analytics page
+    And the "Audience" panel should be visible in the main page area on wildfire app analytics page
     When I click the "Industry Benchmarks" tab on the left navigation menu on wildfire app analytics page
-    Then the "Overview" panel should be highlighted and displayed
+    Then the "Industry Benchmarks" tab should be highlighted
+    And the "Industry Benchmarks" panel should be visible in the main page area on wildfire app analytics page
+    And the "Industry Benchmarks" sticky should be visible in the main page area on wildfire app analytics page
     When I click the "Tabs" tab on the left navigation menu on wildfire app analytics page
-    Then the "Overview" panel should be highlighted and displayed
+    Then the "Tabs" tab should be highlighted
+    And the "Tabs" panel should be visible in the main page area on wildfire app analytics page
+    And the "Tabs" sticky should be visible in the main page area on wildfire app analytics page
     When I click the "Pages" tab on the left navigation menu on wildfire app analytics page
-    Then the "Overview" panel should be highlighted and displayed
+    Then the "Pages" tab should be highlighted
+    And the "Pages" panel should be visible in the main page area on wildfire app analytics page
+    And the "Pages" sticky should be visible in the main page area on wildfire app analytics page
     When I click the "Posts" tab on the left navigation menu on wildfire app analytics page
-    Then the "Overview" panel should be highlighted and displayed
+    Then the "Posts" tab should be highlighted
+    And the "Posts" panel should be visible in the main page area on wildfire app analytics page
+    And the "Posts" sticky should be visible in the main page area on wildfire app analytics page
     When I click the "Referral Sources" tab on the left navigation menu on wildfire app analytics page
-
-  @not_started
-  Scenario: Overview Reports Panel
-    Then the "Promotions" panel should be visible in the dashboard area
-    And the "Promotions" panel title should be "Promotions"
-    And the number of promos run should be visible in the promotions panel
-    And the number of total entries should be visible in the promotions panel
-    And the "Audience" panel should be visible in the dashboard area
+    Then the "Referral Sources" tab should be highlighted
+    And the "Referral Sources" panel should be visible in the main page area on wildfire app analytics page
