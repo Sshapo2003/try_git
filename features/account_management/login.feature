@@ -30,3 +30,9 @@ Feature: Login to Wildfire
 
   @not_started
   Scenario: Go to Sign Up for an Account page
+
+  @not-started
+  Scenario: Reset password by following link from email
+  
+  @not-started
+  Scenario: Ensure password is valid on password reset form
