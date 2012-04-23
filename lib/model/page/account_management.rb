@@ -10,6 +10,10 @@ class Model::Page::AccountManagement < SitePrism::Page
     sidebar.navigate_to(name)
   end
   
+  def loaded?
+    current_url.include?(url)
+  end
+  
   def locations
     Model::Page::AccountManagement::Locations.new
   end

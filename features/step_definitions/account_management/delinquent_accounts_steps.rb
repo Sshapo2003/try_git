@@ -9,6 +9,10 @@ When /^I switch to a non\-delinquent account$/ do
   @wildfire.account_management.header.choose_company('Enabled Company')
 end
 
+When /^I switch to a delinquent account$/ do
+  @wildfire.account_management.header.choose_company('Delinquent Company')
+end
+
 Then /^I should see the delinquent account flash message$/ do
   page.should(have_content(DELINQUENT_FLASH_MESSAGE), "The delinquent account flash message was not present on the page")
 end
@@ -30,4 +34,8 @@ end
 Then /^I (should|should not) have access to Page Manager$/ do |expectation|
   @wildfire.wildfireapp_page_manager.load
   @wildfire.wildfireapp_page_manager.send(expectation.parameterize.underscore, be_active)
+end
+
+Then /^I should be redirected to Account Management$/ do
+  @wildfire.account_management.should(be_loaded, "Currently on '#{current_url}', not Account Management")
 end
