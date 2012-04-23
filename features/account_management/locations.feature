@@ -15,6 +15,9 @@ Feature: Locations
 	Scenario: Remove an existing location
 	
 	@not-started
+	Scenario: Add multiple locations
+	
+	@not-started
 	Scenario: Edit an existing location
 	
 	@not-started
@@ -31,3 +34,7 @@ Feature: Locations
 	
 	@not-started
 	Scenario: Display a validation message if a state is selected for an invalid country
+	
+	@not-started
+	Scenario: Display Company Name and Location on Campaigns published by this company
+	

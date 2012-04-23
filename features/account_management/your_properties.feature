@@ -18,6 +18,18 @@ Feature: Your Properties
 		Given I am logged in to Wildfire as a new user
 		When I add the Facebook page "MyFooPage" to Wildfire
 		Then I should see Facebook page "MyFooPage" in Your Properties
+		
+	@not-started
+	Scenario: Owned properties display in Messenger
+	
+	@not-started
+	Scenario: Tracked properties do not display in Messenger
+	
+	@not-started
+  Scenario: Owned properties display in Analytics
+  
+  @not-started
+  Scenario: Tracked properties display in Analytics
 	
 	@complete @staging @amtest
 	Scenario: Add a new Twitter property to Wildfire

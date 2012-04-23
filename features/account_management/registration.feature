@@ -3,6 +3,9 @@ Feature: Register with Wildfire
 
   Background:
     When I navigate to the signup page
+    
+  @not-started
+  Scenario: Register with valid details
 
   @complete
   Scenario: Invalid Registration

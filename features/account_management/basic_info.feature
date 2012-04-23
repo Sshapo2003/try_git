@@ -7,6 +7,9 @@ Feature: Basic Info
 	Background:
 		Given I am logged in to Wildfire as a new user
 		And I view "Basic Info" in Account Management
+		
+	@not-started
+	Scenario: Verify that Company Name is populated automatically
 	
 	@complete @staging @amtest
 	Scenario: Update Company Name
@@ -89,3 +92,13 @@ Feature: Basic Info
 		When I remove the company logo
 		Then I should see the message "Your logo has been successfully removed"
 		And I should see the default logo image
+		
+	@not-started
+	Scenario: Verify valid file formats can be uploaded (["jpg", "jpeg", "gif", "png"])
+	
+	@not-started
+	Scenario: Display flash message if invalid logo file is uploaded
+	
+	@not-started
+	Scenario: Resize large images to approximately 300px x 100px
+	
