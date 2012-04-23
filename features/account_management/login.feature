@@ -36,4 +36,3 @@ Feature: Login to Wildfire
   
   @not-started
   Scenario: Ensure password is valid on password reset form
-  

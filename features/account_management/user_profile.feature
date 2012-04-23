@@ -18,4 +18,3 @@ Feature: User profile
   
   @not-started
   Scenario: Change password
-  

@@ -33,4 +33,3 @@ Feature: Invitations
   
   @not-started
   Scenario: Accept Invite when already logged in as the invited User
-  

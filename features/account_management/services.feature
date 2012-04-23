@@ -12,4 +12,3 @@ Feature: Services
   
   @not-started
   Scenario: Display validation messages for invalid Constant Contact credentials
-  
