@@ -21,4 +21,8 @@ class Model::Page::AccountManagement < SitePrism::Page
   def basic_info
     Model::Page::AccountManagement::BasicInfo.new
   end
+  
+  def tracked_properties
+    Model::Page::AccountManagement::TrackedProperties.new
+  end
 end
