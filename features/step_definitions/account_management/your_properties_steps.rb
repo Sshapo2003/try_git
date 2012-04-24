@@ -1,11 +1,12 @@
 Given /^I am logged in to Wildfire as a user with existing properties$/ do
   pending "Currently only implemented for staging" unless ENV['CONFIG'] == 'staging'
-   @wildfire.login.load
+  @wildfire.login.load
   @wildfire.login.login('alistair.hutchison+staging@wildfireapp.com', 'password1')
 end
 
 When /^I add the Facebook page "([^"]*)" to Wildfire$/ do |fb_page_name|
-  pending "Need to be able to validate my test facebook account"
+  @wildfire.account_management.load_section('Your Properties')
+  @wildfire.account_management.your_properties.add_facebook_property(fb_page_name)
 end
 
 When /^I add the twitter account "([^"]*)" to Wildfire$/ do |twitter_name|

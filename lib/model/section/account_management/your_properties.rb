@@ -22,12 +22,23 @@ class Model::Section::AccountManagement::YourProperties < SitePrism::Section
   
   def add_facebook_property(fb_page_name)
     add_facebook_property_link.click
-    #TODO: Login to FB with valid credentials and add a facebook page
+    within_facebook_properties_modal do
+      find("div:contains('#{fb_page_name}') input").check
+    end
   end
   
   def add_twitter_property(twitter_name)
     add_twitter_link.click
     within_window(page.driver.browser.window_handles.last){ Model::Page::TwitterOauth.new.login(twitter_name, 'w1ldf1r3')}
     wait_until() { has_property?(twitter_name.capitalize, 'twitter account') }
+  end
+  
+  private
+  def within_facebook_properties_modal(&block)
+    begin
+      # This currently raises Permission denied for <https://s-static.ak.facebook.com> to get property Window.frameElement (Selenium::WebDriver::Error::UnknownError)
+      # See http://code.google.com/p/selenium/issues/detail?id=2863 for details
+      within_frame(find("iframe[src*='fb/properties/new']")[:id]) { yield }
+    end
   end
 end

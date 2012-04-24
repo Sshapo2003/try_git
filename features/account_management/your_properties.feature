@@ -13,11 +13,12 @@ Feature: Your Properties
      | Alistairwf | Twitter Account |
      | MyTestPage | Facebook Page   |
 
-  @pending
+  @blocked
   Scenario: Add a new Facebook property to Wildfire
     Given I am logged in to Wildfire as a new user
-    When I add the Facebook page "MyFooPage" to Wildfire
-    Then I should see Facebook page "MyFooPage" in Your Properties
+    And I am logged in to Facebook as a page administrator
+    When I add the Facebook page "Wildfire Test Automation" to Wildfire
+    Then I should see Facebook page "Wildfire Test Automation" in Your Properties
     
   @not-started
   Scenario: Owned properties display in Messenger

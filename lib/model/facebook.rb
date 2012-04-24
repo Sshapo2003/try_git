@@ -5,4 +5,7 @@ class Model::Facebook
   def countdown_application
     Model::Page::Facebook::WildfireApplications::CountdownApplication.new
   end
+  def home
+    Model::Page::Facebook::Home.new
+  end
 end
