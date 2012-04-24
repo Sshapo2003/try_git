@@ -1,5 +1,4 @@
 class Model::Section::AccountManagement::YourProperties < SitePrism::Section
-  include Capybara::DSL
   
   element :social_properties_form, 'form#social_properties'
   element :add_facebook_property_link, "a:contains('Facebook')"
