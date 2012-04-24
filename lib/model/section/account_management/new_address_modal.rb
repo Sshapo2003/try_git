@@ -1,5 +1,4 @@
 class Model::Section::AccountManagement::NewAddressModal < SitePrism::Section
-  include Capybara::DSL
   
   def fill_address_form(details)
     within_new_address_iframe do

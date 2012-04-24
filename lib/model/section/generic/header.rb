@@ -1,5 +1,4 @@
 class Model::Section::Generic::Header < SitePrism::Section
-  include Capybara::DSL
   
   element :company_name_span, "form.select_form_company_id div.multiuser_company_selector a span"
   element :company_select_button, "form.select_form_company_id a.select_button"

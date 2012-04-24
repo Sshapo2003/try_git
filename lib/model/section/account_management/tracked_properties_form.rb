@@ -1,5 +1,4 @@
 class Model::Section::AccountManagement::TrackedPropertiesForm < SitePrism::Section
-  include Capybara::DSL
   
   def tracked_properties
     return [] unless has_properties?

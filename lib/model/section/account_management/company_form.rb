@@ -1,5 +1,4 @@
 class Model::Section::AccountManagement::CompanyForm < SitePrism::Section
-  include Capybara::DSL
   
   def update_company_name(name)
     within_form { fill_in('Company Name', :with => name) }
