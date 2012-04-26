@@ -15,7 +15,7 @@ Feature: Composing Messages
 
   @not_started
   Scenario: Send a message to twitter property
-    When I compose a valid message
+    When I compose a valid message for my twitter property
     And I send the message
     Then I should be informed that the message has been sent succesfully
     And the message should be visible in the "Sent" folder

@@ -17,6 +17,7 @@ Given /^I navigate to the (.*) page$/ do |page_name|
   when 'wildfire app page manager'
     @wildfire.wildfireapp_page_manager.load
     @wildfire.wildfireapp_page_manager.is_loaded?.should be_true
+  when 'wildfire app templates' then @wildfire.wildfireapp_templates.load
   when 'messenger admin login' then @messengeradmin.login.load
   when 'messenger admin dashboard' then @messengeradmin.dashboard.load
   when 'palo alto foodies countdown app'

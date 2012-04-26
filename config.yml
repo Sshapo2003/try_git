@@ -11,6 +11,7 @@ live:
   wildfire_analytics_root: https://dashboard.wildfireapp.com/
   wildfire_page_manager_root: https://apps.wildfireapp.com/pages/states/published
   wildfire_promotions_root: https://promos.wildfireapp.com
+  wildfire_templates_root: http://templates.wildfireapp.com
   messenger_admin_root: https://messenger.wildfireapp.com/admin
   crystal_ball_root: https://promos.wildfireapp.com/crystal_ball/
   #credentials

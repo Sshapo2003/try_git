@@ -10,4 +10,4 @@ Feature: Flagged Messages
   Scenario: Unflag a message
     Given I have an flagged message in Flagged Messages
     When I unflag the message
-    Then the message should not be displayed in Flagged Messages
+    Then the message should not be displayed in Flagged

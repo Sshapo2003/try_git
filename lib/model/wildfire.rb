@@ -23,6 +23,9 @@ class Model::Wildfire
   def wildfireapp_countdown_template_edit_header
     Model::Page::WildfireappCountdownTemplateEditHeader.new
   end
+  def wildfireapp_templates
+    Model::Page::WildfireappTemplates.new
+  end
   def account_management
     Model::Page::AccountManagement.new
   end
