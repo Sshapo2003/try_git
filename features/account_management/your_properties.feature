@@ -38,6 +38,13 @@ Feature: Your Properties
     When I add the twitter account "alistairwf" to Wildfire
     Then I should see Twitter account "Alistairwf" in Your Properties
     
+  @complete @staging @amtest
+  Scenario: Prevent the same Twitter property from being added multiple times
+    Given I am logged in to Wildfire as a new user
+    And I have added the twitter account "alistairwf" to Wildfire
+    When I add the twitter account "alistairwf" to Wildfire
+    Then I should see the message "The Twitter account you are trying to add has already been added."
+    
   @not-started
   Scenario: Reconnect a Facebook property with expired or broken connection
   

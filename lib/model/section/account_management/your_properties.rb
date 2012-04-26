@@ -3,6 +3,7 @@ class Model::Section::AccountManagement::YourProperties < SitePrism::Section
   element :social_properties_form, 'form#social_properties'
   element :add_facebook_property_link, "a:contains('Facebook')"
   element :add_twitter_link, "a:contains('Twitter')"
+  element :add_property_button, "a:contains('Add')"
   
   def has_property?(name, type)
     social_properties.include?({:name => name, :type => type.downcase})
@@ -24,12 +25,6 @@ class Model::Section::AccountManagement::YourProperties < SitePrism::Section
     within_facebook_properties_modal do
       find("div:contains('#{fb_page_name}') input").check
     end
-  end
-  
-  def add_twitter_property(twitter_name)
-    add_twitter_link.click
-    within_window(page.driver.browser.window_handles.last){ Model::Page::TwitterOauth.new.login(twitter_name, 'w1ldf1r3')}
-    wait_until() { has_property?(twitter_name.capitalize, 'twitter account') }
   end
   
   private
