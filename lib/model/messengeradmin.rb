@@ -1,8 +1,11 @@
 class Model::Messengeradmin
   def login
-    Model::Page::MessengerAdminLogin.new
+    Model::Page::MessengerAdmin::MessengerAdminLogin.new
   end
   def dashboard
-    Model::Page::MessengerAdminDashboard.new
+    Model::Page::MessengerAdmin::MessengerAdminDashboard.new
+  end
+  def refresh_a_social_property
+    Model::Page::MessengerAdmin::MessengerAdminRefreshASocialProperty.new
   end
 end

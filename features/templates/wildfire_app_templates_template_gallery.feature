@@ -1,5 +1,5 @@
 @messenger @production
-Feature: Flagged Messages
+Feature: Template Gallery
 
   Background:
     Given I am logged in as "default"

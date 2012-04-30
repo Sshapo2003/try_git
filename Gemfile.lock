@@ -75,7 +75,7 @@ GEM
       ruby-debug-base19 (>= 0.11.19)
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
-    rubyzip (0.9.7)
+    rubyzip (0.9.8)
     sauce (1.0.2)
       childprocess (>= 0.1.6)
       cmdparse (>= 2.0.2)
