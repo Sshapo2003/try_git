@@ -10,13 +10,13 @@ Given /^I navigate to the (.*) page$/ do |page_name|
   when 'signup' then @wildfire.signup.load
   when 'wildfire app messenger' 
     @wildfire.wildfireapp_messenger.load
-    @wildfire.wildfireapp_messenger.is_loaded?.should be_true
+    @wildfire.wildfireapp_messenger.should be_displayed
   when 'wildfire app analytics'
     @wildfire.wildfireapp_analytics.load
     @wildfire.wildfireapp_analytics.should be_displayed
   when 'wildfire app page manager'
     @wildfire.wildfireapp_page_manager.load
-    @wildfire.wildfireapp_page_manager.is_loaded?.should be_true
+    @wildfire.wildfireapp_page_manager.should be_displayed
   when 'wildfire app templates' then @wildfire.wildfireapp_templates.load
   when 'messenger admin login' then @messengeradmin.login.load
   when 'messenger admin dashboard' then @messengeradmin.dashboard.load

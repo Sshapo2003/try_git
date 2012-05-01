@@ -32,3 +32,9 @@ Feature: Template Gallery
   Scenario: Filter templates by Features
     When I filter by "Virality" in the template search
     Then the "Instagram Feed" template should be displayed in the tile gallery
+
+  @complete
+  Scenario: Create Page from Template in Template Gallery
+    When I click the Start Now button on any template
+    Then the Page Manager page should be displayed
+    And the sticky note on the Page Manager page should display "You have successfully created a page!"

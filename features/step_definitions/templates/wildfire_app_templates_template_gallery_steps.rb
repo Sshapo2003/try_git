@@ -44,3 +44,7 @@ When /^I filter by "(.*)" in the template search$/ do |filter_name|
   @wildfire.wildfireapp_templates.set_filter filter_name
   @wildfire.wildfireapp_templates.search_button.click
 end
+
+When /^I click the Start Now button on any template$/ do
+  @wildfire.wildfireapp_templates.templates.first.start_button.click
+end

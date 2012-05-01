@@ -15,10 +15,10 @@ class Model::Wildfire
     Model::Page::WildfireappAnalytics.new
   end
   def wildfireapp_page_manager
-    Model::Page::WildfireappPageManager.new
+    Model::Page::PageManager::WildfireappPageManager.new
   end
   def wildfireapp_page_manager_edit_mode
-    Model::Page::WildfireappPageManagerEditMode.new
+    Model::Page::PageManager::WildfireappPageManagerEditMode.new
   end
   def wildfireapp_countdown_template_edit_header
     Model::Page::WildfireappCountdownTemplateEditHeader.new

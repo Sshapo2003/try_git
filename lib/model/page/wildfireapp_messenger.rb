@@ -1,5 +1,6 @@
 class Model::Page::WildfireappMessenger < SitePrism::Page
   set_url "#{Helpers::Config['wildfire_messenger_root']}/"
+  set_url_matcher /messenger/
 
   element :messages_div_header, 'div#incoming_messages div.section.header h2'
 
@@ -10,10 +11,6 @@ class Model::Page::WildfireappMessenger < SitePrism::Page
   section :deleted_messages_panel, Model::Section::Messenger::WildfireappMessengerMessagesPanel, 'div#incoming_messages'
   section :sidebar, Model::Section::Messenger::WildfireappMessengerSidebar, 'div.sidebar'
   section :assign_dialog, Model::Section::Messenger::WildfireappMessengerUserAssignmentForm, 'form#message_user_assignment_form'
-
-  def is_loaded?
-    page.current_url.include? 'messenger'
-  end
 
   def active?
     using_wait_time(1) { page.has_no_content?('This product is locked') }
