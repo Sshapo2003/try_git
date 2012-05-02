@@ -33,4 +33,12 @@ class Helpers::Config
   def values
     @yaml_config
   end
+
+  def self.admin_login
+    'xxx'
+  end
+
+  def self.admin_password
+    'xxx'
+  end
 end

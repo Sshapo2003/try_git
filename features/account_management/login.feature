@@ -20,6 +20,11 @@ Feature: Login to Wildfire
     Then the login page should display the message "Invalid email or password provided."
 
   @not_started
+  Scenario: Logout
+    When I click Logout
+    Then I should be logged out
+
+  @not_started
   Scenario: View Privacy Policy
 
   @not_started
