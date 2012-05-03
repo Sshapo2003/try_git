@@ -13,7 +13,7 @@ class Model::Page::WildfireappTemplates < SitePrism::Page
   element :filter_bar_div, 'div.filter-bar'
   element :filter_count_text, 'span.filters-count-text'
 
-  elements :template_titles, 'div.filters > ul.first div.details h2'
+  elements :template_titles, 'ul.page_templates li h2'
 
   def scroll_to_bottom_of_page
     page.execute_script "window.scrollBy(0,10000)"
@@ -38,6 +38,19 @@ class Model::Page::WildfireappTemplates < SitePrism::Page
     elements = filter_options.select {|o| o.label.text.include? filter_name}
     element = elements.first
     unless element.input.checked? then element.input.click end
+  end
+
+  # This select_by_name method is needed because the WildfireappTemplatesTemplate elements always return blank
+  # therefore cannot be used to identify a section based on its contents
+  def select_by_name(template_name)
+    index = 0
+    while index < templates.count
+      queried_template_name = page.evaluate_script "$('ul.page_templates li h2').get(#{index}).textContent"
+      break if queried_template_name == template_name
+      index += 1
+      raise "Couldn't find template #{template_name} in #{all_template_titles}" unless index < templates.count
+    end
+    templates[index]
   end
 
   private

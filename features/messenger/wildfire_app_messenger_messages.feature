@@ -1,4 +1,4 @@
-@messenger
+@messenger @production
 Feature: Messages
 
   Background:

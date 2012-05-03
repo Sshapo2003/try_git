@@ -35,10 +35,10 @@ class Helpers::Config
   end
 
   def self.admin_login
-    'xxx'
+    'testautomation'
   end
 
   def self.admin_password
-    'xxx'
+    'th1sismypassword'
   end
 end

@@ -17,6 +17,9 @@ live:
   #credentials
   default_user_facebook_address: paloaltofoodie@gmail.com
   default_user_facebook_password: th1sismypassword
+  facebook_page_url: http://www.facebook.com/PaloAltoFoodies
+  facebook_property_name: Palo Alto Foodies
+  create_template_property_name: Paloaltofoodies
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: false
 
