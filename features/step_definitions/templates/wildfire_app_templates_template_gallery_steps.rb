@@ -9,7 +9,6 @@ When /^I scroll to the bottom of the page$/ do
 end
 
 When /^I wait a little while for more templates to be loaded$/ do
-
   Timeout.timeout(30) { sleep 0.1 while @templete_count_before_scrolling == @wildfire.wildfireapp_templates.templates.count }
 end
 
@@ -47,4 +46,17 @@ end
 
 When /^I click the Start Now button on any template$/ do
   @wildfire.wildfireapp_templates.templates.first.start_button.click
+end
+
+When /^I create a page from the "(.*)" template$/ do |template_name|
+  @template_name = "Tile Gallery"
+
+  until @wildfire.wildfireapp_templates.all_template_titles.include? template_name
+    @wildfire.wildfireapp_templates.scroll_to_bottom_of_page
+    unless @wildfire.wildfireapp_templates.templates.count < @wildfire.wildfireapp_templates.template_results_count then
+      raise "Could not find #{template_name} in the template gallery. Templates => #{@wildfire.wildfireapp_templates.templates}"
+    end
+  end
+  @wildfire.wildfireapp_templates.select_by_name(template_name).start_button.click
+  step "the Page Manager page should be displayed"
 end

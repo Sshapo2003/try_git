@@ -8,4 +8,7 @@ class Model::Facebook
   def home
     Model::Page::Facebook::Home.new
   end
+  def wildfire_app_page
+    Model::Page::Facebook::WildfireApplications::WildfireAppPage.new
+  end
 end

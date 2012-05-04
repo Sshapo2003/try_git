@@ -21,4 +21,12 @@ class Capybara::Selenium::Driver < Capybara::Driver::Base
       #@browser.navigate.to('about:blank')
     end
   end
+
+
+# Convenience method to easily open a new instance of a selenium browser
+  def new_browser
+    @browser = Selenium::WebDriver.for(options[:browser], options.reject { |key,val| SPECIAL_OPTIONS.include?(key) })
+
+    main = Process.pid
+  end
 end

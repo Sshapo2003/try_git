@@ -1,4 +1,4 @@
-Given /^I navigate to the (.*) page$/ do |page_name|
+Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
   @wildfire = Model::Wildfire.new
   @messengeradmin = Model::Messengeradmin.new
   @facebook = Model::Facebook.new
