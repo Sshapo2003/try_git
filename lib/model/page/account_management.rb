@@ -4,6 +4,17 @@ class Model::Page::AccountManagement < SitePrism::Page
   section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
   section :your_properties, Model::Section::AccountManagement::YourProperties, 'div.body_content'
   section :header, Model::Section::Generic::Header, 'div.head'
+  section :create_company_modal, Model::Section::AccountManagement::Modal::CreateCompany, '#new_company_modal'
+  section :company_menu, Model::Section::Generic::CompanyMenu, 'ol.multiuser_company_selector'
+  
+  def create_company(company_name, options={})
+    show_create_company_modal
+    wait_for_create_company_modal
+    create_company_modal.fill_company_name_field(company_name)
+    create_company_modal.select_account('Create New') if options[:new_account] == true
+    create_company_modal.click_save_button
+    wait_until { !create_company_modal.visible? || !create_company_modal.form_errors.empty? }
+  end
   
   def add_twitter_property(twitter_name)
     show_add_twitter_property_window
@@ -33,6 +44,12 @@ class Model::Page::AccountManagement < SitePrism::Page
   end
   
   private
+  
+  def show_create_company_modal
+    header.company_select_button.click
+    page.execute_script %{$("a:contains('Create a Company')").click()} if ENV['BROWSER'] == 'firefox' # Following the link does not work in firefox
+    click_on('Create a Company')
+  end
   
   def show_add_twitter_property_window
     if your_properties.has_properties?
