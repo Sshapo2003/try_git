@@ -4,9 +4,9 @@ Feature: Flagged Messages
   Background:
     Given I am logged in as "default"
     And I navigate to the wildfire app messenger page
-    And I view the "Flagged" tab
+    And I click the "Flagged Messages" tab on the left navigation menu on wildfire app messenger page
 
-  @not_started
+  @complete
   Scenario: Unflag a message
     Given I have an flagged message in Flagged Messages
     When I unflag the message

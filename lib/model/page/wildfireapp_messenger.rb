@@ -3,6 +3,7 @@ class Model::Page::WildfireappMessenger < SitePrism::Page
   set_url_matcher /messenger/
 
   element :messages_div_header, 'div#incoming_messages div.section.header h2'
+  element :flash_content, 'span.flash_contents'
 
   section :compose_message_panel, Model::Section::Messenger::WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
   section :messages_panel, Model::Section::Messenger::WildfireappMessengerMessagesPanel, 'div#incoming_messages'
@@ -22,6 +23,12 @@ class Model::Page::WildfireappMessenger < SitePrism::Page
     sleep 2
     assign_dialog.select_me
     assign_dialog.save_button.click
+  end
+
+  def unflag_message message
+    message.select
+    page.execute_script("$('ol#message_action a[href=\"Unflag\"]').click();")
+    Timeout.timeout(30) { sleep 0.1 while not flash_content.text.include? "Flagged Message has been cleared." }
   end
 
   def is_messages_panel?

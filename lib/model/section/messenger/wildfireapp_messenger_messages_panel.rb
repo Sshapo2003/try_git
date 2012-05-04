@@ -11,4 +11,8 @@ class Model::Section::Messenger::WildfireappMessengerMessagesPanel < SitePrism::
   def unassigned_messages
     messages.reject {|m| m.is_assigned?}
   end
+
+  def flagged_messages
+    messages.select {|m| m.is_flagged?}
+  end
 end

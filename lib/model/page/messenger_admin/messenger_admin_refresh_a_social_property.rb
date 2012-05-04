@@ -1,4 +1,4 @@
-class Model::Page::MessengerAdmin::MessengerAdminRefreshASocialProperty < SitePrism::Page
+class Model::Page::MessengerAdmin::MessengerAdminRefreshASocialProperty < Model::Page::MessengerAdmin::MessengerAdminPage
   set_url "#{Helpers::Config['messenger_admin_root']}/social_property_refreshes/new"
 
   element :property_select, 'select#social_property_id'
