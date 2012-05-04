@@ -27,4 +27,14 @@ module Capybara
       end
     end
   end
+  
+  class Selenium::Driver
+    def within_frame(frame_id)
+      old_window = browser.window_handle
+      browser.switch_to.frame(frame_id)
+      yield
+      ensure
+      browser.switch_to.window old_window
+    end
+  end
 end
