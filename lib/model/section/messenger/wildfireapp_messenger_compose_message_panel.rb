@@ -1,10 +1,12 @@
 class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SitePrism::Section
   element :message_textbox, 'textarea#message_body'
   element :send_button, "button.wf_submit[name='commit']"
+  element :recepients_error, 'div#recipients p.inline_error'
+  element :message_error, 'div#message_container p.inline_error'
 
   sections :recipients, Model::Section::Messenger::WildfireappMessengerRecipient, 'div.recipient'
 
-  def select_recipient_by_name(recipient_name)
+  def select_recipient_by_name(recipient_name="Palo Alto Foodies")
     i = 0
     while i < recipients.size do
       if recipients[i].name.text == recipient_name 
@@ -14,12 +16,21 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
     end
   end
 
-    def compose_and_send_a_valid_message
+  def compose_a_valid_message
     t = Time.now
     message_text = "Today is #{t.strftime("%A")} #{t.strftime("%d")} #{t.strftime("%b")} #{t.strftime("%Y")} and the time is #{t.strftime("%R")}. What great foods have you discovered recently?"
-    select_recipient_by_name('Palo Alto Foodies')
+    select_recipient_by_name
     message_textbox.set message_text
-    send_button.click
     message_text
+  end
+
+  def send_message
+    send_button.click
+  end
+
+  def compose_and_send_a_valid_message
+    message_text = compose_a_valid_message
+    send_message
+    return message_text
   end
 end
