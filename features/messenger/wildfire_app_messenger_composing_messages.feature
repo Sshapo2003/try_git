@@ -3,11 +3,12 @@ Feature: Composing Messages
 
   Background:
     Given I am logged in as "default"
-    And I compose a new Mesenger message
+    And I navigate to the wildfire app messenger page
 
   @complete
   Scenario Outline: Missing required fields
-    When the "<Required_Field>" is left blank during message composition
+    When I compose a new Mesenger message
+    And the "<Required_Field>" is left blank during message composition
     And I attempt to send the message
     Then the "<Error_Message>" error message should be displayed on the message composition form
   Examples:
@@ -15,13 +16,13 @@ Feature: Composing Messages
     | Destination    | Please enter a destination. |
     | Message        | Please enter a message.     |
 
-  @not_started
+  @complete
   Scenario: Send a message
-    When I compose a valid message
-    And I send the message
+    When I compose and send a valid message
     Then I should be informed that the message has been sent succesfully
     And the message should be visible in the "Sent" folder
     And the message should be visible in the "Messages" folder
+    And the message should be visible on my facebook page
 
   @not_started
   Scenario: Send a message to twitter property
@@ -30,12 +31,6 @@ Feature: Composing Messages
     Then I should be informed that the message has been sent succesfully
     And the message should be visible in the "Sent" folder
     And the message should be visible in the "Messages" folder
-
-  @not_started
-  Scenario: Send multiple messages
-    When I compose and send a few valid messages
-    Then the messages should be visible in the "Sent" folder
-    And the messages should be visible in the "Messages" folder
 
   @not_started
   Scenario: Compose message with Link

@@ -1,8 +1,8 @@
-class Model::Section::Messenger::WildfireappMessengerMessagesPanel < SitePrism::Section
+class Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel < SitePrism::Section
   element :actions_menu, 'div.wf_prompt_button_wpr a'
   element :actions_menu_assign_option, "ol#message_action a[href='Assign']"
 
-  sections :messages, Model::Section::Messenger::WildfireappMessengerMessage, 'div.incoming_message'
+  sections :messages, Model::Section::Messenger::WildfireappMessengerIncomingMessage, 'div.incoming_message'
 
   def assigned_messages
     messages.select {|m| m.is_assigned?}

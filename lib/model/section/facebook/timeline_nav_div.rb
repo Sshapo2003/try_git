@@ -3,7 +3,7 @@ class Model::Section::Facebook::TimelineNavDiv < SitePrism::Section
 
   def navigate_to_app app_name    
     begin
-      Timeout.timeout(30) do  
+      Timeout.timeout(30) do
         while get_app_pagelet_by_name(app_name).count == 0
           sleep 1
           visit(page.driver.current_url)

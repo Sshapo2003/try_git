@@ -8,7 +8,7 @@ Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
     @wildfire.login.load
     raise "This is not the login page. URL: #{current_url}" unless @wildfire.login.is_loaded?
   when 'signup' then @wildfire.signup.load
-  when 'wildfire app messenger' 
+  when 'wildfire app messenger'
     @wildfire.wildfireapp_messenger.load
     @wildfire.wildfireapp_messenger.should be_displayed
   when 'wildfire app analytics'

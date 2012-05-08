@@ -1,16 +1,11 @@
 When /^I click the "(.*)" tab on the left navigation menu on wildfire app messenger page$/ do |tab|
-  case tab
-  when "Messages" 
-    @wildfire.wildfireapp_messenger.load_messages_panel
-  when "Flagged Messages" 
-    @wildfire.wildfireapp_messenger.load_flagged_messages_panel
-  when "Assigned Messages" 
-    @wildfire.wildfireapp_messenger.load_assigned_messages_panel
-  when "Deleted Messages" 
-    @wildfire.wildfireapp_messenger.load_deleted_messages_panel
-  else raise "Unknown tab #{tab}"
-  end
-  sleep 2
+  @wildfire.wildfireapp_messenger.click_tab(tab)
+end
+
+When /^I compose and send a valid message$/ do
+  @wildfire.wildfireapp_messenger.load
+  @wildfire.wildfireapp_messenger.load_compose_message_panel
+  @message_body = @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message
 end
 
 Given /^I compose a new Mesenger message$/ do
@@ -21,6 +16,10 @@ end
 
 Then /^the header in the messages area should be "(.*)"$/ do |header_text|
   @wildfire.wildfireapp_messenger.messages_div_header.text.should eql header_text
+end
+
+Then /^I should be informed that the message has been sent succesfully$/ do
+  @wildfire.wildfireapp_messenger.sticky_header_text.text.should include "Message successfully sent"
 end
 
 When /^the "(.*)" is left blank during message composition$/ do |field|
@@ -123,4 +122,14 @@ end
 Then /^the message should not be displayed in Flagged$/ do
   @content_of_each_message_in_flagged_panel = @wildfire.wildfireapp_messenger.flagged_messages_panel.messages.collect {|m| m.body.text }
   @content_of_each_message_in_flagged_panel.should_not include @flagged_message_content
+end
+
+Then /^the message should be visible in the "(.*)" folder$/ do |folder|
+  Timeout.timeout(60) do
+    while @wildfire.wildfireapp_messenger.messages_in_folder(folder).select {|m| m.include? @message_body }.count < 1 
+      sleep 5.0
+      @wildfire.wildfireapp_messenger.click_tab folder
+    end
+  end
+  @wildfire.wildfireapp_messenger.messages_in_folder(folder).select {|m| m.include? @message_body }.count.should eql 1
 end

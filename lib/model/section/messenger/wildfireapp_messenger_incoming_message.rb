@@ -1,4 +1,4 @@
-class Model::Section::Messenger::WildfireappMessengerMessage < SitePrism::Section
+class Model::Section::Messenger::WildfireappMessengerIncomingMessage < SitePrism::Section
   element :assigned_to, 'div.assigned_to'
   element :flagged, 'div.flagged_message_icon'
   element :input, 'input'
