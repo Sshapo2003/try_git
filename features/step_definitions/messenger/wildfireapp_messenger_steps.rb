@@ -8,6 +8,12 @@ When /^I compose and send a valid message$/ do
   @message_body = @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message
 end
 
+When /^I compose and send a valid message for my twitter property$/ do
+  @wildfire.wildfireapp_messenger.load
+  @wildfire.wildfireapp_messenger.load_compose_message_panel
+  @message_body = @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message_to_twitter
+end
+
 Given /^I compose a new Mesenger message$/ do
   @wildfire.wildfireapp_messenger.load
   @wildfire.wildfireapp_messenger.load_compose_message_panel

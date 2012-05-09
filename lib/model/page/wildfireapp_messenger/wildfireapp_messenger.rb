@@ -28,6 +28,10 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     compose_message_panel.compose_and_send_a_valid_message
   end
 
+  def compose_and_send_a_valid_message_to_twitter
+    compose_message_panel.compose_and_send_a_valid_message 'paloaltofoodie'
+  end
+
   def assign_message_to_me message
     message.select
     page.execute_script("$('ol#message_action a[href=\"Assign\"]').click();")
@@ -93,7 +97,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   end
 
   def is_sent_messages_panel?
-    sent_messages_div_header.text == 'Sent Messages'
+    messages_div_header.text == 'Sent Messages'
   end
 
   def click_tab tab

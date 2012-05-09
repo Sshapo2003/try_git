@@ -2,6 +2,7 @@ Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
   @wildfire = Model::Wildfire.new
   @messengeradmin = Model::Messengeradmin.new
   @facebook = Model::Facebook.new
+  @twitter = Model::Twitter.new
   case page_name.downcase
   when 'login'
     visit "#{Helpers::Config['wildfire_site_root']}/logout" unless @wildfire.login.is_loaded?

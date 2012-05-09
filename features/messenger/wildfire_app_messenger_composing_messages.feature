@@ -24,13 +24,12 @@ Feature: Composing Messages
     And the message should be visible in the "Messages" folder
     And the message should be visible on my facebook page
 
-  @not_started
+  @complete
   Scenario: Send a message to twitter property
-    When I compose a valid message for my twitter property
-    And I send the message
+    When I compose and send a valid message for my twitter property
     Then I should be informed that the message has been sent succesfully
     And the message should be visible in the "Sent" folder
-    And the message should be visible in the "Messages" folder
+    And the message should be visible on my twitter page
 
   @not_started
   Scenario: Compose message with Link

@@ -14,12 +14,13 @@ live:
   wildfire_templates_root: http://templates.wildfireapp.com
   messenger_admin_root: https://messenger.wildfireapp.com/admin
   crystal_ball_root: https://promos.wildfireapp.com/crystal_ball/
+  facebook_page_url: http://www.facebook.com/PaloAltoFoodies
+  twitter_page_url: https://twitter.com/#!/paloaltofoodie
   #credentials
   default_user_facebook_address: paloaltofoodie@gmail.com
   default_user_facebook_password: th1sismypassword
   default_facebook_poster_username: burgerwithcheez@gmail.com
   default_facebook_poster_password: th1sismypassword
-  facebook_page_url: http://www.facebook.com/PaloAltoFoodies
   facebook_property_name: Palo Alto Foodies
   create_template_property_name: Paloaltofoodies
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
