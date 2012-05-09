@@ -9,6 +9,10 @@ class Model::Section::AccountManagement::YourProperties < SitePrism::Section
     social_properties.include?({:name => name, :type => type.downcase})
   end
   
+  def has_twitter_property?(name)
+    has_property?(name, 'twitter property')
+  end
+  
   def has_properties?
     using_wait_time(0.5) { has_content?("You haven't added any properties yet") ? false : true }
   end

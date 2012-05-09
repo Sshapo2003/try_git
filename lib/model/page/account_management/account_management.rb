@@ -19,7 +19,11 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   def add_twitter_property(twitter_name)
     show_add_twitter_property_window
     within_window(page.driver.browser.window_handles.last){ Model::Page::TwitterOauth.new.authorise(twitter_name, 'w1ldf1r3')}
-    wait_until() { your_properties.has_property?(twitter_name.capitalize, 'twitter account') }
+    begin
+      wait_until() { your_properties.has_twitter_property?(twitter_name.capitalize) }
+    rescue Capybara::TimeoutError
+      raise "Failed to add twitter property '#{twitter_name}\n#{flash_message}"
+    end
   end
   
   def load_section(name)
@@ -41,6 +45,10 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   
   def tracked_properties
     Model::Page::AccountManagement::TrackedProperties.new
+  end
+  
+  def flash_message
+    first('span.flash_contents').try(:text)
   end
   
   private
