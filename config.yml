@@ -12,6 +12,7 @@ live:
   wildfire_page_manager_root: https://apps.wildfireapp.com/pages/states/published
   wildfire_promotions_root: https://promos.wildfireapp.com
   wildfire_templates_root: http://templates.wildfireapp.com
+  wildfire_monitor_root: https://monitor.wildfireapp.com
   messenger_admin_root: https://messenger.wildfireapp.com/admin
   crystal_ball_root: https://promos.wildfireapp.com/crystal_ball/
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
@@ -39,6 +40,7 @@ staging:
   wildfire_page_manager_root: https://apps.wildfirestaging.com/pages/states/published
   messenger_admin_root: https://account.wildfirestaging.com/admin
   wildfire_promotions_root: https://promos.wildfirestaging.com
+  wildfire_monitor_root: https://monitor.wildfirestaging.com
   crystal_ball_root: https://promos.wildfirestaging.com/crystal_ball/
   #credentials
   default_user_facebook_address: mountainviewfoodie@gmail.com
@@ -60,6 +62,7 @@ am-test:
   wildfire_page_manager_root: https://apps.am-test.wfhack.com/pages/states/published
   messenger_admin_root: https://messenger.am-test.wfhack.com/admin
   wildfire_promotions_root: https://promos.am-test.wfhack.com
+  wildfire_monitor_root: https://monitor.am-test.wfhack.com
   crystal_ball_root: https://promos.am-test.wfhack.com/crystal_ball/
   #credentials
   default_user_facebook_address: paloaltofoodie@gmail.com

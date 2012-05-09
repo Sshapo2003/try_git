@@ -29,6 +29,9 @@ class Model::Wildfire
   def wildfireapp_promotion_builder
     Model::Page::PromotionBuilder::WildfireappPromotionBuilder.new
   end
+  def wildfireapp_monitor
+    Model::Page::Monitor::WildfireappMonitor.new
+  end
   def account_management
     Model::Page::AccountManagement::AccountManagement.new
   end
