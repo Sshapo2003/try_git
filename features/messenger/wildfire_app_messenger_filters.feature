@@ -7,20 +7,20 @@ Feature: Filters
     And I view the "Filters" tab
 
   @not_started
-  Scenario: Create a filter
-    When I create a valid filter
-    And I save the filter
-    Then the filter should added to the list of filters
-
-  @not_started
   Scenario Outline: Missing required fields
-    When the <Required_Field> is left blank during filter coreation
+    When the "<Required_Field>" is left blank during filter creation
     And I attempt to save the filter
-    Then the <Error_Message> error message should be displayed on the filter creation form
+    Then the "<Error_Message>" error message should be displayed on the filter creation form
   Examples:
     | Required_Field | Error_Message               |
     | Name           | Name can't be blank         |
     | Keywords       | Keywords can't be blank     |
+
+  @not_started
+  Scenario: Create a filter
+    When I create a valid filter
+    And I save the filter
+    Then the filter should added to the list of filters
 
   @not_started
   Scenario: Assign a filter

@@ -9,7 +9,7 @@ class Model::Wildfire
     Model::Page::Dashboard.new
   end
   def wildfireapp_messenger
-    Model::Page::WildfireappMessenger.new
+    Model::Page::WildfireappMessenger::WildfireappMessenger.new
   end
   def wildfireapp_analytics
     Model::Page::WildfireappAnalytics.new
@@ -27,6 +27,6 @@ class Model::Wildfire
     Model::Page::WildfireappTemplates.new
   end
   def account_management
-    Model::Page::AccountManagement.new
+    Model::Page::AccountManagement::AccountManagement.new
   end
 end

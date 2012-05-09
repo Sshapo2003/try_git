@@ -20,3 +20,8 @@ Then /^the published template should be visible on my facebook page$/ do
   
   @facebook.wildfire_app_page.iframe_body.should include @template_name
 end
+
+Then /^the message should be visible on my facebook page$/ do
+  @facebook.timeline.visit_my_timeline
+  @facebook.timeline.status_units.select {|s| s.text.include? @message_body }.count.should eql 1
+end

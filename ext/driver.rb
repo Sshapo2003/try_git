@@ -23,10 +23,16 @@ class Capybara::Selenium::Driver < Capybara::Driver::Base
   end
 
 
-# Convenience method to easily open a new instance of a selenium browser
+  # Convenience method to easily open a new instance of a selenium browser
   def new_browser
     @browser = Selenium::WebDriver.for(options[:browser], options.reject { |key,val| SPECIAL_OPTIONS.include?(key) })
 
     main = Process.pid
+  end
+
+  # Capybara doesn't provide a hook into the Selenium refresh method because this is not supported by all capybara drivers.
+  # For the moment we are using Selenium and Refresh is useful - so I am putting it in here.
+  def refresh
+    browser.navigate.refresh
   end
 end

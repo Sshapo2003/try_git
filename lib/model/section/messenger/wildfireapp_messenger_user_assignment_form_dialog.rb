@@ -1,4 +1,4 @@
-class Model::Section::Messenger::WildfireappMessengerUserAssignmentForm < SitePrism::Section
+class Model::Section::Messenger::WildfireappMessengerUserAssignmentFormDialog < SitePrism::Section
   element :save_button, 'button'
   sections :select_boxs, Model::Section::Messenger::WildfireappMessengerUserAssignmentFormUsers, 'div.user'
 
