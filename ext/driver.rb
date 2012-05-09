@@ -29,4 +29,8 @@ class Capybara::Selenium::Driver < Capybara::Driver::Base
 
     main = Process.pid
   end
+
+  def refresh
+    browser.navigate.refresh
+  end
 end
