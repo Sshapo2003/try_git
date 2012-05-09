@@ -12,12 +12,12 @@ end
 
 When /^I attempt to create a new company using the current company name$/ do
   @wildfire.account_management.load
-  current_company_name = @wildfire.account_management.header.current_company_name
+  current_company_name = @wildfire.account_management.current_company
   @wildfire.account_management.create_company(current_company_name)
 end
 
 Then /^I should be using the new Company$/ do
-  @wildfire.account_management.header.current_company_name.should == @new_company_name
+  @wildfire.account_management.current_company.should == @new_company_name
 end
 
 Then /^I should see the message "([^"]*)" inside the create company modal$/ do |message|
@@ -25,6 +25,5 @@ Then /^I should see the message "([^"]*)" inside the create company modal$/ do |
 end
 
 Then /^the new Account should be created$/ do
-  @wildfire.account_management.header.company_select_button.click
-  @wildfire.account_management.company_menu.account_names.should include @new_company_name
+  @wildfire.account_management.accounts.should include @new_company_name
 end
