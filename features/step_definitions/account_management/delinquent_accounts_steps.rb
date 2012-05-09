@@ -21,21 +21,6 @@ Then /^I should see the request for payment page$/ do
   page.should(have_content(REQUEST_PAYMENT_MESSAGE), "The message '#{REQUEST_PAYMENT_MESSAGE}' was not present on the page")
 end
 
-Then /^I (should|should not) have access to Messenger$/ do |expectation|
-  @wildfire.wildfireapp_messenger.load
-  @wildfire.wildfireapp_messenger.send(expectation.parameterize.underscore, be_active)
-end
-
-Then /^I (should|should not) have access to Analytics$/ do |expectation|
-  @wildfire.wildfireapp_analytics.load
-  @wildfire.wildfireapp_analytics.send(expectation.parameterize.underscore, be_active)
-end
-
-Then /^I (should|should not) have access to Page Manager$/ do |expectation|
-  @wildfire.wildfireapp_page_manager.load
-  @wildfire.wildfireapp_page_manager.send(expectation.parameterize.underscore, be_active)
-end
-
 Then /^I should be redirected to Account Management$/ do
   @wildfire.account_management.should(be_loaded, "Currently on '#{current_url}', not Account Management")
 end
