@@ -18,5 +18,11 @@ end
 
 Then /^the message should be visible on my facebook page$/ do
   @facebook.timeline.visit_my_timeline
-  @facebook.timeline.status_units.select {|s| s.text.include? @message_body }.count.should eql 1
+  @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }.count.should eql 1
+  @matching_message = @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }.first
+end
+
+Then /^the message on my facebook page should have the links title and text$/ do
+   @matching_message.link_title.text.should include @attachment[:link_title]
+   @matching_message.link_url.text.should include @attachment[:url]
 end

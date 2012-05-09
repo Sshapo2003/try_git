@@ -20,6 +20,14 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     using_wait_time(1) { page.has_no_content?('This product is locked') }
   end
 
+  def attach_to_message(attachment_details)
+    compose_message_panel.attach_to_message(attachment_details)
+  end
+
+  def send_message
+    compose_message_panel.send_message
+  end
+
   def compose_a_valid_message
     compose_message_panel.compose_a_valid_message
   end
@@ -32,7 +40,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     compose_message_panel.compose_and_send_a_valid_message 'paloaltofoodie'
   end
 
-  def assign_message_to_me message
+  def assign_message_to_me(message)
     message.select
     page.execute_script("$('ol#message_action a[href=\"Assign\"]').click();")
     Timeout.timeout(30) { sleep 0.1 while page.has_no_selector? 'form#message_user_assignment_form' }
@@ -40,7 +48,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     assign_dialog.save_button.click
   end
 
-  def unflag_message message
+  def unflag_message(message)
     message.select
     page.execute_script("$('ol#message_action a[href=\"Unflag\"]').click();")
     Timeout.timeout(30) { sleep 0.1 while not sticky_header_text.text.include? "Flagged Message has been cleared." }
@@ -100,7 +108,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     messages_div_header.text == 'Sent Messages'
   end
 
-  def click_tab tab
+  def click_tab(tab)
     case tab
     when "Messages" 
       load_messages_panel
@@ -119,7 +127,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     sleep 2
   end
 
-  def messages_in_folder folder_name
+  def messages_in_folder(folder_name)
     click_tab folder_name
     if folder_name == "Sent"
       sent_messages_panel.messages_in_folder

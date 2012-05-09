@@ -20,6 +20,15 @@ Given /^I compose a new Mesenger message$/ do
   @message_body = @wildfire.wildfireapp_messenger.compose_a_valid_message
 end
 
+When /^I add a link to the message$/ do
+  @attachment = { :type => :link, :url => 'www.wildfireapp.com', :link_title => 'Wildfire - Wildfire App - Social Media Marketing Software Suite' }
+  @wildfire.wildfireapp_messenger.attach_to_message(@attachment)
+end
+
+When /^I Send the message$/ do
+  @wildfire.wildfireapp_messenger.send_message
+end
+
 Then /^the header in the messages area should be "(.*)"$/ do |header_text|
   @wildfire.wildfireapp_messenger.messages_div_header.text.should eql header_text
 end

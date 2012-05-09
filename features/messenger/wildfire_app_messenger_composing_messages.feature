@@ -31,34 +31,14 @@ Feature: Composing Messages
     And the message should be visible in the "Sent" folder
     And the message should be visible on my twitter page
 
-  @not_started
+  @complete
   Scenario: Compose message with Link
-    When I compose a valid message
+    When I compose a new Mesenger message
     And I add a link to the message
     And I Send the message
     Then the message should be visible in the "Sent" folder
-    And the link of the sent message should have an image title and text
-
-  @not_started
-  Scenario: Compose message with Flash
-    When I compose a valid message
-    And I add a Flash Video and Image to the message
-    And I give the Flash Attachment a Title and Description
-    And I Send the message
-    Then the message should be visible in the "Sent" folder
-    And the flash attachment of the sent message should have an image title and text
-
-  @not_started
-  Scenario: Compose message with Photo
-    When I compose a valid message
-    And I add a link to the message
-    Then the link image title and text should be shown in the message composition panel
-
-  @not_started
-  Scenario: Compose message with Album
-    When I compose a valid message
-    And I add a link to the message
-    Then the link image title and text should be shown in the message composition panel
+    And the message should be visible on my facebook page
+    And the message on my facebook page should have the links title and text
 
   @not_started
   Scenario: Save a Draft
@@ -74,3 +54,24 @@ Feature: Composing Messages
     And I send the scheduled message
     Then I should be informed that the message has been scheduled succesfully
     And the message should be visible in the "Scheduled" folder
+
+  @not_started
+  Scenario: Compose message with Flash
+    When I compose a valid message
+    And I add a Flash Video and Image to the message
+    And I give the Flash Attachment a Title and Description
+    And I Send the message
+    Then the message should be visible in the "Sent" folder
+    And the flash attachment of the sent message should have an title and text
+
+  @not_started
+  Scenario: Compose message with Photo
+    When I compose a valid message
+    And I add a link to the message
+    Then the link image title and text should be shown in the message composition panel
+
+  @not_started
+  Scenario: Compose message with Album
+    When I compose a valid message
+    And I add a link to the message
+    Then the link image title and text should be shown in the message composition panel

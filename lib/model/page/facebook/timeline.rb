@@ -34,4 +34,8 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
   def messages_on_page
     facebook_timeline_units.collect {|u| u.text }
   end
+
+  def messages_with_attachments
+    facebook_timeline_units.select {|u| u.has_attachment? }
+  end
 end

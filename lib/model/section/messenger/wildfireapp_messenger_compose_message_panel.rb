@@ -4,6 +4,7 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
   element :recepients_error, 'div#recipients p.inline_error'
   element :message_error, 'div#message_container p.inline_error'
 
+  section :attachments_section, Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSection, 'ol.attach'
   sections :recipients, Model::Section::Messenger::WildfireappMessengerRecipient, 'div.recipient'
 
   def select_recipient_by_name(recipient_name='Palo Alto Foodies')
@@ -22,6 +23,10 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
     select_recipient_by_name recipient_name
     message_textbox.set message_text
     message_text
+  end
+
+  def attach_to_message(attachment_details)
+    attachments_section.attach_to_message(attachment_details)
   end
 
   def send_message
