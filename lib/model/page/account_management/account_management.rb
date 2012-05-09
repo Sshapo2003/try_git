@@ -13,7 +13,11 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
     create_company_modal.fill_company_name_field(company_name)
     create_company_modal.select_account('Create New') if options[:new_account] == true
     create_company_modal.click_save_button
-    wait_until { !create_company_modal.visible? || !create_company_modal.form_errors.empty? }
+    begin
+      wait_until { !create_company_modal.visible? || !create_company_modal.form_errors.empty? }
+    rescue Capybara::TimeoutError
+      raise "Failed to create company\n#{create_company_modal.flash_message}"
+    end
   end
   
   def add_twitter_property(twitter_name)

@@ -18,6 +18,10 @@ class Model::Section::AccountManagement::Modal::CreateCompany < SitePrism::Secti
     within_modal { all('.formError').collect {|e| e.text} }
   end
   
+  def flash_message
+    within_modal { first('span.flash_contents').try(:text) }
+  end
+  
   private 
   
   def within_modal
