@@ -25,8 +25,46 @@ When /^I add a link to the message$/ do
   @wildfire.wildfireapp_messenger.attach_to_message(@attachment)
 end
 
-When /^I Send the message$/ do
+When /^I send the message$/ do
   @wildfire.wildfireapp_messenger.send_message
+end
+
+When /^I save the message as a draft$/ do
+  @wildfire.wildfireapp_messenger.save_as_draft
+end
+
+Given /^I have a valid draft message$/ do
+  unless @wildfire.wildfireapp_messenger.draft_messages_panel.messages.size > 0
+    step 'I compose a new Mesenger message'
+    step 'I save the message as a draft'
+  end
+  
+  unless @wildfire.wildfireapp_messenger.draft_messages_panel.messages.size > 0 then raise "No draft messages could be found in the messenger inbox" end
+
+  @draft_message = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.first
+  @draft_message_content = @draft_message.body.text
+end
+
+When /^I delete the draft message$/ do
+  @draft_message.delete_first_draft
+end
+
+When /^I edit the draft$/ do
+  @message_body = @draft_message.edit_first_draft
+end
+
+When /^I send the draft message$/ do
+  @wildfire.wildfireapp_messenger.send_draft_message
+end
+
+Then /^I should be informed that the draft has been deleted$/ do
+  Timeout.timeout(30) { sleep 0.1 until @wildfire.wildfireapp_messenger.sticky_header_text.text.should include "Draft was successfully deleted." }
+  @wildfire.wildfireapp_messenger.sticky_header_text.text.should include "Draft was successfully deleted."
+end
+
+Then /^the message should not be visible in the drafts folder$/ do
+  unless @wildfire.wildfireapp_messenger.is_drafts_panel? then @wildfire.wildfireapp_messenger.load_drafts_panel end
+  @wildfire.wildfireapp_messenger.draft_messages_panel.messages.select {|m| m.body.text.include? @draft_message_content }.count.should eql 0
 end
 
 Then /^the header in the messages area should be "(.*)"$/ do |header_text|
@@ -35,6 +73,14 @@ end
 
 Then /^I should be informed that the message has been sent succesfully$/ do
   @wildfire.wildfireapp_messenger.sticky_header_text.text.should include "Message successfully sent"
+end
+
+Then /^I should be informed that the draft message has been sent succesfully$/ do
+  @wildfire.wildfireapp_messenger.sticky_header_text.text.should include "Message successfully scheduled"
+end
+
+Then /^I should be informed that the message has been saved as a draft$/ do
+  @wildfire.wildfireapp_messenger.compose_message_panel.header.text.should include "Edit Draft Message - Saved on "
 end
 
 When /^the "(.*)" is left blank during message composition$/ do |field|
@@ -81,7 +127,7 @@ Given /^I have an unassigned message$/ do
   unless @wildfire.wildfireapp_messenger.messages_panel.unassigned_messages.size > 0 then raise "No unassigned messages could be found in the messenger inbox" end
 
   @unassigned_message = @wildfire.wildfireapp_messenger.messages_panel.unassigned_messages.first
-  @unassigned_message_content = @wildfire.wildfireapp_messenger.messages_panel.unassigned_messages.first.body.text
+  @unassigned_message_content = @unassigned_message.body.text
 end
 
 Given /^I have an flagged message in Flagged Messages$/ do
@@ -108,7 +154,7 @@ Given /^I have an flagged message in Flagged Messages$/ do
   end
 
   @flagged_message = @wildfire.wildfireapp_messenger.messages_panel.flagged_messages.first
-  @flagged_message_content = @wildfire.wildfireapp_messenger.messages_panel.flagged_messages.first.body.text
+  @flagged_message_content = @flagged_message.body.text
 end
 
 When /^I unflag the message$/ do

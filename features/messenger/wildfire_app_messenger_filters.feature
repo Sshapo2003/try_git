@@ -4,7 +4,7 @@ Feature: Filters
   Background:
     Given I am logged in as "default"
     And I navigate to the wildfire app messenger page
-    And I view the "Filters" tab
+    And I click the "Filters" tab on the left navigation menu on wildfire app messenger page
 
   @not_started
   Scenario Outline: Missing required fields

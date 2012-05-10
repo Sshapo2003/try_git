@@ -1,8 +1,11 @@
 class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SitePrism::Section
   element :message_textbox, 'textarea#message_body'
   element :send_button, "button.wf_submit[name='commit']"
+  element :send_draft_message_link, 'div.wf_menu_button_wpr a.submit'
+  element :save_draft_button, "button.wf_submit[name='commit_draft']"
   element :recepients_error, 'div#recipients p.inline_error'
   element :message_error, 'div#message_container p.inline_error'
+  element :header, 'h2'
 
   section :attachments_section, Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSection, 'ol.attach'
   sections :recipients, Model::Section::Messenger::WildfireappMessengerRecipient, 'div.recipient'
@@ -31,6 +34,14 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
 
   def send_message
     send_button.click
+  end
+
+  def send_draft_message
+    send_draft_message_link.click
+  end
+
+  def save_as_draft
+    save_draft_button.click
   end
 
   def compose_and_send_a_valid_message(recipient_name='Palo Alto Foodies')
