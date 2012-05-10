@@ -13,6 +13,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   section :deleted_messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
   section :sent_messages_panel, Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel, 'div#sent_messages'
   section :draft_messages_panel, Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel, 'div#draft_messages'
+  section :scheduled_messages_panel, Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel, 'div#scheduled_messages'
   section :sidebar, Model::Section::Messenger::WildfireappMessengerSidebar, 'div.sidebar'
   section :assign_dialog, Model::Section::Messenger::WildfireappMessengerUserAssignmentFormDialog, 'form#message_user_assignment_form'
 
@@ -23,6 +24,10 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
 
   def attach_to_message(attachment_details)
     compose_message_panel.attach_to_message(attachment_details)
+  end
+
+  def schedule_message(scheduled_time)
+    compose_message_panel.schedule_message scheduled_time
   end
 
   def send_message
@@ -154,6 +159,19 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     end
   end
 
+  def load_scheduled_panel
+    sidebar.scheduled_link.click
+    Timeout.timeout(30) { sleep 0.1 while not is_scheduled_panel? }
+  end
+
+  def is_scheduled_panel?
+    begin
+      messages_div_header.text == 'Scheduled Messages'
+    rescue Capybara::ElementNotFound
+      return false
+    end
+  end
+
   def click_tab(tab)
     case tab
     when "Messages" 
@@ -170,6 +188,8 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
       load_sent_messages_panel
     when "Drafts" 
       load_drafts_panel
+    when "Scheduled" 
+      load_scheduled_panel
     else raise "Unknown tab #{tab}"
     end
     sleep 2
@@ -181,6 +201,8 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
       sent_messages_panel.messages_in_folder
     elsif folder_name == "Drafts"
       draft_messages_panel.messages_in_folder
+    elsif folder_name == "Scheduled"
+      scheduled_messages_panel.messages_in_folder
     else
       messages_panel.messages.collect {|m| m.body.text }
     end

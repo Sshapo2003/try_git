@@ -11,8 +11,14 @@ Then /^the published template should be visible on my facebook page$/ do
 
   Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.displayed? != true }
   Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.has_iframe? != true }
-  Timeout.timeout(30) { sleep 0.1 while@facebook.wildfire_app_page.iframe_body.include?(@template_name) != true }
-  
+  begin
+    Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.iframe_body.include?(@template_name) != true }
+  rescue
+    puts "Timed out while waiting for iframe to contain #{@template_name}. Page Body:"
+    puts @facebook.wildfire_app_page.iframe_body
+  end
+
+
   @facebook.wildfire_app_page.iframe_body.should include @template_name
 end
 

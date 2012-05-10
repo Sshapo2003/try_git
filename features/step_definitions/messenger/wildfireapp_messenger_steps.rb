@@ -25,7 +25,15 @@ When /^I add a link to the message$/ do
   @wildfire.wildfireapp_messenger.attach_to_message(@attachment)
 end
 
+When /^I schedule the message to be sent at some point in the distant future$/ do
+  @wildfire.wildfireapp_messenger.schedule_message Chronic.parse('in one year').strftime("%m/%d/%y")
+end
+
 When /^I send the message$/ do
+  @wildfire.wildfireapp_messenger.send_message
+end
+
+When /^I schedule the message$/ do
   @wildfire.wildfireapp_messenger.send_message
 end
 
@@ -67,6 +75,41 @@ Then /^the message should not be visible in the drafts folder$/ do
   @wildfire.wildfireapp_messenger.draft_messages_panel.messages.select {|m| m.body.text.include? @draft_message_content }.count.should eql 0
 end
 
+Given /^I have more than (\d+) draft messages$/ do |number_of_messages|
+    while @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_message_total_text.to_i <= number_of_messages.to_i
+    step 'I compose a new Mesenger message'
+    step 'I save the message as a draft'
+    step 'I click the "Drafts" tab on the left navigation menu on wildfire app messenger page'
+  end
+end
+
+Then /^(\d+) drafts should be displayed in the Drafts Panel$/ do |number_of_messages|
+  @drafts = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.collect {|d| d.text }
+  @drafts.count.should eql number_of_messages.to_i
+end
+
+Then /^the Drafts Panel paging message should include "(.*?)"$/ do |paging_message|
+  @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_current_page_indicator_text.should include paging_message
+end
+
+Then /^the right paging icon should be enabled in the Drafts Panel$/ do
+  @wildfire.wildfireapp_messenger.draft_messages_panel.should have_enabled_next_page_button
+end
+
+When /^I click the right paging icon in the Drafts Panel$/ do
+  @wildfire.wildfireapp_messenger.draft_messages_panel.enabled_next_page_button.click
+end
+
+Then /^more drafts should be displayed$/ do
+  @more_drafts = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.collect {|d| d.text }
+  @intersection = @more_drafts & @drafts
+  @intersection.size.should eql 0
+end
+
+Then /^the left paging icon should be enabled in the Drafts Panel$/ do
+  @wildfire.wildfireapp_messenger.draft_messages_panel.should have_enabled_previous_page_button
+end
+
 Then /^the header in the messages area should be "(.*)"$/ do |header_text|
   @wildfire.wildfireapp_messenger.messages_div_header.text.should eql header_text
 end
@@ -76,6 +119,10 @@ Then /^I should be informed that the message has been sent succesfully$/ do
 end
 
 Then /^I should be informed that the draft message has been sent succesfully$/ do
+  @wildfire.wildfireapp_messenger.sticky_header_text.text.should include "Message successfully scheduled"
+end
+
+Then /^I should be informed that the message has been scheduled succesfully$/ do
   @wildfire.wildfireapp_messenger.sticky_header_text.text.should include "Message successfully scheduled"
 end
 
