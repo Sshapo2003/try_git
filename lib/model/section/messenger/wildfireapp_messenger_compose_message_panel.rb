@@ -8,23 +8,25 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
   element :recepients_error, 'div#recipients p.inline_error'
   element :message_error, 'div#message_container p.inline_error'
   element :header, 'h2'
+  element :recepient_input, 'li.search-field'
+  elements :recepients, 'ul.chzn-results li'
+  elements :remove_recipient_links, 'a.search-choice-close'
 
   section :attachments_section, Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSection, 'ol.attach'
   sections :recipients, Model::Section::Messenger::WildfireappMessengerRecipient, 'div.recipient'
 
   def select_recipient_by_name(recipient_name='Palo Alto Foodies')
-    i = 0
-    while i < recipients.size do
-      if recipients[i].name.text == recipient_name 
-        page.execute_script("$('div#messenger_form div.recipient div input')[#{i}].click();")
-      end
-      i = i + 1
-    end
+    recepient_input.click
+    recepients.select {|r| r.text == recipient_name }.first.click
+  end
+
+  def remove_all_recipients
+    remove_recipient_links.each {|l| l.click }
   end
 
   def compose_a_valid_message(recipient_name='Palo Alto Foodies')
     t = Time.now
-    message_text = "Today is #{t.strftime("%A")} #{t.strftime("%d")} #{t.strftime("%b")} #{t.strftime("%Y")} and the time is #{t.strftime("%R")}. What great foods have you discovered recently?"
+    message_text = "Today is #{t.strftime("%A")} #{t.strftime("%d")} #{t.strftime("%b")} #{t.strftime("%Y")} and the time is #{t.strftime("%r")}. What great foods have you discovered recently?"
     select_recipient_by_name recipient_name
     message_textbox.set message_text
     message_text

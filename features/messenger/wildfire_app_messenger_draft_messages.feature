@@ -17,7 +17,7 @@ Feature: Draft Messages
 
   @complete
   Scenario: Delete a Draft
-    Given I have a valid draft message
+    Given I have a valid unique draft message
     When I delete the draft message
     Then I should be informed that the draft has been deleted
     And the message should not be visible in the drafts folder

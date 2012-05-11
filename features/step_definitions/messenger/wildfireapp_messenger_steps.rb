@@ -9,13 +9,13 @@ When /^I compose and send a valid message$/ do
 end
 
 When /^I compose and send a valid message for my twitter property$/ do
-  @wildfire.wildfireapp_messenger.load
+  unless @wildfire.wildfireapp_messenger.displayed? then @wildfire.wildfireapp_messenger.load end
   @wildfire.wildfireapp_messenger.load_compose_message_panel
   @message_body = @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message_to_twitter
 end
 
 Given /^I compose a new Mesenger message$/ do
-  @wildfire.wildfireapp_messenger.load
+  unless @wildfire.wildfireapp_messenger.displayed? then @wildfire.wildfireapp_messenger.load end
   @wildfire.wildfireapp_messenger.load_compose_message_panel
   @message_body = @wildfire.wildfireapp_messenger.compose_a_valid_message
 end
@@ -45,7 +45,19 @@ Given /^I have a valid draft message$/ do
   unless @wildfire.wildfireapp_messenger.draft_messages_panel.messages.size > 0
     step 'I compose a new Mesenger message'
     step 'I save the message as a draft'
+    step 'I click the "Drafts" tab on the left navigation menu on wildfire app messenger page'
   end
+  
+  unless @wildfire.wildfireapp_messenger.draft_messages_panel.messages.size > 0 then raise "No draft messages could be found in the messenger inbox" end
+
+  @draft_message = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.first
+  @draft_message_content = @draft_message.body.text
+end
+
+Given /^I have a valid unique draft message$/ do
+  step 'I compose a new Mesenger message'
+  step 'I save the message as a draft'
+  step 'I click the "Drafts" tab on the left navigation menu on wildfire app messenger page'
   
   unless @wildfire.wildfireapp_messenger.draft_messages_panel.messages.size > 0 then raise "No draft messages could be found in the messenger inbox" end
 
@@ -76,10 +88,12 @@ Then /^the message should not be visible in the drafts folder$/ do
 end
 
 Given /^I have more than (\d+) draft messages$/ do |number_of_messages|
-    while @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_message_total_text.to_i <= number_of_messages.to_i
-    step 'I compose a new Mesenger message'
-    step 'I save the message as a draft'
-    step 'I click the "Drafts" tab on the left navigation menu on wildfire app messenger page'
+    Timeout.timeout(600) do
+      while @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_message_total_text.to_i <= number_of_messages.to_i
+      step 'I compose a new Mesenger message'
+      step 'I save the message as a draft'
+      step 'I click the "Drafts" tab on the left navigation menu on wildfire app messenger page'
+    end
   end
 end
 
@@ -133,7 +147,7 @@ end
 When /^the "(.*)" is left blank during message composition$/ do |field|
   case field
   when "Destination"
-    @wildfire.wildfireapp_messenger.compose_message_panel.select_recipient_by_name
+    @wildfire.wildfireapp_messenger.compose_message_panel.remove_all_recipients
   when "Message"
     @wildfire.wildfireapp_messenger.compose_message_panel.message_textbox.set ""
   else raise "Unknown field #{field}"
