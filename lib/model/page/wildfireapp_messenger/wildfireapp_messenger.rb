@@ -18,18 +18,26 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   section :sidebar, Model::Section::Messenger::WildfireappMessengerSidebar, 'div.sidebar'
   section :assign_dialog, Model::Section::Messenger::WildfireappMessengerUserAssignmentFormDialog, 'form#message_user_assignment_form'
   section :create_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, 'div.ui-dialog'
+  section :edit_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, 'div.ui-dialog'
 
   def active?
     using_wait_time(1) { page.has_no_content?('This product is locked') }
   end
 
   def create_a_valid_filter
-    filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
+    @filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
     filters_panel.create_new_filter_button.click
     create_filter_dialog.name.set filter_name
     create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
     create_filter_dialog.save_button.click
+    Timeout.timeout_and_raise(30, 'Filter not found') { sleep 0.1 unless filters_panel.filters.select {|f| f.name.text.include? filter_name }.count > 0 }
     return filter_name
+  end
+
+  def assign_filter_to_my_company filter_name
+    filters_panel.filter_by_name(filter_name).edit
+    edit_filter_dialog.wait_for_save_button(30)
+    edit_filter_dialog.add_property Helpers::Config['facebook_property_name']
   end
 
   def attach_to_message(attachment_details)

@@ -2,12 +2,30 @@ When /^I click the "(.*)" tab on the left navigation menu on wildfire app messen
   @wildfire.wildfireapp_messenger.click_tab(tab)
 end
 
+Given /^I have an unassigned filter$/ do
+  @unassigned_filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.assigned? == true }
+  unless @unassigned_filters.count > 0
+    @wildfire.wildfireapp_messenger.create_a_valid_filter
+    @unassigned_filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.assigned? == true }
+  end
+  @unassigned_filter_name = @unassigned_filters.first.name.text
+end
+
 When /^I create a valid filter$/ do
   @filter_name = @wildfire.wildfireapp_messenger.create_a_valid_filter
 end
 
+When /^I assign the filter to my company$/ do
+  @wildfire.wildfireapp_messenger.assign_filter_to_my_company(@unassigned_filter_name)
+end
+
+Then /^the filter page should show that the filter is assigned to my company$/ do
+  filters = @wildfire.wildfireapp_messenger.filters_panel.filters
+  filter = filters.select {|f| f.name.text.include? @unassigned_filter_name }.first
+  filter.assigned_properties.text.should include Helpers::Config['facebook_property_name']
+end
+
 Then /^the filter should added to the list of filters$/ do
-  Timeout.timeout_and_raise(30, 'Filter not found') { sleep 0.1 unless @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.text.include? @filter_name }.count > 0 }
   @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.text.include? @filter_name }.count.should == 1
 end
 

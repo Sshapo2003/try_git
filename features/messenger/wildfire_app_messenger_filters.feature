@@ -16,14 +16,14 @@ Feature: Filters
     | Name           | Name can't be blank         |
     | Keywords       | Keywords can't be blank     |
 
-  @wip
+  @complete
   Scenario: Create a filter
     When I create a valid filter
     Then the filter should added to the list of filters
 
-  @not_started
+  @complete
   Scenario: Assign a filter
-    Given I have a filter
+    Given I have an unassigned filter
     When I assign the filter to my company
     Then the filter page should show that the filter is assigned to my company
 
