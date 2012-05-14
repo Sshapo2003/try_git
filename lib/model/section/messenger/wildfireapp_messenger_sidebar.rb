@@ -7,4 +7,5 @@ class Model::Section::Messenger::WildfireappMessengerSidebar < SitePrism::Sectio
   element :sent_messages_link, 'li.sent a span:first-child'
   element :drafts_link, 'li.drafts a span:first-child'
   element :scheduled_link, 'li.scheduled a span:first-child'
+  element :filters_link, 'li.filters a span:first-child'
 end

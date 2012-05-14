@@ -14,12 +14,22 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   section :sent_messages_panel, Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel, 'div#sent_messages'
   section :draft_messages_panel, Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel, 'div#draft_messages'
   section :scheduled_messages_panel, Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel, 'div#scheduled_messages'
+  section :filters_panel, Model::Section::Messenger::WildfireappMessengerFiltersPanel, 'div#message_filters'
   section :sidebar, Model::Section::Messenger::WildfireappMessengerSidebar, 'div.sidebar'
   section :assign_dialog, Model::Section::Messenger::WildfireappMessengerUserAssignmentFormDialog, 'form#message_user_assignment_form'
-
+  section :create_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, 'div.ui-dialog'
 
   def active?
     using_wait_time(1) { page.has_no_content?('This product is locked') }
+  end
+
+  def create_a_valid_filter
+    filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
+    filters_panel.create_new_filter_button.click
+    create_filter_dialog.name.set filter_name
+    create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
+    create_filter_dialog.save_button.click
+    return filter_name
   end
 
   def attach_to_message(attachment_details)
@@ -68,131 +78,28 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     Timeout.timeout(30) { sleep 0.1 while not sticky_header_text.text.include? "Flagged Message has been cleared." }
   end
 
-  def load_compose_message_panel
-    sidebar.compose_link.click
-    Timeout.timeout(30) { sleep 0.1 while not is_compose_message_panel? }
-  end
-
-  def is_compose_message_panel?
-    begin
-      compose_message_div_header.text == 'Compose a Message'
-    rescue Capybara::ElementNotFound
-      return false
-    end
-  end
-
-  def load_messages_panel
-    sidebar.messages_link.click
-    Timeout.timeout(30) { sleep 0.1 while not is_messages_panel? }
-  end
-
-  def is_messages_panel?
-    begin
-      messages_div_header.text == 'Messages'
-    rescue Capybara::ElementNotFound
-      return false
-    end
-  end
-
-  def load_flagged_messages_panel
-    sidebar.flagged_messages_link.click
-    Timeout.timeout(30) { sleep 0.1 while not is_flagged_messages_panel? }
-  end
-
-  def is_flagged_messages_panel?
-    begin
-      messages_div_header.text == 'Flagged Messages'
-    rescue Capybara::ElementNotFound
-      return false
-    end
-  end
-
-  def load_assigned_messages_panel
-    sidebar.assigned_messages_link.click
-    Timeout.timeout(30) { sleep 0.1 while not is_assigned_messages_panel? }
-  end
-
-  def is_assigned_messages_panel?
-    begin
-      messages_div_header.text == 'Assigned Messages'
-    rescue Capybara::ElementNotFound
-      return false
-    end
-  end
-
-  def load_deleted_messages_panel
-    sidebar.deleted_messages_link.click
-    Timeout.timeout(30) { sleep 0.1 while not is_deleted_messages_panel? }
-  end
-
-  def is_deleted_messages_panel?
-    begin
-      messages_div_header.text == 'Deleted Messages'
-    rescue Capybara::ElementNotFound
-      return false
-    end
-  end
-
-  def load_sent_messages_panel
-    sidebar.sent_messages_link.click
-    Timeout.timeout(30) { sleep 0.1 while not is_sent_messages_panel? }
-  end
-
-  def is_sent_messages_panel?
-    begin
-      messages_div_header.text == 'Sent Messages'
-    rescue Capybara::ElementNotFound
-      return false
-    end
-  end
-
-  def load_drafts_panel
-    sidebar.drafts_link.click
-    Timeout.timeout(30) { sleep 0.1 while not is_drafts_panel? }
-  end
-
-  def is_drafts_panel?
-    begin
-      messages_div_header.text == 'Drafts'
-    rescue Capybara::ElementNotFound
-      return false
-    end
-  end
-
-  def load_scheduled_panel
-    sidebar.scheduled_link.click
-    Timeout.timeout(30) { sleep 0.1 while not is_scheduled_panel? }
-  end
-
-  def is_scheduled_panel?
-    begin
-      messages_div_header.text == 'Scheduled Messages'
-    rescue Capybara::ElementNotFound
-      return false
-    end
-  end
-
   def click_tab(tab)
     case tab
+    when "Compose" 
+      load_panel(sidebar.compose_link, Proc.new { compose_message_div_header.text == 'Compose a Message' })
     when "Messages" 
-      load_messages_panel
+      load_panel(sidebar.messages_link, Proc.new { messages_div_header.text == 'Messages' })
     when "Flagged Messages" 
-      load_flagged_messages_panel
+      load_panel(sidebar.flagged_messages_link, Proc.new { messages_div_header.text == 'Flagged Messages' })
     when "Assigned Messages" 
-      load_assigned_messages_panel
+      load_panel(sidebar.assigned_messages_link, Proc.new { messages_div_header.text == 'Assigned Messages' })
     when "Deleted Messages" 
-      load_deleted_messages_panel
-    when "Deleted Messages" 
-      load_deleted_messages_panel
+      load_panel(sidebar.deleted_messages_link, Proc.new { messages_div_header.text == 'Deleted Messages' })
     when "Sent" 
-      load_sent_messages_panel
+      load_panel(sidebar.sent_messages_link, Proc.new { messages_div_header.text == 'Sent Messages' })
     when "Drafts" 
-      load_drafts_panel
+      load_panel(sidebar.drafts_link, Proc.new { messages_div_header.text == 'Drafts' })
     when "Scheduled" 
-      load_scheduled_panel
+      load_panel(sidebar.scheduled_link, Proc.new { messages_div_header.text == 'Scheduled Messages' })
+    when "Filters" 
+      load_panel(sidebar.filters_link, Proc.new { messages_div_header.text == 'Keyword Filters' })
     else raise "Unknown tab #{tab}"
     end
-    sleep 2
   end
 
   def messages_in_folder(folder_name)
@@ -207,4 +114,24 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
       messages_panel.messages.collect {|m| m.body.text }
     end
   end
+
+  private
+
+  def load_panel (panel_link, is_panel_expression)
+    panel_link.click
+    begin
+      Timeout.timeout(30) { sleep 0.1 while not is_expected_panel?(is_panel_expression) }
+    rescue Timeout::Error
+      raise "Panel header '#{panel_header_text}' failed to appear after waiting 30 seconds."
+    end
+  end
+
+  def is_expected_panel?(is_panel_expression)
+    begin
+      is_panel_expression.call
+    rescue Capybara::ElementNotFound
+      return false
+    end
+  end
+
 end

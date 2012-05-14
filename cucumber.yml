@@ -18,3 +18,12 @@ amtestfailing: -f pretty -t @complete -t @failing -t @amtest CONFIG="am-test"
 jenkinsproduction: -f pretty -t @complete -t ~@not_implemented -t @production CONFIG="live" --format junit --out "reports/features/"
 jenkinsstaging: -f pretty -t @complete -t ~@not_implemented -t @staging CONFIG="staging" --format junit --out "reports/features/"
 jenkinsamtest: -f pretty -t @complete -t ~@not_implemented -t @amtest CONFIG="am-test" --format junit --out "reports/features/"
+
+# Tag Specific
+#Production
+pm: -f pretty -t @complete -t ~@not_implemented -t @production -t @messenger CONFIG="live"
+pam: -f pretty -t @complete -t ~@not_implemented -t @production -t @account_management CONFIG="live"
+pa: -f pretty -t @complete -t ~@not_implemented -t @production -t @analytics CONFIG="live"
+pma: -f pretty -t @complete -t ~@not_implemented -t @production -t @messenger_admin CONFIG="live"
+ppm: -f pretty -t @complete -t ~@not_implemented -t @production -t @page_manager CONFIG="live"
+pg: -f pretty -t @complete -t ~@not_implemented -t @production -t @gallery CONFIG="live"

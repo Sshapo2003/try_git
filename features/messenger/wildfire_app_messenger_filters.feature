@@ -16,10 +16,9 @@ Feature: Filters
     | Name           | Name can't be blank         |
     | Keywords       | Keywords can't be blank     |
 
-  @not_started
+  @wip
   Scenario: Create a filter
     When I create a valid filter
-    And I save the filter
     Then the filter should added to the list of filters
 
   @not_started

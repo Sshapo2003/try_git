@@ -2,21 +2,30 @@ When /^I click the "(.*)" tab on the left navigation menu on wildfire app messen
   @wildfire.wildfireapp_messenger.click_tab(tab)
 end
 
+When /^I create a valid filter$/ do
+  @filter_name = @wildfire.wildfireapp_messenger.create_a_valid_filter
+end
+
+Then /^the filter should added to the list of filters$/ do
+  Timeout.timeout_and_raise(30, 'Filter not found') { sleep 0.1 unless @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.text.include? @filter_name }.count > 0 }
+  @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.text.include? @filter_name }.count.should == 1
+end
+
 When /^I compose and send a valid message$/ do
   @wildfire.wildfireapp_messenger.load
-  @wildfire.wildfireapp_messenger.load_compose_message_panel
+  @wildfire.wildfireapp_messenger.click_tab 'Compose'
   @message_body = @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message
 end
 
 When /^I compose and send a valid message for my twitter property$/ do
   unless @wildfire.wildfireapp_messenger.displayed? then @wildfire.wildfireapp_messenger.load end
-  @wildfire.wildfireapp_messenger.load_compose_message_panel
+  @wildfire.wildfireapp_messenger.click_tab 'Compose'
   @message_body = @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message_to_twitter
 end
 
 Given /^I compose a new Mesenger message$/ do
   unless @wildfire.wildfireapp_messenger.displayed? then @wildfire.wildfireapp_messenger.load end
-  @wildfire.wildfireapp_messenger.load_compose_message_panel
+  @wildfire.wildfireapp_messenger.click_tab 'Compose'
   @message_body = @wildfire.wildfireapp_messenger.compose_a_valid_message
 end
 
@@ -83,7 +92,7 @@ Then /^I should be informed that the draft has been deleted$/ do
 end
 
 Then /^the message should not be visible in the drafts folder$/ do
-  unless @wildfire.wildfireapp_messenger.is_drafts_panel? then @wildfire.wildfireapp_messenger.load_drafts_panel end
+  @wildfire.wildfireapp_messenger.click_tab 'Drafts'
   @wildfire.wildfireapp_messenger.draft_messages_panel.messages.select {|m| m.body.text.include? @draft_message_content }.count.should eql 0
 end
 
