@@ -6,6 +6,7 @@ Background:
     And I navigate to the wildfire app messenger page
     And I view the "Assigned" tab
 
+  # This is currently broken so will be implememted when fixed.
   @not_started
   Scenario: Unassign a message
     Given I have an assigned message

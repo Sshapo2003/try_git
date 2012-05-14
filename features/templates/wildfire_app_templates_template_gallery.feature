@@ -1,4 +1,4 @@
-@messenger @production
+@gallery @templates @production
 Feature: Template Gallery
 
   Background:

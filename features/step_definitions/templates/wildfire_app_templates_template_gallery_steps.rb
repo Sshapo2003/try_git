@@ -49,7 +49,7 @@ When /^I click the Start Now button on any template$/ do
 end
 
 When /^I create a page from the "(.*)" template$/ do |template_name|
-  @template_name = "Tile Gallery"
+  @template_name = template_name
 
   until @wildfire.wildfireapp_templates.all_template_titles.include? template_name
     @wildfire.wildfireapp_templates.scroll_to_bottom_of_page

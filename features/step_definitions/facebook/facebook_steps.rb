@@ -16,12 +16,24 @@ Then /^the published template should be visible on my facebook page$/ do
 
   Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.displayed? != true }
   Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.has_iframe? != true }
-  Timeout.timeout(30) { sleep 0.1 while@facebook.wildfire_app_page.iframe_body.include?(@template_name) != true }
-  
+  begin
+    Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.iframe_body.include?(@template_name) != true }
+  rescue
+    puts "Timed out while waiting for iframe to contain #{@template_name}. Page Body:"
+    puts @facebook.wildfire_app_page.iframe_body
+  end
+
+
   @facebook.wildfire_app_page.iframe_body.should include @template_name
 end
 
 Then /^the message should be visible on my facebook page$/ do
   @facebook.timeline.visit_my_timeline
-  @facebook.timeline.status_units.select {|s| s.text.include? @message_body }.count.should eql 1
+  @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }.count.should eql 1
+  @matching_message = @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }.first
+end
+
+Then /^the message on my facebook page should have the links title and text$/ do
+   @matching_message.link_title.text.should include @attachment[:link_title]
+   @matching_message.link_url.text.should include @attachment[:url]
 end

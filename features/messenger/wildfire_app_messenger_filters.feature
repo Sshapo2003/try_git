@@ -4,7 +4,7 @@ Feature: Filters
   Background:
     Given I am logged in as "default"
     And I navigate to the wildfire app messenger page
-    And I view the "Filters" tab
+    And I click the "Filters" tab on the left navigation menu on wildfire app messenger page
 
   @not_started
   Scenario Outline: Missing required fields
@@ -16,10 +16,9 @@ Feature: Filters
     | Name           | Name can't be blank         |
     | Keywords       | Keywords can't be blank     |
 
-  @not_started
+  @wip
   Scenario: Create a filter
     When I create a valid filter
-    And I save the filter
     Then the filter should added to the list of filters
 
   @not_started

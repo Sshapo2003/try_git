@@ -5,9 +5,11 @@ Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
   @twitter = Model::Twitter.new
   case page_name.downcase
   when 'login'
-    visit "#{Helpers::Config['wildfire_site_root']}/logout" unless @wildfire.login.is_loaded?
     @wildfire.login.load
-    raise "This is not the login page. URL: #{current_url}" unless @wildfire.login.is_loaded?
+    unless @wildfire.login.is_loaded? then
+      visit "#{Helpers::Config['wildfire_site_root']}/logout"
+      @wildfire.login.load
+    end
   when 'signup' then @wildfire.signup.load
   when 'wildfire app messenger'
     @wildfire.wildfireapp_messenger.load

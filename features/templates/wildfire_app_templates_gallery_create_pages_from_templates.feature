@@ -1,4 +1,4 @@
-@messenger @production
+@gallery @templates @production
 Feature: Creating Pages from Templates
 
   Background:
@@ -8,5 +8,17 @@ Feature: Creating Pages from Templates
   @complete
   Scenario: Tile Gallery template 
     When I create a page from the "Tile Gallery" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Sliding Gallery 2.0 template 
+    When I create a page from the "Sliding Gallery 2.0" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Signup Form, Gallery and RSS template 
+    When I create a page from the "Signup Form, Gallery and RSS" template
     And I publish the template
     Then the published template should be visible on my facebook page
