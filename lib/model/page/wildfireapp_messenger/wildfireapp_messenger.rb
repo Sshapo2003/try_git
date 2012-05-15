@@ -25,7 +25,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   end
 
   def create_a_valid_filter
-    @filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
+    filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
     filters_panel.create_new_filter_button.click
     create_filter_dialog.name.set filter_name
     create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
@@ -36,8 +36,25 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
 
   def assign_filter_to_my_company filter_name
     filters_panel.filter_by_name(filter_name).edit
-    edit_filter_dialog.wait_for_save_button(30)
+    edit_filter_dialog.wait_for_save_button 30
     edit_filter_dialog.add_property Helpers::Config['facebook_property_name']
+  end
+
+  def unassign_filter_from_my_company filter_name
+    filters_panel.filter_by_name(filter_name).edit
+    edit_filter_dialog.wait_for_save_button 30
+    edit_filter_dialog.remove_property Helpers::Config['facebook_property_name']
+  end
+
+  def update_filters_keywords filter_name, keywords
+    filter = filters_panel.filters.select {|f| f.name.text.include? filter_name }.first
+    filter.edit
+    edit_filter_dialog.wait_for_save_button 30
+    edit_filter_dialog.keywords.set keywords
+    create_filter_dialog.save_button.click
+    sleep 5
+    updated_filter = filters_panel.filter_by_name(filter_name)
+    Timeout.timeout_and_raise(30, 'Filter not found') { sleep 0.1 unless updated_filter.keyword_count.text.include? '2 keywords' }
   end
 
   def attach_to_message(attachment_details)

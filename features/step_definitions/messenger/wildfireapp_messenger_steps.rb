@@ -11,6 +11,25 @@ Given /^I have an unassigned filter$/ do
   @unassigned_filter_name = @unassigned_filters.first.name.text
 end
 
+Given /^I have a filter with 1 keyword$/ do 
+  @filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.text.include? "test filter" }
+  unless @filters.count > 0
+    @wildfire.wildfireapp_messenger.create_a_valid_filter
+    @filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.contain? "test filter" }
+  end
+  @filter_name = @filters.first.name.text
+  @wildfire.wildfireapp_messenger.update_filters_keywords(@filter_name, 'thisisakeyword')
+end
+
+When /^I add another keyword to the filter$/ do
+  @wildfire.wildfireapp_messenger.update_filters_keywords(@filter_name, 'thisisakeyword;soisthis')
+end
+
+Then /^the filter page should show that the filter has 2 keywords$/ do
+  filter = @wildfire.wildfireapp_messenger.filters_panel.filter_by_name(@filter_name)
+  filter.keyword_count.text.include? "2 keywords"
+end
+
 When /^I create a valid filter$/ do
   @filter_name = @wildfire.wildfireapp_messenger.create_a_valid_filter
 end
@@ -19,10 +38,30 @@ When /^I assign the filter to my company$/ do
   @wildfire.wildfireapp_messenger.assign_filter_to_my_company(@unassigned_filter_name)
 end
 
+Given /^I have a filter assigned to my company$/ do
+  step 'I have an unassigned filter'
+  step 'I assign the filter to my company'
+  step 'the filter page should show that the filter is assigned to my company'
+end
+
+When /^I unassign the filter from my company$/ do
+  @wildfire.wildfireapp_messenger.unassign_filter_from_my_company(@unassigned_filter_name)
+end
+
 Then /^the filter page should show that the filter is assigned to my company$/ do
+  @wildfire.wildfireapp_messenger.filters_panel.wait_for_filters
+  sleep 1 # Wait for filters to render correctly on filters panel
   filters = @wildfire.wildfireapp_messenger.filters_panel.filters
-  filter = filters.select {|f| f.name.text.include? @unassigned_filter_name }.first
+  filter = filters.select {|f| f.name.text.include? @unassigned_filter_name}.first
   filter.assigned_properties.text.should include Helpers::Config['facebook_property_name']
+end
+
+Then /^the filter page should show that the filter is not assigned to my company$/ do
+  @wildfire.wildfireapp_messenger.filters_panel.wait_for_filters
+  sleep 1 # Wait for filters to render correctly on filters panel
+  filters = @wildfire.wildfireapp_messenger.filters_panel.filters
+  filter = filters.select {|f| f.name.text.include? @unassigned_filter_name}.first
+  filter.assigned_properties.text.should_not include Helpers::Config['facebook_property_name']
 end
 
 Then /^the filter should added to the list of filters$/ do

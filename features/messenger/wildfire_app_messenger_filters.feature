@@ -27,13 +27,13 @@ Feature: Filters
     When I assign the filter to my company
     Then the filter page should show that the filter is assigned to my company
 
-  @not_started
+  @complete
   Scenario: Unassign a filter
     Given I have a filter assigned to my company
     When I unassign the filter from my company
     Then the filter page should show that the filter is not assigned to my company
 
-  @not_started
+  @complete
   Scenario: Edit a filter
     Given I have a filter with 1 keyword
     When I add another keyword to the filter

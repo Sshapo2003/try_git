@@ -3,6 +3,6 @@ class Model::Section::Messenger::WildfireappMessengerFiltersPanel < SitePrism::S
   sections :filters, Model::Section::Messenger::WildfireappMessengerFilter, 'div.message_filter'
 
   def filter_by_name filter_name
-    filters.select {|f| f.name.text.include? filter_name }.first
+    filters.select {|f| f.name.text.include? filter_name}.first
   end
 end

@@ -2,6 +2,7 @@ class Model::Section::Messenger::WildfireappMessengerFilter < SitePrism::Section
   element :name, 'div.name'
   element :assigned_properties, 'div.assigned_properties'
   element :edit_link, 'a.edit'
+  element :keyword_count, 'div.keyword_count'
 
   def assigned?
     assigned_properties.text.include? 'Applied to 0 properties'
