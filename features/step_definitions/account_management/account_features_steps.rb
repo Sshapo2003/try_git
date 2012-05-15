@@ -3,7 +3,7 @@ Then /^I (should|should not) have access to Messenger$/ do |expectation|
   @wildfire.wildfireapp_messenger.send(expectation.parameterize.underscore, be_active)
 end
 
-Then /^I (should|should not) have access to Analytics$/ do |expectation|
+Then /^I (should|should not) have access to (?:Analytics|Dashboard)$/ do |expectation|
   @wildfire.wildfireapp_analytics.load
   @wildfire.wildfireapp_analytics.send(expectation.parameterize.underscore, be_active)
 end

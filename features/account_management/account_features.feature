@@ -12,3 +12,15 @@ Feature: Account Features
     But I should not have access to Analytics
     And I should not have access to Page Manager
     And I should not have access to Messenger
+    
+  @complete
+  Scenario Outline: Enable access to applications
+    Given I am logged in to Wildfire as a new user
+    When I am granted access to <application>
+    Then I should have access to <application>
+  
+  Examples:
+    | application  |
+    | Page Manager |
+    | Messenger    |
+    | Dashboard    |

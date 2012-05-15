@@ -51,6 +51,10 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
     Model::Page::AccountManagement::TrackedProperties.new
   end
   
+  def demo_page
+    Model::Page::AccountManagement::Demo.new
+  end
+  
   def flash_message
     first('span.flash_contents').try(:text)
   end
