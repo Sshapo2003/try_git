@@ -34,6 +34,10 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     return filter_name
   end
 
+  def delete_filter filter_name
+    filters_panel.filter_by_name(filter_name).delete
+  end
+
   def assign_filter_to_my_company filter_name
     filters_panel.filter_by_name(filter_name).edit
     edit_filter_dialog.wait_for_save_button 30

@@ -39,7 +39,7 @@ Feature: Filters
     When I add another keyword to the filter
     Then the filter page should show that the filter has 2 keywords
 
-  @not_started
+  @complete
   Scenario: Delete a filter
     Given I have a filter
     When I delete the filter

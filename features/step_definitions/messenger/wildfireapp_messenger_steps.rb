@@ -2,6 +2,23 @@ When /^I click the "(.*)" tab on the left navigation menu on wildfire app messen
   @wildfire.wildfireapp_messenger.click_tab(tab)
 end
 
+Given /^I have a filter$/ do
+  @filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.text.include? "test filter" }
+  unless @filters.count > 0
+    @wildfire.wildfireapp_messenger.create_a_valid_filter
+    @filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.contain? "test filter" }
+  end
+  @unassigned_filter_name = @filters.first.name.text
+end
+
+When /^I delete the filter$/ do
+  @wildfire.wildfireapp_messenger.delete_filter @unassigned_filter_name
+end
+
+Then /^the filter should removed from the list of filters$/ do
+  @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.text.include? @unassigned_filter_name }.count.should eql 0
+end
+
 Given /^I have an unassigned filter$/ do
   @unassigned_filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.assigned? == true }
   unless @unassigned_filters.count > 0
