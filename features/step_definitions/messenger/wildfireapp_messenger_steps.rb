@@ -77,26 +77,37 @@ Then /^the Messages Panel paging message should include "(.*?)"$/ do |paging_mes
   @wildfire.wildfireapp_messenger.messages_panel.pagination_current_page_indicator_text.should include paging_message
 end
 
-Then /^the right paging icon should be enabled in the Messages Panel$/ do
-  @wildfire.wildfireapp_messenger.messages_panel.should have_enabled_next_page_button
-end
-
 When /^I click the right paging icon in the Messages Panel$/ do
   @wildfire.wildfireapp_messenger.messages_panel.enabled_next_page_button.click
+end
+
+Then /^the (.*) paging icon should be (.*) in the Messages Panel$/ do |direction, state|
+  panel = @wildfire.wildfireapp_messenger.messages_panel
+  case direction.downcase
+  when "left"
+    if state == 'disabled'
+      panel.should_not have_enabled_previous_page_button
+    elsif state == 'enabled'
+      panel.should have_enabled_previous_page_button
+    else 
+      raise "Unknown state: #{state}"
+    end
+  when "right"
+    if state == 'disabled'
+      panel.should_not have_enabled_next_page_button
+    elsif state == 'enabled'
+      panel.should have_enabled_next_page_button
+    else
+      raise "Unknown state: #{state}"
+    end
+  else raise "Unknown arrow direction: #{direction}"
+  end
 end
 
 Then /^more messages should be displayed in the Messages Panel$/ do
   @more_messages = @wildfire.wildfireapp_messenger.messages_panel.messages.collect {|d| d.text }
   @intersection = @more_messages & @messages
   @intersection.size.should eql 0
-end
-
-Then /^the left paging icon should be enabled in the Messages Panel$/ do
-  @wildfire.wildfireapp_messenger.messages_panel.should have_enabled_previous_page_button
-end
-
-Then /^the right paging icon should be disabled in the Messages Panel$/ do
-  @wildfire.wildfireapp_messenger.messages_panel.should_not have_enabled_next_page_button
 end
 
 When /^I go to the last page of messages in the Messages Panel$/ do
