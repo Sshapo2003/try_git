@@ -3,6 +3,7 @@ class Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog < Si
     element :keywords, 'textarea#message_filter_keyword_text'
     element :save_button, 'button[value="Save"]'
     element :social_properties_input_field, "input[value='Select Some Options']"
+    element :error_explaination_div, 'div.errorExplanation'
     elements :properties_in_select_list, 'ul.chzn-results li'
     sections :selected_properties, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialogSelectedProperty, 'li.search-choice'
 

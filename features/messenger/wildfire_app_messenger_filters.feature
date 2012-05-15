@@ -6,10 +6,11 @@ Feature: Filters
     And I navigate to the wildfire app messenger page
     And I click the "Filters" tab on the left navigation menu on wildfire app messenger page
 
-  @not_started
+  @complete @failing
   Scenario Outline: Missing required fields
-    When the "<Required_Field>" is left blank during filter creation
-    And I attempt to save the filter
+    Given I create a filter
+    But the "<Required_Field>" field is left blank during filter creation
+    Then I attempt to save the filter
     Then the "<Error_Message>" error message should be displayed on the filter creation form
   Examples:
     | Required_Field | Error_Message               |
@@ -18,7 +19,7 @@ Feature: Filters
 
   @complete
   Scenario: Create a filter
-    When I create a valid filter
+    When I create and save a valid filter
     Then the filter should added to the list of filters
 
   @complete

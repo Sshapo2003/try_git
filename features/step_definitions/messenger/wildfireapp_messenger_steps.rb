@@ -5,7 +5,7 @@ end
 Given /^I have a filter$/ do
   @filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.text.include? "test filter" }
   unless @filters.count > 0
-    @wildfire.wildfireapp_messenger.create_a_valid_filter
+    @wildfire.wildfireapp_messenger.create_and_save_a_valid_filter
     @filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.contain? "test filter" }
   end
   @unassigned_filter_name = @filters.first.name.text
@@ -22,7 +22,7 @@ end
 Given /^I have an unassigned filter$/ do
   @unassigned_filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.assigned? == true }
   unless @unassigned_filters.count > 0
-    @wildfire.wildfireapp_messenger.create_a_valid_filter
+    @wildfire.wildfireapp_messenger.create_and_save_a_valid_filter
     @unassigned_filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.assigned? == true }
   end
   @unassigned_filter_name = @unassigned_filters.first.name.text
@@ -31,7 +31,7 @@ end
 Given /^I have a filter with 1 keyword$/ do 
   @filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.text.include? "test filter" }
   unless @filters.count > 0
-    @wildfire.wildfireapp_messenger.create_a_valid_filter
+    @wildfire.wildfireapp_messenger.create_and_save_a_valid_filter
     @filters = @wildfire.wildfireapp_messenger.filters_panel.filters.select {|f| f.name.contain? "test filter" }
   end
   @filter_name = @filters.first.name.text
@@ -47,8 +47,30 @@ Then /^the filter page should show that the filter has 2 keywords$/ do
   filter.keyword_count.text.include? "2 keywords"
 end
 
-When /^I create a valid filter$/ do
-  @filter_name = @wildfire.wildfireapp_messenger.create_a_valid_filter
+When /^I create and save a valid filter$/ do
+  @filter_name = @wildfire.wildfireapp_messenger.create_and_save_a_valid_filter
+end
+
+When /^I create a filter$/ do
+  @filter_name = @wildfire.wildfireapp_messenger.create_a_filter
+end
+
+Given /^the "(.*)" field is left blank during filter creation$/ do |field_name|
+  case field_name
+  when "Name"
+    @wildfire.wildfireapp_messenger.create_filter_dialog.name.set ""
+  when "Keywords"
+    @wildfire.wildfireapp_messenger.create_filter_dialog.keywords.set ""
+  else raise "Unknown field #{field}"
+  end
+end
+
+When /^I attempt to save the filter$/ do
+  @wildfire.wildfireapp_messenger.create_filter_dialog.save_button.click
+end
+
+Then /^the "(.*)" error message should be displayed on the filter creation form$/ do |error_message|
+  @wildfire.wildfireapp_messenger.create_filter_dialog.error_explaination_div.text.should include error_message
 end
 
 When /^I assign the filter to my company$/ do

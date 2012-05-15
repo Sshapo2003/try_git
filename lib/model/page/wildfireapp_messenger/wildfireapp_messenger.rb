@@ -24,7 +24,15 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     using_wait_time(1) { page.has_no_content?('This product is locked') }
   end
 
-  def create_a_valid_filter
+  def create_a_filter
+    filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
+    filters_panel.create_new_filter_button.click
+    create_filter_dialog.name.set filter_name
+    create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
+    return filter_name
+  end
+
+  def create_and_save_a_valid_filter
     filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
     filters_panel.create_new_filter_button.click
     create_filter_dialog.name.set filter_name
