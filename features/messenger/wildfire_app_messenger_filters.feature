@@ -6,7 +6,7 @@ Feature: Filters
     And I navigate to the wildfire app messenger page
     And I click the "Filters" tab on the left navigation menu on wildfire app messenger page
 
-  @complete @failing
+  @complete
   Scenario Outline: Missing required fields
     Given I create a filter
     But the "<Required_Field>" field is left blank during filter creation

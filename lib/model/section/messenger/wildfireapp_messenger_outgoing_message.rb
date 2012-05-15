@@ -2,6 +2,7 @@ class Model::Section::Messenger::WildfireappMessengerOutgoingMessage < SitePrism
   element :body, 'div.message_body'
   element :delete_draft_link, 'div.actions a.delete'
   element :edit_draft_link, 'div.actions a.edit'
+  element :pagination_current_page_indicator_text, 'div.pagination span.range'
 
   def delete_first_draft
     page.execute_script '$("div.actions a.delete").first().click()'
