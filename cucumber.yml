@@ -1,29 +1,32 @@
-<% common = "--tags ~@not-started --tags ~@not_started" %>
-account_management: <%= common %> -f pretty -t @account_management -t @complete
-wip: -f pretty -t @wip
-complete: -f pretty -t @complete -t ~@not_implemented
-failing: -f pretty -t @failing
-complete_no_failing: -f pretty -t @complete -t ~@failing
-custom: -f pretty <%= ENV["TAGS"] %>
-specific: -f pretty --tags <%= ENV['TAGS'] %>
-productionwip: -f pretty -t @wip -t @production CONFIG="live"
-productioncomplete: -f pretty -t @complete -t ~@not_implemented -t @production CONFIG="live"
-productionfailing: -f pretty -t @complete -t @failing -t @production CONFIG="live"
-stagingwip: -f pretty -t @wip -t @staging CONFIG="staging"
-stagingcomplete: -f pretty -t @complete -t ~@not_implemented -t @staging CONFIG="staging"
-stagingfailing: -f pretty -t @complete -t @failing -t @staging CONFIG="staging"
-amtestwip: -f pretty -t @wip -t @amtest CONFIG="am-test"
-amtestcomplete: -f pretty -t @complete -t ~@not_implemented -t @amtest CONFIG="am-test"
-amtestfailing: -f pretty -t @complete -t @failing -t @amtest CONFIG="am-test"
-jenkinsproduction: -f pretty -t @complete -t ~@not_implemented -t @production CONFIG="live" --format junit --out "reports/features/"
-jenkinsstaging: -f pretty -t @complete -t ~@not_implemented -t @staging CONFIG="staging" --format junit --out "reports/features/"
-jenkinsamtest: -f pretty -t @complete -t ~@not_implemented -t @amtest CONFIG="am-test" --format junit --out "reports/features/"
+<% common = "--format rerun --out 'features.txt' -f pretty" %>
+account_management: <%= common %> -t @account_management -t @complete
+wip: <%= common %> -t @wip
+complete: <%= common %> -t @complete -t ~@not_implemented
+failing: <%= common %> -t @failing
+complete_no_failing: <%= common %> -t @complete -t ~@failing
+custom: <%= common %> <%= ENV["TAGS"] %>
+specific: <%= common %> --tags <%= ENV['TAGS'] %>
 
-# Tag Specific
-#Production
-pm: -f pretty -t @complete -t ~@not_implemented -t @production -t @messenger CONFIG="live"
-pam: -f pretty -t @complete -t ~@not_implemented -t @production -t @account_management CONFIG="live"
-pa: -f pretty -t @complete -t ~@not_implemented -t @production -t @analytics CONFIG="live"
-pma: -f pretty -t @complete -t ~@not_implemented -t @production -t @messenger_admin CONFIG="live"
-ppm: -f pretty -t @complete -t ~@not_implemented -t @production -t @page_manager CONFIG="live"
-pg: -f pretty -t @complete -t ~@not_implemented -t @production -t @gallery CONFIG="live"
+<% common = "--format rerun --out 'features.txt' -f pretty" %>
+productionwip: <%= common %> -t @wip -t @production CONFIG="live"
+productioncomplete: <%= common %>  -t @production CONFIG="live"
+productionfailing: <%= common %> -t @complete -t @failing -t @production CONFIG="live"
+stagingwip: <%= common %> -t @wip -t @staging CONFIG="staging"
+stagingcomplete: <%= common %> -t @complete -t ~@not_implemented -t @staging CONFIG="staging"
+stagingfailing: <%= common %> -t @complete -t @failing -t @staging CONFIG="staging"
+amtestwip: <%= common %> -t @wip -t @amtest CONFIG="am-test"
+amtestcomplete: <%= common %> -t @complete -t ~@not_implemented -t @amtest CONFIG="am-test"
+amtestfailing: <%= common %> -t @complete -t @failing -t @amtest CONFIG="am-test"
+jenkinsproduction: <%= common %> -t @complete -t ~@not_implemented -t @production CONFIG="live" --format junit --out "reports/features/"
+jenkinsstaging: <%= common %> -t @complete -t ~@not_implemented -t @staging CONFIG="staging" --format junit --out "reports/features/"
+jenkinsamtest: <%= common %> -t @complete -t ~@not_implemented -t @amtest CONFIG="am-test" --format junit --out "reports/features/"
+
+# Product Group Specific
+# Production
+<% common = "--format rerun --out 'features.txt' -f pretty -t @complete -t @production -t ~@not_implemented -t ~@failing" %>
+pm: <%= common %> -t @messenger CONFIG="live"
+pam: <%= common %> -t @account_management CONFIG="live"
+pa: <%= common %> -t @analytics CONFIG="live"
+pma: <%= common %> -t @messenger_admin CONFIG="live"
+ppm: <%= common %> -t @page_manager CONFIG="live"
+pg: <%= common %> -t @gallery CONFIG="live"

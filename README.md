@@ -36,6 +36,22 @@ All Environment/Tag configurations:
 
  * See the cucumber.yml file for a complete list of available rake configurations
 
+## RERUNNING FAILING TESTS
+
+You may find that, occasionally, a test will fail for reasons outside our control (network issues, browser crashes etc.). In order to rerun only tests which failed in a previous run, use one of the following commands:
+
+AM-TEST
+
+* cucumber @features.txt CONFIG="am-test"
+
+STAGING
+
+* cucumber @features.txt CONFIG="am-test"
+
+PRODUCTION
+
+ * cucumber @features.txt CONFIG="am-test"
+
 ## BEST PRACTICES
 
  When it's not possible to carry out an action via the standard Capybara methods and javascript/jquery are required (i.e. page.execute_script or page.evaluate.evaluate_script) then please be sure to comment with the reason. e.g. 'Cannot interact with element until mouse-over occurs'

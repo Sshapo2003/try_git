@@ -60,6 +60,7 @@ am-test:
   wildfire_page_manager_root: https://apps.am-test.wfhack.com/pages/states/published
   messenger_admin_root: https://messenger.am-test.wfhack.com/admin
   wildfire_promotions_root: https://promos.am-test.wfhack.com
+  wildfire_templates_root: http://templates.am-test.wfhack.com
   crystal_ball_root: https://promos.am-test.wfhack.com/crystal_ball/
   #credentials
   default_user_facebook_address: paloaltofoodie@gmail.com
