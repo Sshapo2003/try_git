@@ -45,8 +45,8 @@ Then /^the message should not be visible in the drafts folder$/ do
 end
 
 Given /^I have more than (\d+) draft messages$/ do |number_of_messages|
-    Timeout.timeout(600) do
-      while @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_message_total_text.to_i <= number_of_messages.to_i
+  Timeout.timeout(600) do
+    while @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_message_total_text.to_i <= number_of_messages.to_i
       step 'I compose a new Mesenger message'
       step 'I save the message as a draft'
       step 'I click the "Drafts" tab on the left navigation menu on wildfire app messenger page'
