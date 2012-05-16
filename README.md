@@ -46,11 +46,11 @@ AM-TEST
 
 STAGING
 
-* cucumber @features.txt CONFIG="am-test"
+* cucumber @features.txt CONFIG="staging"
 
 PRODUCTION
 
- * cucumber @features.txt CONFIG="am-test"
+ * cucumber @features.txt CONFIG="live"
 
 ## BEST PRACTICES
 
