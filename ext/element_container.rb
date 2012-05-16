@@ -39,22 +39,4 @@ module SitePrism::ElementContainer
       find section_locator
     end
   end
-
-  private
-
-  def create_waiter element_name, element_locator
-    method_name = "wait_for_#{element_name.to_s}"
-    if element_locator.nil?
-      define_method method_name do
-        raise SitePrism::NoLocatorForElement.new("#{self.class.name} => :#{element_name} needs a locator")
-      end
-    else
-      define_method method_name do |timeout|
-        if timeout == nil then timeout = Capybara.default_wait_time end
-        Capybara.using_wait_time timeout do
-          element_waiter element_locator
-        end
-      end
-    end
-  end
 end
