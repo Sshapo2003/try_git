@@ -12,3 +12,11 @@ Then /^the message should be in my Assigned Messages$/ do
   @content_of_each_message_in_assigned_panel = @wildfire.wildfireapp_messenger.assigned_messages_panel.messages.collect {|m| m.body.text }
   @content_of_each_message_in_assigned_panel.should include @unassigned_message_content
 end
+
+When /^I hover over the assigned user icon$/ do
+  @assigned_message.hover_over_assigned_to
+end
+
+Then /^then the assigned user bubbletip should be displayed$/ do
+  @assigned_message.assigned_to_bubbletip_visible?.should be_true
+end

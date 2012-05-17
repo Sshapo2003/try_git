@@ -170,5 +170,4 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
       return false
     end
   end
-
 end

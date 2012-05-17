@@ -7,7 +7,7 @@ Feature: Composing Messages
 
   @complete
   Scenario: Compose message panel state
-    When I click the "Compose" tab on the left navigation menu on wildfire app messenger page
+  When I click the "Compose" tab on the left navigation menu on wildfire app messenger page
     And I select the "Later" radio button on wildfire app messenger page
     Then the time should be set for about now
     And the "Schedule" button should be displayed on wildfire app messenger page

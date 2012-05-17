@@ -4,7 +4,13 @@ Feature: Assigned Messages
 Background:
     Given I am logged in as "default"
     And I navigate to the wildfire app messenger page
-    And I view the "Assigned" tab
+    And I click the "Assigned Messages" tab on the left navigation menu on wildfire app messenger page
+
+  @complete
+  Scenario: Assigned message bubbletip on mouseover
+    Given I have an assigned message
+    When I hover over the assigned user icon
+    Then then the assigned user bubbletip should be displayed
 
   # This is currently broken so will be implememted when fixed.
   @not_started

@@ -22,6 +22,14 @@ Then /^I should be informed that the message has been saved as a draft$/ do
   @wildfire.wildfireapp_messenger.compose_message_panel.header.text.should include "Edit Draft Message - Saved on "
 end
 
+Given /^I have an assigned message$/ do
+  unless @wildfire.wildfireapp_messenger.messages_panel.assigned_messages.size > 0
+    step 'I have an unassigned message'
+    @wildfire.wildfireapp_messenger.assign_message_to_me @unassigned_message
+  end
+  @assigned_message = @wildfire.wildfireapp_messenger.messages_panel.assigned_messages.first
+end
+
 Given /^I have an unassigned message$/ do
   unless @wildfire.wildfireapp_messenger.messages_panel.unassigned_messages.size > 0
     @wildfire.wildfireapp_messenger.sidebar.compose_link.click
