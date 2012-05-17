@@ -8,7 +8,7 @@ module SitePrism::ElementContainer
     else
       add_element_name element_name.to_s
       define_method element_name.to_s do
-        find locator
+        find element_locator
       end
     end
     create_existence_checker element_name, element_locator
@@ -29,14 +29,5 @@ module SitePrism::ElementContainer
     create_existence_checker collection_name, collection_locator
     create_waiter collection_name, collection_locator
   end
-  alias :collection :elements
-
-  def root_section section_name, section_class, section_locator
-    add_element_name section_name
-    create_existence_checker section_name, section_locator
-    create_waiter section_name, section_locator
-    define_method section_name do
-      find section_locator
-    end
-  end
+  alias :root_collection :root_elements
 end
