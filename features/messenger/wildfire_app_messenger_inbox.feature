@@ -5,7 +5,7 @@ Feature: Messenger Inbox
     Given I am logged in as "default"
     And I navigate to the wildfire app messenger page
 
-  @wip @US5483
+  @complete @US5483
   Scenario: View Each Message Type
     When I click the "Messages" tab on the left navigation menu on wildfire app messenger page
     Then the header in the messages area should be "Messages"

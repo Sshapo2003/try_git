@@ -9,7 +9,7 @@ specific: <%= common %> --tags <%= ENV['TAGS'] %>
 
 <% common = "--format rerun --out 'features.txt' -f pretty" %>
 productionwip: <%= common %> -t @wip -t @production CONFIG="live"
-productioncomplete: <%= common %>  -t @production CONFIG="live"
+productioncomplete: <%= common %>  -t @complete -t @production CONFIG="live"
 productionfailing: <%= common %> -t @complete -t @failing -t @production CONFIG="live"
 stagingwip: <%= common %> -t @wip -t @staging CONFIG="staging"
 stagingcomplete: <%= common %> -t @complete -t ~@not_implemented -t @staging CONFIG="staging"
