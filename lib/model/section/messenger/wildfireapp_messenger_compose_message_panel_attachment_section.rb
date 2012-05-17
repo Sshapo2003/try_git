@@ -3,6 +3,7 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachme
   element :attach_link_dialog, 'div#attach_link input#attached_link'
   element :attach_link_button, 'div#attach_link a.attach_button'
   element :attachment_title, 'div#attach_link div.title'
+  section :attachment_preview, Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSectionPreview, "div.preview[style='display: block;']"
 
   def attach_to_message(attachment)
     case attachment[:type]

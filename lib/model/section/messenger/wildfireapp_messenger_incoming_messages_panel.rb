@@ -1,10 +1,11 @@
 class Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel < SitePrism::Section
   elements :pagination_totals, 'div.pagination strong'
   element :actions_menu, 'div.wf_prompt_button_wpr a'
-  element :actions_menu_assign_option, "ol#message_action a[href='Assign']"
   element :enabled_next_page_button, 'a.next'
   element :enabled_previous_page_button, 'a.prev'
 
+  root_element :actions_menu_options, 'ol#message_action'
+  
   sections :messages, Model::Section::Messenger::WildfireappMessengerIncomingMessage, 'div.incoming_message'
 
   def assigned_messages

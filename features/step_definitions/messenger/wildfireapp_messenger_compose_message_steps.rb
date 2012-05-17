@@ -55,8 +55,70 @@ Then /^the "(.*)" error message should be displayed on the message composition f
   case error_message
   when "Please enter a destination."
     @wildfire.wildfireapp_messenger.compose_message_panel.recepients_error.text.should include error_message
+  when "Please enter a time in the future."
+    @wildfire.wildfireapp_messenger.compose_message_panel.date_error.text.should include error_message
   when "Please enter a message."
     @wildfire.wildfireapp_messenger.compose_message_panel.message_error.text.should include error_message
   else raise "Don't know where the error message would be displayed on the compose message page => #{error_message}"
   end
+end
+
+When /^I select the "(.*)" radio button on wildfire app messenger page$/ do |button|
+  @wildfire.wildfireapp_messenger.compose_message_panel.later_button.click
+end
+
+When /^I set the Messenger message date in the past$/ do
+  @wildfire.wildfireapp_messenger.compose_message_panel.later_button.click
+  @wildfire.wildfireapp_messenger.compose_message_panel.date_field.set Chronic.parse('yesterday').strftime("%m/%d/%y")
+end
+
+Then /^the "(.*?)" button should be displayed on wildfire app messenger page$/ do |button_label|
+  @wildfire.wildfireapp_messenger.compose_message_panel.send_button.text.should include button_label
+end
+
+Then /^the time should be set for about now$/ do
+  date = @wildfire.wildfireapp_messenger.compose_message_panel.date_field[:value]
+  hours = @wildfire.wildfireapp_messenger.compose_message_panel.hours_select_value.text
+  minutes = @wildfire.wildfireapp_messenger.compose_message_panel.minutes_select_value.text
+  date.should eql Time.now.strftime("%m/%d/%y")
+  hours.should eql Time.now.strftime("%l").strip
+  ((Time.now.strftime("%M").to_i - 5)...(Time.now.strftime("%M").to_i + 5)) === minutes.to_i.should
+end
+
+Given /^I add a long link to the message$/ do
+  @wildfire.wildfireapp_messenger.compose_message_panel.link_shortner_field.set 'http://www.thisisareallylonglink.com'
+end
+
+When /^I click the shorten link$/ do
+  @wildfire.wildfireapp_messenger.compose_message_panel.link_shortner_link.click
+end
+
+Then /^the link should have the following properties$/ do |table|
+  preview = @wildfire.wildfireapp_messenger.compose_message_panel.attachments_section.attachment_preview
+  table.rows_hash.each do |key, value|
+    case key.downcase
+    when "image"
+      preview.image_url.should include value
+    when "title"
+      preview.title.text.should include value
+    when "body"
+      preview.body.text.should include value
+    when "buttons"
+      if value == "Left and Right"
+        preview.should have_previous_button
+        preview.should have_next_button
+      else
+        raise "Unknown button type #{value}"
+      end
+    else raise "Unknown property #{key}"
+    end
+  end
+end
+
+When /^I click the close button on the link attachment panel$/ do
+  @wildfire.wildfireapp_messenger.compose_message_panel.attachments_section.attachment_preview.close_button.click
+end
+
+Then /^the link attachment panel should not be visible$/ do
+  @wildfire.wildfireapp_messenger.compose_message_panel.attachments_section.should_not have_attachment_preview
 end

@@ -6,6 +6,22 @@ Feature: Composing Messages
     And I navigate to the wildfire app messenger page
 
   @complete
+  Scenario: Compose message panel state
+    When I click the "Compose" tab on the left navigation menu on wildfire app messenger page
+    And I select the "Later" radio button on wildfire app messenger page
+    Then the time should be set for about now
+    And the "Schedule" button should be displayed on wildfire app messenger page
+    When I click the "Compose" tab on the left navigation menu on wildfire app messenger page
+    Then the "Send" button should be displayed on wildfire app messenger page
+
+  @complete
+  Scenario: Missing required fields
+    When I compose a new Mesenger message
+    And I set the Messenger message date in the past
+    And I schedule the message
+    Then the "Please enter a time in the future." error message should be displayed on the message composition form
+
+  @complete
   Scenario Outline: Missing required fields
     When I compose a new Mesenger message
     And the "<Required_Field>" is left blank during message composition
@@ -15,6 +31,14 @@ Feature: Composing Messages
     | Required_Field | Error_Message               |
     | Destination    | Please enter a destination. |
     | Message        | Please enter a message.     |
+
+  # Cannot complete this test because message field is always blank with capybara
+  @not_started
+  Scenario: Link Shortener
+    Given I compose a new Mesenger message
+    And I add a long link to the message
+    When I click the shorten link
+    Then a shortened link should be inserted into the message field
 
   @complete
   Scenario: Send a message
@@ -33,6 +57,18 @@ Feature: Composing Messages
 
   @complete
   Scenario: Compose message with Link
+    When I compose a new Mesenger message
+    And I add a link to the message
+    Then the link should have the following properties
+      | Image    | wildfire.png                                                    |
+      | Title    | Wildfire - Wildfire App - Social Media Marketing Software Suite |
+      | Body     | Wildfire social media marketing software is a powerful platform |
+      | Buttons  | Left and Right                                                  |
+    When I click the close button on the link attachment panel
+    Then the link attachment panel should not be visible
+
+  @complete
+  Scenario: Post message with Link
     When I compose a new Mesenger message
     And I add a link to the message
     And I send the message

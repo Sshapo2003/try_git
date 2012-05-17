@@ -129,3 +129,9 @@ Then /^the remaining messages should be displayed$/ do
   expected_messages_displayed = @number_of_messages - ((@num_pages -1) * 25)
   messages_displayed.should eql expected_messages_displayed
 end
+
+Then /^the actions drop down on the "(.*)" panel contains Assign, Delete and Unflag$/ do |panel|
+  @wildfire.wildfireapp_messenger.messages_panel.actions_menu.click
+  menu_items = @wildfire.wildfireapp_messenger.messages_panel.actions_menu_options
+  ["Assign", "Delete", "Unflag"].each {|i| menu_items.text.should include i }
+end
