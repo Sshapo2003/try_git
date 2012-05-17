@@ -4,6 +4,8 @@ class Model::Section::Messenger::WildfireappMessengerIncomingMessage < SitePrism
   element :input, 'input'
   element :date_time, 'div.posted_at'
   element :body, 'div.body'
+  element :assigned_avatar, 'div.assigned_to a img'
+
   root_element :assigned_to_bubbletip , 'body > div.wf_bubbletip'
 
   def is_assigned?

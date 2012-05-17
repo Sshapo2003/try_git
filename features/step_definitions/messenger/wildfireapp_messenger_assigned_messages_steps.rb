@@ -17,6 +17,10 @@ When /^I hover over the assigned user icon$/ do
   @assigned_message.hover_over_assigned_to
 end
 
-Then /^then the assigned user bubbletip should be displayed$/ do
+Then /^the assigned user bubbletip should be displayed$/ do
   @assigned_message.assigned_to_bubbletip_visible?.should be_true
+end
+
+Then /^the assigned icon is displayed$/ do
+  @assigned_message.assigned_avatar[:src].should include '/images/assigned-inactive-badge.png?'
 end
