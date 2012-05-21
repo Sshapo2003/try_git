@@ -1,5 +1,4 @@
 <% common = "--format rerun --out 'features.txt' -f pretty" %>
-account_management: <%= common %> -t @account_management -t @complete
 wip: <%= common %> -t @wip
 complete: <%= common %> -t @complete -t ~@not_implemented
 failing: <%= common %> -t @failing

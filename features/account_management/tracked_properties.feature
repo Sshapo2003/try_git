@@ -1,4 +1,4 @@
-@account_management @amtest @staging
+@account_management @amtest
 Feature: Tracked Properties
   In order to ?
   As a Wildfire app user
