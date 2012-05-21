@@ -4,19 +4,19 @@ Feature: Tracked Properties
   As a Wildfire app user
   I want to be able to add details of properties I want to track
   
-  @complete
+  @complete @amtest @staging
   Scenario: Add a Facebook page to Tracked Properties
     Given I am logged in to Wildfire as a new user
     When I add the Facebook page "www.facebook.com/arsenal" to Tracked Properties
     Then I should see the page "Arsenal" in Tracked Properties
   
-  @complete 
+  @complete @amtest @staging
   Scenario: Add a Twitter profile to Tracked Properties
     Given I am logged in to Wildfire as a new user
     When I add the Twitter profile "wildfireapp" to Tracked Properties
     Then I should see the Twitter profile "Wildfireapp" in Tracked Properties
   
-  @complete 
+  @complete @amtest
   Scenario: Remove a tracked Facebook property
     Given I am logged in to Wildfire as a new user
     And I have a tracked Facebook property
@@ -24,7 +24,7 @@ Feature: Tracked Properties
     Then I should see the message "Facebook property has been removed from Wildfire"
     And I should have no tracked properties
   
-  @complete 
+  @complete @amtest @staging
   Scenario: Remove a tracked Twitter property
     Given I am logged in to Wildfire as a new user
     And I have a tracked Twitter property
