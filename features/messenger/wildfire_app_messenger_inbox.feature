@@ -1,4 +1,4 @@
-@messenger @production
+@messenger @production @staging @amtest
 Feature: Messenger Inbox
 
   Background:
