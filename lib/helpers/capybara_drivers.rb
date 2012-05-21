@@ -17,6 +17,7 @@ class Helpers::CapybaraDrivers
     case ENV['BROWSER']
     when "firefox" then :selenium_firefox
     when "chrome" then :selenium_chrome
+    when "opera" then :selenium_opera
     else abort "BROWSER variable needs to be set to something valid, or left alone"
     end
   end
