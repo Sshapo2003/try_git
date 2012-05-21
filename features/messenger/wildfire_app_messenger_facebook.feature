@@ -1,10 +1,10 @@
-@messenger @production @staging @amtest
+@messenger @production @amtest
 Feature: Facebook
 
   Background:
     Given I am logged in as "default"
 
-  @complete
+  @complete @staging
   Scenario: Trigger a flag filter
     When I send a facebook message which matches a "Flag" filter
     When I navigate to the wildfire app messenger page

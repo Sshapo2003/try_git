@@ -5,6 +5,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   element :messages_div_header, 'div.section.header h2'
   element :compose_message_div_header, 'div#messenger_form h2'
   element :sticky_header_text, 'span.flash_contents'
+  element :notifications_trigger, 'a#notifications_trigger'
 
   section :compose_message_panel, Model::Section::Messenger::WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
   section :messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'

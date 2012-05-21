@@ -1,11 +1,7 @@
 Given /^I have an flagged message in Flagged Messages$/ do
   unless @wildfire.wildfireapp_messenger.messages_panel.flagged_messages.size > 0
-    @facebook.timeline.visit_my_timeline
-    creds = { :username => Helpers::Config['default_facebook_poster_username'], :password => Helpers::Config['default_facebook_poster_password'] }
-    @facebook.timeline.login creds
-    @facebook.timeline.post_message("#{String.random} #{Helpers::Config['default_filter_keyword']}")
-    @messengeradmin.refresh_a_social_property.load
-    @messengeradmin.refresh_a_social_property.refresh_property "Palo Alto Foodies"
+    Helpers::FacebookHelper.post_message_matching_filter
+    Helpers::MessengerAdminHelper.refresh_a_social_property 'Palo Alto Foodies'
     @wildfire.wildfireapp_messenger.load
     step "I click the \"Flagged Messages\" tab on the left navigation menu on wildfire app messenger page"
   end
