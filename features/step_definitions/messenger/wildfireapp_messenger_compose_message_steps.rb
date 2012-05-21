@@ -120,5 +120,6 @@ When /^I click the close button on the link attachment panel$/ do
 end
 
 Then /^the link attachment panel should not be visible$/ do
-  @wildfire.wildfireapp_messenger.compose_message_panel.attachments_section.should_not have_attachment_preview
+  sleep 2
+  @wildfire.wildfireapp_messenger.compose_message_panel.attachments_section.attachment_preview_div[:style].should include 'display: none;'
 end

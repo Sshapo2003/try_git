@@ -5,8 +5,10 @@ class Model::Section::Messenger::WildfireappMessengerOutgoingMessage < SitePrism
   element :pagination_current_page_indicator_text, 'div.pagination span.range'
 
   def delete_first_draft
-    page.execute_script '$("div.actions a.delete").first().click()'
-    sleep 2
+    page.execute_script "$('div.recipient_avatar').first().mouseover()"
+    sleep 2 # Wait for 'delete' button to become visible
+    delete_draft_link.click
+    sleep 2 # Wait for 'Are you sure?' dialog to become visible
     page.driver.browser.switch_to.alert.accept
   end
 

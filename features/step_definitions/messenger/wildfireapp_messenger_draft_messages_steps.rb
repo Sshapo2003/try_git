@@ -55,7 +55,7 @@ Given /^I have more than (\d+) draft messages$/ do |number_of_messages|
 end
 
 Then /^(\d+) drafts should be displayed in the Drafts Panel$/ do |number_of_messages|
-  @drafts = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.collect {|d| d.text }
+  @drafts = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.collect {|d| d.body.text }
   @drafts.count.should eql number_of_messages.to_i
 end
 
@@ -71,8 +71,27 @@ When /^I click the right paging icon in the Drafts Panel$/ do
   @wildfire.wildfireapp_messenger.draft_messages_panel.enabled_next_page_button.click
 end
 
+When /^I view the next page of draft messages$/ do
+  paging_message_before = @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_current_page_indicator_text
+  @wildfire.wildfireapp_messenger.draft_messages_panel.enabled_next_page_button.click
+  Timeout.timeout_and_raise(120, 'Timed out while waiting for the next page of messages to be displayed') do
+    loaded = false
+    while !loaded
+      (1..100).each do
+        if paging_message_before == @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_current_page_indicator_text
+          sleep 0.1
+        else
+          loaded = true
+          break
+        end
+      end
+      unless loaded then @wildfire.wildfireapp_messenger.draft_messages_panel.enabled_next_page_button.click end
+    end
+  end
+end
+
 Then /^more drafts should be displayed$/ do
-  @more_drafts = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.collect {|d| d.text }
+  @more_drafts = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.collect {|d| d.body.text }
   @intersection = @more_drafts & @drafts
   @intersection.size.should eql 0
 end

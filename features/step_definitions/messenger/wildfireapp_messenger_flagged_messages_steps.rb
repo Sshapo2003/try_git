@@ -29,6 +29,26 @@ When /^I unflag the message$/ do
   @wildfire.wildfireapp_messenger.unflag_message @flagged_message
 end
 
+Then /^the message should be listed in flagged folder$/ do
+  Timeout.timeout_and_raise(30, "Timed out while waiting for message \"#{@flagged_message_content}\" to appear in flagged folder") do
+    until @wildfire.wildfireapp_messenger.flagged_messages_panel.messages.collect {|m| m.body.text }.include? @flagged_message_content do
+      sleep 2
+      step 'I click the "Flagged Messages" tab on the left navigation menu on wildfire app messenger page'
+    end
+  end
+  @wildfire.wildfireapp_messenger.flagged_messages_panel.messages.collect {|m| m.body.text }.should include @flagged_message_content
+end
+
+Then /^the message should be listed in deleted folder$/ do
+  Timeout.timeout_and_raise(30, "Timed out while waiting for message \"#{@flagged_message_content}\" to appear in deleted folder") do
+    until @wildfire.wildfireapp_messenger.deleted_messages_panel.messages.collect {|m| m.body.text }.include? @flagged_message_content do
+      sleep 2
+      step 'I click the "Deleted Messages" tab on the left navigation menu on wildfire app messenger page'
+    end
+  end
+  @wildfire.wildfireapp_messenger.deleted_messages_panel.messages.collect {|m| m.body.text }.should include @flagged_message_content
+end
+
 Then /^the message should not be displayed in Flagged$/ do
   @content_of_each_message_in_flagged_panel = @wildfire.wildfireapp_messenger.flagged_messages_panel.messages.collect {|m| m.body.text }
   @content_of_each_message_in_flagged_panel.should_not include @flagged_message_content

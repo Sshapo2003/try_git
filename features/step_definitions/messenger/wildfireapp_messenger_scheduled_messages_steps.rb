@@ -5,6 +5,7 @@ Given /^I have more than (\d+) scheduled messages$/ do |number_of_messages|
       step 'I schedule the message to be sent at some point in the distant future'
       step 'I schedule the message'
       step 'I should be informed that the message has been scheduled succesfully'
+      step 'I click the "Scheduled" tab on the left navigation menu on wildfire app messenger page'
     end
   end
 end
@@ -12,6 +13,19 @@ end
 Then /^(\d+) messages should be displayed in the Scheduled Panel$/ do |number_of_messages|
   @messages = @wildfire.wildfireapp_messenger.scheduled_messages_panel.messages.collect {|d| d.body.text }
   @messages.count.should eql number_of_messages.to_i
+end
+
+Then /^the message should be visible on the last page of the "Scheduled" folder$/ do
+  @wildfire.wildfireapp_messenger.click_tab "Scheduled"
+  @wildfire.wildfireapp_messenger.scheduled_messages_panel.go_to_scheduled_messages_last_page
+
+  Timeout.timeout_and_raise(180, "Timed out while waiting for message #{@message_body} to appear in 'Scheduled' folder.") do
+    while @wildfire.wildfireapp_messenger.scheduled_messages_panel.messages.select {|m| m.body.text.include? @message_body }.count < 1 do
+      sleep 5.0
+      page.driver.refresh
+    end
+  end
+  @wildfire.wildfireapp_messenger.scheduled_messages_panel.messages.select {|m| m.body.text.include? @message_body }.count.should eql 1
 end
 
 Then /^the Scheduled Panel paging message should include "(.*?)"$/ do |paging_message|

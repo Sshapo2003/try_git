@@ -8,7 +8,7 @@ Given /^I have more than (\d+) sent messages$/ do |number_of_messages|
 end
 
 Then /^(\d+) messages should be displayed in the Sent Panel$/ do |number_of_messages|
-  @sent = @wildfire.wildfireapp_messenger.sent_messages_panel.messages.collect {|d| d.text }
+  @sent = @wildfire.wildfireapp_messenger.sent_messages_panel.messages.collect {|d| d.body.text }
   @sent.count.should eql number_of_messages.to_i
 end
 
@@ -24,8 +24,27 @@ When /^I click the right paging icon in the Sent Panel$/ do
   @wildfire.wildfireapp_messenger.sent_messages_panel.enabled_next_page_button.click
 end
 
+When /^I view the next page of sent messages$/ do
+  paging_message_before = @wildfire.wildfireapp_messenger.sent_messages_panel.pagination_current_page_indicator_text
+  @wildfire.wildfireapp_messenger.sent_messages_panel.enabled_next_page_button.click
+  Timeout.timeout_and_raise(120, 'Timed out while waiting for the next page of messages to be displayed') do
+    loaded = false
+    while !loaded
+      (1..100).each do
+        if paging_message_before == @wildfire.wildfireapp_messenger.sent_messages_panel.pagination_current_page_indicator_text
+          sleep 0.1
+        else
+          loaded = true
+          break
+        end
+      end
+      unless loaded then @wildfire.wildfireapp_messenger.sent_messages_panel.enabled_next_page_button.click end
+    end
+  end
+end
+
 Then /^more messages should be displayed in the Sent Panel$/ do
-  @more_sent = @wildfire.wildfireapp_messenger.sent_messages_panel.messages.collect {|d| d.text }
+  @more_sent = @wildfire.wildfireapp_messenger.sent_messages_panel.messages.collect {|d| d.body.text }
   @intersection = @more_sent & @sent
   @intersection.size.should eql 0
 end

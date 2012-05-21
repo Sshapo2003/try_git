@@ -38,7 +38,19 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     create_filter_dialog.name.set filter_name
     create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
     create_filter_dialog.save_button.click
-    Timeout.timeout_and_raise(30, 'Filter not found') { sleep 0.1 unless filters_panel.filters.select {|f| f.name.text.include? filter_name }.count > 0 }
+    Timeout.timeout_and_raise(180, 'Filter not found') do
+      found = false
+      while !found
+        begin
+          while filters_panel.filters.select {|f| f.name.text.include? filter_name }.count < 1
+            sleep 0.1
+          end
+          found = true
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          # Wait for panel to refresh
+        end
+      end
+    end
     return filter_name
   end
 

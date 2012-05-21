@@ -58,8 +58,8 @@ When /^I assign that message to myself$/ do
 end
 
 Then /^the message should be visible in the "(.*)" folder$/ do |folder|
-  Timeout.timeout(60) do
-    while @wildfire.wildfireapp_messenger.messages_in_folder(folder).select {|m| m.include? @message_body }.count < 1 
+  Timeout.timeout_and_raise(180, "Timed out while waiting for message #{@message_body} to appear in #{folder} folder.") do
+    while @wildfire.wildfireapp_messenger.messages_in_folder(folder).select {|m| m.include? @message_body }.count < 1 do
       sleep 5.0
       @wildfire.wildfireapp_messenger.click_tab folder
     end
@@ -69,7 +69,7 @@ end
 
 Given /^I have more than (\d+) messages in the Messages Panel$/ do |number_of_messages|
   Timeout.timeout_and_raise(600, "Timed out while waiting for #{number_of_messages} messages to be available.") do
-    while @wildfire.wildfireapp_messenger.messages_panel.pagination_message_total_text.to_i <= number_of_messages.to_i
+    while @wildfire.wildfireapp_messenger.messages_panel.pagination_message_total_text.to_i <= number_of_messages.to_i do
       step 'I compose and send a valid message'
       step 'I navigate to the wildfire app messenger page'
     end

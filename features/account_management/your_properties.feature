@@ -31,7 +31,7 @@ Feature: Your Properties
   @not-started
   Scenario: Tracked properties display in Analytics
   
-  @complete @staging @amtest
+  @complete @staging @amtest @failing
   Scenario: Add a new Twitter property to Wildfire
     Given I am logged in to Wildfire as a new user
     When I add the twitter account "alistairwf" to Wildfire
