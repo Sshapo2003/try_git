@@ -1,4 +1,4 @@
-@messenger @production
+@messenger @production @staging @amtest
 Feature: Composing Messages
 
   Background:
@@ -89,7 +89,7 @@ Feature: Composing Messages
     And I schedule the message to be sent at some point in the distant future
     And I schedule the message
     Then I should be informed that the message has been scheduled succesfully
-    And the message should be visible in the "Scheduled" folder
+    And the message should be visible on the last page of the "Scheduled" folder
 
   @not_started
   Scenario: Compose message with Flash
