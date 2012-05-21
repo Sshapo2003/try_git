@@ -20,6 +20,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   section :assign_dialog, Model::Section::Messenger::WildfireappMessengerUserAssignmentFormDialog, 'form#message_user_assignment_form'
   section :create_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, 'div.ui-dialog'
   section :edit_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, 'div.ui-dialog'
+  sections :notifications, Model::Section::Generic::WildfireappNotification, 'div#notifications a div'
 
   def active?
     using_wait_time(1) { page.has_no_content?('This product is locked') }
