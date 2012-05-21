@@ -9,13 +9,13 @@ specific: <%= common %> --tags <%= ENV['TAGS'] %>
 
 <% common = "--format rerun --out 'features.txt' -f pretty" %>
 productionwip: <%= common %> -t @wip -t @production CONFIG="live"
-productioncomplete: <%= common %>  -t @complete -t @production CONFIG="live"
+productioncomplete: <%= common %>  -t @complete -t ~@failing -t @production CONFIG="live"
 productionfailing: <%= common %> -t @complete -t @failing -t @production CONFIG="live"
 stagingwip: <%= common %> -t @wip -t @staging CONFIG="staging"
-stagingcomplete: <%= common %> -t @complete -t ~@not_implemented -t @staging CONFIG="staging"
+stagingcomplete: <%= common %> -t @complete -t ~@not_implemented -t @staging -t ~@failing CONFIG="staging"
 stagingfailing: <%= common %> -t @complete -t @failing -t @staging CONFIG="staging"
 amtestwip: <%= common %> -t @wip -t @amtest CONFIG="am-test"
-amtestcomplete: <%= common %> -t @complete -t ~@not_implemented -t @amtest CONFIG="am-test"
+amtestcomplete: <%= common %> -t @complete -t ~@not_implemented -t ~@failing -t @amtest CONFIG="am-test"
 amtestfailing: <%= common %> -t @complete -t @failing -t @amtest CONFIG="am-test"
 jenkinsproduction: <%= common %> -t @complete -t ~@not_implemented -t @production CONFIG="live" --format junit --out "reports/features/"
 jenkinsstaging: <%= common %> -t @complete -t ~@not_implemented -t @staging CONFIG="staging" --format junit --out "reports/features/"
@@ -30,3 +30,21 @@ pa: <%= common %> -t @analytics CONFIG="live"
 pma: <%= common %> -t @messenger_admin CONFIG="live"
 ppm: <%= common %> -t @page_manager CONFIG="live"
 pg: <%= common %> -t @gallery CONFIG="live"
+
+# Product Group Specific
+# Staging
+sm: <%= common %> -t @messenger CONFIG="staging"
+sam: <%= common %> -t @account_management CONFIG="staging"
+sa: <%= common %> -t @analytics CONFIG="staging"
+sma: <%= common %> -t @messenger_admin CONFIG="staging"
+spm: <%= common %> -t @page_manager CONFIG="staging"
+sg: <%= common %> -t @gallery CONFIG="staging"
+
+# Product Group Specific
+# AM-Test
+am: <%= common %> -t @messenger CONFIG="am-test"
+aam: <%= common %> -t @account_management CONFIG="am-test"
+aa: <%= common %> -t @analytics CONFIG="am-test"
+ama: <%= common %> -t @messenger_admin CONFIG="am-test"
+apm: <%= common %> -t @page_manager CONFIG="am-test"
+ag: <%= common %> -t @gallery CONFIG="am-test"
