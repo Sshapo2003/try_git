@@ -10,7 +10,7 @@ require 'active_support/dependencies'
 require 'timeout'
 require 'time'
 require 'json'
-require 'ruby-debug'
+#require 'ruby-debug'
 require 'chronic'
 
 #setting 'lib' to be the root of active support's autoloader
@@ -49,10 +49,15 @@ Capybara.register_driver :selenium_chrome do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 
+Capybara.register_driver :selenium_opera do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :opera)
+end
+
 def browser
   case ENV['BROWSER']
   when "firefox" then :selenium_firefox
   when "chrome" then :selenium_chrome
+  when "opera" then :selenium_opera
   else :selenium_firefox
   end
 end
