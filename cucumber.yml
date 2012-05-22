@@ -32,6 +32,7 @@ pg: <%= common %> -t @gallery CONFIG="live"
 
 # Product Group Specific
 # Staging
+<% common = "--format rerun --out 'features.txt' -f pretty -t @complete -t @staging -t ~@not_implemented -t ~@failing" %>
 sm: <%= common %> -t @messenger CONFIG="staging"
 sam: <%= common %> -t @account_management CONFIG="staging"
 sa: <%= common %> -t @analytics CONFIG="staging"
@@ -41,6 +42,7 @@ sg: <%= common %> -t @gallery CONFIG="staging"
 
 # Product Group Specific
 # AM-Test
+<% common = "--format rerun --out 'features.txt' -f pretty -t @complete -t @amtest -t ~@not_implemented -t ~@failing" %>
 am: <%= common %> -t @messenger CONFIG="am-test"
 aam: <%= common %> -t @account_management CONFIG="am-test"
 aa: <%= common %> -t @analytics CONFIG="am-test"
