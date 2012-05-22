@@ -63,6 +63,7 @@ def browser
 end
 
 Capybara.default_driver = browser
+Capybara.default_wait_time = 30
 
 World(Capybara)
 
