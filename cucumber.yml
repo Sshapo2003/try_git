@@ -1,3 +1,4 @@
+
 <% common = "--format rerun --out 'features.txt' -f pretty" %>
 wip: <%= common %> -t @wip
 complete: <%= common %> -t @complete -t ~@not_implemented
@@ -16,9 +17,6 @@ stagingfailing: <%= common %> -t @complete -t @failing -t @staging CONFIG="stagi
 amtestwip: <%= common %> -t @wip -t @amtest CONFIG="am-test"
 amtestcomplete: <%= common %> -t @complete -t ~@not_implemented -t ~@failing -t @amtest CONFIG="am-test"
 amtestfailing: <%= common %> -t @complete -t @failing -t @amtest CONFIG="am-test"
-jenkinsproduction: <%= common %> -t @complete -t ~@not_implemented -t @production CONFIG="live" --format junit --out "reports/features/"
-jenkinsstaging: <%= common %> -t @complete -t ~@not_implemented -t @staging CONFIG="staging" --format junit --out "reports/features/"
-jenkinsamtest: <%= common %> -t @complete -t ~@not_implemented -t @amtest CONFIG="am-test" --format junit --out "reports/features/"
 
 # Product Group Specific
 # Production
@@ -49,29 +47,35 @@ apm: <%= common %> -t @page_manager CONFIG="am-test"
 ag: <%= common %> -t @gallery CONFIG="am-test"
 
 #Jenkins
+<% junit = "--format junit --out 'reports/features/'" %>
+<% common = "--format rerun --out 'features.txt' -f pretty -t @complete -t ~@not_implemented" %>
+jenkinsproduction: <%= common %> -t @production CONFIG="live" <%= junit %>
+jenkinsstaging: <%= common %> -t @staging CONFIG="staging" <%= junit %>
+jenkinsamtest: <%= common %> -t @amtest CONFIG="am-test" <%= junit %>
+
 # Production
 <% common = "--format rerun --out 'features.txt' -f pretty -t @complete -t @production -t ~@not_implemented -t ~@failing" %>
-jpm: <%= common %> -t @messenger CONFIG="live" --format junit --out "reports/features/"
-jpam: <%= common %> -t @account_management CONFIG="live" --format junit --out "reports/features/"
-jpa: <%= common %> -t @analytics CONFIG="live" --format junit --out "reports/features/"
-jpma: <%= common %> -t @messenger_admin CONFIG="live" --format junit --out "reports/features/"
-jppm: <%= common %> -t @page_manager CONFIG="live" --format junit --out "reports/features/"
-jpg: <%= common %> -t @gallery CONFIG="live" --format junit --out "reports/features/"
+jpm: <%= common %> -t @messenger CONFIG="live" <%= junit %>
+jpam: <%= common %> -t @account_management CONFIG="live" <%= junit %>
+jpa: <%= common %> -t @analytics CONFIG="live" <%= junit %>
+jpma: <%= common %> -t @messenger_admin CONFIG="live" <%= junit %>
+jppm: <%= common %> -t @page_manager CONFIG="live" <%= junit %>
+jpg: <%= common %> -t @gallery CONFIG="live" <%= junit %>
 
 # Product Group Specific
 # Staging
-jsm: <%= common %> -t @messenger CONFIG="staging" --format junit --out "reports/features/"
-jsam: <%= common %> -t @account_management CONFIG="staging" --format junit --out "reports/features/"
-jsa: <%= common %> -t @analytics CONFIG="staging" --format junit --out "reports/features/"
-jsma: <%= common %> -t @messenger_admin CONFIG="staging" --format junit --out "reports/features/"
-jspm: <%= common %> -t @page_manager CONFIG="staging" --format junit --out "reports/features/"
-jsg: <%= common %> -t @gallery CONFIG="staging" --format junit --out "reports/features/"
+jsm: <%= common %> -t @messenger CONFIG="staging" <%= junit %>
+jsam: <%= common %> -t @account_management CONFIG="staging" <%= junit %>
+jsa: <%= common %> -t @analytics CONFIG="staging" <%= junit %>
+jsma: <%= common %> -t @messenger_admin CONFIG="staging" <%= junit %>
+jspm: <%= common %> -t @page_manager CONFIG="staging" <%= junit %>
+jsg: <%= common %> -t @gallery CONFIG="staging" <%= junit %>
 
 # Product Group Specific
 # AM-Test
-jam: <%= common %> -t @messenger CONFIG="am-test" --format junit --out "reports/features/"
-jaam: <%= common %> -t @account_management CONFIG="am-test" --format junit --out "reports/features/"
-jaa: <%= common %> -t @analytics CONFIG="am-test" --format junit --out "reports/features/"
-jama: <%= common %> -t @messenger_admin CONFIG="am-test" --format junit --out "reports/features/"
-japm: <%= common %> -t @page_manager CONFIG="am-test" --format junit --out "reports/features/"
-jag: <%= common %> -t @gallery CONFIG="am-test" --format junit --out "reports/features/"
+jam: <%= common %> -t @messenger CONFIG="am-test" <%= junit %>
+jaam: <%= common %> -t @account_management CONFIG="am-test" <%= junit %>
+jaa: <%= common %> -t @analytics CONFIG="am-test" <%= junit %>
+jama: <%= common %> -t @messenger_admin CONFIG="am-test" <%= junit %>
+japm: <%= common %> -t @page_manager CONFIG="am-test" <%= junit %>
+jag: <%= common %> -t @gallery CONFIG="am-test" <%= junit %>
