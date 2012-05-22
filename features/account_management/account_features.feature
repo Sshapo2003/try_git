@@ -24,3 +24,15 @@ Feature: Account Features
     | Page Manager |
     | Messenger    |
     | Dashboard    |
+    
+  @complete
+  Scenario: Invite user without advanced permissions enabled
+    Given I am logged in to Wildfire as a new user
+    Then I should not be able to set advanced permissions
+    
+  @complete
+  Scenario: Invite users with advanced permissions enabled
+    Given I am logged in to Wildfire as a new user
+    And I have the advanced permissions feature enabled
+    Then I should be able to set advanced permissions
+    

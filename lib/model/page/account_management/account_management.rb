@@ -2,6 +2,7 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   include ::Wildfire::Header
   
   set_url(Helpers::Config['wildfire_site_root']) #TODO - The site root should really be www and we should have a spearate site for account
+  set_url_matcher /#{Regexp.escape(url)}/
   
   section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
   section :your_properties, Model::Section::AccountManagement::YourProperties, 'div.body_content'
@@ -53,6 +54,14 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   
   def demo_page
     Model::Page::AccountManagement::Demo.new
+  end
+  
+  def manage_accounts
+    Model::Page::AccountManagement::ManageAccounts.new
+  end
+  
+  def edit_subscription
+    Model::Page::AccountManagement::EditSubscription.new
   end
   
   def flash_message
