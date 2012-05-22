@@ -47,3 +47,31 @@ aa: <%= common %> -t @analytics CONFIG="am-test"
 ama: <%= common %> -t @messenger_admin CONFIG="am-test"
 apm: <%= common %> -t @page_manager CONFIG="am-test"
 ag: <%= common %> -t @gallery CONFIG="am-test"
+
+#Jenkins
+# Production
+<% common = "--format rerun --out 'features.txt' -f pretty -t @complete -t @production -t ~@not_implemented -t ~@failing" %>
+jpm: <%= common %> -t @messenger CONFIG="live" --format junit --out "reports/features/"
+jpam: <%= common %> -t @account_management CONFIG="live" --format junit --out "reports/features/"
+jpa: <%= common %> -t @analytics CONFIG="live" --format junit --out "reports/features/"
+jpma: <%= common %> -t @messenger_admin CONFIG="live" --format junit --out "reports/features/"
+jppm: <%= common %> -t @page_manager CONFIG="live" --format junit --out "reports/features/"
+jpg: <%= common %> -t @gallery CONFIG="live" --format junit --out "reports/features/"
+
+# Product Group Specific
+# Staging
+jsm: <%= common %> -t @messenger CONFIG="staging" --format junit --out "reports/features/"
+jsam: <%= common %> -t @account_management CONFIG="staging" --format junit --out "reports/features/"
+jsa: <%= common %> -t @analytics CONFIG="staging" --format junit --out "reports/features/"
+jsma: <%= common %> -t @messenger_admin CONFIG="staging" --format junit --out "reports/features/"
+jspm: <%= common %> -t @page_manager CONFIG="staging" --format junit --out "reports/features/"
+jsg: <%= common %> -t @gallery CONFIG="staging" --format junit --out "reports/features/"
+
+# Product Group Specific
+# AM-Test
+jam: <%= common %> -t @messenger CONFIG="am-test" --format junit --out "reports/features/"
+jaam: <%= common %> -t @account_management CONFIG="am-test" --format junit --out "reports/features/"
+jaa: <%= common %> -t @analytics CONFIG="am-test" --format junit --out "reports/features/"
+jama: <%= common %> -t @messenger_admin CONFIG="am-test" --format junit --out "reports/features/"
+japm: <%= common %> -t @page_manager CONFIG="am-test" --format junit --out "reports/features/"
+jag: <%= common %> -t @gallery CONFIG="am-test" --format junit --out "reports/features/"
