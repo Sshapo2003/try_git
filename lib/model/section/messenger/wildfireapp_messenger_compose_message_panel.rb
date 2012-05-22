@@ -6,9 +6,16 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
   element :send_draft_message_link, 'div.wf_menu_button_wpr a.submit'
   element :save_draft_button, "button.wf_submit[name='commit_draft']"
   element :recepients_error, 'div#recipients p.inline_error'
+  element :date_error, 'li#when_to_send p.inline_error'
   element :message_error, 'div#message_container p.inline_error'
   element :header, 'h2'
   element :recepient_input, 'li.search-field'
+  element :later_button, 'span.later a'
+  element :date_field, 'input#message_send_at_date'
+  element :hours_select_value, 'div.hour a.select_button span'
+  element :minutes_select_value, 'div.minute a.select_button span'
+  element :link_shortner_field, 'div#shortener_container input'
+  element :link_shortner_link, 'div#shortener_container a'
   elements :recepients, 'ul.chzn-results li'
   elements :remove_recipient_links, 'a.search-choice-close'
 

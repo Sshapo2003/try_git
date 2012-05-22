@@ -5,6 +5,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   element :messages_div_header, 'div.section.header h2'
   element :compose_message_div_header, 'div#messenger_form h2'
   element :sticky_header_text, 'span.flash_contents'
+  element :notifications_trigger, 'a#notifications_trigger'
 
   section :compose_message_panel, Model::Section::Messenger::WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
   section :messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
@@ -18,18 +19,68 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   section :sidebar, Model::Section::Messenger::WildfireappMessengerSidebar, 'div.sidebar'
   section :assign_dialog, Model::Section::Messenger::WildfireappMessengerUserAssignmentFormDialog, 'form#message_user_assignment_form'
   section :create_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, 'div.ui-dialog'
+  section :edit_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, 'div.ui-dialog'
+  sections :notifications, Model::Section::Generic::WildfireappNotification, 'div#notifications a div'
 
   def active?
     using_wait_time(1) { page.has_no_content?('This product is locked') }
   end
 
-  def create_a_valid_filter
+  def create_a_filter
+    filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
+    filters_panel.create_new_filter_button.click
+    create_filter_dialog.name.set filter_name
+    create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
+    return filter_name
+  end
+
+  def create_and_save_a_valid_filter
     filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
     filters_panel.create_new_filter_button.click
     create_filter_dialog.name.set filter_name
     create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
     create_filter_dialog.save_button.click
+    Timeout.timeout_and_raise(180, 'Filter not found') do
+      found = false
+      while !found
+        begin
+          while filters_panel.filters.select {|f| f.name.text.include? filter_name }.count < 1
+            sleep 0.1
+          end
+          found = true
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          # Wait for panel to refresh
+        end
+      end
+    end
     return filter_name
+  end
+
+  def delete_filter filter_name
+    filters_panel.filter_by_name(filter_name).delete
+  end
+
+  def assign_filter_to_my_company filter_name
+    filters_panel.filter_by_name(filter_name).edit
+    edit_filter_dialog.wait_for_save_button 30
+    edit_filter_dialog.add_property Helpers::Config['facebook_property_name']
+  end
+
+  def unassign_filter_from_my_company filter_name
+    filters_panel.filter_by_name(filter_name).edit
+    edit_filter_dialog.wait_for_save_button 30
+    edit_filter_dialog.remove_property Helpers::Config['facebook_property_name']
+  end
+
+  def update_filters_keywords filter_name, keywords
+    filter = filters_panel.filters.select {|f| f.name.text.include? filter_name }.first
+    filter.edit
+    edit_filter_dialog.wait_for_save_button 30
+    edit_filter_dialog.keywords.set keywords
+    create_filter_dialog.save_button.click
+    sleep 5
+    updated_filter = filters_panel.filter_by_name(filter_name)
+    Timeout.timeout_and_raise(30, 'Filter not found') { sleep 0.1 unless updated_filter.keyword_count.text.include? '2 keywords' }
   end
 
   def attach_to_message(attachment_details)
@@ -133,5 +184,4 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
       return false
     end
   end
-
 end

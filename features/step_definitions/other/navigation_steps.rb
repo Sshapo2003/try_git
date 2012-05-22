@@ -23,6 +23,7 @@ Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
   when 'wildfire app templates' then @wildfire.wildfireapp_templates.load
   when 'messenger admin login' then @messengeradmin.login.load
   when 'messenger admin dashboard' then @messengeradmin.dashboard.load
+  when 'facebook timeline' then @facebook.timeline.visit_my_timeline
   when 'palo alto foodies countdown app'
     visit('http://www.facebook.com/PaloAltoFoodies/app_364041783617057')
   when 'account management' then @wildfire.account_management.load

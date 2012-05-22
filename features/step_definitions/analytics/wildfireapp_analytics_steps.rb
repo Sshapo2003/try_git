@@ -45,7 +45,7 @@ Then /^the "(.*)" panel should be visible in the main page area on wildfire app 
   when "Industry Benchmarks" 
     @wildfire.wildfireapp_analytics.content_div.wait_for_industry_benchmarks_panel(30)
     @wildfire.wildfireapp_analytics.content_div.should have_industry_benchmarks_panel
-  when "Tabs" 
+  when "Tabs"
     @wildfire.wildfireapp_analytics.content_div.wait_for_tabs_panel(30)
     @wildfire.wildfireapp_analytics.content_div.should have_tabs_panel
   when "Pages" 

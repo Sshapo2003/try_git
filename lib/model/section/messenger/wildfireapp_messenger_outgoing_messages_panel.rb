@@ -1,7 +1,7 @@
 class Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel < SitePrism::Section
   elements :pagination_totals, 'div.pagination strong'
-  element :enabled_next_page_button, 'div.pagination a.next[href="/draft_messages?page=2"]'
-  element :enabled_previous_page_button, 'div.pagination a.prev[href="/draft_messages?page=1"]'
+  element :enabled_next_page_button, 'a.next'
+  element :enabled_previous_page_button, 'a.prev'
   sections :messages, Model::Section::Messenger::WildfireappMessengerOutgoingMessage, 'div.message'
   
   def pagination_current_page_indicator_text
@@ -14,5 +14,11 @@ class Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel < Sit
 
   def messages_in_folder
     messages.collect {|m| m.body.text }
+  end
+
+  def go_to_scheduled_messages_last_page
+    total_messages = pagination_totals[1].text
+    total_pages = (Float(total_messages) / 25.0).ceil
+    visit("#{Helpers::Config['wildfire_messenger_root']}/scheduled_messages?page=#{total_pages}")
   end
 end

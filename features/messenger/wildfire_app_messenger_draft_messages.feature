@@ -1,4 +1,4 @@
-@messenger @production
+@messenger @production @staging @amtest
 Feature: Draft Messages
 
   Background:
@@ -28,7 +28,7 @@ Feature: Draft Messages
     Then 25 drafts should be displayed in the Drafts Panel
     And the Drafts Panel paging message should include "1-25"
     And the right paging icon should be enabled in the Drafts Panel
-    When I click the right paging icon in the Drafts Panel
+    When I view the next page of draft messages
     Then more drafts should be displayed
     And the Drafts Panel paging message should include "26-"
     And the left paging icon should be enabled in the Drafts Panel

@@ -4,7 +4,7 @@ class Model::Page::MessengerAdmin::MessengerAdminPage < SitePrism::Page
   def load
     super
     @messengeradmin = Model::Messengeradmin.new
-    if is_login_page? then @messengeradmin.login.login(Helpers::Config.admin_login, Helpers::Config.admin_password) end
+    if @messengeradmin.login.displayed? then @messengeradmin.login.login(Helpers::Config.admin_login, Helpers::Config.admin_password) end
   end
 
   def is_login_page?

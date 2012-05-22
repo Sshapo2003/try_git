@@ -1,4 +1,4 @@
-@account_management @production
+@account_management @production @staging
 Feature: Login to Wildfire
 
   Background:

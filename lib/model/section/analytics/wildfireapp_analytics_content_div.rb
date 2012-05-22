@@ -1,4 +1,5 @@
 class Model::Section::Analytics::WildfireappAnalyticsContentDiv < SitePrism::Section
+  element :inner_liner, 'div.inner_liner'
   element :promotions_panel, 'div.promotions-panel'
   element :audience_panel, 'div.monitor-panel'
   element :industry_benchmarks_panel, 'div.industry_benchmarks'

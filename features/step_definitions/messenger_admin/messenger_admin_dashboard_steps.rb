@@ -1,7 +1,6 @@
 Given /^I am logged into the messenger admin site$/ do
   step "I navigate to the messenger admin login page"
-  if !@messengeradmin.login.is_logged_in? then @messengeradmin.login.login(Helpers::Config.admin_login, Helpers::Config.admin_password) end
-  # @messengeradmin.login.confirm
+  @messengeradmin.login
 end
 
 Then /^the following tabs should be visible on the messenger admin page$/ do |table|

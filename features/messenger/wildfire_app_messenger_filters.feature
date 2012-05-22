@@ -1,4 +1,4 @@
-@messenger @production
+@messenger @production @staging @amtest
 Feature: Filters
 
   Background:
@@ -6,40 +6,41 @@ Feature: Filters
     And I navigate to the wildfire app messenger page
     And I click the "Filters" tab on the left navigation menu on wildfire app messenger page
 
-  @not_started
+  @complete
   Scenario Outline: Missing required fields
-    When the "<Required_Field>" is left blank during filter creation
-    And I attempt to save the filter
+    Given I create a filter
+    But the "<Required_Field>" field is left blank during filter creation
+    Then I attempt to save the filter
     Then the "<Error_Message>" error message should be displayed on the filter creation form
   Examples:
     | Required_Field | Error_Message               |
     | Name           | Name can't be blank         |
     | Keywords       | Keywords can't be blank     |
 
-  @wip
+  @complete
   Scenario: Create a filter
-    When I create a valid filter
+    When I create and save a valid filter
     Then the filter should added to the list of filters
 
-  @not_started
+  @complete
   Scenario: Assign a filter
-    Given I have a filter
+    Given I have an unassigned filter
     When I assign the filter to my company
     Then the filter page should show that the filter is assigned to my company
 
-  @not_started
+  @complete
   Scenario: Unassign a filter
     Given I have a filter assigned to my company
     When I unassign the filter from my company
     Then the filter page should show that the filter is not assigned to my company
 
-  @not_started
+  @complete
   Scenario: Edit a filter
     Given I have a filter with 1 keyword
     When I add another keyword to the filter
     Then the filter page should show that the filter has 2 keywords
 
-  @not_started
+  @complete
   Scenario: Delete a filter
     Given I have a filter
     When I delete the filter

@@ -1,11 +1,27 @@
-@messenger @production
+@messenger @production @amtest
 Feature: Composing Messages
 
   Background:
     Given I am logged in as "default"
     And I navigate to the wildfire app messenger page
 
-  @complete
+  @complete @staging
+  Scenario: Compose message panel state
+  When I click the "Compose" tab on the left navigation menu on wildfire app messenger page
+    And I select the "Later" radio button on wildfire app messenger page
+    Then the time should be set for about now
+    And the "Schedule" button should be displayed on wildfire app messenger page
+    When I click the "Compose" tab on the left navigation menu on wildfire app messenger page
+    Then the "Send" button should be displayed on wildfire app messenger page
+
+  @complete @staging
+  Scenario: Missing required fields
+    When I compose a new Mesenger message
+    And I set the Messenger message date in the past
+    And I schedule the message
+    Then the "Please enter a time in the future." error message should be displayed on the message composition form
+
+  @complete @staging
   Scenario Outline: Missing required fields
     When I compose a new Mesenger message
     And the "<Required_Field>" is left blank during message composition
@@ -16,6 +32,14 @@ Feature: Composing Messages
     | Destination    | Please enter a destination. |
     | Message        | Please enter a message.     |
 
+  # Cannot complete this test because message field is always blank with capybara
+  @not_started
+  Scenario: Link Shortener
+    Given I compose a new Mesenger message
+    And I add a long link to the message
+    When I click the shorten link
+    Then a shortened link should be inserted into the message field
+
   @complete
   Scenario: Send a message
     When I compose and send a valid message
@@ -24,15 +48,27 @@ Feature: Composing Messages
     And the message should be visible in the "Messages" folder
     And the message should be visible on my facebook page
 
-  @complete
+  @complete @staging
   Scenario: Send a message to twitter property
     When I compose and send a valid message for my twitter property
     Then I should be informed that the message has been sent succesfully
     And the message should be visible in the "Sent" folder
     And the message should be visible on my twitter page
 
-  @complete
+  @complete @staging
   Scenario: Compose message with Link
+    When I compose a new Mesenger message
+    And I add a link to the message
+    Then the link should have the following properties
+      | Image    | wildfire.png                                                    |
+      | Title    | Wildfire - Wildfire App - Social Media Marketing Software Suite |
+      | Body     | Wildfire social media marketing software is a powerful platform |
+      | Buttons  | Left and Right                                                  |
+    When I click the close button on the link attachment panel
+    Then the link attachment panel should not be visible
+
+  @complete @staging
+  Scenario: Post message with Link
     When I compose a new Mesenger message
     And I add a link to the message
     And I send the message
@@ -40,22 +76,22 @@ Feature: Composing Messages
     And the message should be visible on my facebook page
     And the message on my facebook page should have the links title and text
 
-  @complete
+  @complete @staging
   Scenario: Save a Draft
     When I compose a new Mesenger message
     And I save the message as a draft
     Then I should be informed that the message has been saved as a draft
     And the message should be visible in the "Drafts" folder
 
-  @complete
+  @complete @staging
   Scenario: Schedule a message
     When I compose a new Mesenger message
     And I schedule the message to be sent at some point in the distant future
     And I schedule the message
     Then I should be informed that the message has been scheduled succesfully
-    And the message should be visible in the "Scheduled" folder
+    And the message should be visible on the last page of the "Scheduled" folder
 
-  @not_started
+  @not_started @staging
   Scenario: Compose message with Flash
     When I compose a new Mesenger message
     And I add a Flash Video and Image to the message
@@ -64,13 +100,13 @@ Feature: Composing Messages
     Then the message should be visible in the "Sent" folder
     And the flash attachment of the sent message should have an title and text
 
-  @not_started
+  @not_started @staging
   Scenario: Compose message with Photo
     When I compose a new Mesenger message
     And I add a link to the message
     Then the link image title and text should be shown in the message composition panel
 
-  @not_started
+  @not_started @staging
   Scenario: Compose message with Album
     When I compose a new Mesenger message
     And I add a link to the message

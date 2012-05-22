@@ -1,4 +1,4 @@
-@messenger @production
+@messenger @production @staging @amtest
 Feature: Messenger Inbox
 
   Background:
@@ -9,9 +9,13 @@ Feature: Messenger Inbox
   Scenario: View Each Message Type
     When I click the "Messages" tab on the left navigation menu on wildfire app messenger page
     Then the header in the messages area should be "Messages"
+    And the actions drop down on the "Messages" panel contains Assign, Delete and Unflag
     When I click the "Flagged Messages" tab on the left navigation menu on wildfire app messenger page
     Then the header in the messages area should be "Flagged Messages"
+    And the actions drop down on the "Flagged Messages" panel contains Assign, Delete and Unflag
     When I click the "Assigned Messages" tab on the left navigation menu on wildfire app messenger page
     Then the header in the messages area should be "Assigned Messages"
+    And the actions drop down on the "Assigned Messages" panel contains Assign, Delete and Unflag
     When I click the "Deleted Messages" tab on the left navigation menu on wildfire app messenger page
     Then the header in the messages area should be "Deleted Messages"
+    And the actions drop down on the "Deleted Messages" panel contains Assign, Delete and Unflag

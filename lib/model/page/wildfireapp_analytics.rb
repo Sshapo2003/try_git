@@ -1,6 +1,6 @@
 class Model::Page::WildfireappAnalytics < SitePrism::Page
-  set_url "#{Helpers::Config['wildfire_analytics_root']}/"
-  set_url_matcher /dashboard.wildfireapp.com/
+  set_url "#{Helpers::Config['wildfire_analytics_root']}"
+  set_url_matcher /dashboard./
 
   section :sidebar, Model::Section::Analytics::WildfireappAnalyticsSidebar, 'div.sidebar'
   section :content_div, Model::Section::Analytics::WildfireappAnalyticsContentDiv, 'div.body_content'
