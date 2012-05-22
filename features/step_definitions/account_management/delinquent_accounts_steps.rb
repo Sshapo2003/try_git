@@ -6,11 +6,11 @@ Given /^I am logged in to Wildfire as a user with a delinquent account$/ do
 end
 
 When /^I switch to a non\-delinquent account$/ do
-  @wildfire.account_management.header.choose_company('Enabled Company')
+  @wildfire.account_management.switch_company('Enabled Company')
 end
 
 When /^I switch to a delinquent account$/ do
-  @wildfire.account_management.header.choose_company('Delinquent Company')
+  @wildfire.account_management.switch_company('Delinquent Company')
 end
 
 Then /^I should see the delinquent account flash message$/ do
