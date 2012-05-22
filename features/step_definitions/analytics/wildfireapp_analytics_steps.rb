@@ -17,6 +17,7 @@ When /^I click the "(.*)" tab on the left navigation menu on wildfire app analyt
 end
 
 Then /^the "(.*)" tab should be highlighted$/ do |tab|
+  @wildfire.wildfireapp_analytics.wait_for_sidebar
   @wildfire.wildfireapp_analytics.sidebar.wait_for_selected_link_label
   @wildfire.wildfireapp_analytics.sidebar.selected_link_label.text.should eql tab
 end
