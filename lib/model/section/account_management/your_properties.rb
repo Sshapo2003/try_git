@@ -10,7 +10,7 @@ class Model::Section::AccountManagement::YourProperties < SitePrism::Section
   end
   
   def has_twitter_property?(name)
-    has_property?(name, 'twitter property')
+    has_property?(name, 'twitter account')
   end
   
   def has_properties?
