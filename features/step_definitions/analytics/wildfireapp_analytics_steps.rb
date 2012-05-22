@@ -17,21 +17,8 @@ When /^I click the "(.*)" tab on the left navigation menu on wildfire app analyt
 end
 
 Then /^the "(.*)" tab should be highlighted$/ do |tab|
-  case tab
-  when "Overview" 
-    @wildfire.wildfireapp_analytics.sidebar.selected_link_label.text.should eql "Overview"
-  when "Industry Benchmarks" 
-    @wildfire.wildfireapp_analytics.sidebar.selected_link_label.text.should eql "Industry Benchmarks"
-  when "Tabs" 
-    @wildfire.wildfireapp_analytics.sidebar.selected_link_label.text.should eql "Tabs"
-  when "Pages" 
-    @wildfire.wildfireapp_analytics.sidebar.selected_link_label.text.should eql "Pages"
-  when "Posts" 
-    @wildfire.wildfireapp_analytics.sidebar.selected_link_label.text.should eql "Posts"
-  when "Referral Sources" 
-    @wildfire.wildfireapp_analytics.sidebar.selected_link_label.text.should eql "Referral Sources"
-  else raise "Unknown tab #{tab}"
-  end
+  @wildfire.wildfireapp_analytics.sidebar.wait_for_selected_link_label
+  @wildfire.wildfireapp_analytics.sidebar.selected_link_label.text.should eql tab
 end
 
 Then /^the "(.*)" panel should be visible in the main page area on wildfire app analytics page$/ do |panel|
@@ -55,8 +42,16 @@ Then /^the "(.*)" panel should be visible in the main page area on wildfire app 
   wait_for_method = "wait_for_#{element}"
   have_method = "have_#{element}"
   
-  @wildfire.wildfireapp_analytics.content_div.send(wait_for_method)
-  @wildfire.wildfireapp_analytics.content_div.should send(have_method)  
+  # Sometimes panels don't load first time. This gives the load a second chance
+  begin
+    @wildfire.wildfireapp_analytics.content_div.send(wait_for_method)
+  rescue Capybara::TimeoutError
+    page.driver.refresh
+    @wildfire.wildfireapp_analytics.content_div.send(wait_for_method)
+  end
+
+  @wildfire.wildfireapp_analytics.content_div.should send(have_method)
+
 end
 
 Then /^the "(.*)" sticky should be visible in the main page area on wildfire app analytics page$/ do |sticky|
