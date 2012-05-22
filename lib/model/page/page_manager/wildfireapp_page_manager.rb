@@ -2,6 +2,7 @@ class Model::Page::PageManager::WildfireappPageManager < SitePrism::Page
   set_url "#{Helpers::Config['wildfire_page_manager_root']}/"
   set_url_matcher /pages\/states\/published/
 
+  elements :sidebar_links, 'div.sidebar_nav li a'
   section :content_div, Model::Section::PageManager::WildfireappPageManagerContentDiv, 'div.body_content'
   
   def active?
