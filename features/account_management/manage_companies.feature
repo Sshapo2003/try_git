@@ -16,12 +16,14 @@ Feature: Manage Companies
   @complete @amtest @staging
   Scenario: Create a new Company
     Given I am logged in to Wildfire as a new user
+    And my subscription has a 3 Company limit
     When I create a new Company under the current account
     Then I should be using the new Company
     
   @complete @amtest @staging
   Scenario: Display validation message if the Company name is not unique
     Given I am logged in to Wildfire as a new user
+    And my subscription has a 3 Company limit
     When I attempt to create a new company using the current company name
     Then I should see the message "Name has already been taken" inside the create company modal
   
