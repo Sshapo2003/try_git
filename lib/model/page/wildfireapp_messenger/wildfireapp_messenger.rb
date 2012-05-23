@@ -7,6 +7,9 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   element :sticky_header_text, 'span.flash_contents'
   element :notifications_trigger, 'a#notifications_trigger'
 
+  element :actions_menu, '.wf_prompt_button_wpr a'
+  element :action_menu_action_item, "ol#message_action a[href='Assign']"
+
   section :compose_message_panel, Model::Section::Messenger::WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
   section :messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
   section :flagged_messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
@@ -117,8 +120,9 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
 
   def assign_message_to_me(message)
     message.select
-    page.execute_script("$('ol#message_action a[href=\"Assign\"]').click();")
-    Timeout.timeout(30) { sleep 0.1 while page.has_no_selector? 'form#message_user_assignment_form' }
+    actions_menu.click
+    page.execute_script "$('ol#message_action a[href=Assign]').click()"
+    wait_for_assign_dialog
     assign_dialog.select_me
     assign_dialog.save_button.click
   end
