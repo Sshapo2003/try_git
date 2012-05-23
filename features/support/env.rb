@@ -53,6 +53,10 @@ Capybara.register_driver :selenium_opera do |app|
   Capybara::Selenium::Driver.new(app, :browser => :opera)
 end
 
+Capybara.register_driver :selenium_ie do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :internet_explorer)
+end
+
 def browser
   case ENV['BROWSER']
   when "firefox" then :selenium_firefox
