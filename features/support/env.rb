@@ -60,6 +60,7 @@ end
 def browser
   case ENV['BROWSER']
   when "firefox" then :selenium_firefox
+  when "ie" then :selenium_ie
   when "chrome" then :selenium_chrome
   when "opera" then :selenium_opera
   else :selenium_firefox
