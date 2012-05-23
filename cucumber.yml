@@ -1,7 +1,7 @@
 <% common = "-f pretty" %>
-productionrerun: <%= common %> features.txtCONFIG=live
-stagingrerun: <%= common %> features.txtCONFIG=staging
-amtestrerun: <%= common %> features.txtCONFIG=am-test
+productionrerun: <%= common %> features.txt CONFIG=live
+stagingrerun: <%= common %> features.txt CONFIG=staging
+amtestrerun: <%= common %> features.txt CONFIG=am-test
 
 <% common = "--format rerun --out features.txt -f pretty" %>
 wip: <%= common %> -t @wip
