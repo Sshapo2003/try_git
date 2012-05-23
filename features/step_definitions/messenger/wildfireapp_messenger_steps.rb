@@ -129,7 +129,7 @@ When /^I navigate to the last page of of messages in the Messages Panel via the 
   @original_pagination_total = @wildfire.wildfireapp_messenger.messages_panel.pagination_message_total_text
   @number_of_messages = @wildfire.wildfireapp_messenger.messages_panel.pagination_message_total_text.to_i
   @num_pages = (Float(@number_of_messages) / 25.0).ceil
-  visit("#{Helpers::Config['wildfire_messenger_root']}incoming_messages?page=#{@num_pages}")
+  visit("#{Helpers::Config['wildfire_messenger_root']}/incoming_messages?page=#{@num_pages}")
 end
 
 Then /^the remaining messages should be displayed$/ do
