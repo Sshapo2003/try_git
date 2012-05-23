@@ -1,9 +1,9 @@
 <% common = "-f pretty" %>
-productionrerun: <%= common %> @features.txt CONFIG=live
-stagingrerun: <%= common %> @features.txt CONFIG=staging
-amtestrerun: <%= common %> @features.txt CONFIG=am-test
+productionrerun: <%= common %> features.txtCONFIG=live
+stagingrerun: <%= common %> features.txtCONFIG=staging
+amtestrerun: <%= common %> features.txtCONFIG=am-test
 
-<% common = "--format rerun --out 'features.txt' -f pretty" %>
+<% common = "--format rerun --out features.txt -f pretty" %>
 wip: <%= common %> -t @wip
 complete: <%= common %> -t @complete -t ~@not_implemented
 failing: <%= common %> -t @failing
@@ -11,7 +11,7 @@ complete_no_failing: <%= common %> -t @complete -t ~@failing
 custom: <%= common %> <%= ENV["TAGS"] %>
 specific: <%= common %> --tags <%= ENV['TAGS'] %>
 
-<% common = "--format rerun --out 'features.txt' -f pretty" %>
+<% common = "--format rerun --out features.txt -f pretty" %>
 productionwip: <%= common %> -t @wip -t @production CONFIG=live
 productioncomplete: <%= common %>  -t @complete -t ~@failing -t @production CONFIG=live
 productionfailing: <%= common %> -t @complete -t @failing -t @production CONFIG=live
@@ -24,7 +24,7 @@ amtestfailing: <%= common %> -t @complete -t @failing -t @amtest CONFIG=am-test
 
 # Product Group Specific
 # Production
-<% common = "--format rerun --out 'features.txt' -f pretty -t @complete -t @production -t ~@not_implemented -t ~@failing" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t @production -t ~@not_implemented -t ~@failing" %>
 pm: <%= common %> -t @messenger CONFIG=live
 pam: <%= common %> -t @account_management CONFIG=live
 pa: <%= common %> -t @analytics CONFIG=live
@@ -52,13 +52,13 @@ ag: <%= common %> -t @gallery CONFIG=am-test
 
 #Jenkins
 <% junit = "--format junit --out 'reports/features/'" %>
-<% common = "--format rerun --out 'features.txt' -f pretty -t @complete -t ~@not_implemented" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented" %>
 jenkinsproduction: <%= common %> -t @production CONFIG=live <%= junit %>
 jenkinsstaging: <%= common %> -t @staging CONFIG=staging <%= junit %>
 jenkinsamtest: <%= common %> -t @amtest CONFIG=am-test <%= junit %>
 
 # Production
-<% common = "--format rerun --out 'features.txt' -f pretty -t @complete -t @production -t ~@not_implemented -t ~@failing" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t @production -t ~@not_implemented -t ~@failing" %>
 jpm: <%= common %> -t @messenger CONFIG=live <%= junit %>
 jpam: <%= common %> -t @account_management CONFIG=live <%= junit %>
 jpa: <%= common %> -t @analytics CONFIG=live <%= junit %>
