@@ -80,9 +80,14 @@ Then /^the time should be set for about now$/ do
   date = @wildfire.wildfireapp_messenger.compose_message_panel.date_field[:value]
   hours = @wildfire.wildfireapp_messenger.compose_message_panel.hours_select_value.text
   minutes = @wildfire.wildfireapp_messenger.compose_message_panel.minutes_select_value.text
-  date.should eql Time.now.strftime("%m/%d/%y") , "Expected the date to be #{Time.now.strftime("%m/%d/%y")} but was #{date}"
-  hours.should eql Time.now.strftime("%l").strip, "Expected the hours to be #{Time.now.strftime("%l").strip} but was #{hours}"
-  ((Time.now.strftime("%M").to_i - 10)...(Time.now.strftime("%M").to_i + 10)) === minutes.to_i.should
+
+  (date == Time.now.strftime("%m/%d/%y")).should be_true, "Expected the date to be #{Time.now.strftime("%m/%d/%y")} but was #{date}. Is your system clock correct?"
+  (hours ==Time.now.strftime("%l").strip).should be_true, "Expected the hours to be #{Time.now.strftime("%l").strip} but was #{hours}. Is your system clock correct?"
+  
+  min_minutes = (Time.now.strftime("%M").to_i - 10)
+  max_minutes = (Time.now.strftime("%M").to_i + 10)
+  time_within_threshold = (min_minutes...max_minutes) === minutes.to_i
+  time_within_threshold.should be_true, "Expected the minutes to be #{} but was #{minutes}. Is your system clock correct?"
 end
 
 Given /^I add a long link to the message$/ do
