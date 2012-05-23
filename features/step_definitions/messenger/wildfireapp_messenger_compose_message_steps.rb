@@ -80,9 +80,9 @@ Then /^the time should be set for about now$/ do
   date = @wildfire.wildfireapp_messenger.compose_message_panel.date_field[:value]
   hours = @wildfire.wildfireapp_messenger.compose_message_panel.hours_select_value.text
   minutes = @wildfire.wildfireapp_messenger.compose_message_panel.minutes_select_value.text
-  date.should eql Time.now.strftime("%m/%d/%y")
-  hours.should eql Time.now.strftime("%l").strip
-  ((Time.now.strftime("%M").to_i - 5)...(Time.now.strftime("%M").to_i + 5)) === minutes.to_i.should
+  date.should eql Time.now.strftime("%m/%d/%y") , "Expected the date to be Time.now.strftime("%m/%d/%y") but was #{date}"
+  hours.should eql Time.now.strftime("%l").strip, "Expected the hours to be #{Time.now.strftime("%l").strip} but was #{hours}"
+  ((Time.now.strftime("%M").to_i - 10)...(Time.now.strftime("%M").to_i + 10)) === minutes.to_i.should
 end
 
 Given /^I add a long link to the message$/ do
