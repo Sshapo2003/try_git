@@ -1,5 +1,6 @@
 class Model::Page::MessengerAdmin::MessengerAdminPage < SitePrism::Page
   element :info_text, 'td.smallfont div p'
+  element :login_box, 'div.loginBox'
 
   def load
     super
@@ -9,7 +10,7 @@ class Model::Page::MessengerAdmin::MessengerAdminPage < SitePrism::Page
 
   def is_login_page?
     begin
-      return info_text.text == "Account.wildfireapp.com is asking for some information from your Wildfire Interactive, Inc. account. To see and approve the request, sign in."
+      return login_box.text include? "Sign in to your account"
     rescue
       # Probably not the login page
       return

@@ -21,7 +21,6 @@ Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
     @wildfire.wildfireapp_page_manager.load
     @wildfire.wildfireapp_page_manager.should be_displayed
   when 'wildfire app templates' then @wildfire.wildfireapp_templates.load
-  when 'messenger admin login' then @messengeradmin.login.load
   when 'messenger admin dashboard' then @messengeradmin.dashboard.load
   when 'facebook timeline' then @facebook.timeline.visit_my_timeline
   when 'palo alto foodies countdown app'

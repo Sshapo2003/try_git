@@ -1,6 +1,5 @@
 Given /^I am logged into the messenger admin site$/ do
-  step "I navigate to the messenger admin login page"
-  @messengeradmin.login
+  step "I navigate to the messenger admin dashboard page"
 end
 
 Then /^the following tabs should be visible on the messenger admin page$/ do |table|
