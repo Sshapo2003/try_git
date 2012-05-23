@@ -5,7 +5,8 @@ end
 
 When /^a notification event is triggered$/ do
   @message_body = Helpers::FacebookHelper.post_message_matching_filter
-  Helpers::MessengerAdminHelper.refresh_a_social_property 'Palo Alto Foodies'
+  @messengeradmin.refresh_a_social_property.load
+  @messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['facebook_property_name']
   @wildfire.wildfireapp_messenger.load
 end
 
@@ -23,4 +24,8 @@ Then /^I should see the recently triggered notification details$/ do
   posted_time_string = @wildfire.wildfireapp_messenger.notifications.first.time.text
   posted_time = Chronic.parse(posted_time_string[4..posted_time_string.length])
   range.cover?(posted_time).should eql true
+end
+
+Given /^I should have no current notifications$/ do
+  @wildfire.wildfireapp_messenger.notifications_trigger.text.should eql "0"
 end

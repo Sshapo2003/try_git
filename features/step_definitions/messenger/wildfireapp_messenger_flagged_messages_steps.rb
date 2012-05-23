@@ -1,7 +1,8 @@
 Given /^I have an flagged message in Flagged Messages$/ do
   unless @wildfire.wildfireapp_messenger.messages_panel.flagged_messages.size > 0
     Helpers::FacebookHelper.post_message_matching_filter
-    Helpers::MessengerAdminHelper.refresh_a_social_property 'Palo Alto Foodies'
+    @messengeradmin.refresh_a_social_property.load
+    @messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['facebook_property_name']
     @wildfire.wildfireapp_messenger.load
     step "I click the \"Flagged Messages\" tab on the left navigation menu on wildfire app messenger page"
   end

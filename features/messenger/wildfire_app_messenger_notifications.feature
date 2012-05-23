@@ -11,4 +11,5 @@ Background:
     Then I should have notifications
     When I click the notifications link
     Then I should see the recently triggered notification details
+    And I should have no current notifications
     

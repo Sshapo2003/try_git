@@ -22,7 +22,7 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
   section :attachments_section, Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSection, 'ol.attach'
   sections :recipients, Model::Section::Messenger::WildfireappMessengerRecipient, 'div.recipient'
 
-  def select_recipient_by_name(recipient_name='Palo Alto Foodies')
+  def select_recipient_by_name(recipient_name=Helpers::Config['facebook_property_name'])
     recepient_input.click
     recepients.select {|r| r.text == recipient_name }.first.click
   end
@@ -31,7 +31,7 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
     remove_recipient_links.each {|l| l.click }
   end
 
-  def compose_a_valid_message(recipient_name='Palo Alto Foodies')
+  def compose_a_valid_message(recipient_name=Helpers::Config['facebook_property_name'])
     t = Time.now
     message_text = "Today is #{t.strftime("%A")} #{t.strftime("%d")} #{t.strftime("%b")} #{t.strftime("%Y")} and the time is #{t.strftime("%r")}. What great foods have you discovered recently?"
     select_recipient_by_name recipient_name
@@ -60,7 +60,7 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
     save_draft_button.click
   end
 
-  def compose_and_send_a_valid_message(recipient_name='Palo Alto Foodies')
+  def compose_and_send_a_valid_message(recipient_name=Helpers::Config['facebook_property_name'])
     message_text = compose_a_valid_message recipient_name
     send_message
     return message_text

@@ -36,7 +36,7 @@ Given /^I have an unassigned message$/ do
     @wildfire.wildfireapp_messenger.compose_message_panel.compose_and_send_a_valid_message
     @wildfire.wildfireapp_messenger.sidebar.messages_link.click
     @messengeradmin.refresh_a_social_property.load
-    @messengeradmin.refresh_a_social_property.refresh_property "Palo Alto Foodies"
+    @messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['facebook_property_name']
     @wildfire.wildfireapp_messenger.load
   end
 
