@@ -82,11 +82,12 @@ Then /^(\d+) messages should be displayed in the Messages Panel$/ do |number_of_
 end
 
 Then /^the Messages Panel paging message should include "(.*?)"$/ do |paging_message|
+  @wildfire.wildfireapp_messenger.messages_panel.wait_for_pagination_totals
   @wildfire.wildfireapp_messenger.messages_panel.pagination_current_page_indicator_text.should include paging_message
 end
 
 When /^I click the right paging icon in the Messages Panel$/ do
-  @wildfire.wildfireapp_messenger.messages_panel.enabled_next_page_button.click
+  @wildfire.wildfireapp_messenger.messages_panel.click_enabled_next_page_button
 end
 
 Then /^the (.*) paging icon should be (.*) in the Messages Panel$/ do |direction, state|
@@ -120,8 +121,7 @@ end
 
 When /^I go to the last page of messages in the Messages Panel$/ do
   while @wildfire.wildfireapp_messenger.messages_panel.has_enabled_next_page_button? do
-    @wildfire.wildfireapp_messenger.messages_panel.enabled_next_page_button.click
-    sleep 0.1
+    @wildfire.wildfireapp_messenger.messages_panel.click_enabled_next_page_button
   end
 end
 

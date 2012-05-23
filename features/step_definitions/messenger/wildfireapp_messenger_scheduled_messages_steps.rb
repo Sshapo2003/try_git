@@ -37,7 +37,7 @@ Then /^the right paging icon should be enabled in the Scheduled Panel$/ do
 end
 
 When /^I click the right paging icon in the Scheduled Panel$/ do
-  @wildfire.wildfireapp_messenger.scheduled_messages_panel.enabled_next_page_button.click
+  @wildfire.wildfireapp_messenger.scheduled_messages_panel.click_enabled_next_page_button
 end
 
 Then /^more messages should be displayed$/ do
