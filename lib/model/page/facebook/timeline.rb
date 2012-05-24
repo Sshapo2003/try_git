@@ -13,14 +13,12 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
   element :login_button, 'label#loginbutton input'
   elements :status_units, 'div.statusUnit'
 
-  def visit_my_timeline
+  def visit_my_timeline user_credentials=nil
     visit(Helpers::Config['facebook_page_url'])
-  end
-
-  def visit_my_timeline user_credentials
-    visit(Helpers::Config['facebook_page_url'])
-    login user_credentials
-    unless page.current_url.include? Helpers::Config['facebook_page_url'] then visit(Helpers::Config['facebook_page_url']) end
+    if user_credentials != nil
+      login user_credentials
+      unless page.current_url.include? Helpers::Config['facebook_page_url'] then visit(Helpers::Config['facebook_page_url']) end
+    end
   end
 
   def login user_credentials
