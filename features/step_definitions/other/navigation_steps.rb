@@ -18,11 +18,13 @@ Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
     @wildfire.wildfireapp_page_manager.should be_displayed
   when 'wildfire app templates' then @wildfire.wildfireapp_templates.load
   when 'messenger admin dashboard' then @messengeradmin.dashboard.load
-  when 'palo alto foodies countdown app'
-    visit('http://www.facebook.com/PaloAltoFoodies/app_364041783617057')
   when 'account management' then @wildfire.account_management.load
   else raise "Haven't mapped the '#{page_name}' page"
   end
+end
+
+Given /^I view the "(.*)" facebook page$/ do |page_name|
+  @facebook.timeline.visit_timeline page_name
 end
 
 Given /^I am in the "([^"]*)" application$/ do |application|

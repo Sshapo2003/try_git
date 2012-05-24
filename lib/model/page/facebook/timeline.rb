@@ -13,6 +13,11 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
   element :login_button, 'label#loginbutton input'
   elements :status_units, 'div.statusUnit'
 
+
+  def visit_timeline page_name
+    visit "http://www.facebook.com/#{page_name}"
+  end
+
   def visit_my_timeline user_credentials=nil
     visit(Helpers::Config['facebook_page_url'])
     if user_credentials != nil

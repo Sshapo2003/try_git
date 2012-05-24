@@ -30,4 +30,27 @@ module SitePrism::ElementContainer
     create_waiter collection_name, collection_locator
   end
   alias :root_collection :root_elements
+
+  def create_waiter element_name, element_locator
+    method_name = "wait_for_#{element_name.to_s}"
+    and_click_method_name = "wait_for_and_click_#{element_name.to_s}"
+    if element_locator.nil?
+      define_method method_name do
+        raise SitePrism::NoLocatorForElement.new("#{self.class.name} => :#{element_name} needs a locator")
+      end
+    else
+      define_method method_name do |timeout = Capybara.default_wait_time|
+        Capybara.using_wait_time timeout do
+          element_waiter element_locator
+        end
+      end
+
+      define_method and_click_method_name do |timeout = Capybara.default_wait_time|
+        Capybara.using_wait_time timeout do
+          element_waiter element_locator
+          find_one(element_locator).click
+        end
+      end
+    end
+  end
 end
