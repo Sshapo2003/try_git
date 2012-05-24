@@ -1,4 +1,6 @@
 class Model::Page::PromotionBuilder::WildfireappPromotionBuilder < SitePrism::Page
+  include ::Wildfire::Header
+  
   set_url "#{Helpers::Config['wildfire_promotions_root']}/"
   set_url_matcher /dashboard\/contests/
   

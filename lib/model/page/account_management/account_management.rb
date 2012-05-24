@@ -5,7 +5,6 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   set_url_matcher /#{Regexp.escape(url)}/
   
   section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
-  section :your_properties, Model::Section::AccountManagement::YourProperties, 'div.body_content'
   section :create_company_modal, Model::Section::AccountManagement::Modal::CreateCompany, '#new_company_modal'
   
   def create_company(company_name, options={})
@@ -21,18 +20,12 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
     end
   end
   
-  def add_twitter_property(twitter_name)
-    show_add_twitter_property_window
-    within_window(page.driver.browser.window_handles.last){ Model::Page::TwitterOauth.new.authorise(twitter_name, 'w1ldf1r3')}
-    begin
-      wait_until() { your_properties.has_twitter_property?(twitter_name.capitalize) }
-    rescue Capybara::TimeoutError
-      raise "Failed to add twitter property '#{twitter_name}\n#{flash_message}"
-    end
+  def your_properties
+    Model::Page::AccountManagement::YourProperties.new
   end
   
   def load_section(name)
-    load
+    load unless displayed?
     sidebar.navigate_to(name)
   end
   
@@ -66,17 +59,5 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   
   def flash_message
     first('span.flash_contents').try(:text)
-  end
-  
-  private
-  
-  def show_add_twitter_property_window
-    if your_properties.has_properties?
-      your_properties.add_property_button.click
-      page.execute_script %{$("a:contains('a Twitter property')").click()} if ENV['BROWSER'] == 'firefox' # Following the link does not work in firefox
-      find_link('a Twitter property').click
-    else
-      your_properties.add_twitter_link.click
-    end
   end
 end

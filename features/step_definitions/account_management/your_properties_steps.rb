@@ -5,8 +5,7 @@ Given /^I am logged in to Wildfire as a user with existing properties$/ do
 end
 
 Given /^I have added the twitter account "([^"]*)" to Wildfire$/ do |twitter_name|
-  @wildfire.account_management.load_section('Your Properties')
-  @wildfire.account_management.add_twitter_property(twitter_name)
+  @wildfire.account_management.your_properties.add_twitter_property(twitter_name)
 end
 
 When /^I add the Facebook page "([^"]*)" to Wildfire$/ do |fb_page_name|
@@ -15,8 +14,7 @@ When /^I add the Facebook page "([^"]*)" to Wildfire$/ do |fb_page_name|
 end
 
 When /^I add the twitter account "([^"]*)" to Wildfire$/ do |twitter_name|
-  @wildfire.account_management.load_section('Your Properties')
-  @wildfire.account_management.add_twitter_property(twitter_name)
+  @wildfire.account_management.your_properties.add_twitter_property(twitter_name)
 end
 
 Then /^I should see the following social properties:$/ do |table|

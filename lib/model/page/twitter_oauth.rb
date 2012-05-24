@@ -32,7 +32,7 @@ class Model::Page::TwitterOauth < SitePrism::Page
   end
   
   def log_out
-    return unless logged_in
+    return unless logged_in?
     within_window(window_handle) do
       first('span.name').click
       click_on('Sign out')
