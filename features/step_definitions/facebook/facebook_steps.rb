@@ -37,9 +37,10 @@ When /^I send a facebook message which matches a "(.*)" filter$/ do |filter_type
 
   @flagged_message_content = "#{String.random} #{filter_keyword}"
 
-  step 'I navigate to my facebook timeline page'
   creds = { :username => Helpers::Config['default_facebook_poster_username'], :password => Helpers::Config['default_facebook_poster_password'] }
-  @facebook.timeline.login creds
+  
+  @facebook.timeline.visit_my_timeline creds
+
   @facebook.timeline.post_message @flagged_message_content
 
   @messengeradmin.refresh_a_social_property.load

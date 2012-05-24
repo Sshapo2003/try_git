@@ -5,7 +5,7 @@ Background:
     Given I am logged in as "default"
 
   @complete
-  Scenario: Notifications
+  Scenario: Displaying of Notifications
     Given I have no current notifications
     When a notification event is triggered
     Then I should have notifications

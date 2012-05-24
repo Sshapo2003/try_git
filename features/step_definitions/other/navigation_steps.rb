@@ -1,8 +1,4 @@
 Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
-  @wildfire = Model::Wildfire.new
-  @messengeradmin = Model::Messengeradmin.new
-  @facebook = Model::Facebook.new
-  @twitter = Model::Twitter.new
   case page_name.downcase
   when 'login'
     @wildfire.login.load
@@ -22,7 +18,6 @@ Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
     @wildfire.wildfireapp_page_manager.should be_displayed
   when 'wildfire app templates' then @wildfire.wildfireapp_templates.load
   when 'messenger admin dashboard' then @messengeradmin.dashboard.load
-  when 'facebook timeline' then @facebook.timeline.visit_my_timeline
   when 'palo alto foodies countdown app'
     visit('http://www.facebook.com/PaloAltoFoodies/app_364041783617057')
   when 'account management' then @wildfire.account_management.load

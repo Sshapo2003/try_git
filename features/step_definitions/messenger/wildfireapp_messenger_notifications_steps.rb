@@ -4,14 +4,16 @@ Given /^I have no current notifications$/ do
 end
 
 When /^a notification event is triggered$/ do
-  @message_body = Helpers::FacebookHelper.post_message_matching_filter
+  creds = { :username => Helpers::Config['default_facebook_poster_username'], :password => Helpers::Config['default_facebook_poster_password'] }
+  @facebook.timeline.visit_my_timeline(creds)
+  @message_body = @facebook.timeline.post_message("#{String.random} #{Helpers::Config['default_flag_filter_keyword']}")
   @messengeradmin.refresh_a_social_property.load
   @messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['facebook_property_name']
   @wildfire.wildfireapp_messenger.load
 end
 
 Then /^I should have notifications$/ do
-  Timeout.timeout(60) { sleep 0.1 until @wildfire.wildfireapp_messenger.notifications_trigger.text != "0" }
+  Timeout.timeout(600) { sleep 0.1 until @wildfire.wildfireapp_messenger.notifications_trigger.text != "0" }
   @wildfire.wildfireapp_messenger.notifications_trigger.text.should_not eql "0"
 end
 

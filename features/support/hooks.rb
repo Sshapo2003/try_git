@@ -3,4 +3,7 @@ Before do
     Helpers::BasicAuthHelper.authorize(Capybara.current_session)
   end
   @wildfire = Model::Wildfire.new
+  @messengeradmin = Model::Messengeradmin.new
+  @facebook = Model::Facebook.new
+  @twitter = Model::Twitter.new
 end
