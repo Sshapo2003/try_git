@@ -1,7 +1,8 @@
 Given /^I have an flagged message in Flagged Messages$/ do
   unless @wildfire.wildfireapp_messenger.messages_panel.flagged_messages.size > 0
     Helpers::FacebookHelper.post_message_matching_filter
-    Helpers::MessengerAdminHelper.refresh_a_social_property 'Palo Alto Foodies'
+    @messengeradmin.refresh_a_social_property.load
+    @messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['facebook_property_name']
     @wildfire.wildfireapp_messenger.load
     step "I click the \"Flagged Messages\" tab on the left navigation menu on wildfire app messenger page"
   end
@@ -26,7 +27,7 @@ When /^I unflag the message$/ do
 end
 
 Then /^the message should be listed in flagged folder$/ do
-  Timeout.timeout_and_raise(30, "Timed out while waiting for message \"#{@flagged_message_content}\" to appear in flagged folder") do
+  Timeout.timeout_and_raise(300, "Timed out while waiting for message \"#{@flagged_message_content}\" to appear in flagged folder") do
     until @wildfire.wildfireapp_messenger.flagged_messages_panel.messages.collect {|m| m.body.text }.include? @flagged_message_content do
       sleep 2
       step 'I click the "Flagged Messages" tab on the left navigation menu on wildfire app messenger page'
@@ -36,7 +37,7 @@ Then /^the message should be listed in flagged folder$/ do
 end
 
 Then /^the message should be listed in deleted folder$/ do
-  Timeout.timeout_and_raise(30, "Timed out while waiting for message \"#{@flagged_message_content}\" to appear in deleted folder") do
+  Timeout.timeout_and_raise(300, "Timed out while waiting for message \"#{@flagged_message_content}\" to appear in deleted folder") do
     until @wildfire.wildfireapp_messenger.deleted_messages_panel.messages.collect {|m| m.body.text }.include? @flagged_message_content do
       sleep 2
       step 'I click the "Deleted Messages" tab on the left navigation menu on wildfire app messenger page'

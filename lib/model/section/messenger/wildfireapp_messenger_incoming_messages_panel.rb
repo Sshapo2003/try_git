@@ -1,11 +1,4 @@
-class Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel < SitePrism::Section
-  elements :pagination_totals, 'div.pagination strong'
-  element :actions_menu, 'div.wf_prompt_button_wpr a'
-  element :enabled_next_page_button, 'a.next'
-  element :enabled_previous_page_button, 'a.prev'
-
-  root_element :actions_menu_options, 'ol#message_action'
-  
+class Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel < Model::Section::Messenger::WildfireappMessengerMessagesPanel  
   sections :messages, Model::Section::Messenger::WildfireappMessengerIncomingMessage, 'div.incoming_message'
 
   def assigned_messages
@@ -18,14 +11,6 @@ class Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel < Sit
 
   def flagged_messages
     messages.select {|m| m.is_flagged?}
-  end
-
-  def pagination_current_page_indicator_text
-    pagination_totals[0].text
-  end
-
-  def pagination_message_total_text
-    pagination_totals[1].text
   end
 
   def messages_in_folder

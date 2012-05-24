@@ -6,15 +6,11 @@ Feature: Template Gallery
     And I navigate to the wildfire app templates page
 
   @complete
-  Scenario: View more templates
+  Scenario: View all templates
     Given 12 templates are displayed
     When I scroll to the bottom of the page
     And I wait a little while for more templates to be loaded
     Then 24 templates should be displayed
-
-  @complete
-  Scenario: View all templates
-    Given 12 templates are displayed
     When I keep scrolling to the bottom of the page until no more templates load
     Then all available templates are visible
 

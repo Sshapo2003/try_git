@@ -36,7 +36,7 @@ Given /^I have an unassigned message$/ do
     @wildfire.wildfireapp_messenger.compose_message_panel.compose_and_send_a_valid_message
     @wildfire.wildfireapp_messenger.sidebar.messages_link.click
     @messengeradmin.refresh_a_social_property.load
-    @messengeradmin.refresh_a_social_property.refresh_property "Palo Alto Foodies"
+    @messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['facebook_property_name']
     @wildfire.wildfireapp_messenger.load
   end
 
@@ -82,11 +82,12 @@ Then /^(\d+) messages should be displayed in the Messages Panel$/ do |number_of_
 end
 
 Then /^the Messages Panel paging message should include "(.*?)"$/ do |paging_message|
+  @wildfire.wildfireapp_messenger.messages_panel.wait_for_pagination_totals
   @wildfire.wildfireapp_messenger.messages_panel.pagination_current_page_indicator_text.should include paging_message
 end
 
 When /^I click the right paging icon in the Messages Panel$/ do
-  @wildfire.wildfireapp_messenger.messages_panel.enabled_next_page_button.click
+  @wildfire.wildfireapp_messenger.messages_panel.click_enabled_next_page_button
 end
 
 Then /^the (.*) paging icon should be (.*) in the Messages Panel$/ do |direction, state|
@@ -120,8 +121,7 @@ end
 
 When /^I go to the last page of messages in the Messages Panel$/ do
   while @wildfire.wildfireapp_messenger.messages_panel.has_enabled_next_page_button? do
-    @wildfire.wildfireapp_messenger.messages_panel.enabled_next_page_button.click
-    sleep 0.1
+    @wildfire.wildfireapp_messenger.messages_panel.click_enabled_next_page_button
   end
 end
 
@@ -129,7 +129,7 @@ When /^I navigate to the last page of of messages in the Messages Panel via the 
   @original_pagination_total = @wildfire.wildfireapp_messenger.messages_panel.pagination_message_total_text
   @number_of_messages = @wildfire.wildfireapp_messenger.messages_panel.pagination_message_total_text.to_i
   @num_pages = (Float(@number_of_messages) / 25.0).ceil
-  visit("#{Helpers::Config['wildfire_messenger_root']}incoming_messages?page=#{@num_pages}")
+  visit("#{Helpers::Config['wildfire_messenger_root']}/incoming_messages?page=#{@num_pages}")
 end
 
 Then /^the remaining messages should be displayed$/ do

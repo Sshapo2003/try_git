@@ -48,15 +48,15 @@ You may find that, occasionally, a test will fail for reasons outside our contro
 
 AM-TEST
 
-* cucumber @features.txt CONFIG="am-test"
+* cucumber @features.txt CONFIG=am-test
 
 STAGING
 
-* cucumber @features.txt CONFIG="staging"
+* cucumber @features.txt CONFIG=staging
 
 PRODUCTION
 
- * cucumber @features.txt CONFIG="live"
+ * cucumber @features.txt CONFIG=live
 
 ## BEST PRACTICES
 

@@ -68,26 +68,11 @@ Then /^the right paging icon should be enabled in the Drafts Panel$/ do
 end
 
 When /^I click the right paging icon in the Drafts Panel$/ do
-  @wildfire.wildfireapp_messenger.draft_messages_panel.enabled_next_page_button.click
+  @wildfire.wildfireapp_messenger.draft_messages_panel.click_enabled_next_page_button
 end
 
 When /^I view the next page of draft messages$/ do
-  paging_message_before = @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_current_page_indicator_text
-  @wildfire.wildfireapp_messenger.draft_messages_panel.enabled_next_page_button.click
-  Timeout.timeout_and_raise(120, 'Timed out while waiting for the next page of messages to be displayed') do
-    loaded = false
-    while !loaded
-      (1..100).each do
-        if paging_message_before == @wildfire.wildfireapp_messenger.draft_messages_panel.pagination_current_page_indicator_text
-          sleep 0.1
-        else
-          loaded = true
-          break
-        end
-      end
-      unless loaded then @wildfire.wildfireapp_messenger.draft_messages_panel.enabled_next_page_button.click end
-    end
-  end
+  @wildfire.wildfireapp_messenger.draft_messages_panel.click_enabled_next_page_button
 end
 
 Then /^more drafts should be displayed$/ do

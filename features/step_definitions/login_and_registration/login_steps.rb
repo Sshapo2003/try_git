@@ -6,6 +6,10 @@ Given /^I am logged in as "(.*)"$/ do |username|
   end
 end
 
+Given /^I login to Wildfire as "(.*)"$/ do |username|
+  step "I am logged in as \"#{username}\""
+end
+
 Given /^I am logged in to Wildfire as "([^"]*)"$/ do |email|
   @wildfire ||= Model::Wildfire.new
   @wildfire.login.load
