@@ -1,4 +1,4 @@
-@page_manager @production @staging
+@page_manager @production
 Feature: Update Page
 
   Background:

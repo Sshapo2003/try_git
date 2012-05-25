@@ -4,7 +4,8 @@ class Model::Section::PageManager::WildfireappPageManagerContentDiv < SitePrism:
 
   def get_page_by_title(title)
     found_pages = pages.select {|page| page.title_div.text == title}
-    unless found_pages.count > 0 then raise "Couldnt find page #{title}. Pages = #{pages.each {|p| puts p.title_div.text}}" end
+    page_names = pages.collect {|p| puts p.title_div.text}
+    unless found_pages.count > 0 then raise "Couldnt find page #{title}. Pages = #{page_names}" end
     return found_pages.first
   end
 
