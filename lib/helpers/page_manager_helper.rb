@@ -16,5 +16,23 @@ class Helpers::PageManagerHelper
       wildfire.wildfireapp_page_manager_edit_mode.sidebar.content_menu.wait_for_and_click_save_button
       return updated_countdown_app_title
     end
+
+    def publish_completed_page
+      wildfire = Model::Wildfire.new
+
+      wildfire.wildfireapp_page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_link
+      wildfire.wildfireapp_page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_publish_to_facebook_link
+
+      wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.wait_for_cancel_button(30)
+
+      wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.select_property(Helpers::Config['facebook_property_name'])
+      wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.select_application(Helpers::Config['create_template_property_name'])
+
+      if !wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.overwrite_prior_content_checkbox.checked?
+        wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.check_overwrite_previous_content_checkbox
+      end
+
+      wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.update_button.click
+    end
   end
 end

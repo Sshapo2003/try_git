@@ -4,5 +4,5 @@ class Model::Page::PageManager::WildfireappPageManagerEditMode < SitePrism::Page
   element :header_sticky, 'span.flash_contents'
 
   section :sidebar, Model::Section::PageManager::WildfireappPageManagerEditModeSidebar, 'div.sidebar'
-  section :publish_to_facebook_modal, Model::Section::PageManager::WildfireappPageManagerEditModePublishToFacebookModal, 'div.ui-dialog'
+  section :publish_to_facebook_modal, Model::Section::PageManager::EditModePublishToFacebookModal, 'div.ui-dialog'
 end
