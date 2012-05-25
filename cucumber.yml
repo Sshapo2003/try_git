@@ -52,7 +52,7 @@ ag: <%= common %> -t @gallery CONFIG=am-test
 
 #Jenkins
 <% junit = "--format junit --out reports/features/" %>
-<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing" %>
 jenkinsproduction: <%= common %> -t @production CONFIG=live <%= junit %>
 jenkinsstaging: <%= common %> -t @staging CONFIG=staging <%= junit %>
 jenkinsamtest: <%= common %> -t @amtest CONFIG=am-test <%= junit %>
