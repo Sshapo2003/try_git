@@ -4,6 +4,7 @@ class Model::Section::PageManager::EditModePublishToFacebookModal < SitePrism::S
   element :application_select_box, 'div.app_select_wpr > div > a'
   element :update_button, 'button[value="Update"]'
   element :cancel_button, 'button[value="Cancel"]'
+  element :publish_success_postit, 'div.publishing div.content div.success'
   elements :facebook_publication_name_labels, 'div.top form.fbfanpage_tab_publication_form > label'
   root_elements :application_select_box_options_links, 'body > ol li a'
   

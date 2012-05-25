@@ -22,7 +22,7 @@ live:
   default_facebook_poster_username: burgerwithcheez@gmail.com
   default_facebook_poster_password: th1sismypassword
   facebook_property_name: Palo Alto Foodies
-  create_template_property_name: Paloaltofoodies
+  create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: false
   #others
@@ -51,7 +51,7 @@ staging:
   default_facebook_poster_username: burgerwithcheez@gmail.com
   default_facebook_poster_password: th1sismypassword
   facebook_property_name: Palo Alto Foodies
-  create_template_property_name: Paloaltofoodies
+  create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: true
   #others
@@ -84,7 +84,7 @@ am-test:
   default_facebook_poster_username: burgerwithcheez@gmail.com
   default_facebook_poster_password: th1sismypassword
   facebook_property_name: Palo Alto Foodies
-  create_template_property_name: Paloaltofoodies
+  create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: true
   #others
