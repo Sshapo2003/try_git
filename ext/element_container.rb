@@ -23,7 +23,7 @@ module SitePrism::ElementContainer
     else
       add_element_name collection_name
       define_method collection_name.to_s do
-        all locator
+        all collection_locator
       end
     end
     create_existence_checker collection_name, collection_locator
