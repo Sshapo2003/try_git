@@ -83,3 +83,5 @@ jaa: <%= common %> -t @analytics CONFIG=am-test <%= junit %>
 jama: <%= common %> -t @messenger_admin CONFIG=am-test <%= junit %>
 japm: <%= common %> -t @page_manager CONFIG=am-test <%= junit %>
 jag: <%= common %> -t @gallery CONFIG=am-test <%= junit %>
+
+cpt: <%= common %> -t @analytics CONFIG=am-test <%= junit %> --format json --o reports/json/cucumber.json 
