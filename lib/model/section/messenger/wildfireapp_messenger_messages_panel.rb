@@ -28,7 +28,8 @@ class Model::Section::Messenger::WildfireappMessengerMessagesPanel < SitePrism::
   def click_enabled_next_page_button
     paging_message_before = pagination_current_page_indicator_text
     enabled_next_page_button.click
-    Timeout.timeout_and_raise(120, 'Timed out while waiting for the next page of messages to be displayed') do
+    msg = 'Timed out while waiting for the next page of messages to be displayed'
+    Timeout.timeout_and_raise(120, msg) do
       while true
         (1..50).each do
           if paging_message_before == pagination_current_page_indicator_text

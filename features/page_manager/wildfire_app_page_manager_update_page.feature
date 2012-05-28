@@ -8,5 +8,6 @@ Feature: Update Page
   @complete
   Scenario: Publish an update to an App in Page Manager
     When I update and publish the Countdown App
-    And I navigate to the palo alto foodies countdown app page
-    Then the updates to the "palo alto foodies countdown app" page should be visible
+    And I view the "PaloAltoFoodies" facebook page 
+    And I view the "Countdown" app page
+    Then the updates to the "Countdown" app should be visible

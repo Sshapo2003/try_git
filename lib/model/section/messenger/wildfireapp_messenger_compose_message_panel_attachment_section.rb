@@ -12,7 +12,8 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachme
       attach_link_link.click
       attach_link_dialog.set attachment[:url]
       attach_link_button.click
-      Timeout.timeout(30) { sleep 0.1 until link_attachment_title.text.include? attachment[:link_title] }
+      msg = "Timed out waiting for #{attachment[:link_title]} to appear in compose panel attachment section"
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until link_attachment_title.text.include? attachment[:link_title] }
     else raise "Unknown attachment type #{attachment_type}"
     end
   end

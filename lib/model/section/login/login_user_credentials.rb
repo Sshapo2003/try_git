@@ -4,8 +4,8 @@ class Model::Section::Login::LoginUserCredentials < SitePrism::Section
   element :login_button, "button.login"
 
   def login_with_credentials(email, password)
-    email_field.set email
-    password_field.set password
-    login_button.click
+    wait_for_and_set_email_field email
+    wait_for_and_set_password_field password
+    wait_for_and_click_login_button
   end
 end

@@ -3,7 +3,11 @@ Given /^I am logged in to Facebook as a page administrator$/ do
   page.should have_content('Alistair Wildfire')
 end
 
-Then /^the updates to the "(.*)" page should be visible$/ do |page|
+When /^I view the "(.*)" app page$/ do |app_name|
+  @facebook.timeline.navigate_to_app app_name
+end
+
+Then /^the updates to the "(.*)" app should be visible$/ do |page|
   @facebook.countdown_application.header_text_should_be(@updated_countdown_app_title).should be_true
 end
 
@@ -12,7 +16,7 @@ Then /^the published template should be visible on my facebook page$/ do
   page.driver.new_browser
 
   @facebook.timeline.visit_my_timeline
-  @facebook.timeline.navigate_to_app('AllTemplates')
+  @facebook.timeline.navigate_to_app Helpers::Config['create_template_property_name']
 
   Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.displayed? != true }
   Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.has_iframe? != true }

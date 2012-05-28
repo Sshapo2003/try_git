@@ -1,7 +1,6 @@
 class Model::Page::Facebook::Timeline < SitePrism::Page
   section :timeline_nav_div, Model::Section::Facebook::TimelineNavDiv, 'div#timelineNavContent'
-  section :first_recent_comment_facebook_timeline_unit, Model::Section::Facebook::TimelineUnit, 'div#pagelet_timeline_recent li.firstUnit'
-  sections :facebook_timeline_units, Model::Section::Facebook::TimelineUnit, 'li.fbTimelineUnit'
+  sections :facebook_timeline_units, Model::Section::Facebook::TimelineUnit, 'div.timelineUnitContainer'
 
   element :current_user_username_span, 'span.headerTinymanName'
   element :user_nav_drop_down, 'div#userNavigationLabel'
@@ -12,6 +11,13 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
   element :password_textbox, 'input#pass'
   element :login_button, 'label#loginbutton input'
   elements :status_units, 'div.statusUnit'
+  elements :status_units_text_content, 'div.timelineUnitContainer .statusUnit'
+  elements :status_units_with_image_text_content, '.uiStreamMessage span'
+
+
+  def visit_timeline page_name
+    visit "http://www.facebook.com/#{page_name}"
+  end
 
   def visit_my_timeline user_credentials=nil
     visit(Helpers::Config['facebook_page_url'])
@@ -50,8 +56,13 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
         sleep 1
       end
     end
-    failure_message = "Expected first facebook timelone message to be #{message} but was #{first_recent_comment_facebook_timeline_unit.status.text}"
-    Timeout.timeout_and_raise(30, failure_message) { sleep 0.1 while not first_recent_comment_facebook_timeline_unit.status.text.include?(message) }
+    msg = "Expected facebook timeline messages to include #{message}."
+    Timeout.timeout_and_raise(60, msg) { sleep 0.1 while not timeline_units_contain_message? message }
+  end
+
+  def timeline_units_contain_message? message
+    all_status_units = status_units_text_content | status_units_with_image_text_content
+    all_status_units.select {|su| su.text.include? message}.count > 0
   end
 
   def messages_on_page

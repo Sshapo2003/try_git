@@ -52,34 +52,35 @@ ag: <%= common %> -t @gallery -t @amtest CONFIG=am-test
 
 #Jenkins
 <% junit = "--format junit --out reports/features/" %>
-<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented" %>
-jenkinsproduction: <%= common %> -t @production CONFIG=live <%= junit %>
-jenkinsstaging: <%= common %> -t @staging CONFIG=staging <%= junit %>
-jenkinsamtest: <%= common %> -t @amtest CONFIG=am-test <%= junit %>
+<% cucumber = "--format json --o reports/json/cucumber.json" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing" %>
+jenkinsproduction: <%= common %> -t @production CONFIG=live <%= junit %> <%= cucumber %>
+jenkinsstaging: <%= common %> -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
+jenkinsamtest: <%= common %> -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
 
 # Production
 <% common = "--format rerun --out features.txt -f pretty -t @complete -t @production -t ~@not_implemented -t ~@failing" %>
-jpm: <%= common %> -t @messenger CONFIG=live <%= junit %>
-jpam: <%= common %> -t @account_management CONFIG=live <%= junit %>
-jpa: <%= common %> -t @analytics CONFIG=live <%= junit %>
-jpma: <%= common %> -t @messenger_admin CONFIG=live <%= junit %>
-jppm: <%= common %> -t @page_manager CONFIG=live <%= junit %>
-jpg: <%= common %> -t @gallery CONFIG=live <%= junit %>
+jpm: <%= common %> -t @messenger CONFIG=live <%= junit %> <%= cucumber %>
+jpam: <%= common %> -t @account_management CONFIG=live <%= junit %> <%= cucumber %>
+jpa: <%= common %> -t @analytics CONFIG=live <%= junit %> <%= cucumber %>
+jpma: <%= common %> -t @messenger_admin CONFIG=live <%= junit %> <%= cucumber %>
+jppm: <%= common %> -t @page_manager CONFIG=live <%= junit %> <%= cucumber %>
+jpg: <%= common %> -t @gallery CONFIG=live <%= junit %> <%= cucumber %>
 
 # Product Group Specific
 # Staging
-jsm: <%= common %> -t @messenger CONFIG=staging <%= junit %>
-jsam: <%= common %> -t @account_management CONFIG=staging <%= junit %>
-jsa: <%= common %> -t @analytics CONFIG=staging <%= junit %>
-jsma: <%= common %> -t @messenger_admin CONFIG=staging <%= junit %>
-jspm: <%= common %> -t @page_manager CONFIG=staging <%= junit %>
-jsg: <%= common %> -t @gallery CONFIG=staging <%= junit %>
+jsm: <%= common %> -t @messenger CONFIG=staging <%= junit %> <%= cucumber %>
+jsam: <%= common %> -t @account_management CONFIG=staging <%= junit %> <%= cucumber %>
+jsa: <%= common %> -t @analytics CONFIG=staging <%= junit %> <%= cucumber %>
+jsma: <%= common %> -t @messenger_admin CONFIG=staging <%= junit %> <%= cucumber %>
+jspm: <%= common %> -t @page_manager CONFIG=staging <%= junit %> <%= cucumber %>
+jsg: <%= common %> -t @gallery CONFIG=staging <%= junit %> <%= cucumber %>
 
 # Product Group Specific
 # AM-Test
-jam: <%= common %> -t @messenger CONFIG=am-test <%= junit %>
-jaam: <%= common %> -t @account_management CONFIG=am-test <%= junit %>
-jaa: <%= common %> -t @analytics CONFIG=am-test <%= junit %>
-jama: <%= common %> -t @messenger_admin CONFIG=am-test <%= junit %>
-japm: <%= common %> -t @page_manager CONFIG=am-test <%= junit %>
-jag: <%= common %> -t @gallery CONFIG=am-test <%= junit %>
+jam: <%= common %> -t @messenger CONFIG=am-test <%= junit %> <%= cucumber %>
+jaam: <%= common %> -t @account_management CONFIG=am-test <%= junit %> <%= cucumber %>
+jaa: <%= common %> -t @analytics CONFIG=am-test <%= junit %> <%= cucumber %>
+jama: <%= common %> -t @messenger_admin CONFIG=am-test <%= junit %> <%= cucumber %>
+japm: <%= common %> -t @page_manager CONFIG=am-test <%= junit %> <%= cucumber %>
+jag: <%= common %> -t @gallery CONFIG=am-test <%= junit %> <%= cucumber %>
