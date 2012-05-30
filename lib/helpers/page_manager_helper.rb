@@ -35,5 +35,12 @@ class Helpers::PageManagerHelper
       wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.update_button.click
       wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.wait_for_publish_success_postit
     end
+
+    def get_template_menu_options
+      wildfire = Model::Wildfire.new
+      wildfire.wildfireapp_page_manager.content_div.templates[0].wait_for_drop_down_menu
+      wildfire.wildfireapp_page_manager.content_div.templates[0].drop_down_menu.click
+      wildfire.wildfireapp_page_manager.content_div.template_menu_options.collect {|o| o.text}
+    end
   end
 end
