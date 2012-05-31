@@ -1,16 +1,24 @@
 Given /^I am logged in to Wildfire as a user with existing properties$/ do
   pending "Currently only implemented for staging" unless ENV['CONFIG'] == 'staging'
-   @wildfire.login.load
+  @wildfire.login.load
   @wildfire.login.login('alistair.hutchison+staging@wildfireapp.com', 'password1')
 end
 
-When /^I add the Facebook page "([^"]*)" to Wildfire$/ do |fb_page_name|
-  pending "Need to be able to validate my test facebook account"
+Given /^I have added the twitter account "([^"]*)" to Wildfire$/ do |twitter_name|
+  @wildfire.account_management.your_properties.add_twitter_property(twitter_name)
+end
+
+When /^I (?:add|have added) the Facebook page "([^"]*)" to Wildfire$/ do |fb_page_name|
+  @wildfire.account_management.load_section('Your Properties')
+  @wildfire.account_management.your_properties.add_facebook_property(fb_page_name)
 end
 
 When /^I add the twitter account "([^"]*)" to Wildfire$/ do |twitter_name|
-  @wildfire.account_management.load_section('Your Properties')
   @wildfire.account_management.your_properties.add_twitter_property(twitter_name)
+end
+
+When /^I remove the Facebook page "(.*?)" from Your Properties$/ do |page_name|
+  @wildfire.account_management.your_properties.remove_property(page_name)
 end
 
 Then /^I should see the following social properties:$/ do |table|
@@ -23,6 +31,10 @@ Then /^I should see Twitter account "([^"]*)" in Your Properties$/ do |twitter_n
   @wildfire.account_management.your_properties.should have_property(twitter_name.capitalize, 'twitter account')
 end
 
-Then /^I should see Facebook page "([^"]*)" in Your Properties$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^I should see Facebook page "([^"]*)" in Your Properties$/ do |page_name|
+  @wildfire.account_management.your_properties.should have_facebook_property(page_name)
+end
+
+Then /^I should have (\d+) social properties$/ do |count|
+  @wildfire.account_management.your_properties.social_properties.count.should == count.to_i
 end

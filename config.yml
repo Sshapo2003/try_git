@@ -12,6 +12,7 @@ live:
   wildfire_page_manager_root: https://apps.wildfireapp.com/pages/states/published
   wildfire_promotions_root: https://promos.wildfireapp.com
   wildfire_templates_root: http://templates.wildfireapp.com
+  wildfire_monitor_root: https://monitor.wildfireapp.com
   messenger_admin_root: https://messenger.wildfireapp.com/admin
   crystal_ball_root: https://promos.wildfireapp.com/crystal_ball
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
@@ -41,6 +42,7 @@ staging:
   wildfire_analytics_root: https://dashboard.wildfirestaging.com
   wildfire_page_manager_root: https://apps.wildfirestaging.com/pages/states/published
   wildfire_promotions_root: https://promos.wildfirestaging.com
+  wildfire_monitor_root: https://monitor.wildfirestaging.com
   wildfire_templates_root: http://templates.wildfirestaging.com
   wildfire_front_page: http://www.wildfirestaging.com
   messenger_admin_root: https://messenger.wildfirestaging.com/admin
@@ -74,6 +76,7 @@ am-test:
   wildfire_analytics_root: https://dashboard.am-test.wfhack.com
   wildfire_page_manager_root: https://apps.am-test.wfhack.com/pages/states/published
   wildfire_promotions_root: https://promos.am-test.wfhack.com
+  wildfire_monitor_root: https://monitor.am-test.wfhack.com
   wildfire_templates_root: http://templates.am-test.wfhack.com
   wildfire_front_page: http://www.am-test.wfhack.com
   messenger_admin_root: https://messenger.am-test.wfhack.com/admin
