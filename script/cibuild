@@ -8,4 +8,4 @@ set -ex
 
 . script/bootstrap
 
-bundle exec rake CONFIG=staging BROWSER=firefox SAUCE_OS=LINUX cuke:stagingcomplete
+bundle exec rake CONFIG=staging BROWSER=firefox SAUCE_OS=LINUX cuke:jenkinsstaging
