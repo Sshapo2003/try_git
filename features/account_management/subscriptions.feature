@@ -9,7 +9,7 @@ Feature: Subscriptions
     Given I am logged in to Wildfire as a new user
     Then I should have the default subscription
   
-  @complete
+  @complete @no-chrome
   Scenario: Limit feature tags from multiple subscriptions are summed
     Given I am logged in to Wildfire as a new user
     When I am given the following additional subscription:
