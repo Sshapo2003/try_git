@@ -8,4 +8,10 @@ set -ex
 
 . script/bootstrap
 
-bundle exec rake CONFIG=staging BROWSER=firefox SAUCE_OS=LINUX cuke:jenkinsstaging
+if [ -z "$RAKE_TASK_NAME" ]; then
+  echo "You must set the RAKE_TASK_NAME variable"
+  echo "Usage: RAKE_TASK_NAME=\"<task_name>\" script/cibuild"
+  exit 1
+fi
+
+bundle exec rake CONFIG=staging BROWSER=firefox SAUCE_OS=LINUX cuke:$RAKE_TASK_NAME
