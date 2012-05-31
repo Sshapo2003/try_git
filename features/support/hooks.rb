@@ -7,3 +7,11 @@ Before do
   @facebook = Model::Facebook.new
   @twitter = Model::Twitter.new
 end
+
+Before('@no-firefox') do |scenario|
+  scenario.skip_invoke! if ENV['BROWSER'] == 'firefox'
+end
+
+Before('@no-chrome') do |scenario|
+  scenario.skip_invoke! if ENV['BROWSER'] == 'chrome'
+end

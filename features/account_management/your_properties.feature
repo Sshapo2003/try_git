@@ -13,12 +13,6 @@ Feature: Your Properties
      | Alistairwf | Twitter Account |
      | MyTestPage | Facebook Page   |
 
-  @pending
-  Scenario: Add a new Facebook property to Wildfire
-    Given I am logged in to Wildfire as a new user
-    When I add the Facebook page "MyFooPage" to Wildfire
-    Then I should see Facebook page "MyFooPage" in Your Properties
-    
   @not-started
   Scenario: Owned properties display in Messenger
   
@@ -31,24 +25,22 @@ Feature: Your Properties
   @not-started
   Scenario: Tracked properties display in Analytics
   
-  @complete @staging @amtest @failing
+  @complete @staging @amtest @no-chrome
   Scenario: Add a new Twitter property to Wildfire
     Given I am logged in to Wildfire as a new user
     When I add the twitter account "alistairwf" to Wildfire
     Then I should see Twitter account "Alistairwf" in Your Properties
     
-  @not-started
-  Scenario: Reconnect a Facebook property with expired or broken connection
+  @complete @staging @amtest @no-chrome
+  Scenario: Prevent the same Twitter property from being added multiple times
+    Given I am logged in to Wildfire as a new user
+    And I have added the twitter account "alistairwf" to Wildfire
+    When I add the twitter account "alistairwf" to Wildfire
+    Then I should see the message "The Twitter account you are trying to add has already been added."
   
   @not-started
   Scenario: Reconnect a Twitter property with expired or broken connection
-  
-  @not-started
-  Scenario: Action required message is displayed when there is an expired or broken Facebook property
-  
-  @not-started
-  Scenario: Remove an existing Facebook property
-  
+    
   @not-started
   Scenario: Remove an existing Twitter property
   

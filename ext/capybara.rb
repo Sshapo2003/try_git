@@ -1,7 +1,17 @@
 module Capybara
   class Session
     def accept_alert
+      wait_until() { has_alert? }
       driver.browser.switch_to.alert.accept
+    end
+    
+    def has_alert?
+      begin
+        driver.browser.switch_to.alert
+        true
+      rescue ::Selenium::WebDriver::Error::NoAlertPresentError => e
+        return false
+      end
     end
   end
   
@@ -25,6 +35,16 @@ module Capybara
       def parent
         @parent
       end
+    end
+  end
+  
+  class Selenium::Driver
+    def within_frame(frame_id)
+      old_window = browser.window_handle
+      browser.switch_to.frame(frame_id)
+      yield
+    ensure
+      browser.switch_to.window old_window
     end
   end
 end

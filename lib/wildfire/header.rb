@@ -48,7 +48,9 @@ module Wildfire::Header
   
   def show_manage_accounts_modal
     show_account_menu
-    click_wf_link('Manage Accounts')
+    within('ol.account_menu') do
+      first("a:contains('Manage Accounts')") ? click_wf_link('Manage Accounts') : click_wf_link('Manage Account')
+    end
   end
   
   def show_create_company_modal

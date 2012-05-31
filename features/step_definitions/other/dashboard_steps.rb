@@ -1,5 +1,5 @@
 Then /^I should be successfully logged in as "(.*)"$/ do |company_name|
-  @wildfire.dashboard.dashboard_header.current_company_name.should eql company_name
+  @wildfire.dashboard.current_company.should eql company_name
 end
 
 Given /^I am viewing the "(.*)" account$/ do |company_name|

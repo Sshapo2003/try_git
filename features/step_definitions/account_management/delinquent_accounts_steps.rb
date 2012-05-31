@@ -6,11 +6,11 @@ Given /^I am logged in to Wildfire as a user with a delinquent account$/ do
 end
 
 When /^I switch to a non\-delinquent account$/ do
-  @wildfire.account_management.header.choose_company('Enabled Company')
+  @wildfire.account_management.switch_company('Enabled Company')
 end
 
 When /^I switch to a delinquent account$/ do
-  @wildfire.account_management.header.choose_company('Delinquent Company')
+  @wildfire.account_management.switch_company('Delinquent Company')
 end
 
 Then /^I should see the delinquent account flash message$/ do
@@ -19,21 +19,6 @@ end
 
 Then /^I should see the request for payment page$/ do
   page.should(have_content(REQUEST_PAYMENT_MESSAGE), "The message '#{REQUEST_PAYMENT_MESSAGE}' was not present on the page")
-end
-
-Then /^I (should|should not) have access to Messenger$/ do |expectation|
-  @wildfire.wildfireapp_messenger.load
-  @wildfire.wildfireapp_messenger.send(expectation.parameterize.underscore, be_active)
-end
-
-Then /^I (should|should not) have access to Analytics$/ do |expectation|
-  @wildfire.wildfireapp_analytics.load
-  @wildfire.wildfireapp_analytics.send(expectation.parameterize.underscore, be_active)
-end
-
-Then /^I (should|should not) have access to Page Manager$/ do |expectation|
-  @wildfire.wildfireapp_page_manager.load
-  @wildfire.wildfireapp_page_manager.send(expectation.parameterize.underscore, be_active)
 end
 
 Then /^I should be redirected to Account Management$/ do
