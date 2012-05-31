@@ -1,12 +1,13 @@
 class Model::Section::PageManager::WildfireappPageManagerContentDiv < SitePrism::Section
   element :templetes_drop_down_menu, 'h2 div.wf_menu_button_wpr a.wf_menu_button'
-  sections :pages, Model::Section::PageManager::WildfireappPageManagerContentDivPages, 'li.screenshot'
+  root_elements :template_menu_options, 'body > ol li'
+  sections :templates, Model::Section::PageManager::Template, 'li.screenshot'
 
   def get_page_by_title(title)
-    found_pages = pages.select {|page| page.title_div.text == title}
-    page_names = pages.collect {|p| puts p.title_div.text}
-    unless found_pages.count > 0 then raise "Couldnt find page #{title}. Pages = #{page_names}" end
-    return found_pages.first
+    found_templates = templates.select {|page| page.title_div.text == title}
+    template_names = templates.collect {|p| puts p.title_div.text}
+    unless found_templates.count > 0 then raise "Couldnt find page #{title}. Pages = #{template_names}" end
+    return found_templates.first
   end
 
   def click_templates_menu_create_blank_template_option

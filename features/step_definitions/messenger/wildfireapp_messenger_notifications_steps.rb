@@ -1,6 +1,7 @@
 Given /^I have no current notifications$/ do
-  unless @wildfire.wildfireapp_messenger.notifications_trigger.text == "0" then @wildfire.wildfireapp_messenger.notifications_trigger.click end
-  @wildfire.wildfireapp_messenger.notifications_trigger.text.should eql "0"
+  clear_notifications = ->{ if @wildfire.wildfireapp_messenger.notifications_trigger.text == "0" then @wildfire.wildfireapp_messenger.notifications_trigger.click end }
+  msg = "Expected 0 noticifaction but there were #{@wildfire.wildfireapp_messenger.notifications_trigger.text}"
+  Timeout.timeout_and_raise(30, msg) { clear_notifications.call }
 end
 
 When /^a notification event is triggered$/ do
