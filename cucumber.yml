@@ -53,13 +53,13 @@ ag: <%= common %> -t @gallery -t @amtest CONFIG=am-test
 #Jenkins
 <% junit = "--format junit --out reports/features/" %>
 <% cucumber = "--format json --o reports/json/cucumber.json" %>
-<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing -t ~@no-run" %>
 jenkinsproduction: <%= common %> -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jenkinsstaging: <%= common %> -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
 jenkinsamtest: <%= common %> -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
 
 # Production
-<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing -t ~@no-run" %>
 jpm: <%= common %> -t @messenger -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jpam: <%= common %> -t @account_management -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jpa: <%= common %> -t @analytics -t @production CONFIG=live <%= junit %> <%= cucumber %>
