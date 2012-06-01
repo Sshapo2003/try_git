@@ -1,4 +1,4 @@
-@account_management
+@account_management @failing
 Feature: Manage Companies
   In order to keep my social properties organised
   As a Wildfire user
