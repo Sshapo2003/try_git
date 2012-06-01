@@ -14,4 +14,4 @@ if [ -z "$RAKE_TASK_NAME" ]; then
   exit 1
 fi
 
-bundle exec rake CONFIG=staging BROWSER=firefox SAUCE_OS=LINUX cuke:$RAKE_TASK_NAME
+bundle exec rake BROWSER=firefox SAUCE_OS=LINUX cuke:$RAKE_TASK_NAME
