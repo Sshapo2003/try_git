@@ -4,10 +4,12 @@ When /^I compose and send a valid message$/ do
   @message_body = @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message
 end
 
+Given /^I have a twitter message$/ do
+  @message_body = Helpers::TwitterHelper.compose_and_send_a_valid_twitter_message_to_my_twitter_property
+end
+
 When /^I compose and send a valid message for my twitter property$/ do
-  unless @wildfire.wildfireapp_messenger.displayed? then @wildfire.wildfireapp_messenger.load end
-  @wildfire.wildfireapp_messenger.click_tab 'Compose'
-  @message_body = @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message_to_twitter
+  @message_body = Helpers::TwitterHelper.compose_and_send_a_valid_twitter_message_to_my_twitter_property
 end
 
 Given /^I compose a new Mesenger message$/ do
@@ -127,4 +129,12 @@ end
 Then /^the link attachment panel should not be visible$/ do
   sleep 2
   @wildfire.wildfireapp_messenger.compose_message_panel.attachments_section.attachment_preview_div[:style].should include 'display: none;'
+end
+
+Then /^the reply should be visible in my wildfire messenger messages$/ do
+  Helpers::MessengerAdminHelper.refresh_my_twitter_account
+  step 'I navigate to the wildfire app messenger page'
+  message = Helpers::MessengerHelper.wait_for_message_to_appear @message_body
+  replies = Helpers::MessengerHelper.replies_for_message message
+  replies.select {|r| r.text.include? @reply }.count.should be > 0
 end

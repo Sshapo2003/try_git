@@ -5,8 +5,9 @@ class Model::Section::Messenger::WildfireappMessengerIncomingMessage < SitePrism
   element :date_time, 'div.posted_at'
   element :body, 'div.body'
   element :assigned_avatar, 'div.assigned_to a img'
-
+  element :view_replies_link, 'a.show_replies'
   root_element :assigned_to_bubbletip , 'body > div.wf_bubbletip'
+  elements :replies, 'div.twitter_reply'
 
   def is_assigned?
     has_assigned_to?

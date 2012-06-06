@@ -1,12 +1,9 @@
 Then /^the message should be visible on my twitter page$/ do
-  @twitter.home.visit_my_page
-  @twitter.home.wait_for_tweets(5)
+  Helpers::TwitterHelper.wait_for_message_to_appear_on_my_twitter_page_messages @message_body
+end
 
-  Timeout.timeout(300) do
-    while @twitter.home.tweets.collect {|t| t.text }.include? @message_body == false do
-      page.driver.refresh
-      @twitter.home.wait_for_tweets(5)
-    end
-  end
-  @twitter.home.tweets.collect {|t| t.text }.should include @message_body
+When /^the message receives a reply$/ do
+  creds = { :username => Helpers::Config['default_twitter_poster_username'], :password => Helpers::Config['default_twitter_poster_password'] }
+  @reply = Helpers::TwitterHelper.post_reply_to_message_as_user(@message_body, creds)
+  Helpers::TwitterHelper.wait_for_message_to_appear_on_posters_twitter_page_messages @reply
 end
