@@ -1,10 +1,10 @@
-@account_management @amtest @staging
+@account_management @amtest
 Feature: Account Features
   In order to generate $$$s for Wildfire
   As a Wildfire App User
   I should only have access to the account features that I have paid for
   
-  @complete
+  @complete @staging
   Scenario: Applications that are accessible to a new user
     Given I am logged in to Wildfire as a new user
     Then I should have access to Promotion Builder
@@ -25,12 +25,12 @@ Feature: Account Features
     | Messenger    |
     | Dashboard    |
     
-  @complete
+  @complete @staging
   Scenario: Invite user without advanced permissions enabled
     Given I am logged in to Wildfire as a new user
     Then I should not be able to set advanced permissions
     
-  @complete
+  @complete @staging
   Scenario: Invite users with advanced permissions enabled
     Given I am logged in to Wildfire as a new user
     And I have the advanced permissions feature enabled
