@@ -40,8 +40,13 @@ module SitePrism::ElementContainer
       define_method wait_for_method_name do
         raise SitePrism::NoLocatorForElement.new("#{self.class.name} => :#{element_name} needs a locator")
       end
+      define_method wait_for_and_click_method_name do
+        raise SitePrism::NoLocatorForElement.new("#{self.class.name} => :#{element_name} needs a locator")
+      end
+      define_method wait_for_and_set_method_name do
+        raise SitePrism::NoLocatorForElement.new("#{self.class.name} => :#{element_name} needs a locator")
+      end
     else
-
       define_method wait_for_method_name do |timeout = Capybara.default_wait_time|
         Capybara.using_wait_time timeout do
           element_waiter element_locator
@@ -55,6 +60,7 @@ module SitePrism::ElementContainer
       end
       define_method wait_for_and_set_method_name do |value, timeout = Capybara.default_wait_time|
         Capybara.using_wait_time timeout do
+          element_waiter element_locator
           find_one(element_locator).set value
         end
       end
