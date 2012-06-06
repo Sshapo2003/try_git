@@ -57,7 +57,7 @@ Feature: My Templates
     When I upload Upload a new version of the template 
     Then the "Upload a Template" page should be displayed
 
-  @complete
+  @failing
   Scenario: Clone a Template
     When I clone a template
     Then the template should be listed in My Templates
