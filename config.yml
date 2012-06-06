@@ -24,7 +24,9 @@ live:
   default_facebook_poster_password: th1sismypassword
   default_twitter_poster_username: burgerwithcheez
   default_twitter_poster_password: th1sismypassword
+  default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   facebook_property_name: Palo Alto Foodies
+  twitter_property_name: paloaltofoodie
   create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: false
@@ -54,7 +56,11 @@ staging:
   default_user_facebook_password: th1sismypassword
   default_facebook_poster_username: burgerwithcheez@gmail.com
   default_facebook_poster_password: th1sismypassword
+  default_twitter_poster_username: burgerwithcheez
+  default_twitter_poster_password: th1sismypassword
+  default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   facebook_property_name: Palo Alto Foodies
+  twitter_property_name: paloaltofoodie
   create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: true
@@ -88,7 +94,11 @@ am-test:
   default_user_facebook_password: th1sismypassword
   default_facebook_poster_username: burgerwithcheez@gmail.com
   default_facebook_poster_password: th1sismypassword
+  default_twitter_poster_username: burgerwithcheez
+  default_twitter_poster_password: th1sismypassword
+  default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   facebook_property_name: Palo Alto Foodies
+  twitter_property_name: paloaltofoodie
   create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: true

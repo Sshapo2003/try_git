@@ -3,9 +3,9 @@ class Model::Section::PageManager::WildfireappPageManagerContentDiv < SitePrism:
   root_elements :template_menu_options, 'body > ol li'
   sections :templates, Model::Section::PageManager::Template, 'li.screenshot'
 
-  def get_page_by_title(title)
+  def get_template_by_title(title)
     found_templates = templates.select {|page| page.title_div.text == title}
-    template_names = templates.collect {|p| puts p.title_div.text}
+    template_names = templates.collect {|p| p.title_div.text}
     unless found_templates.count > 0 then raise "Couldnt find page #{title}. Pages = #{template_names}" end
     return found_templates.first
   end

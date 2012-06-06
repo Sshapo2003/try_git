@@ -5,7 +5,7 @@ Feature: Templates
     Given I am logged in as "default"
     And I navigate to the wildfire app templates page
 
-  @complete
+  @not_started
   Scenario Outline: Displaying of Notifications
     When I create a page from the "<Template>" template
     And I publish the template

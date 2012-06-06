@@ -18,13 +18,3 @@ end
 When /^I view "(.*?)" in the left hand nav bar of Page Manager$/ do |link|
   @wildfire.wildfireapp_page_manager.sidebar_links.select {|l| l.text.include? link }.first.click
 end
-
-When /^I have at least one template$/ do
-  @wildfire.wildfireapp_page_manager.content_div.templates.count.should > 0
-end
-
-Then /^the templates menu options should be$/ do |table|
-  expected_options = table.raw.flatten
-  actual_options = Helpers::PageManagerHelper.get_template_menu_options
-  expected_options.should eql actual_options
-end
