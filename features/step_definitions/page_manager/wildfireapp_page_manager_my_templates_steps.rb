@@ -12,12 +12,21 @@ Given /^I edit the templates design with some liquid content$/ do
   @template_content = Helpers::PageManagerHelper.update_template_with_valid_liquid_content @template
 end
 
+When /^I edit the templates default content$/ do
+  @template_title = "TestTemplate#{String.random}"
+  @template_content = Helpers::PageManagerHelper.update_template_title(@template, @template_title)
+end
+
 Then /^the Page Editor should be displayed with the templates details$/ do
   @wildfire.wildfireapp_page_manager_edit_mode.sidebar.content_menu.title_text_box[:value].should == @template_name
 end
 
-Then /^the Page Editor should be displayed with the updated template content$/ do
+Then /^the Page Editor should be displayed with the updated template design$/ do
   @wildfire.wildfireapp_page_manager_edit_mode.page_preview_content.should include @template_content
+end
+
+Then /^the Page Editor should be displayed with the updated template content$/ do
+  @wildfire.wildfireapp_page_manager_edit_mode.sidebar.content_menu.title_text_box[:value].should include @template_title
 end
 
 Then /^the templates menu options should be$/ do |table|

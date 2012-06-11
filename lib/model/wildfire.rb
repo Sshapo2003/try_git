@@ -29,6 +29,9 @@ class Model::Wildfire
   def template_builder
     Model::Page::PageManager::TemplateBuilder.new
   end
+  def template_editor
+    Model::Page::PageManager::TemplateEditor.new
+  end
   def wildfireapp_promotion_builder
     Model::Page::PromotionBuilder::WildfireappPromotionBuilder.new
   end

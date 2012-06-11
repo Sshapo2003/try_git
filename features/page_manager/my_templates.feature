@@ -38,7 +38,7 @@ Feature: My Templates
     Given I have a valid template
     And I edit the templates design with some liquid content
     When I create a page with the template
-    Then the Page Editor should be displayed with the updated template content
+    Then the Page Editor should be displayed with the updated template design
 
   @complete
   Scenario: Delete a Template
@@ -46,16 +46,17 @@ Feature: My Templates
     When I delete the template
     Then the template should be removed My Templates
 
+  @complete
+  Scenario: Edit Templates Default Content
+    Given I have a valid template
+    When I edit the templates default content
+    When I create a page with the template
+    Then the Page Editor should be displayed with the updated template content
+
   @not_started
   Scenario: Upload New Template
     When I upload Upload new template 
     Then the "Upload a Template" page should be displayed
-
-  @not_started
-  Scenario: Edit Templates Default Content
-    Given I have a valid template
-    When I edit the templates default content
-    Then the "Default Content" page should be displayed
 
   @not_started
   Scenario: Download a Template

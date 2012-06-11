@@ -7,7 +7,7 @@ class Model::Page::PageManager::WildfireappPageManagerEditMode < SitePrism::Page
   section :publish_to_facebook_modal, Model::Section::PageManager::EditModePublishToFacebookModal, 'div.ui-dialog'
 
   def page_preview_content
-    msg = "Timeout occurred waiting to page preview to have content."
+    msg = "Timeout occurred waiting for page preview to have content."
     Timeout.timeout_and_raise(30, msg) { sleep 0.1 while page_preview_body.chomp == "" }
     page_preview_body
   end

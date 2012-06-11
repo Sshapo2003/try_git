@@ -2,7 +2,7 @@ class Helpers::PageManagerHelper
   class << self
     def update_template_with_valid_liquid_content template
       wildfire = Model::Wildfire.new
-      edit_template(template.title_div.text)
+      edit_template_design(template.title_div.text)
       wildfire.template_builder.edit_default_liquid_link.click
       liquid_content = "Hello World #{String.random}"
 
@@ -24,6 +24,18 @@ class Helpers::PageManagerHelper
       Timeout.timeout_and_raise(30, msg) { sleep 0.1 while not wildfire.template_builder.sticky_label.text.include?("You've successfully created a new Template version!") }
 
       liquid_content
+    end
+
+    def update_template_title(template, title)
+      wildfire = Model::Wildfire.new
+      edit_default_content(template.title_div.text)
+
+      wildfire.template_editor.template_name.set title
+
+      wildfire.template_editor.content_save_and_continue_button.click
+
+      sleep 2.0
+      wildfire.template_editor.go_back_button.click
     end
 
     def make_a_change_to_countdown_app
@@ -96,7 +108,7 @@ class Helpers::PageManagerHelper
       Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.wildfireapp_page_manager.sticky_label.text != 'You have successfully cloned the template.' }
     end
 
-    def edit_template(name='TestTemplate')
+    def edit_template_design(name='TestTemplate')
       wildfire = Model::Wildfire.new
       content_div = wildfire.wildfireapp_page_manager.content_div
       template = content_div.get_template_by_title name
@@ -106,6 +118,18 @@ class Helpers::PageManagerHelper
       template.visit link
 
       wildfire.template_builder.wait_for_back_to_templates_button
+    end
+
+    def edit_default_content(name='TestTemplate')
+      wildfire = Model::Wildfire.new
+      content_div = wildfire.wildfireapp_page_manager.content_div
+      template = content_div.get_template_by_title name
+      template.wait_for_drop_down_menu
+      template.drop_down_menu.click
+      link = template.template_menu_options.select {|o| o.text == "Edit Default Content" }.first[:href]
+      template.visit link
+
+      wildfire.template_editor.wait_for_go_back_button
     end
     
     def delete_template(name='TestTemplate')
