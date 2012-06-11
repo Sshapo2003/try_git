@@ -1,5 +1,31 @@
 class Helpers::PageManagerHelper
   class << self
+    def update_template_with_valid_liquid_content template
+      wildfire = Model::Wildfire.new
+      edit_template(template.title_div.text)
+      wildfire.template_builder.edit_default_liquid_link.click
+      liquid_content = "Hello World #{String.random}"
+
+
+      Timeout.timeout(30 ) { sleep 0.1 while not wildfire.template_builder.page.evaluate_script("editor.isFocused()") }
+
+      wildfire.template_builder.page.execute_script("editor.removeLines()")
+      wildfire.template_builder.page.execute_script("editor.insert('#{liquid_content}')")
+      wildfire.template_builder.edit_liquid_dialog_save_button.click
+     
+      sleep 1.0
+      wildfire.template_builder.wait_for_publish_template_changes_button
+      wildfire.template_builder.page.execute_script("$('a.publish_template').click()")
+
+      sleep 1.0
+      wildfire.template_builder.page.execute_script(%{$('button[value="Publish"]').click()})
+
+      msg = "Time out occured while waiting for template to be published."
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while not wildfire.template_builder.sticky_label.text.include?("You've successfully created a new Template version!") }
+
+      liquid_content
+    end
+
     def make_a_change_to_countdown_app
       updated_countdown_app_title = "Countdown #{String.random} #{DateTime.now.strftime("%Y-%m-%d %H:%M:%S")}"
 
@@ -68,6 +94,18 @@ class Helpers::PageManagerHelper
       content_div.page.execute_script %{ $('body > ol li a[href="#{link}"]').click() }
       msg = "Unable to clone template. Sticky Message = #{wildfire.wildfireapp_page_manager.sticky_label.text}"
       Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.wildfireapp_page_manager.sticky_label.text != 'You have successfully cloned the template.' }
+    end
+
+    def edit_template(name='TestTemplate')
+      wildfire = Model::Wildfire.new
+      content_div = wildfire.wildfireapp_page_manager.content_div
+      template = content_div.get_template_by_title name
+      template.wait_for_drop_down_menu
+      template.drop_down_menu.click
+      link = template.template_menu_options.select {|o| o.text == "Edit Template Design" }.first[:href]
+      template.visit link
+
+      wildfire.template_builder.wait_for_back_to_templates_button
     end
   end
 end

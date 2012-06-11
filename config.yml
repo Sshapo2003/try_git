@@ -18,6 +18,8 @@ live:
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
   twitter_page_url: https://twitter.com/#!/paloaltofoodie
   #credentials
+  template_user_facebook_address: paloaltofoodietemplateuser@gmail.com
+  template_user_facebook_password: th1sismypassword
   default_user_facebook_address: paloaltofoodie@gmail.com
   default_user_facebook_password: th1sismypassword
   default_facebook_poster_username: burgerwithcheez@gmail.com
@@ -52,6 +54,8 @@ staging:
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
   twitter_page_url: https://twitter.com/#!/paloaltofoodie
   #credentials
+  template_user_facebook_address: paloaltofoodie@gmail.com
+  template_user_facebook_password: th1sismypassword
   default_user_facebook_address: paloaltofoodie@gmail.com
   default_user_facebook_password: th1sismypassword
   default_facebook_poster_username: burgerwithcheez@gmail.com
@@ -90,6 +94,8 @@ am-test:
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
   twitter_page_url: https://twitter.com/#!/paloaltofoodie
   #credentials
+  template_user_facebook_address: paloaltofoodie@gmail.com
+  template_user_facebook_password: th1sismypassword
   default_user_facebook_address: paloaltofoodie@gmail.com
   default_user_facebook_password: th1sismypassword
   default_facebook_poster_username: burgerwithcheez@gmail.com

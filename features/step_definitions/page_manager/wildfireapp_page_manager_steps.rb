@@ -11,10 +11,6 @@ Then /^the sticky note on the Page Manager page should display "(.*)"$/ do |mess
   @wildfire.wildfireapp_page_manager_edit_mode.header_sticky.text.should eql message
 end
 
-When /^I publish the template$/ do
-  Helpers::PageManagerHelper.publish_completed_page
-end
-
 When /^I view "(.*?)" in the left hand nav bar of Page Manager$/ do |link|
   @wildfire.wildfireapp_page_manager.sidebar_links.select {|l| l.text.include? link }.first.click
 end
