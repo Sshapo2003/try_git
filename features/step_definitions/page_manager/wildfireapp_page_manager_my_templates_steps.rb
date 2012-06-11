@@ -26,6 +26,11 @@ Then /^the templates menu options should be$/ do |table|
   expected_options.should eql actual_options
 end
 
+Given /^I have created a valid template$/ do
+  step 'I create a Blank Template'
+  step 'the template should be listed in My Templates'
+end
+
 When /^I create a Blank Template$/ do
   @num_templates_before = @wildfire.wildfireapp_page_manager.content_div.templates.count
   @template_name = Helpers::PageManagerHelper.create_template
@@ -34,6 +39,11 @@ end
 When /^I clone a template$/ do
   @num_templates_before = @wildfire.wildfireapp_page_manager.content_div.templates.count
   Helpers::PageManagerHelper.clone_template
+end
+
+When /^I delete the template$/ do
+  Helpers::PageManagerHelper.delete_template @template_name
+  @wildfire.wildfireapp_page_manager.sticky_label.text.should include 'You have successfully deleted the template.'
 end
 
 Then /^the template should be listed in My Templates$/ do
@@ -49,4 +59,8 @@ end
 
 When /^I publish the template$/ do
   Helpers::PageManagerHelper.publish_completed_page
+end
+
+Then /^the template should be removed My Templates$/ do
+  @wildfire.wildfireapp_page_manager.content_div.templates.select {|t| t.title_div.text == @template_name}.count.should == 0
 end

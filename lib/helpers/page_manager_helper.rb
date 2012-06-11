@@ -107,5 +107,20 @@ class Helpers::PageManagerHelper
 
       wildfire.template_builder.wait_for_back_to_templates_button
     end
+    
+    def delete_template(name='TestTemplate')
+      wildfire = Model::Wildfire.new
+      content_div = wildfire.wildfireapp_page_manager.content_div
+      template = content_div.get_template_by_title name
+      template.wait_for_drop_down_menu
+      template.drop_down_menu.click
+      link = template.template_menu_options.select {|o| o.text == "Delete Template" }.first[:href]
+      content_div.page.execute_script %{ $('body > ol li a[href="#{link}"]').click() }
+
+      content_div.page.driver.browser.switch_to.alert.accept
+
+      msg = "Unable to delete template. Sticky Message = #{wildfire.wildfireapp_page_manager.sticky_label.text}"
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.wildfireapp_page_manager.sticky_label.text != 'You have successfully deleted the template.' }
+    end
   end
 end

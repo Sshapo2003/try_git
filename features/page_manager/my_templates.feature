@@ -40,6 +40,12 @@ Feature: My Templates
     When I create a page with the template
     Then the Page Editor should be displayed with the updated template content
 
+  @complete
+  Scenario: Delete a Template
+    Given I have created a valid template
+    When I delete the template
+    Then the template should be removed My Templates
+
   @not_started
   Scenario: Upload New Template
     When I upload Upload new template 
@@ -62,9 +68,3 @@ Feature: My Templates
     Given I have a valid template
     When I upload Upload a new version of the template 
     Then the "Upload a Template" page should be displayed
-
-  @not_started
-  Scenario: Delete a Template
-    Given I have a valid template
-    When I delete the template
-    Then the template should be removed My Templates
