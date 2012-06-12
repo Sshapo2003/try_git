@@ -58,14 +58,15 @@ Feature: My Templates
     When I upload a new template 
     Then the template should be available for selection in My Templates
 
+  @complete
+  Scenario: Upload New Version of Template
+    Given I have a valid uploaded template
+    When I upload a new version of the template 
+    And I create a page with the template
+    Then the Page Editor should be displayed with the updated template design
+
   @not_started
   Scenario: Download a Template
     Given I have a valid template
     When I download the template
     Then the download dialog should be opened
-
-  @not_started
-  Scenario: Upload New Version of Template
-    Given I have a valid template
-    When I upload Upload a new version of the template 
-    Then the "Upload a Template" page should be displayed

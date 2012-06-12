@@ -162,5 +162,21 @@ class Helpers::PageManagerHelper
 
       template_name
     end
+
+    def upload_new_version_of_template template_name
+      wildfire = Model::Wildfire.new
+      content_div = wildfire.wildfireapp_page_manager.content_div
+      template = content_div.get_template_by_title template_name
+      template.wait_for_drop_down_menu
+      template.drop_down_menu.click
+      link = template.template_menu_options.select {|o| o.text == "Upload New Version" }.first[:href]
+      template.visit link
+
+      wildfire.upload_template.upload_a_template 'templates/updated_test_template_for_upload.zip'
+      wildfire.upload_template.submit_button.click
+
+      msg = "Unable to upload template. Sticky Message = #{wildfire.wildfireapp_page_manager.sticky_label.text}"
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.wildfireapp_page_manager.sticky_label.text != "You have successfully added another version." }
+    end
   end
 end

@@ -80,6 +80,16 @@ When /^I upload a new template$/ do
   @template_name = Helpers::PageManagerHelper.upload_new_template
 end
 
+Given /^I have a valid uploaded template$/ do
+  @template = @wildfire.wildfireapp_page_manager.content_div.templates.select {|t| t.title_div.text.include? 'Uploaded Template'}.first
+  @template_name = @template.title_div.text
+end
+
+When /^I upload a new version of the template$/ do
+  Helpers::PageManagerHelper.upload_new_version_of_template @template_name
+  @template_content = 'Follow Foodie on Twitter! Updated'
+end
+
 Then /^the template should be available for selection in My Templates$/ do
   @wildfire.wildfireapp_page_manager.content_div.get_template_by_title(@template_name).title_div.text.should include @template_name
 end
