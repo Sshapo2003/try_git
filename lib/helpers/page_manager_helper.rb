@@ -146,5 +146,22 @@ class Helpers::PageManagerHelper
       msg = "Unable to delete template. Sticky Message = #{wildfire.wildfireapp_page_manager.sticky_label.text}"
       Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.wildfireapp_page_manager.sticky_label.text != 'You have successfully deleted the template.' }
     end
+
+    def upload_new_template
+      wildfire = Model::Wildfire.new
+      wildfire.wildfireapp_page_manager.content_div.upload_new_template_link.click
+      wildfire.upload_template.wait_for_template_name_textbox
+
+      template_name = "Uploaded Template #{String.random}"
+      wildfire.upload_template.template_name_textbox.set template_name
+      wildfire.upload_template.upload_a_template
+      wildfire.upload_template.accept_terms_checkbox.click
+      wildfire.upload_template.submit_button.click
+
+      msg = "Unable to upload template. Sticky Message = #{wildfire.wildfireapp_page_manager.sticky_label.text}"
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.wildfireapp_page_manager.sticky_label.text != "You've successfully uploaded a Template!" }
+
+      template_name
+    end
   end
 end

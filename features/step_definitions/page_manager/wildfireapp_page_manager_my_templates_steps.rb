@@ -75,3 +75,11 @@ end
 Then /^the template should be removed My Templates$/ do
   @wildfire.wildfireapp_page_manager.content_div.templates.select {|t| t.title_div.text == @template_name}.count.should == 0
 end
+
+When /^I upload a new template$/ do
+  @template_name = Helpers::PageManagerHelper.upload_new_template
+end
+
+Then /^the template should be available for selection in My Templates$/ do
+  @wildfire.wildfireapp_page_manager.content_div.get_template_by_title(@template_name).title_div.text.should include @template_name
+end

@@ -17,7 +17,7 @@ Feature: My Templates
       | Clone Template       |
       | Delete Template      |
 
-  @wip
+  @complete
   Scenario: Clone a Template
     When I clone a template
     Then an additional template should be listed in My Templates
@@ -53,10 +53,10 @@ Feature: My Templates
     When I create a page with the template
     Then the Page Editor should be displayed with the updated template content
 
-  @not_started
+  @complete
   Scenario: Upload New Template
-    When I upload Upload new template 
-    Then the "Upload a Template" page should be displayed
+    When I upload a new template 
+    Then the template should be available for selection in My Templates
 
   @not_started
   Scenario: Download a Template

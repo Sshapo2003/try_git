@@ -32,6 +32,9 @@ class Model::Wildfire
   def template_editor
     Model::Page::PageManager::TemplateEditor.new
   end
+  def upload_template
+    Model::Page::PageManager::UploadTemplate.new
+  end
   def wildfireapp_promotion_builder
     Model::Page::PromotionBuilder::WildfireappPromotionBuilder.new
   end

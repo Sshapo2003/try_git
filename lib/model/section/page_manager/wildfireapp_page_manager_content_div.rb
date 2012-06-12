@@ -1,6 +1,7 @@
 class Model::Section::PageManager::WildfireappPageManagerContentDiv < SitePrism::Section
   element :templetes_drop_down_menu, 'h2 div.wf_menu_button_wpr a.wf_menu_button'
   element :more_templates_link, 'a.more_templates'
+  element :upload_new_template_link, "a[href='/page_templates/new']"
   root_elements :template_menu_options, 'body > ol li'
   sections :templates, Model::Section::PageManager::Template, 'li.screenshot'
 
