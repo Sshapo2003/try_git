@@ -17,7 +17,7 @@ Feature: My Templates
       | Clone Template       |
       | Delete Template      |
 
-  @complete
+  @wip
   Scenario: Clone a Template
     When I clone a template
     Then an additional template should be listed in My Templates
