@@ -7,17 +7,6 @@ Feature: My Templates
     And I view "My Templates" in the left hand nav bar of Page Manager
 
   @complete
-  Scenario: Template Menu Options
-    Given I have at least one template
-    Then the templates menu options should be
-      | Edit Template Design |
-      | Edit Default Content |
-      | Download Template    |
-      | Upload New Version   |
-      | Clone Template       |
-      | Delete Template      |
-
-  @complete
   Scenario: Clone a Template
     When I clone a template
     Then an additional template should be listed in My Templates
@@ -42,6 +31,18 @@ Feature: My Templates
 
   @complete
   Scenario: Delete a Template
+    Given I have created a valid template
+    When I delete the template
+    Then the template should be removed My Templates
+
+  @not_started
+  Scenario: Attempt Delete a Template with a Draft
+    Given I have created a valid template
+    When I delete the template
+    Then the template should be removed My Templates
+
+  @not_started
+  Scenario: Attempt Delete a Template with a Published Page
     Given I have created a valid template
     When I delete the template
     Then the template should be removed My Templates

@@ -29,12 +29,6 @@ Then /^the Page Editor should be displayed with the updated template content$/ d
   @wildfire.wildfireapp_page_manager_edit_mode.sidebar.content_menu.title_text_box[:value].should include @template_title
 end
 
-Then /^the templates menu options should be$/ do |table|
-  expected_options = table.raw.flatten
-  actual_options = Helpers::PageManagerHelper.get_template_menu_options
-  expected_options.should eql actual_options
-end
-
 Given /^I have created a valid template$/ do
   step 'I create a Blank Template'
   step 'the template should be listed in My Templates'
