@@ -51,8 +51,7 @@ class Helpers::PageManagerHelper
       wildfire.wildfireapp_countdown_template_edit_header.body_text(updated_countdown_app_title)
       wildfire.wildfireapp_countdown_template_edit_header.save_button.click
 
-      wildfire.wildfireapp_page_manager_edit_mode.sidebar.content_menu.wait_for_and_click_save_button
-      return updated_countdown_app_title
+      updated_countdown_app_title
     end
 
     def publish_completed_page

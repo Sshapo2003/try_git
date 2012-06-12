@@ -1,5 +1,5 @@
 class Model::Page::WildfireappCountdownTemplateEditHeader < SitePrism::Page
-  element :save_button, 'button#internal_widget_submit'
+  element :save_button, "button[value='Save']"
 
   def body_text(text)
     script_executed = false
