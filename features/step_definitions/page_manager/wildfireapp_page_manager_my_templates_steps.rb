@@ -93,3 +93,9 @@ end
 Then /^the template should be available for selection in My Templates$/ do
   @wildfire.wildfireapp_page_manager.content_div.get_template_by_title(@template_name).title_div.text.should include @template_name
 end
+
+Then /^the template should have a valid download option$/ do
+  download_link_regex = /.*\/page_templates\/(\d*)\/download/
+  href = Helpers::PageManagerHelper.template_download_link @template.title_div.text
+  download_link_regex.match(href).should be_true
+end

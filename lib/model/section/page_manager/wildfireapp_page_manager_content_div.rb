@@ -12,7 +12,7 @@ class Model::Section::PageManager::WildfireappPageManagerContentDiv < SitePrism:
       templates = get_templates_by_title(title)
     end
         
-    unless templates.count > 0 then raise "Couldnt find page #{title}. Pages = #{template_names}" end
+    unless templates.count > 0 then raise "Couldnt find page #{title}. Pages = #{templates}" end
     templates.first 
   end
 

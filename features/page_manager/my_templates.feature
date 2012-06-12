@@ -65,8 +65,7 @@ Feature: My Templates
     And I create a page with the template
     Then the Page Editor should be displayed with the updated template design
 
-  @not_started
+  @complete
   Scenario: Download a Template
     Given I have a valid template
-    When I download the template
-    Then the download dialog should be opened
+    Then the template should have a valid download option
