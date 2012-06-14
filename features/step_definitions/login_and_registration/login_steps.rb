@@ -21,6 +21,12 @@ Given /^I am logged in to Wildfire as a new user$/ do
   Helpers::AccountManagementHelper.register_and_login_new_user
 end
 
+Given /^I am logged in to Wildfire as ([a-zA-Z\s]*)$/ do |user|
+  credentials = Helpers::WildfireAccountsHelper.get_credentials_for(user)
+  @wildfire.login.load
+  @wildfire.login.login_user_credentials_form.login_with_credentials(credentials['email'], credentials['password'])
+end
+
 When /^I login with email "(.*)" and password "(.*)"$/ do |email, password|
   @wildfire.login.login_user_credentials_form.login_with_credentials(email, password)
 end

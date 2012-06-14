@@ -1,10 +1,6 @@
 DELINQUENT_FLASH_MESSAGE = "Access to your account has been suspended due to non payment. Please contact us at 650-352-3248 or billing@wildfireapp.com"
 REQUEST_PAYMENT_MESSAGE = "Access to your account has been suspended due to non payment. Please contact us at 650-352-3248 or billing@wildfireapp.com"
 
-Given /^I am logged in to Wildfire as a user with a delinquent account$/ do
-  Helpers::AccountManagementHelper.login_account(Helpers::AccountManagementHelper::ACCOUNTS[:delinquent])
-end
-
 When /^I switch to a non\-delinquent account$/ do
   @wildfire.account_management.switch_company('Enabled Company')
 end
