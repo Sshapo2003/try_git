@@ -5,7 +5,7 @@ class Helpers::WildfireAccountsHelper
     end
     
     def load_users_for_current_config
-      YAML.load(File.read('config/wildfire_users.yml'))[ENV['CONFIG']]
+      YAML.load(File.read(File.join 'config', 'wildfire_users.yml'))[ENV['CONFIG']]
     end
   end
 end
