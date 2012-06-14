@@ -13,7 +13,7 @@ Feature: Account Features
     And I should not have access to Page Manager
     And I should not have access to Messenger
     
-  @complete
+  @complete @amtest
   Scenario Outline: Enable access to applications
     Given I am logged in to Wildfire as a new user
     When I am granted access to <application>
@@ -25,12 +25,22 @@ Feature: Account Features
     | Messenger    |
     | Dashboard    |
     
+  @wip @staging
+  Scenario: Existing user can access all applications
+    Given I am logged in to Wildfire as a user with access to all applications
+    Then I should have access to the following applications:
+      | Page Manager     |
+      | Messenger        |
+      | Dashboard        |
+      | Promotion Builder |
+      | Monitor          |
+    
   @complete @staging
   Scenario: Invite user without advanced permissions enabled
     Given I am logged in to Wildfire as a new user
     Then I should not be able to set advanced permissions
     
-  @complete @staging
+  @complete
   Scenario: Invite users with advanced permissions enabled
     Given I am logged in to Wildfire as a new user
     And I have the advanced permissions feature enabled
