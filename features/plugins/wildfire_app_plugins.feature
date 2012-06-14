@@ -16,7 +16,7 @@ Background:
     When I add the following liquid
       """
         {% plugin rawtext twitter_handle %}
-        <a href="http://twitter.com/%7B%7B%20twitter_handle%20%7D%7D">Follow me on Twitter!</a>'
+        <a href="http://twitter.com/%7B%7B%20twitter_handle%20%7D%7D">Follow me on Twitter!</a>
       """
     And I create a page with the template
     Then the page should contain
