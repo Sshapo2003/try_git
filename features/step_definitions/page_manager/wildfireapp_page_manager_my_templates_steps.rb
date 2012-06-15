@@ -82,7 +82,7 @@ end
 
 When /^I upload a new version of the template$/ do
   Helpers::PageManagerHelper.upload_new_version_of_template @template_name
-  @template_content = 'Follow Foodie on Twitter! Updated'
+  @template_content = 'Follow me on Twitter! Updated'
 end
 
 Then /^the template should be available for selection in My Templates$/ do
