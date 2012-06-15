@@ -8,7 +8,7 @@ Feature: Edit Template
     And I have created a valid template
     And I edit the templates content
 
-  @wip
+  @complete
   Scenario: Update all elements with valid content
     When I edit the template with the following content
       | Template Name        | My Updated Template        |
