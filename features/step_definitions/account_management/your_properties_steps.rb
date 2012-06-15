@@ -1,9 +1,3 @@
-Given /^I am logged in to Wildfire as a user with existing properties$/ do
-  pending "Currently only implemented for staging" unless ENV['CONFIG'] == 'staging'
-  @wildfire.login.load
-  @wildfire.login.login('alistair.hutchison+staging@wildfireapp.com', 'password1')
-end
-
 Given /^I have added the twitter account "([^"]*)" to Wildfire$/ do |twitter_name|
   @wildfire.account_management.your_properties.add_twitter_property(twitter_name)
 end

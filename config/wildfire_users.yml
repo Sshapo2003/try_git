@@ -8,6 +8,9 @@ staging:
   a user with access to all applications:
     email: alistair.hutchison+allapps@wildfireapp.com
     password: w1ldf1r3
+  a user with existing properties:
+    email: alistair.hutchison+staging@wildfireapp.com
+    password: password1
     
 am-test:
   <<: *default_users
