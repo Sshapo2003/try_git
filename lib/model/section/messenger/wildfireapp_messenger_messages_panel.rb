@@ -3,6 +3,7 @@ class Model::Section::Messenger::WildfireappMessengerMessagesPanel < SitePrism::
   element :enabled_next_page_button, 'a.next'
   element :enabled_previous_page_button, 'a.prev'
   element :actions_menu, 'div.wf_prompt_button_wpr a'
+  element :clear_deleted_messages_button, 'a.delete_all_messages'
   root_element :actions_menu_options, 'ol#message_action'
   
   def pagination_current_page_indicator_text
