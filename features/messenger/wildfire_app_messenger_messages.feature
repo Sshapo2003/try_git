@@ -11,7 +11,7 @@ Feature: Messages
     When I assign that message to myself
     Then the message should be in my Assigned Messages
 
-  @complete
+  @complete @slow
   Scenario: Messages Panel Paging
     Given I have more than 25 messages in the Messages Panel
     Then 25 messages should be displayed in the Messages Panel

@@ -7,24 +7,28 @@ amtestrerun: <%= common %> features.txt CONFIG=am-test
 wip: <%= common %> -t @wip
 complete: <%= common %> -t @complete -t ~@not_implemented
 failing: <%= common %> -t @failing
+slow: <%= common %> -t @slow
 complete_no_failing: <%= common %> -t @complete -t ~@failing
 custom: <%= common %> <%= ENV["TAGS"] %>
 specific: <%= common %> --tags <%= ENV['TAGS'] %>
 
 <% common = "--format rerun --out features.txt -f pretty" %>
 productionwip: <%= common %> -t @wip -t @production CONFIG=live
-productioncomplete: <%= common %>  -t @complete -t ~@failing -t @production CONFIG=live
+productioncomplete: <%= common %>  -t @complete -t ~@failing -t ~@slow -t @production CONFIG=live
 productionfailing: <%= common %> -t @complete -t @failing -t @production CONFIG=live
+productionslow: <%= common %> -t @complete -t @slow -t @production CONFIG=live
 stagingwip: <%= common %> -t @wip -t @staging CONFIG=staging
-stagingcomplete: <%= common %> -t @complete -t ~@not_implemented -t @staging -t ~@failing CONFIG=staging
+stagingcomplete: <%= common %> -t @complete -t ~@slow -t ~@not_implemented -t @staging -t ~@failing CONFIG=staging
 stagingfailing: <%= common %> -t @complete -t @failing -t @staging CONFIG=staging
+stagingslow: <%= common %> -t @complete -t @slow -t @staging CONFIG=live
 amtestwip: <%= common %> -t @wip -t @amtest CONFIG=am-test
-amtestcomplete: <%= common %> -t @complete -t ~@not_implemented -t ~@failing -t @amtest CONFIG=am-test
+amtestcomplete: <%= common %> -t @complete -t ~@slow -t ~@not_implemented -t ~@failing -t @amtest CONFIG=am-test
 amtestfailing: <%= common %> -t @complete -t @failing -t @amtest CONFIG=am-test
+amtestslow: <%= common %> -t @complete -t @slow -t @amtest CONFIG=live
 
 # Product Group Specific
 # Production
-<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing -t ~@slow" %>
 pm: <%= common %> -t @messenger -t @production CONFIG=live
 pam: <%= common %> -t @account_management -t @production CONFIG=live
 pa: <%= common %> -t @analytics -t @production CONFIG=live
@@ -53,13 +57,19 @@ ag: <%= common %> -t @gallery -t @amtest CONFIG=am-test
 #Jenkins
 <% junit = "--format junit --out reports/features/" %>
 <% cucumber = "--format json --o reports/json/cucumber.json" %>
-<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing -t ~@no-run" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing -t ~@no-run -t ~@slow" %>
 jenkinsproduction: <%= common %> -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jenkinsstaging: <%= common %> -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
 jenkinsamtest: <%= common %> -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
 
+#Slow Tests
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t @slow -t ~@not_implemented -t ~@failing -t ~@no-run" %>
+jenkinsproductionslow: <%= common %> -t @production CONFIG=live <%= junit %> <%= cucumber %>
+jenkinsstagingslow: <%= common %> -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
+jenkinsamtestslow: <%= common %> -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
+
 # Production
-<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing -t ~@no-run" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing -t ~@no-run -t ~@slow" %>
 jpm: <%= common %> -t @messenger -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jpam: <%= common %> -t @account_management -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jpa: <%= common %> -t @analytics -t @production CONFIG=live <%= junit %> <%= cucumber %>
