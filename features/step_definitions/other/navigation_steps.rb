@@ -1,11 +1,6 @@
 Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
   case page_name.downcase
-  when 'login'
-    @wildfire.login.load
-    unless @wildfire.login.is_loaded? then
-      visit "#{Helpers::Config['wildfire_site_root']}/logout"
-      @wildfire.login.load
-    end
+  when 'login' then @wildfire.login.load
   when 'signup' then @wildfire.signup.load
   when 'wildfire app messenger'
     @wildfire.wildfireapp_messenger.load

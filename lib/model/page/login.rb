@@ -1,7 +1,17 @@
 class Model::Page::Login < SitePrism::Page
+  include ::Wildfire::Header
+  
   set_url "#{Helpers::Config['wildfire_site_root']}/sso_sign_on/"
   section :login_user_credentials_form, Model::Section::Login::LoginUserCredentials, 'form#login_form'
   element :login_error_message, 'span.flash_contents'
+  
+  def load
+    super
+    unless is_loaded?
+      logout
+      super
+    end
+  end
 
   def is_loaded?
     page.current_url.include? 'sso_sign_on' and page.has_content? 'Don\'t have a login?' and page.has_content? 'Sign up for an account'
