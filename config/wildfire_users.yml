@@ -1,4 +1,7 @@
 defaults: &default_users
+  the default user:
+    email: paloaltofoodie@gmail.com
+    password: th1sismypassword
   a user with a delinquent account:
     email: alistair.hutchison+delinquent@wildfireapp.com
     password: w1ldf1r3
@@ -11,9 +14,18 @@ staging:
   a user with existing properties:
     email: alistair.hutchison+staging@wildfireapp.com
     password: password1
+  the template user:
+    email: paloaltofoodie@gmail.com
+    password: th1sismypassword
     
 am-test:
   <<: *default_users
+  the template user:
+    email: paloaltofoodie@gmail.com
+    password: th1sismypassword
 
 production:
   <<: *default_users
+  the template user:
+    email: paloaltofoodietemplateuser@gmail.com
+    password: th1sismypassword

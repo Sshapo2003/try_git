@@ -2,7 +2,7 @@
 Feature: Messenger Inbox
 
   Background:
-    Given I am logged in as "default"
+    Given I am logged in to Wildfire as the default user
     And I navigate to the wildfire app messenger page
 
   @complete @US5483
