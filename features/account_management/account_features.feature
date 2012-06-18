@@ -4,7 +4,7 @@ Feature: Account Features
   As a Wildfire App User
   I should only have access to the account features that I have paid for
   
-  @complete @staging
+  @complete @staging @failing
   Scenario: Applications that are accessible to a new user
     Given I am logged in to Wildfire as a new user
     Then I should have access to Promotion Builder
@@ -30,7 +30,7 @@ Feature: Account Features
     Given I am logged in to Wildfire as a new user
     Then I should not be able to set advanced permissions
     
-  @complete @staging
+  @complete @staging @failing
   Scenario: Invite users with advanced permissions enabled
     Given I am logged in to Wildfire as a new user
     And I have the advanced permissions feature enabled
