@@ -32,6 +32,7 @@ end
 Given /^I have created a valid template$/ do
   step 'I create a Blank Template'
   step 'the template should be listed in My Templates'
+  @template = @wildfire.wildfireapp_page_manager.content_div.templates.select {|t| t.title_div.text.include? @template_name}.first
 end
 
 When /^I create a Blank Template$/ do
@@ -81,7 +82,7 @@ end
 
 When /^I upload a new version of the template$/ do
   Helpers::PageManagerHelper.upload_new_version_of_template @template_name
-  @template_content = 'Follow Foodie on Twitter! Updated'
+  @template_content = 'Follow me on Twitter! Updated'
 end
 
 Then /^the template should be available for selection in My Templates$/ do

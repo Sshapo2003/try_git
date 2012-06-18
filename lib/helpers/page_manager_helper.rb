@@ -29,12 +29,7 @@ class Helpers::PageManagerHelper
     def update_template_title(template, title)
       wildfire = Model::Wildfire.new
       edit_default_content(template.title_div.text)
-
-      wildfire.template_editor.template_name.set title
-
-      wildfire.template_editor.content_save_and_continue_button.click
-
-      sleep 2.0
+      wildfire.template_editor.set_template_name title
       wildfire.template_editor.go_back_button.click
     end
 
