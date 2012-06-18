@@ -8,7 +8,7 @@ class Model::Page::Login < SitePrism::Page
   def load
     super
     unless is_loaded?
-      logout
+      visit "#{Helpers::Config['wildfire_site_root']}/logout"
       super
     end
   end
