@@ -7,6 +7,7 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
   element :add_facebook_property_link, "div.page_content a:contains('Facebook')"
   element :add_twitter_link, "div.page_content a:contains('Twitter')"
   element :add_property_button, "div.page_content a:contains('Add')"
+  sections :properties, Model::Section::AccountManagement::Property, 'div.field'
   
   def load
     am = Model::Page::AccountManagement::AccountManagement.new

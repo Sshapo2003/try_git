@@ -44,4 +44,7 @@ class Model::Wildfire
   def account_management
     Model::Page::AccountManagement::AccountManagement.new
   end
+  def your_properties
+    Model::Page::AccountManagement::YourProperties.new
+  end
 end
