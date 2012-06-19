@@ -24,7 +24,7 @@ am-test:
     email: paloaltofoodie@gmail.com
     password: th1sismypassword
 
-production:
+live:
   <<: *default_users
   the template user:
     email: paloaltofoodietemplateuser@gmail.com
