@@ -1,4 +1,7 @@
 class Model::Wildfire
+  def front_page
+    Model::Page::WildfireFrontPage.new
+  end
   def login
     Model::Page::Login.new
   end
