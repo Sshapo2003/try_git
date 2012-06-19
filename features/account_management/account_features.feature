@@ -25,15 +25,15 @@ Feature: Account Features
     | Messenger    |
     | Dashboard    |
     
-  @wip @staging
+  @complete @staging @production
   Scenario: Existing user can access all applications
     Given I am logged in to Wildfire as a user with access to all applications
     Then I should have access to the following applications:
-      | Page Manager     |
-      | Messenger        |
-      | Dashboard        |
+      | Page Manager      |
+      | Messenger         |
+      | Dashboard         |
       | Promotion Builder |
-      | Monitor          |
+      | Monitor           |
     
   @complete @staging
   Scenario: Invite user without advanced permissions enabled

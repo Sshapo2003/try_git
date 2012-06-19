@@ -5,12 +5,12 @@ defaults: &default_users
   a user with a delinquent account:
     email: alistair.hutchison+delinquent@wildfireapp.com
     password: w1ldf1r3
-
-staging:
-  <<: *default_users
   a user with access to all applications:
     email: alistair.hutchison+allapps@wildfireapp.com
     password: w1ldf1r3
+
+staging:
+  <<: *default_users
   a user with existing properties:
     email: alistair.hutchison+staging@wildfireapp.com
     password: password1
