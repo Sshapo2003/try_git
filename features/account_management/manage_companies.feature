@@ -1,8 +1,11 @@
-@account_management @failing
+@account_management
 Feature: Manage Companies
   In order to keep my social properties organised
   As a Wildfire user
   I want to be able to create and manage multiple companies under my account
+  
+  Background:
+    Given I'm logged in to google as a wildfireapp.com domain user
   
   @not-started
   Scenario: Delete a Company

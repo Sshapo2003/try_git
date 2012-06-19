@@ -4,7 +4,7 @@ class Helpers::AccountManagementHelper
       # Workaround for Rally DE1278 - some apps error if we hit the signup page directly, so first
       # visit the main front page to ensure we get cookies dropped
       wildfire.front_page.load
-      wildfire.front_page.signup_link.click rescue nil # because the link isn't present on staging
+      wildfire.front_page.signup_link.click if ENV['CONFIG'] == 'am-test'
       
       signup = wildfire.signup
       signup.load
