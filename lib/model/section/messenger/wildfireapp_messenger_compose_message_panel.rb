@@ -16,6 +16,8 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
   element :minutes_select_value, 'div.minute a.select_button span'
   element :link_shortner_field, 'div#shortener_container input'
   element :link_shortner_link, 'div#shortener_container a'
+  element :invalid_token_for_property_message_div, 'div#invalid_property_warning'
+  root_element :reconnect_property_link, 'a.am_link'
   elements :recepients, 'ul.chzn-results li'
   elements :remove_recipient_links, 'a.search-choice-close'
 
@@ -35,6 +37,12 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
     t = Time.now
     message_text = "Today is #{t.strftime("%A")} #{t.strftime("%d")} #{t.strftime("%b")} #{t.strftime("%Y")} and the time is #{t.strftime("%r")}. What great foods have you discovered recently?"
     select_recipient_by_name recipient_name
+
+    if invalid_token_for_property_message_displayed?
+      reconnect_property recipient_name
+      select_recipient_by_name recipient_name
+    end
+
     message_textbox.set message_text
     message_text
   end
@@ -64,5 +72,13 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
     message_text = compose_a_valid_message recipient_name
     send_message
     return message_text
+  end
+
+  def invalid_token_for_property_message_displayed?
+    invalid_token_for_property_message_div[:style].include? 'display: block;'
+  end
+
+  def reconnect_property property_name
+    Helpers::MessengerHelper.reconnect_property property_name
   end
 end

@@ -19,6 +19,13 @@ class Helpers::MessengerHelper
       Timeout.timeout_and_raise(30, msg) { sleep 1 while not message.has_replies? }
       message.replies
     end
-
+    
+    def reconnect_property property_name
+      wildfire = Model::Wildfire.new
+      wildfire.wildfireapp_messenger.compose_message_panel.reconnect_property_link.click
+      Helpers::SettingsHelper.reconnect_property property_name
+      wildfire.wildfireapp_messenger.load
+      wildfire.wildfireapp_messenger.click_tab 'Compose'
+    end
   end
 end
