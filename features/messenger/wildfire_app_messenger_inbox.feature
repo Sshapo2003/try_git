@@ -5,7 +5,7 @@ Feature: Messenger Inbox
     Given I am logged in as "default"
     And I navigate to the wildfire app messenger page
 
-  @complete @US5483 @production @staging
+  @complete @US5483 @production
   Scenario: View Each Message Type
     When I click the "Messages" tab on the left navigation menu on wildfire app messenger page
     Then the header in the messages area should be "Messages"
@@ -21,7 +21,7 @@ Feature: Messenger Inbox
     And the actions drop down on the "Deleted Messages" panel contains Assign, Delete and Unflag
 
 
-  @complete @US5483 @amtest
+  @complete @US5483 @amtest @staging
   Scenario: View Each Message Type
     When I click the "Messages" tab on the left navigation menu on wildfire app messenger page
     Then the header in the messages area should be "Messages"
