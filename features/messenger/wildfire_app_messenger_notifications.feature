@@ -1,8 +1,8 @@
 @messenger @production @staging @amtest
 Feature: Notifications
 
-Background:
-    Given I am logged in as "default"
+  Background:
+    Given I am logged in to Wildfire as the default user
 
   @complete
   Scenario: Displaying of Notifications

@@ -22,3 +22,9 @@ Then /^I (should|should not) have access to Monitor$/ do |expectation|
  @wildfire.wildfireapp_monitor.load
  @wildfire.wildfireapp_monitor.send(expectation.parameterize.underscore, be_active)
 end
+
+Then /^I should have access to the following applications:$/ do |table|
+  table.raw.flatten.each do |app|
+    step "I should have access to #{app}"
+  end
+end

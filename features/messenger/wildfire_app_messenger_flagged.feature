@@ -2,7 +2,7 @@
 Feature: Flagged Messages
 
   Background:
-    Given I am logged in as "default"
+    Given I am logged in to Wildfire as the default user
     And I navigate to the wildfire app messenger page
     And I click the "Flagged Messages" tab on the left navigation menu on wildfire app messenger page
 

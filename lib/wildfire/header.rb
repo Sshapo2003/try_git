@@ -10,7 +10,7 @@ module Wildfire::Header
   
   def logout
     show_account_menu
-    click_on('Logout')
+    click_wf_link('Logout')
   end
   
   def accounts
