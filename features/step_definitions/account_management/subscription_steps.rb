@@ -20,6 +20,11 @@ Given /^my subscription has a (\d+) Company limit$/ do |limit|
   @wildfire.account_management.edit_subscription.set_company_limit(limit)
 end
 
+Given /^my subscription allows me to add Facebook applications$/ do
+  @wildfire.account_management.demo_page.show_edit_subscription_modal
+  @wildfire.account_management.edit_subscription.set_facebook_app_limit(10)
+end
+
 Given /^I have the default subscription$/ do
   step "I should have the default subscription"
 end  
