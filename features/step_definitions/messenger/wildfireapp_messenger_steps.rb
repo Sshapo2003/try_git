@@ -58,7 +58,7 @@ When /^I assign that message to myself$/ do
 end
 
 Then /^the message should be visible in the "(.*)" folder$/ do |folder|
-  Timeout.timeout_and_raise(180, "Timed out while waiting for message #{@message_body} to appear in #{folder} folder.") do
+  Timeout.timeout_and_raise(600, "Timed out while waiting for message #{@message_body} to appear in #{folder} folder.") do
     while @wildfire.wildfireapp_messenger.messages_in_folder(folder).select {|m| m.include? @message_body }.count < 1 do
       sleep 5.0
       @wildfire.wildfireapp_messenger.click_tab folder
