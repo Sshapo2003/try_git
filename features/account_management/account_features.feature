@@ -4,7 +4,7 @@ Feature: Account Features
   As a Wildfire App User
   I should only have access to the account features that I have paid for
   
-  @complete @staging @failing
+  @complete @staging
   Scenario: Applications that are accessible to a new user
     Given I am logged in to Wildfire as a new user
     Then I should have access to Promotion Builder
@@ -25,15 +25,15 @@ Feature: Account Features
     | Messenger    |
     | Dashboard    |
     
-  @wip @staging
+  @complete @staging @production
   Scenario: Existing user can access all applications
     Given I am logged in to Wildfire as a user with access to all applications
     Then I should have access to the following applications:
-      | Page Manager     |
-      | Messenger        |
-      | Dashboard        |
+      | Page Manager      |
+      | Messenger         |
+      | Dashboard         |
       | Promotion Builder |
-      | Monitor          |
+      | Monitor           |
     
   @complete @staging
   Scenario: Invite user without advanced permissions enabled

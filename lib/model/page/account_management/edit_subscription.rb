@@ -29,6 +29,14 @@ class Model::Page::AccountManagement::EditSubscription < SitePrism::Page
     wait_until() { !has_modal? }
   end
   
+  def set_facebook_app_limit(limit)
+    within_modal do
+      fill_in('Facebook App Limit', :with => limit)
+      click_on 'Save'
+    end
+    wait_until() { !has_modal? }
+  end
+  
   def update_subscription(values)
     within_modal do
       values.each_pair { |field, value| fill_in(field, :with => value) }

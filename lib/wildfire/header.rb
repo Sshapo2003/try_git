@@ -1,4 +1,6 @@
 module Wildfire::Header
+  include Helpers::FirefoxLinksHelper
+  
   def current_company
     company_select_button.text
   end
@@ -86,11 +88,5 @@ module Wildfire::Header
   
   def company_select_menu
     first('ol', text: 'Create a Company', :visible => true)
-  end
-  
-  # Workaround for links which can't currently be clicked in selenium firefox
-  def click_wf_link(locator)
-    link = find_link(locator)
-    Capybara.current_driver == :selenium_firefox ? link.native.send_key(:return) : link.click
   end
 end

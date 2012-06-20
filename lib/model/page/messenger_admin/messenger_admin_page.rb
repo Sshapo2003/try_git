@@ -1,4 +1,5 @@
 class Model::Page::MessengerAdmin::MessengerAdminPage < SitePrism::Page
+  set_url Helpers::Config['messenger_admin_root']
   element :info_text, 'td.smallfont div p'
   element :login_box, 'div.loginBox'
 

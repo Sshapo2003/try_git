@@ -5,11 +5,7 @@ class Model::Page::AccountManagement::CreateCompany < SitePrism::Page
     fill_company_name_field(company_name)
     select_account('Create New') if options[:new_account] == true
     click_save_button
-    begin
-      wait_until { !has_modal? || !form_errors.empty? }
-    rescue Capybara::TimeoutError
-      raise "Failed to create company\n#{flash_message}"
-    end
+    wait_until { !has_modal? || !form_errors.empty? }
   end
   
   def fill_company_name_field(value)
@@ -25,8 +21,9 @@ class Model::Page::AccountManagement::CreateCompany < SitePrism::Page
   end
   
   def form_errors
-    return [] unless has_modal?
-    within_modal { all('.formError').collect {|e| e.text} }
+    using_wait_time(0.5) do
+      within_modal { all('.formError').collect {|e| e.text} } rescue []
+    end
   end
   
   def flash_message

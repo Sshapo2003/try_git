@@ -4,7 +4,7 @@ Feature: Subscriptions
   As a Wildfire App user
   I should be limited according to my active subscription(s)
   
-  @complete @failing
+  @complete
   Scenario: New account is given a default subscription
     Given I am logged in to Wildfire as a new user
     Then I should have the default subscription

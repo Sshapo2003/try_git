@@ -1,4 +1,4 @@
-@account_management @no-firefox @amtest @staging
+@account_management @amtest @staging @firefox_facebook_profile
 Feature: Your Properties
   In order to allow Wildfire to manage my social properties
   As a Wildfire app user
@@ -7,13 +7,13 @@ Feature: Your Properties
   Background:
     Given I am logged in to Wildfire as a new user
   
-  @complete @no-run
+  @complete
   Scenario: Add a new Facebook property to Wildfire
     Given I am logged in to Facebook as a page administrator
     When I add the Facebook page "Wildfire Test Automation" to Wildfire
     Then I should see Facebook page "Wildfire Test Automation" in Your Properties
     
-  @complete @no-run
+  @complete
   Scenario: Remove an existing Facebook property
     Given I am logged in to Facebook as a page administrator
     And I have added the Facebook page "Wildfire Test Automation" to Wildfire

@@ -1,9 +1,9 @@
 DEFAULT_SUBSCRIPTION = { 'Salesforce ID' =>          '',
-                         'Promotions' =>             false,
+                         'Promotions' =>             true,
                          'Page Manager' =>           false,
                          'Messenger' =>              false,
                          'Dashboard' =>              false,
-                         'Monitor' =>                false,
+                         'Monitor' =>                true,
                          'Company Limit' =>          1,
                          'Member Limit' =>           2,
                          'Facebook App Limit' =>     0,
@@ -18,6 +18,11 @@ TWITTER_LIMIT_EXCEEDED = "You're trying to add more Twitter properties than your
 Given /^my subscription has a (\d+) Company limit$/ do |limit|
   @wildfire.account_management.demo_page.show_edit_subscription_modal
   @wildfire.account_management.edit_subscription.set_company_limit(limit)
+end
+
+Given /^my subscription allows me to add Facebook applications$/ do
+  @wildfire.account_management.demo_page.show_edit_subscription_modal
+  @wildfire.account_management.edit_subscription.set_facebook_app_limit(10)
 end
 
 Given /^I have the default subscription$/ do

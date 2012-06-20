@@ -38,9 +38,15 @@ Capybara.configure do |config|
 end
 
 Capybara.register_driver :selenium_firefox do |app|
-  profile = Selenium::WebDriver::Firefox::Profile.new
-  profile["browser.cache.disk.enable"] = false
-  profile["browser.cache.memory.enable"] = false
+  profile = default_firefox_profile
+  Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile)
+end
+
+Capybara.register_driver :selenium_firefox_facebook do |app|
+  profile = default_firefox_profile
+  profile['capability.policy.default.Window.QueryInterface'] = 'allAccess'
+  profile['capability.policy.default.Window.frameElement.get'] = 'allAccess'
+  profile['capability.policy.default.Window.HTMLDocument.compatMode.get'] = 'allAccess'
   Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile)
 end
 
@@ -65,6 +71,13 @@ def browser
   when "opera" then :selenium_opera
   else :selenium_firefox
   end
+end
+
+def default_firefox_profile
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  profile["browser.cache.disk.enable"] = false
+  profile["browser.cache.memory.enable"] = false
+  profile
 end
 
 Capybara.default_driver = browser

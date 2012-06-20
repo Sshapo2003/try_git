@@ -48,6 +48,10 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
     Model::Page::AccountManagement::CreateCompany.new
   end
   
+  def social_apps
+    Model::Page::AccountManagement::SocialApps.new
+  end
+  
   def flash_message
     first('span.flash_contents').try(:text)
   end
