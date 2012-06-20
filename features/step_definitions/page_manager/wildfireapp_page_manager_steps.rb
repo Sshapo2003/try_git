@@ -14,3 +14,19 @@ end
 When /^I view "(.*?)" in the left hand nav bar of Page Manager$/ do |link|
   @wildfire.wildfireapp_page_manager.sidebar_links.select {|l| l.text.include? link }.first.click
 end
+
+When /^I view the Page Managers "(.*?)" tab$/ do |tab_name|
+  link = @wildfire.wildfireapp_page_manager.sidebar_links.select {|l| l.text.include? tab_name}.first
+  unless link == nil then link.click end
+end
+
+Then /^the header in the panel should be "(.*?)"$/ do |header_text|
+  case header_text
+  when 'Published' then @wildfire.wildfireapp_page_manager.published_pages_panel.header.text.should include header_text
+  when 'Drafts' then @wildfire.wildfireapp_page_manager.draft_pages_panel.header.text.should include header_text
+  when 'Archived' then @wildfire.wildfireapp_page_manager.archived_pages_panel.header.text.should include header_text
+  when 'My Templates' then @wildfire.wildfireapp_page_manager.archived_pages_panel.header.text.should include header_text
+  when 'Upload a Template' then @wildfire.wildfireapp_page_manager.upload_a_template_panel.header.text.should include header_text
+  else raise "Unknown tab #{header_text}"
+  end
+end
