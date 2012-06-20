@@ -39,7 +39,7 @@ Feature: Composing Messages
     When I click the shorten link
     Then a shortened link should be inserted into the message field
 
-  @complete
+  @complete @slow
   Scenario: Send a message
     When I compose and send a valid message
     Then I should be informed that the message has been sent succesfully
@@ -47,7 +47,7 @@ Feature: Composing Messages
     And the message should be visible in the "Messages" folder
     And the message should be visible on my facebook page
 
-  @complete
+  @complete @slow
   Scenario: Send a message to twitter property
     When I compose and send a valid message for my twitter property
     Then I should be informed that the message has been sent succesfully

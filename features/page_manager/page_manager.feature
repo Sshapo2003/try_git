@@ -5,7 +5,7 @@ Feature: My Templates
     Given I am logged in to Wildfire as the template user
     And I navigate to the wildfire app page manager page
 
-  @complete
+  @complete @slow
   Scenario: View Each Tab
     When I view the Page Managers "Published" tab
     Then the header in the panel should be "Published"
