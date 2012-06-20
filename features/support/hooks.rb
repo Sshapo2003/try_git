@@ -4,7 +4,7 @@
 # hook below, to ensure that the new session also performs basic auth
 Before('@firefox_facebook_profile') do
   @previous_driver = Capybara.current_driver || Capybara.default_driver
-  Capybara.current_driver = :selenium_firefox_facebook
+  Capybara.current_driver = :selenium_firefox_facebook if Capybara.current_driver == :selenium_firefox
 end
 
 Before do
