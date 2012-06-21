@@ -82,15 +82,13 @@ Feature: Composing Messages
     Then I should be informed that the message has been saved as a draft
     And the message should be visible in the "Drafts" folder
 
-  # Moved to Tests Under Transition folder
-  #
-  #@complete
-  #Scenario: Schedule a message
-  #  When I compose a new Mesenger message
-  #  And I schedule the message to be sent at some point in the distant future
-  #  And I schedule the message
-  #  Then I should be informed that the message has been scheduled succesfully
-  #  And the message should be visible on the last page of the "Scheduled" folder
+  @complete
+  Scenario: Schedule a message
+    When I compose a new Mesenger message
+    And I schedule the message to be sent at some point in the distant future
+    And I schedule the message
+    Then I should be informed that the message has been scheduled succesfully
+    And the message should be visible on the last page of the "Scheduled" folder
 
   @not_started
   Scenario: Compose message with Flash
