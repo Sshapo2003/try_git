@@ -1,6 +1,6 @@
 class Model::Page::WildfireappTemplates < SitePrism::Page
   set_url "#{Helpers::Config['wildfire_templates_root']}/"
-  set_url_matcher /emplates.wildfireapp.com\/templates/
+  set_url_matcher /#{Regexp.escape(Helpers::Config['wildfire_templates_root'])}/
 
   section :filter, Model::Section::WildfireappTemplatesFilterDiv, 'div.filters > ul.first'
 
