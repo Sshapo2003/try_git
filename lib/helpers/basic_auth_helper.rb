@@ -12,6 +12,7 @@ class Helpers::BasicAuthHelper
         path = "#{uri.scheme}://#{user}:#{password}@#{uri.host}#{uri.path}"
         puts "BasicAuthHelper visiting #{path}"
         Capybara.current_session.visit(path)
+        puts "Title: #{Capybara.current_session.find('head title').text}"
       end
       authorized_sessions << session.object_id
     end
