@@ -1,14 +1,15 @@
 class Model::Page::Facebook::Home < SitePrism::Page
   set_url 'http://www.facebook.com'
   
-  element :header_username, "span.headerTinymanName"
+  element :header_username,   "span.headerTinymanName"
   element :nav_dropdown_menu, "a#navAccountLink"
+  element :login_button,      "input[value='Log in']"
   
   def login(email, password)
     load_as_logged_out
     fill_in('email', :with => email)
     fill_in('pass', :with => password)
-    click_on('Log in')
+    login_button.click
   end
   
   def logout
