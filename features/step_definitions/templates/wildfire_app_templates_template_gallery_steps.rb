@@ -1,5 +1,5 @@
 Then /^the Template Gallery page should be displayed$/ do
-  sleep 2
+  @wildfire.wildfireapp_templates.wait_for_ajax
   @wildfire.wildfireapp_templates.should be_displayed
 end
 
