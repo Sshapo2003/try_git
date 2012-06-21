@@ -14,24 +14,21 @@ Mac
  * Install bundler =>  $ gem install bundler
  * run `script/bootstrap` (which essentially just runs bundle)
 
-If you want to run tests in chrome you need to install chrome driver
-
- * Install homebrew => see https://github.com/mxcl/homebrew/wiki/installation
- * brew install chromedriver
-
 ## USAGE
 
 To run tests using capybara on your own machine:
 
- *   rake cuke:complete # runs tests tagged with @complete
- *   rake cuke:wip # runs tests tagged with @wip
- *   rake cuke:failing # runs tests tagged with @failing
+ *   rake cuke:productioncomplete # runs tests tagged with @complete
+ *   rake cuke:productionwip # runs tests tagged with @wip
+ *   rake cuke:productionfailing # runs tests tagged with @failing
 
-By default the tests will be run on the Production environment. To run the tests on different environment use the following options:
+To run the tests on different environment use the following options:
 
  *   rake cuke:amtestcomplete # runs tests tagged with @complete on the AM-TEST environment
  *   rake cuke:stagingcomplete # runs tests tagged with @complete on the STAGING environment
- *   rake cuke:<your-task> # other tasks defined in the cucumber.yml file
+ *   rake cuke:amtestwip # runs tests tagged with @wip on the AM-TEST environment
+ *   rake cuke:amtestfailing # runs tests tagged with @failing on the AM-TEST environment
+ *   etc.
 
 All Environment/Tag configurations:
 
@@ -66,3 +63,10 @@ Avoid usage of 'sleep' method. If you need to wait for an asynchronous action to
 
 * Use the site_prism 'wait_for_xxx' method. See => https://github.com/natritmeyer/site_prism
 * Use the Timeout#timeout method or Timeout#timeout_and_raise methods to keep polling for the state which you expect. e.g. Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.asynchronous_messages_panel.contains_message('Hi everyone')? == false }
+
+## FQAS
+Q: How do I run tests on Chrome?
+A: If you want to run tests in chrome you need to install chrome driver
+
+ * Install homebrew => see https://github.com/mxcl/homebrew/wiki/installation
+ * brew install chromedriver
