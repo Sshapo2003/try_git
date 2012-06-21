@@ -4,6 +4,7 @@ class Model::Page::Login < SitePrism::Page
   set_url "#{Helpers::Config['wildfire_site_root']}/sso_sign_on/"
   section :login_user_credentials_form, Model::Section::Login::LoginUserCredentials, 'form#login_form'
   element :login_error_message, 'span.flash_contents'
+  element :signup_link, "a:contains('Sign up for an account')"
   
   def load
     super

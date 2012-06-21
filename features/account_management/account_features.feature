@@ -40,9 +40,10 @@ Feature: Account Features
     Given I am logged in to Wildfire as a new user
     Then I should not be able to set advanced permissions
     
-  @complete @staging @failing
+  @complete @staging
   Scenario: Invite users with advanced permissions enabled
-    Given I am logged in to Wildfire as a new user
+    Given I'm logged in to google as a wildfireapp.com domain user
+    And I am logged in to Wildfire as a new user
     And I have the advanced permissions feature enabled
     Then I should be able to set advanced permissions
     
