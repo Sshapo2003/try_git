@@ -28,9 +28,3 @@ end
 Before('@no-chrome') do |scenario|
   scenario.skip_invoke! if ENV['BROWSER'] == 'chrome'
 end
-
-After do |scenario|
-  if scenario.failed?
-    page.driver.browser.save_screenshot(File.join('tmp', scenario.name.parameterize << '.jpg'))
-  end
-end

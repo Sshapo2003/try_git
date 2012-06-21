@@ -14,7 +14,4 @@ if [ -z "$RAKE_TASK_NAME" ]; then
   exit 1
 fi
 
-rm -rf tmp
-mkdir tmp
-
 bundle exec rake cuke:$RAKE_TASK_NAME
