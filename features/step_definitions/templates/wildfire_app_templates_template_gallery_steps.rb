@@ -1,4 +1,6 @@
 Then /^the Template Gallery page should be displayed$/ do
+  puts "Title: #{Capybara.current_session.find('head title').text}"
+  puts "URL: #{Capybara.current_url}"
   @wildfire.wildfireapp_templates.should be_displayed
 end
 
