@@ -1,6 +1,7 @@
 Given /^I am logged in to Facebook as a page administrator$/ do
-  @facebook.home.login('alistair.hutchison@wildfireapp.com', 'w1ldf1r3')
-  page.should have_content('Alistair Wildfire')
+  credentials = {:username => 'alistair.hutchison@wildfireapp.com', :password => 'w1ldf1r3'}
+  @facebook.home.load
+  @facebook.home.login(credentials)
 end
 
 When /^I view the "(.*)" app page$/ do |app_name|
