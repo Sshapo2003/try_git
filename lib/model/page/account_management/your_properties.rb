@@ -50,7 +50,11 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
   def add_twitter_property(twitter_name)
     show_add_twitter_property_window
     within_window(page.driver.browser.window_handles.last){ Model::Page::TwitterOauth.new.authorise(twitter_name, 'w1ldf1r3')}
-    wait_until() { has_twitter_property?(twitter_name.capitalize) || !flash_message.blank? }
+    begin
+      wait_until() { has_twitter_property?(twitter_name.capitalize) || !flash_message.blank? }
+    rescue Capybara::TimeoutError => e
+      raise "The expected property did not appear in Your Properties and no error was displayed"
+    end
   end
   
   def remove_property(name)
