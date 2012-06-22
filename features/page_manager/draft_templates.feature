@@ -19,13 +19,14 @@ Feature: Draft Templates
     When I delete the archived template
     Then there should be one less template in Archived
 
-  @not_started
+  @complete
   Scenario: Archive and Delete a Template
     When I archive a Template
     Then there should be one less template in Drafts
     And the template should be listed in Archived
-    When I delete the archived template
+    When I unarchive the archived template
     Then there should be one less template in Archived
+    And the template should be listed in Drafts
 
   @complete
   Scenario: Archived Template Menu Options

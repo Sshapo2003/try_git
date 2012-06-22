@@ -18,3 +18,11 @@ end
 Then /^there should be one less template in Archived$/ do
   @wildfire.wildfireapp_page_manager.content_div.templates.count == @num_templates_before
 end
+
+When /^I unarchive the archived template$/ do
+  @num_templates_before = @wildfire.wildfireapp_page_manager.content_div.templates.count
+  template = @wildfire.wildfireapp_page_manager.archived_pages_panel.get_template_by_title @template_name
+  template.unarchive_template
+  msg = "Time out occurred waiting for template #{@template_name} to disappear."
+  Timeout.timeout_and_raise(10, msg) {sleep 0.1 while @wildfire.wildfireapp_page_manager.content_div.templates.count == @num_templates_before }
+end

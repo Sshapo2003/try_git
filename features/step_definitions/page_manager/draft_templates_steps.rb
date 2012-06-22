@@ -24,3 +24,8 @@ end
 Then /^there should be one less template in Drafts$/ do
   @wildfire.wildfireapp_page_manager.content_div.templates.count.should eql (@num_templates_before - 1)
 end
+
+Then /^the template should be listed in Drafts$/ do
+  step 'I view "Drafts" in the left hand nav bar of Page Manager'
+  @wildfire.wildfireapp_page_manager.content_div.templates.first.title_div.text.should eql @template_name
+end
