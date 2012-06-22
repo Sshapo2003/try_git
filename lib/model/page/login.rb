@@ -15,7 +15,7 @@ class Model::Page::Login < SitePrism::Page
   end
 
   def is_loaded?
-    page.current_url.include? 'sso_sign_on' and page.has_content? 'Don\'t have a login?' and page.has_content? 'Sign up for an account'
+    has_login_user_credentials_form? && has_signup_link?
   end
   
   def login(email, password)
