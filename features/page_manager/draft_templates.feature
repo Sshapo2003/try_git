@@ -20,7 +20,7 @@ Feature: Draft Templates
     Then there should be one less template in Archived
 
   @complete
-  Scenario: Archive and Delete a Template
+  Scenario: Archive and Unarchive a Template
     When I archive a Template
     Then there should be one less template in Drafts
     And the template should be listed in Archived
