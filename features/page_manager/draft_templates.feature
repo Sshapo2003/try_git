@@ -11,10 +11,21 @@ Feature: Draft Templates
     When I create a page in Drafts
     Then the Template Gallery page should be displayed
 
-  @not_started
-  Scenario: Archive a Template
+  @complete
+  Scenario: Archive and Delete a Template
     When I archive a Template
-    Then the template should be listed in Archived
+    Then there should be one less template in Drafts
+    And the template should be listed in Archived
+    When I delete the archived template
+    Then there should be one less template in Archived
+
+  @not_started
+  Scenario: Archive and Delete a Template
+    When I archive a Template
+    Then there should be one less template in Drafts
+    And the template should be listed in Archived
+    When I delete the archived template
+    Then there should be one less template in Archived
 
   @complete
   Scenario: Archived Template Menu Options
