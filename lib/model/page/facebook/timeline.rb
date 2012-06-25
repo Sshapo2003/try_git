@@ -4,7 +4,7 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
 
   element :current_user_username_span, 'span.headerTinymanName'
   element :user_nav_drop_down, 'div#userNavigationLabel'
-  element :user_nav_drop_down_log_out_option, 'input[value="Log Out"]'
+  element :user_nav_drop_down_log_out_option, 'input[value^="Log"]'
   element :post_message_textarea , 'textarea[title="Write something..."]'
   element :post_message_share_button, 'input[value="Share"]'
   element :username_textbox, 'input#email'
