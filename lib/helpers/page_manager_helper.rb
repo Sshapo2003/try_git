@@ -65,7 +65,7 @@ class Helpers::PageManagerHelper
       end
 
       wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.update_button.click
-      wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.wait_for_publish_success_postit
+      wildfire.wildfireapp_page_manager_edit_mode.publish_to_facebook_modal.wait_for_publish_success_postit(30)
     end
 
     def get_template_menu_options
@@ -98,6 +98,7 @@ class Helpers::PageManagerHelper
       template.drop_down_menu.click
       link = template.template_menu_options.select {|o| o.text == "Clone Template" }.first[:href]
       content_div.page.execute_script %{ $('body > ol li a[href="#{link}"]').click() }
+      wildfire.wildfireapp_page_manager.wait_for_sticky_label
       msg = "Unable to clone template. Sticky Message = #{wildfire.wildfireapp_page_manager.sticky_label.text}"
       Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.wildfireapp_page_manager.sticky_label.text != 'You have successfully cloned the template.' }
     end
