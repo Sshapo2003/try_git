@@ -15,6 +15,10 @@ Before do
   @messengeradmin = Model::Messengeradmin.new
   @facebook = Model::Facebook.new
   @twitter = Model::Twitter.new
+
+  if ENV['TIMINGS'] == 'true'
+    @start_time = Time.now
+  end
 end
 
 After ('@firefox_facebook_profile') do
@@ -27,4 +31,13 @@ end
 
 Before('@no-chrome') do |scenario|
   scenario.skip_invoke! if ENV['BROWSER'] == 'chrome'
+end
+
+After do |scenario|
+  if ENV['TIMINGS'] == 'true'
+    $test_timings || $test_timings = {}
+    @end_time = Time.now
+    total_time = @end_time - @start_time
+    $test_timings.merge!(scenario.to_sexp[3] => total_time)
+  end
 end

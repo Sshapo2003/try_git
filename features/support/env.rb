@@ -85,3 +85,9 @@ Capybara.default_driver = browser
 World(Capybara)
 
 Capybara.run_server = false
+
+at_exit do
+  if ENV['TIMINGS'] == 'true'
+    $test_timings.each {|k,v| puts "#{k} #{v}"}
+  end
+end
