@@ -24,7 +24,7 @@ When /^I add a link to the message$/ do
 end
 
 When /^I schedule the message to be sent at some point in the distant future$/ do
-  @wildfire.wildfireapp_messenger.schedule_message Chronic.parse('in one year').strftime("%m/%d/%y")
+  @wildfire.wildfireapp_messenger.schedule_message Chronic.parse('in one year').strftime("%m/%d/%Y")
 end
 
 When /^I send the message$/ do

@@ -2,7 +2,7 @@
 Feature: Edit Template
 
   Background:
-    Given I am logged in as "template-user"
+    Given I am logged in to Wildfire as the template user
     And I navigate to the wildfire app page manager page
     And I view "My Templates" in the left hand nav bar of Page Manager
     And I have created a valid template

@@ -1,3 +1,8 @@
+Then /^the Template Gallery page should be displayed$/ do
+  @wildfire.wildfireapp_templates.wait_for_ajax
+  @wildfire.wildfireapp_templates.should be_displayed
+end
+
 Given /^(\d+) templates are displayed$/ do |number_of_templates|
   @templates_visible = @wildfire.wildfireapp_templates.templates.count
   @templates_visible.should eql number_of_templates.to_i
