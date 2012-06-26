@@ -8,9 +8,8 @@ Background:
   @not_started
   Scenario: Message Comments
     Given I have a message with a comment
-    Then the comment should be displayed in the messages panel
     When I like the comment
-    Then "You like this Message" is displayed
+    Then "You like this Message" is displayed in the message comment area
     When I reply to the comment
     Then the reply should be visible in facebook
     And the like is visible in facebook
