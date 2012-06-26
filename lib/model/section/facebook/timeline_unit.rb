@@ -4,6 +4,8 @@ class Model::Section::Facebook::TimelineUnit < SitePrism::Section
   element :story_content_message, 'div.storyContent h6.uiStreamMessage span'
   element :link_title, 'div.uiAttachmentTitle'
   element :link_url, 'div.storyContent div.fbMainStreamAttachment span.caption'
+  element :view_all_comments_link, "input[name='view_all[1]']"
+  sections :comments, Model::Section::Facebook::Comment, '.uiUfiComment'
 
   def has_message?
     is_status_unit? or is_story?
@@ -24,5 +26,9 @@ class Model::Section::Facebook::TimelineUnit < SitePrism::Section
 
   def is_story?
     has_story_content?
+  end
+
+  def expand_comments
+    unless not has_view_all_comments_link? then view_all_comments_link.click end
   end
 end

@@ -40,9 +40,7 @@ class Helpers::PageManagerHelper
 
       wildfire.wildfireapp_page_manager.wait_for_content_div
       wildfire.wildfireapp_page_manager.content_div.get_template_by_title('Countdown Timer').wait_for_and_click_edit_link
-
-      wildfire.wildfireapp_page_manager_edit_mode.sidebar.content_menu.header_text_edit_link.click
-
+      wildfire.wildfireapp_page_manager_edit_mode.sidebar.content_menu.wait_for_and_click_header_text_edit_link
       wildfire.wildfireapp_countdown_template_edit_header.body_text(updated_countdown_app_title)
       wildfire.wildfireapp_countdown_template_edit_header.save_button.click
 

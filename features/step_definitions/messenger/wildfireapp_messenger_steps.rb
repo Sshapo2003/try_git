@@ -53,6 +53,26 @@ Given /^I have an unassigned message$/ do
   @unassigned_message_content = @unassigned_message.body.text
 end
 
+Given /^I have a message with a comment$/ do
+  @message = @wildfire.wildfireapp_messenger.messages_panel.messages.reject {|m| m.is_flagged?}.select {|m| m.is_facebook_message?}.reject {|m| m.has_sender_name?}.first
+  @message_body = @message.body.text
+  @message_comment_text = Helpers::MessengerHelper.comment_on_a_message @message
+end
+
+When /^I like the comment$/ do
+  @comment = @message.comments.select {|m| m.body.text.include? @message_comment_text }.first
+  @comment.like
+end
+
+When /^I reply to the comment$/ do
+  @message = @wildfire.wildfireapp_messenger.messages_panel.messages.select {|m| m.body.text.include? @message_body}.first
+  Helpers::MessengerHelper.comment_on_a_message @message
+end
+
+Then /^the comment should be liked$/ do
+  @comment.should be_liked
+end
+
 When /^I assign that message to myself$/ do
   @wildfire.wildfireapp_messenger.assign_message_to_me @unassigned_message
 end
