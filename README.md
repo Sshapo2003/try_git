@@ -70,3 +70,8 @@ A: If you want to run tests in chrome you need to install chrome driver
 
  * Install homebrew => see https://github.com/mxcl/homebrew/wiki/installation
  * brew install chromedriver
+
+Q: How do I find out how long each individual step takes to run?
+A: You can add TIMINGS=true when running your rake task. Example:
+ * rake cuke:productioncomplete TIMINGS=true
+

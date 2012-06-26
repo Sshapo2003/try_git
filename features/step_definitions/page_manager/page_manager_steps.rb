@@ -13,7 +13,6 @@ end
 
 When /^I view "(.*?)" in the left hand nav bar of Page Manager$/ do |link|
   @wildfire.wildfireapp_page_manager.wait_for_sidebar_links
-  unless @wildfire.wildfireapp_page_manager.has_sidebar_links? then raise "Couldn't find sidebar links" end
   link = @wildfire.wildfireapp_page_manager.sidebar_links.select {|l| l.text.include? link }.first
   unless link == nil then link.click end
 end

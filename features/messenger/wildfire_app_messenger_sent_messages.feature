@@ -6,7 +6,7 @@ Feature: Sent Messages
     And I navigate to the wildfire app messenger page
     And I click the "Sent" tab on the left navigation menu on wildfire app messenger page
 
-  @complete
+  @no-ci
   Scenario: Sent Panel Paging
     Given I have more than 25 sent messages
     Then 25 messages should be displayed in the Sent Panel
