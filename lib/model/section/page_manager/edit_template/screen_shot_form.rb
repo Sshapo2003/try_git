@@ -9,7 +9,7 @@ class Model::Section::PageManager::EditTemplate::ScreenShotForm  < SitePrism::Se
 
   def save
     add_image_button.click
-    wait_for_ajax
+    wait_for_ajax(30)
   end
 
   def has_screenshot?
