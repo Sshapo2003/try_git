@@ -1,11 +1,17 @@
 class Helpers::MessengerHelper
   class << self
 
+    def compose_and_send_a_valid_twitter_message_to_my_twitter_property
+      wildfire = Model::Wildfire.new
+      unless wildfire.wildfireapp_messenger.displayed? then wildfire.wildfireapp_messenger.load end
+      wildfire.wildfireapp_messenger.click_tab 'Compose'
+      wildfire.wildfireapp_messenger.compose_and_send_a_valid_message_to_twitter
+    end
+
     def comment_on_a_message message
       comment = String.random
       wildfire = Model::Wildfire.new
-
-      unless message.has_comments? then message.view_comments_link.click end
+      message.view_comments
       message.wait_for_comment_entry_field
       message.comment_entry_field.set comment
       message.add_comment_button.click

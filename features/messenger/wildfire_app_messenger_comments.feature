@@ -6,7 +6,7 @@ Background:
     And I navigate to the wildfire app messenger page
 
   @complete
-  Scenario: Message Comments
+  Scenario: Commenting and Liking a message
     Given I have a message with a comment
     When I like the comment
     Then the comment should be liked

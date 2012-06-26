@@ -6,8 +6,7 @@ class Model::Page::MessengerAdmin::MessengerAdminRefreshASocialProperty < Model:
   element :refresh_button, 'input[name=commit]'
 
   def refresh_property(property_name)
-    # property_select.click
-    sleep 3
+    wait_for_property_select_options
     property_select_options.select {|o| o.text == property_name}.first.click
     refresh_button.click
   end

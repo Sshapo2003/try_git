@@ -1,3 +1,10 @@
+When /^I view the wildfire app messenger page as the default user$/ do
+  step 'I am logged in to Wildfire as the default user'
+  @messengeradmin.refresh_a_social_property.load
+  @messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['twitter_property_name']
+  step 'I navigate to the wildfire app messenger page'
+end
+
 When /^I update and publish the Countdown App$/ do
   @updated_countdown_app_title = Helpers::PageManagerHelper.make_a_change_to_countdown_app
 end
