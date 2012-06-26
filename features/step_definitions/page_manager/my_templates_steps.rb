@@ -36,6 +36,7 @@ Given /^I have created a valid template$/ do
 end
 
 When /^I create a Blank Template$/ do
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates
   @num_templates_before = @wildfire.wildfireapp_page_manager.content_div.templates.count
   @template_name = Helpers::PageManagerHelper.create_template
 end
