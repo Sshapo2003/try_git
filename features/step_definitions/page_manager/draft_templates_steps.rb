@@ -1,10 +1,10 @@
 When /^I create a page in Drafts$/ do
-  @wildfire.wildfireapp_page_manager.wait_for_archived_pages_panel(30)
+  @wildfire.wildfireapp_page_manager.wait_for_archived_pages_panel(180)
   @wildfire.wildfireapp_page_manager.archived_pages_panel.create_page
 end
 
 When /^I view the menu for a Draft Template$/ do
-  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(180)
   @wildfire.wildfireapp_page_manager.content_div.templates.first.drop_down_menu.click
 end
 
@@ -16,7 +16,7 @@ Then /^the following menu options should be available for the draft template$/ d
 end
 
 When /^I archive a Template$/ do
-  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(180)
   @template_name = @wildfire.wildfireapp_page_manager.content_div.templates.first.title_div.text
   @num_templates_before = @wildfire.wildfireapp_page_manager.content_div.templates.count
   @wildfire.wildfireapp_page_manager.content_div.templates.first.archive_template
@@ -25,12 +25,12 @@ When /^I archive a Template$/ do
 end
 
 Then /^there should be one less template in Drafts$/ do
-  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(180)
   @wildfire.wildfireapp_page_manager.content_div.templates.count.should eql (@num_templates_before - 1)
 end
 
 Then /^the template should be listed in Drafts$/ do
   step 'I view "Drafts" in the left hand nav bar of Page Manager'
-  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(180)
   @wildfire.wildfireapp_page_manager.content_div.templates.first.title_div.text.should eql @template_name
 end
