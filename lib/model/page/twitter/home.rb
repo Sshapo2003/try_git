@@ -23,7 +23,7 @@ class Model::Page::Twitter::Home < SitePrism::Page
   end
 
   def post_tweet tweet
-    wait_for_tweet_text_area
+    wait_for_tweet_text_area(30)
     tweet_text_area.set tweet
     tweet_button.click
     msg = "Timeout occured waiting for tweet '#{tweet} to appear"

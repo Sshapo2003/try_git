@@ -9,7 +9,7 @@ class Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog < Si
 
     def add_property property_name
       social_properties_input_field.click
-      wait_for_properties_in_select_list
+      wait_for_properties_in_select_list(30)
       properties_in_select_list.select {|p| p.text.include? property_name }.first.click
       save_button.click
     end

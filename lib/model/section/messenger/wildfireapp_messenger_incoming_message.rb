@@ -44,7 +44,7 @@ class Model::Section::Messenger::WildfireappMessengerIncomingMessage < SitePrism
 
   def view_replies
     unless has_replies? then view_replies_link.click end
-    wait_for_twitter_replies_area
+    wait_for_twitter_replies_area(30)
     Timeout.timeout(Capybara.default_wait_time) { sleep 0.1 while twitter_replies_area.text.include? 'Loading...' }
     sleep 1
   end

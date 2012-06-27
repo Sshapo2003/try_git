@@ -12,7 +12,7 @@ class Helpers::MessengerHelper
       comment = String.random
       wildfire = Model::Wildfire.new
       message.view_comments
-      message.wait_for_comment_entry_field
+      message.wait_for_comment_entry_field(30)
       message.comment_entry_field.set comment
       message.add_comment_button.click
       msg = "Timeout occured waiting for comment '#{comment}' to appear."

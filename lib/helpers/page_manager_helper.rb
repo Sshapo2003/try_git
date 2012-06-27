@@ -83,8 +83,8 @@ class Helpers::PageManagerHelper
       wildfire.wildfireapp_page_manager.new_template_dialog.template_name.set name
       wildfire.wildfireapp_page_manager.new_template_dialog.save_button.click
 
-      wildfire.template_builder.wait_for_and_click_back_to_templates_button
-      wildfire.wildfireapp_page_manager.content_div.wait_for_templates
+      wildfire.template_builder.wait_for_and_click_back_to_templates_button(30)
+      wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
       return name
     end
 
@@ -122,7 +122,7 @@ class Helpers::PageManagerHelper
       link = template.template_menu_options.select {|o| o.text == "Edit Default Content" }.first[:href]
       template.visit link
 
-      wildfire.template_editor.wait_for_go_back_button
+      wildfire.template_editor.wait_for_go_back_button(30)
     end
     
     def delete_template(name='TestTemplate')

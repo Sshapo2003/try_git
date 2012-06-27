@@ -122,7 +122,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     message.select
     actions_menu.click
     page.execute_script "$('ol#message_action a[href=Assign]').click()"
-    wait_for_assign_dialog
+    wait_for_assign_dialog(30)
     assign_dialog.select_me
     assign_dialog.save_button.click
   end

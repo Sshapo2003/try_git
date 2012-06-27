@@ -13,19 +13,19 @@ class Model::Page::PageManager::TemplateEditor < SitePrism::Page
     case tab_name.downcase
     when 'content'
       tabs.select {|t| t.text.downcase.include? tab_name.downcase}.first.click
-      content_form.wait_for_content_save_and_continue_button
+      content_form.wait_for_content_save_and_continue_button(30)
     when 'screenshot'
       tabs.select {|t| t.text.downcase.include? tab_name.downcase}.first.click
-      screen_shot_form.wait_for_add_image_button
+      screen_shot_form.wait_for_add_image_button(30)
     when 'categories'
       tabs.select {|t| t.text.downcase.include? tab_name.downcase}.first.click
-      categories_form.wait_for_save_and_continue_button
+      categories_form.wait_for_save_and_continue_button(30)
     when 'tags'
       tabs.select {|t| t.text.downcase.include? tab_name.downcase}.first.click
-      tags_form.wait_for_save_and_continue_button
+      tags_form.wait_for_save_and_continue_button(30)
     when 'privacy'
       tabs.select {|t| t.text.downcase.include? tab_name.downcase}.first.click
-      privacy_form.wait_for_save_and_continue_button
+      privacy_form.wait_for_save_and_continue_button(30)
     else raise "Unknown tab #{tab_name}"
     end
   end
