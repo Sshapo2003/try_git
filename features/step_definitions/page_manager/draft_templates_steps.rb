@@ -1,8 +1,10 @@
 When /^I create a page in Drafts$/ do
+  @wildfire.wildfireapp_page_manager.wait_for_archived_pages_panel(30)
   @wildfire.wildfireapp_page_manager.archived_pages_panel.create_page
 end
 
 When /^I view the menu for a Draft Template$/ do
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
   @wildfire.wildfireapp_page_manager.content_div.templates.first.drop_down_menu.click
 end
 
