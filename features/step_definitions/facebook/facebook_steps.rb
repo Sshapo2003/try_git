@@ -31,7 +31,6 @@ Then /^the message should be visible on my facebook page$/ do
   @facebook.timeline.visit_my_timeline
   @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }.count.should eql 1
   @matching_message = @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }.first
-  @matching_message.comments.select {|m| m.body.text.include? @message_comment_text}.count.should == 1
 end
 
 Then /^the reply should be visible in facebook$/ do
