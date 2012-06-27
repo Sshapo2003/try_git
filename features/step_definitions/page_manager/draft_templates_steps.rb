@@ -29,5 +29,6 @@ end
 
 Then /^the template should be listed in Drafts$/ do
   step 'I view "Drafts" in the left hand nav bar of Page Manager'
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
   @wildfire.wildfireapp_page_manager.content_div.templates.first.title_div.text.should eql @template_name
 end
