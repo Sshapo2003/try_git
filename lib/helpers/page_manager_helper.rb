@@ -115,6 +115,7 @@ class Helpers::PageManagerHelper
 
     def edit_default_content(name='TestTemplate')
       wildfire = Model::Wildfire.new
+      wildfire.wildfireapp_page_manager.wait_for_content_div(30)
       content_div = wildfire.wildfireapp_page_manager.content_div
       template = content_div.get_template_by_title name
       template.wait_for_drop_down_menu(30)
