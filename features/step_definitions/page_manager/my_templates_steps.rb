@@ -36,7 +36,7 @@ Given /^I have created a valid template$/ do
 end
 
 When /^I create a Blank Template$/ do
-  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
   @num_templates_before = @wildfire.wildfireapp_page_manager.content_div.templates.count
   @template_name = Helpers::PageManagerHelper.create_template
 end
@@ -77,7 +77,7 @@ When /^I upload a new template$/ do
 end
 
 Given /^I have a valid uploaded template$/ do
-  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
   @template = @wildfire.wildfireapp_page_manager.content_div.templates.select {|t| t.title_div.text.include? 'Uploaded Template'}.first
   @template_name = @template.title_div.text
 end
