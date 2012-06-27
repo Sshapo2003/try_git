@@ -16,6 +16,7 @@ Then /^the following menu options should be available for the draft template$/ d
 end
 
 When /^I archive a Template$/ do
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
   @template_name = @wildfire.wildfireapp_page_manager.content_div.templates.first.title_div.text
   @num_templates_before = @wildfire.wildfireapp_page_manager.content_div.templates.count
   @wildfire.wildfireapp_page_manager.content_div.templates.first.archive_template
@@ -24,6 +25,7 @@ When /^I archive a Template$/ do
 end
 
 Then /^there should be one less template in Drafts$/ do
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
   @wildfire.wildfireapp_page_manager.content_div.templates.count.should eql (@num_templates_before - 1)
 end
 
