@@ -1,4 +1,5 @@
 When /^I have (a valid|at least one) template$/ do |unused|
+  @wildfire.wildfireapp_page_manager.content_div.wait_for_templates(30)
   @wildfire.wildfireapp_page_manager.content_div.templates.count.should > 0
   @template = @wildfire.wildfireapp_page_manager.content_div.templates.first
 end
