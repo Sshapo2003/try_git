@@ -14,7 +14,7 @@ class Model::Section::Messenger::WildfireappMessengerIncomingMessage < SitePrism
   element :property_name, '.property_name'
   element :sender_name, '.sender_name'
   root_element :assigned_to_bubbletip , 'body > div.wf_bubbletip'
-  elements :replies, 'div.twitter_reply'
+  sections :replies, Model::Section::Messenger::MessageReply, '.twitter_reply'
   sections :comments, Model::Section::Messenger::MessageComment, '.comment'
 
   def is_assigned?

@@ -29,6 +29,12 @@ class Helpers::TwitterHelper
       tweet message_body
     end
 
+    def visit_my_page_as_user creds
+      twitter = Model::Twitter.new
+      login creds
+      go_to_my_page
+    end
+
     private
 
     def login creds

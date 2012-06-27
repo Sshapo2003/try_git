@@ -1,10 +1,10 @@
 @messenger @amtest @staging @production
 Feature: Twiter Replies
 
-  @not_started
+  @complete @no-ci
   Scenario: Should be able to see replies to a twitter message
     Given I have a twitter message with multiple replies from another user
-    When I view the wildfire app messenger page
+    When I view the wildfire app messenger page as the default user
     And I view the replies for the twitter message
     Then each of the replies should be visible in wildfire messenger in chronological order
     And each of the replies should have a Reply button
@@ -18,10 +18,9 @@ Feature: Twiter Replies
     And the Tweet button should be enabled
     When I send the reply to the twitter message
     Then I should be informed that the reply has been sent
-    When I view my twitter page
-    Then the reply should be visible
+    And the message should be visible on my twitter page
 
-  @complete
+  @complete @no-ci
   Scenario: Should be able to see replies to a twitter message
     Given I have a tweet with no replies
     When I view the wildfire app messenger page as the default user
