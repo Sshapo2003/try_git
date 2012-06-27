@@ -4,7 +4,7 @@ defaults: &execution_defaults
 live:
   <<: *execution_defaults
   #capybara settings
-  default_wait_time: 5
+  default_wait_time: 15
   #urls
   wildfire_site_root: https://account.wildfireapp.com
   wildfire_messenger_root: https://messenger.wildfireapp.com
