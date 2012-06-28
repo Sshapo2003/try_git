@@ -115,7 +115,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   end
 
   def compose_and_send_a_valid_message_to_twitter
-    compose_message_panel.compose_and_send_a_valid_message 'paloaltofoodie'
+    compose_message_panel.compose_and_send_a_valid_message Helpers::Config['twitter_property_name']
   end
 
   def assign_message_to_me(message)

@@ -10,7 +10,7 @@ class Model::Section::Twitter::Tweet < SitePrism::Section
     tweet_id = @root_element["data-tweet-id"]
     page.execute_script(%{$("div.tweet[data-tweet-id='#{tweet_id}']").click()})
     page.execute_script(%{$("div.tweet[data-tweet-id='#{tweet_id}'] a[title='Reply']").click()})
-    reply_text_area.set "@paloaltofoodie #{message}"
+    reply_text_area.set "@#{Helpers::Config['twitter_property_name']} #{message}"
     tweet_button.click
     return message
   end

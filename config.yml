@@ -17,7 +17,8 @@ live:
   messenger_admin_root: https://messenger.wildfireapp.com/admin
   crystal_ball_root: https://promos.wildfireapp.com/crystal_ball
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
-  twitter_page_url: https://twitter.com/#!/paloaltofoodie
+  twitter_page_url: https://twitter.com/#!/PaFd1
+  default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   #credentials
   template_user_facebook_address: paloaltofoodietemplateuser@gmail.com
   template_user_facebook_password: th1sismypassword
@@ -27,9 +28,8 @@ live:
   default_facebook_poster_password: th1sismypassword
   default_twitter_poster_username: burgerwithcheez
   default_twitter_poster_password: th1sismypassword
-  default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   facebook_property_name: Palo Alto Foodies
-  twitter_property_name: paloaltofoodie
+  twitter_property_name: PaFd1
   create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: false
@@ -55,7 +55,8 @@ staging:
   messenger_admin_root: https://messenger.wildfirestaging.com/admin
   crystal_ball_root: https://promos.wildfirestaging.com/crystal_ball
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
-  twitter_page_url: https://twitter.com/#!/paloaltofoodie
+  twitter_page_url: https://twitter.com/#!/PaFd1
+  default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   #credentials
   template_user_facebook_address: paloaltofoodie@gmail.com
   template_user_facebook_password: th1sismypassword
@@ -65,9 +66,8 @@ staging:
   default_facebook_poster_password: th1sismypassword
   default_twitter_poster_username: burgerwithcheez
   default_twitter_poster_password: th1sismypassword
-  default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   facebook_property_name: Palo Alto Foodies
-  twitter_property_name: paloaltofoodie
+  twitter_property_name: PaFd1
   create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: true
@@ -96,7 +96,8 @@ am-test:
   messenger_admin_root: https://messenger.am-test.wfhack.com/admin
   crystal_ball_root: https://promos.am-test.wfhack.com/crystal_ball
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
-  twitter_page_url: https://twitter.com/#!/paloaltofoodie
+  twitter_page_url: https://twitter.com/#!/PaFd1
+  default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   #credentials
   template_user_facebook_address: paloaltofoodie@gmail.com
   template_user_facebook_password: th1sismypassword
@@ -106,9 +107,8 @@ am-test:
   default_facebook_poster_password: th1sismypassword
   default_twitter_poster_username: burgerwithcheez
   default_twitter_poster_password: th1sismypassword
-  default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   facebook_property_name: Palo Alto Foodies
-  twitter_property_name: paloaltofoodie
+  twitter_property_name: PaFd1
   create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
   requires_basic_auth: true
