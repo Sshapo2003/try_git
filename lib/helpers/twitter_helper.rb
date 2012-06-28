@@ -45,13 +45,13 @@ class Helpers::TwitterHelper
     def go_to_my_page
       twitter = Model::Twitter.new
       twitter.home.visit_my_page
-      twitter.home.wait_for_tweets(15)
+      twitter.home.wait_for_tweets(60)
     end
 
     def go_to_posters_page
       twitter = Model::Twitter.new
       twitter.home.visit_twitter_posters_page
-      twitter.home.wait_for_tweets(15)
+      twitter.home.wait_for_tweets(60)
     end
 
     def wait_for_message_to_appear message
@@ -60,7 +60,7 @@ class Helpers::TwitterHelper
       Timeout.timeout_and_raise(300, msg) do
         while twitter.home.tweets.select {|t| t.body.text.include? message }.count == 0 do
           twitter.home.page.driver.refresh
-          twitter.home.wait_for_tweets(15)
+          twitter.home.wait_for_tweets(60)
         end
       end
     end
