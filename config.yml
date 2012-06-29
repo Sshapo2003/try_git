@@ -4,7 +4,7 @@ defaults: &execution_defaults
 live:
   <<: *execution_defaults
   #capybara settings
-  default_wait_time: 15
+  default_wait_time: 30
   #urls
   wildfire_site_root: https://account.wildfireapp.com
   wildfire_messenger_root: https://messenger.wildfireapp.com
@@ -42,7 +42,7 @@ live:
 staging:
   <<: *execution_defaults
   #capybara settings
-  default_wait_time: 15
+  default_wait_time: 30
   #urls
   wildfire_site_root: https://account.wildfirestaging.com
   wildfire_messenger_root: https://messenger.wildfirestaging.com
@@ -83,7 +83,7 @@ staging:
 am-test:
   <<: *execution_defaults
   #capybara settings
-  default_wait_time: 15
+  default_wait_time: 30
   #urls
   wildfire_site_root: https://account.am-test.wfhack.com
   wildfire_messenger_root: https://messenger.am-test.wfhack.com
