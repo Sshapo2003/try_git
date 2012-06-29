@@ -1,8 +1,8 @@
 class Model::Section::PageManager::Template < SitePrism::Section
-  element :title_div, '.title'
+  element :title_div, 'div.title'
   element :edit_link, 'div.edit a span'
   element :create_page_link, 'div.edit a span'
-  element :drop_down_menu, 'dropdown-toggle'
+  element :drop_down_menu, 'a.wf_menu_button'
   root_element :delete_menu_option, 'body > ol[data-visible="true"] .delete_link'
   root_element :archive_menu_option, 'body > ol[data-visible="true"] .archive_link'
   root_elements :template_menu_options, 'body > ol[data-visible="true"] li a'

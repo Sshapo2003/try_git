@@ -1,6 +1,6 @@
 class Model::Section::PageManager::ArchivedTemplatesPanel < SitePrism::Section
   element :header, 'h2'
-  root_elements :create_page_buttons, '.btn-primary'
+  elements :create_page_buttons, 'h2 > a'
   sections :templates, Model::Section::PageManager::ArchivedTemplate, 'li.screenshot'
 
   def create_page
