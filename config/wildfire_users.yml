@@ -17,6 +17,9 @@ staging:
   the template user:
     email: paloaltofoodie@gmail.com
     password: th1sismypassword
+  a user with two accounts:
+    email: alistair.hutchison+twoaccounts@wildfireapp.com
+    password: w1ldf1r3
     
 am-test:
   <<: *default_users
@@ -29,3 +32,9 @@ live:
   the template user:
     email: paloaltofoodietemplateuser@gmail.com
     password: th1sismypassword
+  a user with two companies:
+    email: alistair.hutchison+twocompanies@wildfireapp.com
+    password: password1
+  a user with two accounts:
+    email: alistair.hutchison+twoaccounts@wildfireapp.com
+    password: password1

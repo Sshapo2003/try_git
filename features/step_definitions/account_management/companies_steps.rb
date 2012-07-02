@@ -62,3 +62,11 @@ end
 Then /^the second company should not appear in the Company selector menu$/ do
   @wildfire.account_management.companies.should_not include @second_company
 end
+
+Then /^my Companies should include "(.*?)"$/ do |company_name|
+  @wildfire.account_management.companies.should include company_name
+end
+
+Then /^I should see Company "(.*?)" under Account "(.*?)"$/ do |company_name, account_name|
+  @wildfire.account_management.accounts_companies[account_name].should include company_name
+end
