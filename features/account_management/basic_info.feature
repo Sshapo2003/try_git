@@ -8,8 +8,9 @@ Feature: Basic Info
     Given I am logged in to Wildfire as a new user
     And I view "Basic Info" in Account Management
     
-  @not-started
+  @complete @staging @amtest
   Scenario: Verify that Company Name is populated automatically
+    Then the Company Name field should contain the name of the current company
   
   @complete @staging @amtest
   Scenario: Update Company Name
@@ -40,8 +41,10 @@ Feature: Basic Info
     Then I should see the message "Company details updated"
     And the Company Website URL should be "http://nyan.cat"
     
-  @not-started
+  @complete @staging @amtest
   Scenario: Display error message if the Company Website URL is invalid
+    When I update my Company website URL to "this is not a valid url"
+    Then I should see the message "URL is not a valid url"
   
   @complete @staging @amtest
   Scenario: Update Company Description
@@ -63,28 +66,16 @@ Feature: Basic Info
     Then I should see the message "Company details updated"
     And the Company Email should be "myemail@somecompany.com"
     
-  @not-started
+  @complete @staging @amtest
   Scenario: Display error message if the Company Email is invalid
+    When I update my Company Email to "invalidemailaddress"
+    Then I should see the message "Email is not a valid email address"
     
   @complete @staging @amtest
   Scenario: Update Reply Email
     When I update my Reply Email to "myemail@somecompany.com"
     Then I should see the message "Company details updated"
     And the Reply Email should be "myemail@somecompany.com"
-  
-  @not-started
-  Scenario: Display error message when deleting the only active company
-    When I attempt to delete the company
-    Then I should see the message "You may not remove the only company associated with this account"
-    
-  @not-started
-  Scenario: Delete Company
-  
-  @complete @staging @amtest
-  Scenario: Upload Company Logo
-    When I upload a valid image as my company logo
-    Then I should see the message "Company details updated"
-    And I should no longer see the default logo image
   
   @complete @staging @amtest
   Scenario: Remove Company Logo
@@ -93,9 +84,19 @@ Feature: Basic Info
     Then I should see the message "Your logo has been successfully removed"
     And I should see the default logo image
     
-  @not-started
-  Scenario: Verify valid file formats can be uploaded (["jpg", "jpeg", "gif", "png"])
-  
+  @complete @staging @amtest
+  Scenario Outline: Verify valid image files can be uploaded as the company logo
+    When I upload a valid <file format> file as my company logo
+    Then I should see the message "Company details updated"
+    And I should no longer see the default logo image
+    
+  Examples:
+    | file format |
+    | jpg         |
+    | jpeg        |
+    | gif         |
+    | png         |
+    
   @not-started
   Scenario: Display flash message if invalid logo file is uploaded
   
