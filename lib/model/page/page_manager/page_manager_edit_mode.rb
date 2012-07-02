@@ -1,4 +1,4 @@
-class Model::Page::PageManager::WildfireappPageManagerEditMode < SitePrism::Page
+class Model::Page::PageManager::PageManagerEditMode < SitePrism::Page
   set_url_matcher /pages\/.*\/edit/
 
   element :header_sticky, 'span.flash_contents'

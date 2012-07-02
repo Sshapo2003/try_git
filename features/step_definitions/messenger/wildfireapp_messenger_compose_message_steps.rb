@@ -5,11 +5,11 @@ When /^I compose and send a valid message$/ do
 end
 
 Given /^I have a twitter message$/ do
-  @message_body = Helpers::TwitterHelper.compose_and_send_a_valid_twitter_message_to_my_twitter_property
+  @message_body = Helpers::MessengerHelper.compose_and_send_a_valid_twitter_message_to_my_twitter_property
 end
 
 When /^I compose and send a valid message for my twitter property$/ do
-  @message_body = Helpers::TwitterHelper.compose_and_send_a_valid_twitter_message_to_my_twitter_property
+  @message_body = Helpers::MessengerHelper.compose_and_send_a_valid_twitter_message_to_my_twitter_property
 end
 
 Given /^I compose a new Mesenger message$/ do

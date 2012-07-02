@@ -69,7 +69,7 @@ jenkinsstagingslow: <%= common %> -t @staging CONFIG=staging <%= junit %> <%= cu
 jenkinsamtestslow: <%= common %> -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
 
 # Production
-<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing -t ~@no-run -t ~@slow-t ~@no-ci" %>
+<% common = "--format rerun --out features.txt -f pretty -t @complete -t ~@not_implemented -t ~@failing -t ~@no-run -t ~@slow -t ~@no-ci" %>
 jpm: <%= common %> -t @messenger -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jpam: <%= common %> -t @account_management -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jpa: <%= common %> -t @analytics -t @production CONFIG=live <%= junit %> <%= cucumber %>

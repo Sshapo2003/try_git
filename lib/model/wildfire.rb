@@ -17,11 +17,17 @@ class Model::Wildfire
   def wildfireapp_analytics
     Model::Page::WildfireappAnalytics.new
   end
-  def wildfireapp_page_manager
-    Model::Page::PageManager::WildfireappPageManager.new
+
+  def page_manager
+    if ENV['CONFIG'] == 'am-test'
+      Model::Page::PageManager::Uitk5PageManager.new
+    else
+      Model::Page::PageManager::PageManager.new
+    end
   end
-  def wildfireapp_page_manager_edit_mode
-    Model::Page::PageManager::WildfireappPageManagerEditMode.new
+
+  def page_manager_edit_mode
+    Model::Page::PageManager::PageManagerEditMode.new
   end
   def wildfireapp_countdown_template_edit_header
     Model::Page::WildfireappCountdownTemplateEditHeader.new

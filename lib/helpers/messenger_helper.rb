@@ -1,5 +1,26 @@
 class Helpers::MessengerHelper
   class << self
+
+    def compose_and_send_a_valid_twitter_message_to_my_twitter_property
+      wildfire = Model::Wildfire.new
+      unless wildfire.wildfireapp_messenger.displayed? then wildfire.wildfireapp_messenger.load end
+      wildfire.wildfireapp_messenger.click_tab 'Compose'
+      wildfire.wildfireapp_messenger.compose_and_send_a_valid_message_to_twitter
+    end
+
+    def comment_on_a_message message
+      comment = String.random
+      wildfire = Model::Wildfire.new
+      message.view_comments
+      message.wait_for_comment_entry_field
+      message.comment_entry_field.set comment
+      message.add_comment_button.click
+      msg = "Timeout occured waiting for comment '#{comment}' to appear."
+      Timeout.timeout(30, msg) {sleep 0.1 while message.comments.select {|m| m.body.text.include? comment}.count == 0}
+
+      comment
+    end
+
     def wait_for_message_to_appear message
       wildfire = Model::Wildfire.new
       panel_has_message = lambda { wildfire.wildfireapp_messenger.messages_panel.messages.select { |m| m.body.text.include? message }.count > 0 }

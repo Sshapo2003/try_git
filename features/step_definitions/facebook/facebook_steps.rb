@@ -33,6 +33,17 @@ Then /^the message should be visible on my facebook page$/ do
   @matching_message = @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }.first
 end
 
+Then /^the reply should be visible in facebook$/ do
+  @facebook.timeline.visit_my_timeline
+  @matching_message = @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }.first
+  @matching_message.expand_comments
+  @matching_message.comments.select {|m| m.body.text.include? @message_comment_text}.count.should == 1
+end
+
+Then /^the like is visible in facebook$/ do
+  @matching_message.comments.select {|m| m.body.text.include? @message_comment_text}.first.should be_liked
+end
+
 Then /^the message on my facebook page should have the links title and text$/ do
    @matching_message.link_title.text.should include @attachment[:link_title]
    @matching_message.link_url.text.should include @attachment[:url]
