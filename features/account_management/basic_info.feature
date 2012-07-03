@@ -77,14 +77,14 @@ Feature: Basic Info
     Then I should see the message "Company details updated"
     And the Reply Email should be "myemail@somecompany.com"
   
-  @complete @staging @amtest
+  @complete @staging @amtest @failing
   Scenario: Remove Company Logo
     Given I have uploaded a company logo
     When I remove the company logo
     Then I should see the message "Your logo has been successfully removed"
     And I should see the default logo image
     
-  @complete @staging @amtest
+  @complete @staging @amtest @failing
   Scenario Outline: Verify valid image files can be uploaded as the company logo
     When I upload a valid <file format> file as my company logo
     Then I should see the message "Company details updated"
