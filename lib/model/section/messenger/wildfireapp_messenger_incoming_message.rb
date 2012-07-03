@@ -9,11 +9,12 @@ class Model::Section::Messenger::WildfireappMessengerIncomingMessage < SitePrism
   element :view_comments_link, 'a.show_comments'
   element :comment_entry_field, 'input.comment_body'
   element :add_comment_button, "button[value='Add Comment']"
+  element :twitter_replies_area, '.twitter_replies'
   element :service, '.service'
   element :property_name, '.property_name'
   element :sender_name, '.sender_name'
   root_element :assigned_to_bubbletip , 'body > div.wf_bubbletip'
-  elements :replies, 'div.twitter_reply'
+  sections :replies, Model::Section::Messenger::MessageReply, '.twitter_reply'
   sections :comments, Model::Section::Messenger::MessageComment, '.comment'
 
   def is_assigned?
@@ -34,6 +35,18 @@ class Model::Section::Messenger::WildfireappMessengerIncomingMessage < SitePrism
 
   def select
     input.click
+  end
+
+  def view_comments
+    unless has_comments? then view_comments_link.click end
+    wait_for_comment_entry_field
+  end
+
+  def view_replies
+    unless has_replies? then view_replies_link.click end
+    wait_for_twitter_replies_area(30)
+    Timeout.timeout(Capybara.default_wait_time) { sleep 0.1 while twitter_replies_area.text.include? 'Loading...' }
+    sleep 1
   end
 
   def like_comment comment_text

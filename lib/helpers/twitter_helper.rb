@@ -14,13 +14,6 @@ class Helpers::TwitterHelper
       twitter.home.tweets.collect {|t| t.body.text }
     end
 
-    def compose_and_send_a_valid_twitter_message_to_my_twitter_property
-      wildfire = Model::Wildfire.new
-      unless wildfire.wildfireapp_messenger.displayed? then wildfire.wildfireapp_messenger.load end
-      wildfire.wildfireapp_messenger.click_tab 'Compose'
-      wildfire.wildfireapp_messenger.compose_and_send_a_valid_message_to_twitter
-    end
-
     def post_reply_to_message_as_user message_body, creds
       twitter = Model::Twitter.new
       login creds
@@ -30,6 +23,20 @@ class Helpers::TwitterHelper
       tweet.post_reply
     end
 
+    def post_a_tweet_as_user message_body, creds
+      twitter = Model::Twitter.new
+      login creds
+      tweet message_body
+    end
+
+    def visit_my_page_as_user creds
+      twitter = Model::Twitter.new
+      login creds
+      go_to_my_page
+    end
+
+    private
+
     def login creds
       twitter = Model::Twitter.new
       twitter.home.login creds
@@ -38,13 +45,13 @@ class Helpers::TwitterHelper
     def go_to_my_page
       twitter = Model::Twitter.new
       twitter.home.visit_my_page
-      twitter.home.wait_for_tweets(5)
+      twitter.home.wait_for_tweets(60)
     end
 
     def go_to_posters_page
       twitter = Model::Twitter.new
       twitter.home.visit_twitter_posters_page
-      twitter.home.wait_for_tweets(5)
+      twitter.home.wait_for_tweets(60)
     end
 
     def wait_for_message_to_appear message
@@ -53,10 +60,14 @@ class Helpers::TwitterHelper
       Timeout.timeout_and_raise(300, msg) do
         while twitter.home.tweets.select {|t| t.body.text.include? message }.count == 0 do
           twitter.home.page.driver.refresh
-          twitter.home.wait_for_tweets(5)
+          twitter.home.wait_for_tweets(60)
         end
       end
     end
 
+    def tweet tweet
+      twitter = Model::Twitter.new
+      twitter.home.post_tweet tweet
+    end
   end
 end

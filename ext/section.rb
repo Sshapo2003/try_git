@@ -1,8 +1,8 @@
 module SitePrism
   class Section
     include Capybara::DSL
-    def wait_for_ajax
-      wait_until { page.evaluate_script("jQuery.active") == 0 }
+    def wait_for_ajax wait_time=Capybara.default_wait_time
+      wait_until(wait_time) { page.evaluate_script("jQuery.active") == 0 }
     end
   end
 end

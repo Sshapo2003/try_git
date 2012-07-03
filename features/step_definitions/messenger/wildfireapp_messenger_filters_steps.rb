@@ -84,7 +84,7 @@ When /^I unassign the filter from my company$/ do
 end
 
 Then /^the filter page should show that the filter is assigned to my company$/ do
-  @wildfire.wildfireapp_messenger.filters_panel.wait_for_filters
+  @wildfire.wildfireapp_messenger.filters_panel.wait_for_filters(30)
   sleep 1 # Wait for filters to render correctly on filters panel
   filters = @wildfire.wildfireapp_messenger.filters_panel.filters
   filter = filters.select {|f| f.name.text.include? @unassigned_filter_name}.first
@@ -92,7 +92,7 @@ Then /^the filter page should show that the filter is assigned to my company$/ d
 end
 
 Then /^the filter page should show that the filter is not assigned to my company$/ do
-  @wildfire.wildfireapp_messenger.filters_panel.wait_for_filters
+  @wildfire.wildfireapp_messenger.filters_panel.wait_for_filters(30)
   sleep 1 # Wait for filters to render correctly on filters panel
   filters = @wildfire.wildfireapp_messenger.filters_panel.filters
   filter = filters.select {|f| f.name.text.include? @unassigned_filter_name}.first

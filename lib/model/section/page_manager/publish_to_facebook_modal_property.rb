@@ -4,6 +4,6 @@ class Model::Section::PageManager::PublishToFacebookModalProperty < SitePrism::S
   element :checkbox, 'input'
 
   def check_checkbox
-    wait_for_and_click_name
+    wait_for_and_click_name(30)
   end
 end

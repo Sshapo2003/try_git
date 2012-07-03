@@ -102,7 +102,7 @@ Then /^(\d+) messages should be displayed in the Messages Panel$/ do |number_of_
 end
 
 Then /^the Messages Panel paging message should include "(.*?)"$/ do |paging_message|
-  @wildfire.wildfireapp_messenger.messages_panel.wait_for_pagination_totals
+  @wildfire.wildfireapp_messenger.messages_panel.wait_for_pagination_totals(30)
   @wildfire.wildfireapp_messenger.messages_panel.pagination_current_page_indicator_text.should include paging_message
 end
 

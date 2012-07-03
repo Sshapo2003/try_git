@@ -115,14 +115,14 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   end
 
   def compose_and_send_a_valid_message_to_twitter
-    compose_message_panel.compose_and_send_a_valid_message 'paloaltofoodie'
+    compose_message_panel.compose_and_send_a_valid_message Helpers::Config['twitter_property_name']
   end
 
   def assign_message_to_me(message)
     message.select
     actions_menu.click
     page.execute_script "$('ol#message_action a[href=Assign]').click()"
-    wait_for_assign_dialog
+    wait_for_assign_dialog(30)
     assign_dialog.select_me
     assign_dialog.save_button.click
   end

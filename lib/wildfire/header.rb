@@ -20,6 +20,16 @@ module Wildfire::Header
     all('ol.multiuser_company_selector li a.optgroup span').collect { |e| e.text }[0..-2]
   end
   
+  def accounts_companies
+    show_company_select_menu
+    # currently also returns the spacer and create new company link. The markup here is pretty horrible, but
+    # this can be revisited after the UITK upgrade
+    all('ol.multiuser_company_selector li').inject({}) do |ac, item|
+      item.first('a.optgroup') ? ac[item.text] = [] : ac[ac.keys.last] << item.text
+      ac
+    end
+  end
+  
   def switch_company(company_name)
     show_company_select_menu
     has_link?(company_name) ? click_link(company_name) : raise("Company '#{company_name}' not found")

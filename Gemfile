@@ -12,3 +12,4 @@ gem "sauce"
 #gem "ruby-debug", :platforms => :mri_18
 gem "chromedriver-helper"
 gem "chronic"
+gem "awesome_print"

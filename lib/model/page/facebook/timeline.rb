@@ -39,10 +39,10 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
   end
 
   def post_message message
-    wait_for_post_message_textarea
+    wait_for_post_message_textarea(30)
     post_message_textarea.click
     post_message_textarea.set message
-    wait_for_post_message_share_button
+    wait_for_post_message_share_button(30)
     
     retries = 0
     max_retries = 5
@@ -79,7 +79,7 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
 
   def logout
     user_nav_drop_down.click
-    wait_for_user_nav_drop_down_log_out_option
+    wait_for_user_nav_drop_down_log_out_option(30)
     user_nav_drop_down_log_out_option.click
   end
 end

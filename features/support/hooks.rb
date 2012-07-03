@@ -38,6 +38,10 @@ After do |scenario|
     $test_timings || $test_timings = {}
     @end_time = Time.now
     total_time = @end_time - @start_time
-    $test_timings.merge!(scenario.to_sexp[3] => total_time)
+
+    scenario_name = scenario.name
+    feature_name = scenario.feature.name
+
+    $test_timings.merge!(scenario_name => total_time)
   end
 end
