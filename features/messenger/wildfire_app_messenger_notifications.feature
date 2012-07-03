@@ -34,7 +34,6 @@ Feature: Notifications
    Then I should have a notification
    When I click on the notifications link
    Then I should see the notification details "A message failed to send"
-
   
   @not_started
   Scenario : Email notification of Flag keyword Filter
