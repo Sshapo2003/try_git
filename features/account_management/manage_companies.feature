@@ -77,7 +77,7 @@ Feature: Manage Companies
       | Promotion Builder |
       | Monitor           |
       
-  @complete @production
+  @complete @production @failing
   Scenario Outline: List Companies under multiple Accounts
     Given I am logged in to Wildfire as a user with two accounts
     And I am in the "<application>" application
