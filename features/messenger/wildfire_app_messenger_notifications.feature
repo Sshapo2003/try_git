@@ -42,7 +42,7 @@ Feature: Notifications
    Then all team members for that company should receive an email notification
 
   @not_started
-  Scenario : Eamil notification of Delete keyword Filter 
+  Scenario: Eamil notification of Delete keyword Filter 
   Given I've created a delete keyword filter
   When a message triggers the keyword filter
   Then all team members for that company should receive an email notification
