@@ -7,7 +7,7 @@ Feature: Creating Pages from Templates
 
   @complete
   Scenario: Tile Gallery template 
-    When I create a page from the "Tile Gallery" template
+    When I create a page from the "Tile Gallery 2.0" template
     And I publish the template
     Then the published template should be visible on my facebook page
 
