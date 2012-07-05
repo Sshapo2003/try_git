@@ -10,4 +10,8 @@ class Model::Page::PageManager::Uitk5PageManager < Model::Page::PageManager::Pag
   section :draft_pages_panel, Model::Section::PageManager::DraftTemplatesPanel, '.span9'
   section :archived_pages_panel, Model::Section::PageManager::ArchivedTemplatesPanel, '.span9'
   section :upload_a_template_panel, Model::Section::PageManager::PagesPanel, '.span9'
+  
+  def active?
+    has_sidebar_links?
+  end
 end

@@ -9,7 +9,7 @@ class Model::Page::AccountManagement::ManageAccounts < SitePrism::Page
   def has_advanced_permissions?
     within_modal_if_required do
       manage_members.show_invites_form
-      find('input#account_admin')[:disabled] == "false"
+      !find('input#account_admin')[:disabled]
     end
   end
 end
