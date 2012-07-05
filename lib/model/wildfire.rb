@@ -56,4 +56,10 @@ class Model::Wildfire
   def your_properties
     Model::Page::AccountManagement::YourProperties.new
   end
+  def monitor
+    Model::Page::Monitor::WildfireappMonitor.new
+  end
+  def track_your_competitors
+    Model::Page::Monitor::TrackYourCompetitors.new
+  end
 end

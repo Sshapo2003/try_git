@@ -11,6 +11,8 @@ Given /^I navigate to (the|my) (.*) page$/ do |unused, page_name|
   when 'wildfire app templates' then @wildfire.wildfireapp_templates.load
   when 'messenger admin dashboard' then @messengeradmin.dashboard.load
   when 'account management' then @wildfire.account_management.load
+  when 'wildfire app monitor' then @wildfire.monitor.load
+  when 'wildfire app track your competitors' then @wildfire.track_your_competitors.load
   else raise "Haven't mapped the '#{page_name}' page"
   end
 end
