@@ -39,6 +39,10 @@ When /^I upload a valid image as my company logo$/ do
   @wildfire.account_management.basic_info.upload_logo("images/logo-wildfire-lrg.jpg")
 end
 
+When /^I upload a valid ([a-z]+) file as my company logo$/ do |format|
+  @wildfire.account_management.basic_info.upload_logo("images/logo-wildfire-lrg.#{format}")
+end
+
 When /^I remove the company logo$/ do
   @wildfire.account_management.basic_info.remove_logo
 end
@@ -77,4 +81,8 @@ end
 
 Then /^I should see the default logo image$/ do
    @wildfire.account_management.basic_info.should(have_no_logo, "Expected to find the default 'No logo' image, but it was not present")
+end
+
+Then /^the Company Name field should contain the name of the current company$/ do
+  @wildfire.account_management.basic_info.company_name.should == @wildfire.account_management.current_company
 end

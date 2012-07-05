@@ -1,6 +1,7 @@
 defaults: &execution_defaults
   default_config: live
   default_browser: firefox
+  google_apps_login_url: https://www.google.com/a/wildfireapp.com/ServiceLogin
 live:
   <<: *execution_defaults
   #capybara settings
