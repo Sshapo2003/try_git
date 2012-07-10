@@ -169,6 +169,7 @@ class Helpers::PageManagerHelper
 
       wildfire.upload_template.upload_a_template 'templates/updated_test_template_for_upload.zip'
       wildfire.upload_template.submit_button.click
+      wildfire.page_manager.wait_for_sticky_label(30)
 
       msg = "Unable to upload template. Sticky Message = #{wildfire.page_manager.sticky_label.text}"
       Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.page_manager.sticky_label.text != "You have successfully added another version." }

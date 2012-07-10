@@ -174,11 +174,8 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
 
   def load_panel (panel_link, is_panel_expression)
     panel_link.click
-    begin
-      Timeout.timeout(30) { sleep 0.1 while not is_expected_panel?(is_panel_expression) }
-    rescue Timeout::Error
-      raise "Panel header '#{panel_header_text}' failed to appear after waiting 30 seconds."
-    end
+    msg = "Panel header '#{sticky_header_text}' failed to appear after waiting 30 seconds."
+    Timeout.timeout_and_raise(30, msg) { sleep 0.1 while not is_expected_panel?(is_panel_expression) }
   end
 
   def is_expected_panel?(is_panel_expression)
