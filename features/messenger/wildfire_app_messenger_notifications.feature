@@ -30,7 +30,7 @@ Feature: Notifications
   @not_started
   Scenario: Trigger a failed sent message notification
    Given I have attempted to send a message
-   And this message fails to deliver
+   When this message fails to deliver
    Then I should have a notification
    When I click on the notifications link
    Then I should see the notification details "A message failed to send"
