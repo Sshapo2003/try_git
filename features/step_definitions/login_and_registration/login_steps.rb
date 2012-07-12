@@ -9,6 +9,20 @@ Given /^I am logged in to Wildfire as a new user$/ do
   Helpers::AccountManagementHelper.register_and_login_new_user
 end
 
+Given /^I am logged in to Wildfire as a new user with access to "(.*?)"$/ do |app|
+  Helpers::AccountManagementHelper.register_and_login_new_user
+  @wildfire.account_management.demo_page.show_edit_subscription_modal
+  @wildfire.account_management.edit_subscription.enable_application(app)
+end
+
+Given /^I am logged in to Wildfire as a new user with access to "(.*?)" and "(.*?)"$/ do |app1, app2|
+  Helpers::AccountManagementHelper.register_and_login_new_user
+  [app1, app2].each do |app|
+    @wildfire.account_management.demo_page.show_edit_subscription_modal
+    @wildfire.account_management.edit_subscription.enable_application(app)
+  end
+end
+
 When /^I login to Wildfire as (.*)$/ do |user|
   step "I am logged in to Wildfire as #{user}"
 end
