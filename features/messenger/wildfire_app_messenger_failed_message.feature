@@ -32,8 +32,10 @@ Scenario: Triggers a fail message with blocked content (3)
  
  @not_started
 Scenario: Triggers a failed message notification due to invalid token
-Given I have changed the password of my facebook property
-Then I have attempted to send a message
-Then I should have 2 notifications
-When I click on the notifications 
-Then I should see the notification details "A message failed to send"
+ Given I have changed the password of my facebook property
+ Then I have attempted to send a message
+ Then I should have 2 notifications
+ When I click on the notifications 
+ Then I should see the notification details "A message failed to send"
+
+
