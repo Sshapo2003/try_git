@@ -38,4 +38,11 @@ Scenario: Triggers a failed message notification due to invalid token
  When I click on the notifications 
  Then I should see the notification details "A message failed to send"
 
-
+@not_started
+Scenario: Triggers a failed message notification due to blocked countries
+ Given I have attempted to send a message
+ When I click on custom audience 
+ Then I enter N.Korea,Mynmar, Cuba or Iran
+ Then I should have a notification
+ When I click on the notification
+ Then I should see the notification details " A message failed to send"
