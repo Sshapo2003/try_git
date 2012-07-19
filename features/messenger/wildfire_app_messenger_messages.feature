@@ -26,7 +26,7 @@ Feature: Messages
     Then the right paging icon should be disabled in the Messages Panel
     And the left paging icon should be enabled in the Messages Panel
 
-  @complete @failing
+  @complete
   Scenario: Messages Panel Paging via URL
     Given I have more than 500 messages in the Messages Panel
     When I navigate to the last page of of messages in the Messages Panel via the URL
