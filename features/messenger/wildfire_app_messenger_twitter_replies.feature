@@ -1,5 +1,5 @@
 @messenger @amtest @staging @production
-Feature: Twiter Replies
+Feature: Twitter Replies
 
   @complete @no-ci
   Scenario: Should be able to see replies to a twitter message
