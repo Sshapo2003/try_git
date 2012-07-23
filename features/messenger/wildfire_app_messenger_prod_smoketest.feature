@@ -2,6 +2,7 @@
 
 @complete @slow @meesenger-smoke-test
 
+    @complete
   Scenario: Send a message
     When I compose and send a valid message
     Then I should be informed that the message has been sent succesfully
