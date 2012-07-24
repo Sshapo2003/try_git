@@ -4,7 +4,7 @@ Feature: Track Your Competitors Page
   Background:
     Given I navigate to the wildfire app track your competitors page
 
-  @staging @not_started
+  @staging @complete
   Scenario: Example facebook comparisson
     When I follow the Walmart vs target vs amazon.com comparison link
     Then the monitor page should be loaded with these Facebook properties
