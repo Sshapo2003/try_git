@@ -8,8 +8,11 @@ class Model::Section::Twitter::Tweet < SitePrism::Section
 
   def post_reply(message="Had any good food recently? #{Time.hours_mins_seconds}")
     tweet_id = @root_element["data-tweet-id"]
-    page.execute_script(%{$("div.tweet[data-tweet-id='#{tweet_id}']").click()})
-    page.execute_script(%{$("div.tweet[data-tweet-id='#{tweet_id}'] a[title='Reply']").click()})
+
+    puts %{$$("div.tweet[data-tweet-id='#{tweet_id}']").click()}
+
+    page.execute_script(%{$$("div.tweet[data-tweet-id='#{tweet_id}']").click()})
+    page.execute_script(%{$$("div.tweet[data-tweet-id='#{tweet_id}'] a[title='Reply']").click()})
     reply_text_area.set "@#{Helpers::Config['twitter_property_name']} #{message}"
     tweet_button.click
     return message

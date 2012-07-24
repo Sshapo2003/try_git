@@ -1,4 +1,4 @@
-@messenger @production @staging @amtest
+@messenger
 Feature: Assigned Messages
 
 Background:
@@ -6,7 +6,7 @@ Background:
     And I navigate to the wildfire app messenger page
     And I click the "Assigned Messages" tab on the left navigation menu on wildfire app messenger page
 
-  @complete
+  @complete @production @staging @amtest
   Scenario: Assigned message state
     Given I have an assigned message
     When I hover over the assigned user icon

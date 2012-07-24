@@ -1,16 +1,18 @@
-@analytics @staging
+@analytics
 Feature: Track Your Competitors Page
 
   Background:
     Given I navigate to the wildfire app track your competitors page
 
-  @not_started
+  @staging @not_started
   Scenario: Example facebook comparisson
     When I follow the Walmart vs target vs amazon.com comparison link
     Then the monitor page should be loaded with these Facebook properties
       | Walmart    |
       | Target     |
       | Amazon.com |
+    And the facebook chart should be loaded
+    And the facebook data table should be loaded
 
   @not_started
   Scenario: Example twitter comparisson

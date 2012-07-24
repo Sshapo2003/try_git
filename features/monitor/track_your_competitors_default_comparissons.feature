@@ -1,10 +1,10 @@
-@analytics @staging
+@analytics
 Feature: Track Your Competitors Default Comparisons
 
   Background:
     Given I navigate to the wildfire app monitor page
 
-  @not_started
+  @not_started @staging
   Scenario: Facebook Comparison
     When I type "<search_string>" in the "<position>" facebook searchbox and select "<expected_match>"
       | search_string        | position | expected_match             |

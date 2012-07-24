@@ -62,4 +62,7 @@ class Model::Wildfire
   def track_your_competitors
     Model::Page::Monitor::TrackYourCompetitors.new
   end
+  def comparison
+    Model::Page::Monitor::Comparison.new
+  end
 end

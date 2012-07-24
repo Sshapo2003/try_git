@@ -1,4 +1,4 @@
-@allgallerytemplates @production
+@allgallerytemplates
 Feature: Templates
 
   Background:
@@ -6,7 +6,7 @@ Feature: Templates
     And I navigate to the wildfire app templates page
 
   @not_started
-  Scenario Outline: Displaying of Notifications
+  Scenario Outline: Publishing Pages created with Public Templates
     When I create a page from the "<Template>" template
     And I publish the template
     Then the published template should be visible on my facebook page

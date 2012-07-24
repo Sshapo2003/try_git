@@ -21,9 +21,8 @@ Feature: Twiter Replies
     And the message should be visible on my twitter page
 
   @complete @no-ci
-  Scenario: Should be able to see replies to a twitter message
+  Scenario: View a tweet with no replies
     Given I have a tweet with no replies
     When I view the wildfire app messenger page as the default user
     And I view the replies for the twitter message
     Then I should be informed that there are no replies
-

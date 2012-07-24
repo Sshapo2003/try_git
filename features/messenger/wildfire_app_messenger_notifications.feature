@@ -1,10 +1,10 @@
-@messenger @production @staging @amtest
+@messenger
 Feature: Notifications
 
   Background:
     Given I am logged in to Wildfire as the default user
 
-  @complete
+  @complete @production @staging @amtest
   Scenario: Displaying of Notifications
     Given I have no current notifications
     When a notification event is triggered
