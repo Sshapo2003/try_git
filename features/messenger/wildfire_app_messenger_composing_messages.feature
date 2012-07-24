@@ -110,3 +110,11 @@ Feature: Composing Messages
     When I compose a new Mesenger message
     And I add a link to the message
     Then the link image title and text should be shown in the message composition panel
+
+  @not_started
+  Scenario: Schedule a message to twitter property
+    Given I have attempted to compose a twitter message
+    And I scheduled the message to be sent at some point in the distant future
+    And I schedule the message
+    Then I should be informed that the message has been scheduled succesfully
+    And the message should be visible on the last page of the "Scheduled" folder
