@@ -45,7 +45,6 @@ Then /^the like is visible in facebook$/ do
 end
 
 Then /^the message on my facebook page should have the links title and text$/ do
-   @matching_message.link_title.text.should include @attachment[:link_title]
    @matching_message.link_url.text.should include @attachment[:url]
 end
 
