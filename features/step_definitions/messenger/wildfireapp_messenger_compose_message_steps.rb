@@ -19,7 +19,7 @@ Given /^I compose a new Mesenger message$/ do
 end
 
 When /^I add a link to the message$/ do
-  @attachment = { :type => :link, :url => 'www.wildfireapp.com', :link_title => 'Wildfire - Wildfire App - Social Media Marketing Software Suite' }
+  @attachment = { :type => :link, :url => 'www.wildfireapp.com' }
   @wildfire.wildfireapp_messenger.attach_to_message(@attachment)
 end
 
@@ -105,13 +105,17 @@ Then /^the link should have the following properties$/ do |table|
   table.rows_hash.each do |key, value|
     case key.downcase
     when "image"
+      preview.wait_for_image
       preview.image_url.should include value
     when "title"
+      preview.wait_for_title
       preview.title.text.should include value
     when "body"
+      preview.wait_for_body
       preview.body.text.should include value
     when "buttons"
       if value == "Left and Right"
+        preview.wait_for_previous_button
         preview.should have_previous_button
         preview.should have_next_button
       else

@@ -7,6 +7,7 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachme
   element :close_button, 'a.cancel'
 
   def image_url
+    Timeout.timeout(10) { sleep 0.1 while image[:src] == nil }
     image[:src]
   end
 end
