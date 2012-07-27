@@ -1,6 +1,19 @@
 class Helpers::MessengerHelper
   class << self
 
+    def compose_and_send_a_valid_facebook_message
+      wildfire = Model::Wildfire.new
+
+      wildfire.wildfireapp_messenger.compose_message
+      wildfire.wildfireapp_messenger.compose_and_send_a_valid_message
+      wildfire.wildfireapp_messenger.sidebar.messages_link.click
+
+      messengeradmin = Model::MessengerAdmin.new
+      messengeradmin.refresh_a_social_property.load
+      messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['facebook_property_name']
+    end
+
+
     def compose_and_send_a_valid_twitter_message_to_my_twitter_property
       wildfire = Model::Wildfire.new
       unless wildfire.wildfireapp_messenger.displayed? then wildfire.wildfireapp_messenger.load end

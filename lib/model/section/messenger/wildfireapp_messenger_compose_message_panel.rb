@@ -33,6 +33,12 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
     remove_recipient_links.each {|l| l.click }
   end
 
+  def compose_and_send_a_valid_message(recipient_name=Helpers::Config['facebook_property_name'])
+    message_text = compose_a_valid_message recipient_name
+    send_message
+    return message_text
+  end
+
   def compose_a_valid_message(recipient_name=Helpers::Config['facebook_property_name'])
     t = Time.now
     message_text = "Today is #{t.strftime("%A")} #{t.strftime("%d")} #{t.strftime("%b")} #{t.strftime("%Y")} and the time is #{t.strftime("%r")}. What great foods have you discovered recently?"
@@ -66,12 +72,6 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
 
   def save_as_draft
     save_draft_button.click
-  end
-
-  def compose_and_send_a_valid_message(recipient_name=Helpers::Config['facebook_property_name'])
-    message_text = compose_a_valid_message recipient_name
-    send_message
-    return message_text
   end
 
   def invalid_token_for_property_message_displayed?

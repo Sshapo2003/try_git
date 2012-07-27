@@ -3,7 +3,11 @@ class Model::Wildfire
     Model::Page::WildfireFrontPage.new
   end
   def login
-    Model::Page::Login.new
+    if ENV['CONFIG'] == 'am-test'
+      Model::Page::Uitk5Login.new
+    else
+      Model::Page::Login.new
+    end
   end
   def signup
     Model::Page::Signup.new
@@ -12,12 +16,15 @@ class Model::Wildfire
     Model::Page::Dashboard.new
   end
   def wildfireapp_messenger
-    Model::Page::WildfireappMessenger::WildfireappMessenger.new
+    if ENV['CONFIG'] == 'am-test'
+      Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger.new
+    else
+      Model::Page::WildfireappMessenger::WildfireappMessenger.new
+    end
   end
   def wildfireapp_analytics
     Model::Page::WildfireappAnalytics.new
   end
-
   def page_manager
     if ENV['CONFIG'] == 'am-test'
       Model::Page::PageManager::Uitk5PageManager.new
@@ -25,7 +32,6 @@ class Model::Wildfire
       Model::Page::PageManager::PageManager.new
     end
   end
-
   def page_manager_edit_mode
     Model::Page::PageManager::PageManagerEditMode.new
   end

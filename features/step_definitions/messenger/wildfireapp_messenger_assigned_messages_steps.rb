@@ -18,9 +18,9 @@ When /^I hover over the assigned user icon$/ do
 end
 
 Then /^the assigned user bubbletip should be displayed$/ do
-  @assigned_message.assigned_to_bubbletip_visible?.should be_true
+  @assigned_message.assigned_to_bubbletip[:style].should include 'display: block;'
 end
 
 Then /^the assigned icon is displayed$/ do
-  @assigned_message.assigned_avatar[:src].should include '/images/assigned-inactive-badge.png?'
+  @assigned_message.assigned_avatar[:src].should include '/assigned-inactive-badge'
 end

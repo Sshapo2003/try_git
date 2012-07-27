@@ -106,6 +106,10 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     compose_message_panel.save_as_draft
   end
 
+  def compose_message
+    compose_message_panel.sidebar.compose_link.click
+  end
+
   def compose_a_valid_message
     compose_message_panel.compose_a_valid_message
   end
@@ -174,7 +178,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
 
   def load_panel (panel_link, is_panel_expression)
     panel_link.click
-    msg = "Panel header '#{sticky_header_text}' failed to appear after waiting 30 seconds."
+    msg = "Panel header failed to appear after waiting 30 seconds."
     Timeout.timeout_and_raise(30, msg) { sleep 0.1 while not is_expected_panel?(is_panel_expression) }
   end
 
