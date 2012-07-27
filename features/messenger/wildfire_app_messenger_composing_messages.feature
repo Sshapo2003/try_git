@@ -59,10 +59,10 @@ Feature: Composing Messages
     When I compose a new Mesenger message
     And I add a link to the message
     Then the link should have the following properties
-      | Image    | wildfire.png                                                    |
-      | Title    | Wildfire                                                        |
-      | Body     | Login Demo Contact Us: (888) 274-0929 x2 Wildfire Products      |
-      | Buttons  | Left and Right                                                  |
+      | Image    | wildfire.png           |
+      | Title    | Wildfire               |
+      | Body     | Login Demo Contact Us: |
+      | Buttons  | Left and Right         |
     When I click the close button on the link attachment panel
     Then the link attachment panel should not be visible
 
