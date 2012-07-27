@@ -18,7 +18,7 @@ live:
   messenger_admin_root: https://messenger.wildfireapp.com/admin
   crystal_ball_root: https://promos.wildfireapp.com/crystal_ball
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
-  twitter_page_url: https://twitter.com/#!/PaloFddie
+  twitter_page_url: https://twitter.com/#!/PaFd1
   default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   #credentials
   template_user_facebook_address: paloaltofoodietemplateuser@gmail.com
@@ -30,7 +30,7 @@ live:
   facebook_property_name: Palo Alto Foodies
   default_twitter_poster_username: burgerwithcheez
   default_twitter_poster_password: th1sismypassword
-  twitter_property_name: PaloFddie
+  twitter_property_name: PaFd1
   twitter_property_email: pafd@gmx.com
   create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
@@ -57,7 +57,7 @@ staging:
   messenger_admin_root: https://messenger.wildfirestaging.com/admin
   crystal_ball_root: https://promos.wildfirestaging.com/crystal_ball
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
-  twitter_page_url: https://twitter.com/#!/PaloFddie
+  twitter_page_url: https://twitter.com/#!/PaFd1
   default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   #credentials
   template_user_facebook_address: paloaltofoodie@gmail.com
@@ -69,7 +69,7 @@ staging:
   default_twitter_poster_username: burgerwithcheez
   default_twitter_poster_password: th1sismypassword
   facebook_property_name: Palo Alto Foodies
-  twitter_property_name: PaloFddie
+  twitter_property_name: PaFd1
   twitter_property_email: pafd@gmx.com
   create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
@@ -99,7 +99,7 @@ am-test:
   messenger_admin_root: https://messenger.am-test.wfhack.com/admin
   crystal_ball_root: https://promos.am-test.wfhack.com/crystal_ball
   facebook_page_url: http://www.facebook.com/PaloAltoFoodies
-  twitter_page_url: https://twitter.com/#!/PaloFddie
+  twitter_page_url: https://twitter.com/#!/PaFd1
   default_twitter_poster_url: https://twitter.com/#!/burgerwithcheez
   #credentials
   template_user_facebook_address: paloaltofoodie@gmail.com
@@ -111,7 +111,7 @@ am-test:
   default_twitter_poster_username: burgerwithcheez
   default_twitter_poster_password: th1sismypassword
   facebook_property_name: Palo Alto Foodies
-  twitter_property_name: PaloFddie
+  twitter_property_name: PaFd1
   twitter_property_email: pafd@gmx.com
   create_template_property_name: MyGallery
   default_user_facebook_secret_key: 5ce074c05d67cfd269cd07ce15a869e8
