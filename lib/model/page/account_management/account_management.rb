@@ -13,7 +13,7 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   
   def load_section(name)
     load unless displayed?
-    sidebar.navigate_to(name)
+    click_on name
   end
   
   def loaded?
@@ -25,7 +25,7 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   end
   
   def basic_info
-    Model::Page::AccountManagement::BasicInfo.new
+    ENV['CONFIG'] == 'am-test' ? Model::Page::AccountManagement::Uitk5BasicInfo.new : Model::Page::AccountManagement::BasicInfo.new
   end
   
   def tracked_properties

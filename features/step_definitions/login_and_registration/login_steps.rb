@@ -28,14 +28,20 @@ When /^I login to Wildfire as (.*)$/ do |user|
 end
 
 When /^I login with email "(.*)" and password "(.*)"$/ do |email, password|
-  @wildfire.login.login_user_credentials_form.login_with_credentials(email, password)
+  @wildfire.login.login(email, password)
 end
 
 Then /^the login page should display the message "(.*)"$/ do |message|
-  @wildfire.login.login_error_message.text.should eql message
+  @wildfire.login.login_error_message.should eql message
 end
 
 Then /^the login page should be loaded$/ do
   @wildfire.login.wait_for_login_user_credentials_form
   @wildfire.login.is_loaded?.should be_true
+end
+
+Then /^I should be successfully logged in as "(.*)"$/ do |company_name|
+  #TODO: Pull the current company name from the sidebar
+  @wildfire.account_management.load_section('Basic Info')
+  @wildfire.account_management.basic_info.company_name.should eql company_name
 end

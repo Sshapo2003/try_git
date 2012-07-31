@@ -4,7 +4,7 @@ class Model::Wildfire
   end
   def login
     if ENV['CONFIG'] == 'am-test'
-      Model::Page::Uitk5Login.new
+      Model::Page::AccountManagement::Uitk5Login.new
     else
       Model::Page::Login.new
     end
