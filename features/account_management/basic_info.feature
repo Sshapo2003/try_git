@@ -7,8 +7,9 @@ Feature: Basic Info
   Background:
     Given I am logged in to Wildfire as a new user
     And I view "Basic Info" in Account Management
-    
-  @complete @staging @amtest
+  
+  # Re-implement on UITK5 once the current company can be extracted from the sidebar  
+  @complete @staging
   Scenario: Verify that Company Name is populated automatically
     Then the Company Name field should contain the name of the current company
   
@@ -21,7 +22,7 @@ Feature: Basic Info
   @complete @staging @amtest
   Scenario: Company Name cannot be blank
     When I update my Company Name to ""
-    Then I should see the message "Company name can't be blank"
+    Then I should see the message "can't be blank"
   
   @complete @staging @amtest
   Scenario: Update Company Industry
@@ -44,7 +45,7 @@ Feature: Basic Info
   @complete @staging @amtest
   Scenario: Display error message if the Company Website URL is invalid
     When I update my Company website URL to "this is not a valid url"
-    Then I should see the message "URL is not a valid url"
+    Then I should see the message "is not a valid url"
   
   @complete @staging @amtest
   Scenario: Update Company Description
@@ -69,7 +70,7 @@ Feature: Basic Info
   @complete @staging @amtest
   Scenario: Display error message if the Company Email is invalid
     When I update my Company Email to "invalidemailaddress"
-    Then I should see the message "Email is not a valid email address"
+    Then I should see the message "is not a valid email address"
     
   @complete @staging @amtest
   Scenario: Update Reply Email

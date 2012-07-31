@@ -34,5 +34,5 @@ end
 
 When /^I view "([^"]*)" in Account Management$/ do |section|
   @wildfire.account_management.load
-  @wildfire.account_management.sidebar.navigate_to(section)
+  @wildfire.account_management.load_section(section)
 end

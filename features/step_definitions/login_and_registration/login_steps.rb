@@ -6,7 +6,8 @@ Given /^I am logged in to Wildfire as ((?:!a new user).*)$/ do |user|
 end
 
 Given /^I am logged in to Wildfire as a new user$/ do
-  Helpers::AccountManagementHelper.register_and_login_new_user
+  @wildfire.account_management.signup.load
+  @wildfire.account_management.signup.register_user_with_valid_credentials
 end
 
 Given /^I am logged in to Wildfire as a new user with access to "(.*?)"$/ do |app|

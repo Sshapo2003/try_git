@@ -8,7 +8,7 @@ class Model::Page::AccountManagement::BasicInfo < SitePrism::Page
   end
   
   def update_company_industry(industry)
-    company_form.update_industry(industry)
+    company_form.update_company_industry(industry)
   end
   
   def update_timezone(timezone)

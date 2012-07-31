@@ -52,6 +52,10 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
     Model::Page::AccountManagement::SocialApps.new
   end
   
+  def signup
+    ENV['CONFIG'] == 'am-test' ? Model::Page::AccountManagement::Uitk5Signup.new : Model::Page::Signup.new
+  end
+  
   def flash_message
     first('span.flash_contents').try(:text)
   end
