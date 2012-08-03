@@ -1,5 +1,5 @@
-class Model::Section::AccountManagement::CompanyLogoForm < SitePrism::Section
-  element :upload_button, "button[value='Upload']"
+class Model::Section::AccountManagement::Uitk5CompanyLogoForm < SitePrism::Section
+  element :upload_button, 'input[value="Upload"]'
   element :remove_button, "a:contains('Remove')"
   
   def attach_file(filename)
