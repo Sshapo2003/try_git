@@ -8,7 +8,7 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
   
   def your_properties
-    Model::Page::AccountManagement::YourProperties.new
+    ENV['CONFIG'] == 'am-test' ? Model::Page::AccountManagement::Uitk5YourProperties.new : Model::Page::AccountManagement::YourProperties.new
   end
   
   def load_section(name)
