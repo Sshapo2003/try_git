@@ -1,5 +1,5 @@
 class Model::Section::Facebook::TimelineUnit < SitePrism::Section
-  element :status, 'div.statusUnit'
+  element :status, '.-cx-PRIVATE-fbTimelineStatusUnit__root'
   element :story_content, 'div.storyContent'
   element :story_content_message, 'div.storyContent h6.uiStreamMessage span'
   element :link_title, 'div.uiAttachmentTitle'
