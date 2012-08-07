@@ -11,7 +11,6 @@ Feature: Messenger Admin Login
       |Outgoing Messages         |
       |Sending Failures          |
       |Invalidations             |
-      |Resque                    |
       |Errors                    |
       |KPI Report                |
       |Refresh Property          |
