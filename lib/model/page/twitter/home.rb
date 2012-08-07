@@ -4,6 +4,7 @@ class Model::Page::Twitter::Home < SitePrism::Page
   element :sign_in_button, 'table.password-signin button.submit'
   element :tweet_text_area, '.twitter-anywhere-tweet-box-editor'
   element :tweet_button, '.tweet-button'
+  element :message_div, '.message'
 
   sections :tweets, Model::Section::Twitter::Tweet, 'div.tweet'
 
@@ -20,6 +21,7 @@ class Model::Page::Twitter::Home < SitePrism::Page
     wait_for_and_set_username_textbox creds[:username]
     wait_for_and_set_password_textbox creds[:password]
     wait_for_and_click_sign_in_button
+    if (has_message_div?) then raise 'Captcha is displayed - please resolve the captcha manually and rerun the test.' end
   end
 
   def post_tweet tweet

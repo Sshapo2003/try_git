@@ -26,7 +26,7 @@ Then /^I should see the recently triggered notification details$/ do
   range = Chronic.parse('10 minutes ago')..Time.now
   posted_time_string = @wildfire.wildfireapp_messenger.notifications.first.time.text
   posted_time = Chronic.parse(posted_time_string[4..posted_time_string.length])
-  notifications = @wildfire.wildfireapp_messenger.notifications.join(" ")
+  notifications = @wildfire.wildfireapp_messenger.notifications.collect {|n| n.text}.join(" ")
   msg = "Expected a notification with timestamp around#{posted_time_string} in #{notifications}"
   range.cover?(posted_time).should(be_true, msg)
 end

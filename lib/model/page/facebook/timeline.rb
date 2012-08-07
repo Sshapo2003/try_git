@@ -11,9 +11,7 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
   element :password_textbox, 'input#pass'
   element :login_button, 'label#loginbutton input'
   elements :status_units, 'div.statusUnit'
-  elements :status_units_text_content, 'div.timelineUnitContainer .statusUnit'
-  elements :status_units_with_image_text_content, '.uiStreamMessage span'
-
+  elements :timeline_units, '.timelineUnitContainer'
 
   def visit_timeline page_name
     visit "http://www.facebook.com/#{page_name}"
@@ -61,8 +59,7 @@ class Model::Page::Facebook::Timeline < SitePrism::Page
   end
 
   def timeline_units_contain_message? message
-    all_status_units = status_units_text_content | status_units_with_image_text_content
-    all_status_units.select {|su| su.text.include? message}.count > 0
+    timeline_units.select {|su| su.text.include? message}.count > 0
   end
 
   def messages_on_page
