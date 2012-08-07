@@ -64,7 +64,7 @@ Avoid usage of 'sleep' method. If you need to wait for an asynchronous action to
 * Use the site_prism 'wait_for_xxx' method. See => https://github.com/natritmeyer/site_prism
 * Use the Timeout#timeout method or Timeout#timeout_and_raise methods to keep polling for the state which you expect. e.g. Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.asynchronous_messages_panel.contains_message('Hi everyone')? == false }
 
-## FQAS
+## FAQ's
 Q: How do I run tests on Chrome?
 A: If you want to run tests in chrome you need to install chrome driver
 

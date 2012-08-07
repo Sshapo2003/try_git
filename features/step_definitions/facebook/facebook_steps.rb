@@ -35,7 +35,14 @@ end
 
 Then /^the reply should be visible in facebook$/ do
   @facebook.timeline.visit_my_timeline
-  @matching_message = @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }.first
+  matching_messages = @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.select {|t| t.status_message.text.include? @message_body }
+  
+  if matching_messages == nil
+    messages = @facebook.timeline.facebook_timeline_units.select {|t| t.has_message? }.collect {|t| t.status_message.text}
+    raise "No messages found with body #{@message_body}. Messages found: #{messages.each {|m| print "#{m}, "}} }"
+  end
+
+  @matching_message = matching_messages.first
   @matching_message.expand_comments
   @matching_message.comments.select {|m| m.body.text.include? @message_comment_text}.count.should == 1
 end
