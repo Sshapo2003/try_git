@@ -1,4 +1,4 @@
-Given /^I am logged in to Wildfire as ((?:!a new user).*)$/ do |user|
+Given /^I am logged in to Wildfire as ((?!a new user).*)$/ do |user|
   credentials = Helpers::WildfireAccountsHelper.get_credentials_for(user)
   raise "No credentials found for #{user} on environment #{ENV['CONFIG']}. Please add them to config/wildfire_users.yml." if credentials.blank?
   @wildfire.login.load
