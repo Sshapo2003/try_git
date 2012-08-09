@@ -1,5 +1,5 @@
 class Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSectionPreview < SitePrism::Section
-  element :image, 'img'
+  element :image, '.thumbnail img'
   element :title, 'div.title'
   element :body, 'div.description'
   element :previous_button, 'a[href="#previous"]'
