@@ -10,4 +10,8 @@ class Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel < Mod
     total_pages = (Float(total_messages) / 25.0).ceil
     visit("#{Helpers::Config['wildfire_messenger_root']}/scheduled_messages?page=#{total_pages}")
   end
+
+  def has_message? message
+    messages.select {|m| m.body.text.include? message }.count < 1
+  end
 end

@@ -20,12 +20,11 @@ Then /^the message should be visible on the last page of the "Scheduled" folder$
   @wildfire.wildfireapp_messenger.scheduled_messages_panel.go_to_scheduled_messages_last_page
 
   Timeout.timeout_and_raise(180, "Timed out while waiting for message #{@message_body} to appear in 'Scheduled' folder.") do
-    while @wildfire.wildfireapp_messenger.scheduled_messages_panel.messages.select {|m| m.body.text.include? @message_body }.count < 1 do
+    while @wildfire.wildfireapp_messenger.scheduled_messages_panel.has_message?(@message_body) == false
       sleep 5.0
       page.driver.refresh
     end
   end
-  @wildfire.wildfireapp_messenger.scheduled_messages_panel.messages.select {|m| m.body.text.include? @message_body }.count.should eql 1
 end
 
 Then /^the Scheduled Panel paging message should include "(.*?)"$/ do |paging_message|
