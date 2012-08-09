@@ -8,7 +8,7 @@ class Model::Page::AccountManagement::BasicInfo < SitePrism::Page
   end
   
   def update_company_industry(industry)
-    company_form.update_industry(industry)
+    company_form.update_company_industry(industry)
   end
   
   def update_timezone(timezone)
@@ -37,13 +37,11 @@ class Model::Page::AccountManagement::BasicInfo < SitePrism::Page
   end
   
   def upload_logo(filename)
-    company_logo_form.attach_file(filename)
-    company_logo_form.upload_button.click
+    company_logo_form.upload_logo(filename)
   end
   
   def remove_logo
-    company_logo_form.remove_button.click
-    page.accept_alert
+    company_logo_form.remove_logo
   end
   
   def company_name

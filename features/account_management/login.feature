@@ -1,4 +1,4 @@
-@account_management @production @staging
+@account_management @production @staging @amtest
 Feature: Login to Wildfire
 
   Background:

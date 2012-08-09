@@ -8,12 +8,12 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
   
   def your_properties
-    Model::Page::AccountManagement::YourProperties.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5YourProperties.new : Model::Page::AccountManagement::YourProperties.new
   end
   
   def load_section(name)
     load unless displayed?
-    sidebar.navigate_to(name)
+    click_on name
   end
   
   def loaded?
@@ -21,11 +21,11 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   end
   
   def locations
-    Model::Page::AccountManagement::Locations.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5Locations.new : Model::Page::AccountManagement::Locations.new
   end
   
   def basic_info
-    Model::Page::AccountManagement::BasicInfo.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5BasicInfo.new : Model::Page::AccountManagement::BasicInfo.new
   end
   
   def tracked_properties
@@ -50,6 +50,10 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   
   def social_apps
     Model::Page::AccountManagement::SocialApps.new
+  end
+  
+  def signup
+    uitk5? ? Model::Page::AccountManagement::Uitk5Signup.new : Model::Page::Signup.new
   end
   
   def flash_message

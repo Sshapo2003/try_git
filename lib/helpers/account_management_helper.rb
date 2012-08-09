@@ -20,5 +20,15 @@ class Helpers::AccountManagementHelper
     def wildfire
       @wildfire ||= Model::Wildfire.new
     end
+    
+    def valid_user_credentials
+      {
+        :first_name => 'Firstname',
+        :last_name =>  'Lastname',
+        :company_name => 'Company Name',
+        :email => "#{String.random}my@email.com",
+        :password => 'pa55w0rd'
+      }
+    end
   end
 end

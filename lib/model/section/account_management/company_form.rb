@@ -5,7 +5,7 @@ class Model::Section::AccountManagement::CompanyForm < SitePrism::Section
     save
   end
   
-  def update_industry(industry)
+  def update_company_industry(industry)
     within_form { select(industry, :from => 'Industry') }
     save
   end

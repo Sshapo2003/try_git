@@ -14,4 +14,10 @@ class Model::Page::Signup < SitePrism::Page
   def dismiss_error_message
     signup_error_message_close_button.click
   end
+  
+  def register_user_with_valid_credentials
+    signup_register_user_form.complete_form_with_valid_credentials
+    signup_register_user_form.accept_terms
+    signup_register_user_form.create_account_button.click
+  end
 end
