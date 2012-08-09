@@ -8,7 +8,7 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
   
   def your_properties
-    ENV['CONFIG'] == 'am-test' ? Model::Page::AccountManagement::Uitk5YourProperties.new : Model::Page::AccountManagement::YourProperties.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5YourProperties.new : Model::Page::AccountManagement::YourProperties.new
   end
   
   def load_section(name)
@@ -21,11 +21,11 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   end
   
   def locations
-    Model::Page::AccountManagement::Locations.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5Locations.new : Model::Page::AccountManagement::Locations.new
   end
   
   def basic_info
-    ENV['CONFIG'] == 'am-test' ? Model::Page::AccountManagement::Uitk5BasicInfo.new : Model::Page::AccountManagement::BasicInfo.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5BasicInfo.new : Model::Page::AccountManagement::BasicInfo.new
   end
   
   def tracked_properties
@@ -53,7 +53,7 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   end
   
   def signup
-    ENV['CONFIG'] == 'am-test' ? Model::Page::AccountManagement::Uitk5Signup.new : Model::Page::Signup.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5Signup.new : Model::Page::Signup.new
   end
   
   def flash_message
