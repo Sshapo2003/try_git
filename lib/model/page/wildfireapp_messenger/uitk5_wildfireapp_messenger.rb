@@ -1,13 +1,15 @@
 class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page::WildfireappMessenger::WildfireappMessenger
   set_url "#{Helpers::Config['wildfire_messenger_root']}/"
   set_url_matcher /messenger/
-
+  
+  element :drafts_div_header, '.span8'
   element :new_message_button, '#new_message_button'
   element :sticky_header_text, '.flashes .flash'
 
   section :sidebar, Model::Section::Messenger::Uitk5WildfireappMessengerSidebar, '.the-hero > #sidebar #messenger-nav'
   section :messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
   section :compose_message_panel, Model::Section::Messenger::Uitk5WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
+  section :draft_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerOutgoingMessagesPanel, 'div#draft_messages'
 
   def click_tab(tab)
     case tab
@@ -24,7 +26,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
     when "Sent" 
       load_panel(sidebar.sent_messages_link, Proc.new { messages_div_header.text == 'Sent Messages' })
     when "Drafts" 
-      load_panel(sidebar.drafts_link, Proc.new { messages_div_header.text == 'Drafts' })
+      load_panel(sidebar.drafts_link, Proc.new { drafts_div_header.text == 'Drafts' })
     when "Scheduled" 
       load_panel(sidebar.scheduled_link, Proc.new { messages_div_header.text == 'Scheduled Messages' })
     when "Filters" 
@@ -33,7 +35,26 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
     end
   end
 
+  def load_panel (panel_link, is_panel_expression)
+    panel_link.click
+    msg = "Panel header failed to appear after waiting 30 seconds."
+    Timeout.timeout_and_raise(30, msg) { sleep 0.1 while not is_expected_panel?(is_panel_expression) }
+  end
+
   def compose_message
     new_message_button.click
+  end
+
+  def messages_in_folder(folder_name)
+    click_tab folder_name
+    if folder_name == "Sent"
+      sent_messages_panel.messages_in_folder
+    elsif folder_name == "Drafts"
+      draft_messages_panel.messages_in_folder
+    elsif folder_name == "Scheduled"
+      scheduled_messages_panel.messages_in_folder
+    else
+      messages_panel.messages.collect {|m| m.body.text }
+    end
   end
 end

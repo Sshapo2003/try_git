@@ -19,7 +19,8 @@ Then /^I should be informed that the message has been scheduled succesfully$/ do
 end
 
 Then /^I should be informed that the message has been saved as a draft$/ do
-  @wildfire.wildfireapp_messenger.compose_message_panel.header.text.should include "Edit Draft Message - Saved on "
+  msg = 'Timed out waiting for "Draft Saved On" message to be displayed in header area.'
+  Timeout.timeout_and_raise(30, msg) { sleep 0.1 until @wildfire.wildfireapp_messenger.compose_message_panel.header_message.text.include? "Saved on " }
 end
 
 Given /^I have an assigned message$/ do

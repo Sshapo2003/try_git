@@ -6,7 +6,6 @@ class Model::Section::Messenger::Uitk5WildfireappMessengerComposeMessagePanel < 
   element :recepients_error, '#recipients .help-inline'
   element :date_error, '#when_to_send .help-inline'
   element :message_error, '#message_container .help-inline'
-  element :header, 'h2'
   element :later_button, '#outgoing_message_when_1'
   element :date_field, '#outgoing_message_send_at_date'
   element :hours_select_value, '#outgoing_message_send_at_hour'
@@ -15,6 +14,7 @@ class Model::Section::Messenger::Uitk5WildfireappMessengerComposeMessagePanel < 
   element :link_shortner_link, '#shorten_link'
   elements :recepients, 'ul.chzn-results li'
   elements :remove_recipient_links, '.search-choice-close'
+  root_element :header_message, '.page-header'
 
   section :attachments_section, Model::Section::Messenger::Uitk5WildfireappMessengerComposeMessagePanelAttachmentSection, '#attachment'
 
