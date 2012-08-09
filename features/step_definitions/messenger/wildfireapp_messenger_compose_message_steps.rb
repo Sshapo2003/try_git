@@ -75,7 +75,11 @@ When /^I set the Messenger message date in the past$/ do
 end
 
 Then /^the "(.*?)" button should be displayed on wildfire app messenger page$/ do |button_label|
-  @wildfire.wildfireapp_messenger.compose_message_panel.send_button.text.should include button_label
+  if ENV['CONFIG'] == 'am-test'
+    @wildfire.wildfireapp_messenger.compose_message_panel.send_button[:value].should include button_label
+  else
+    @wildfire.wildfireapp_messenger.compose_message_panel.send_button.text.should include button_label
+  end
 end
 
 Then /^the time should be set for about now$/ do

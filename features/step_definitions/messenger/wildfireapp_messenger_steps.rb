@@ -32,9 +32,9 @@ end
 
 Given /^I have an unassigned message$/ do
   unless @wildfire.wildfireapp_messenger.messages_panel.unassigned_messages.size > 0
-    @wildfire.wildfireapp_messenger.sidebar.compose_link.click
-    @wildfire.wildfireapp_messenger.compose_message_panel.compose_and_send_a_valid_message
-    @wildfire.wildfireapp_messenger.sidebar.messages_link.click
+    @wildfire.wildfireapp_messenger.click_tab 'Compose'
+    @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message
+    @wildfire.wildfireapp_messenger.sidebar.click_tab 'Messages'
     @messengeradmin.refresh_a_social_property.load
     @messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['facebook_property_name']
     @wildfire.wildfireapp_messenger.load

@@ -7,10 +7,10 @@ Feature: Messenger Admin Login
   @complete
   Scenario: Correct tabs shown
     Then the following tabs should be visible on the messenger admin page
-    |Dashboard                 |
-    |Outgoing Messages         |
-    |Sending Failures          |
-    |Resque                    |
-    |Errors                    |
-    |KPI Report                |
-    |Refresh a Social Property |
+      |Dashboard                 |
+      |Outgoing Messages         |
+      |Sending Failures          |
+      |Invalidations             |
+      |Errors                    |
+      |KPI Report                |
+      |Refresh Property          |

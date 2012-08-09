@@ -1,7 +1,5 @@
 class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SitePrism::Section
   element :message_textbox, 'textarea#message_body'
-  element :later_radio_button, 'span.later a'
-  element :scheduled_date_field, 'input#message_send_at_date'
   element :send_button, "button.wf_submit[name='commit']"
   element :send_draft_message_link, 'div.wf_menu_button_wpr a.submit'
   element :save_draft_button, "button.wf_submit[name='commit_draft']"
@@ -58,8 +56,8 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
   end
 
   def schedule_message(scheduled_time)
-    later_radio_button.click
-    scheduled_date_field.set scheduled_time
+    later_button.click
+    date_field.set scheduled_time
   end
 
   def send_message

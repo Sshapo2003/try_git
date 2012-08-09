@@ -10,7 +10,8 @@ Feature: Composing Messages
   When I click the "Compose" tab on the left navigation menu on wildfire app messenger page
     And I select the "Later" radio button on wildfire app messenger page
     And the "Schedule" button should be displayed on wildfire app messenger page
-    When I click the "Compose" tab on the left navigation menu on wildfire app messenger page
+    When I click the "Messages" tab on the left navigation menu on wildfire app messenger page
+    And I click the "Compose" tab on the left navigation menu on wildfire app messenger page
     Then the "Send" button should be displayed on wildfire app messenger page
 
   @complete
