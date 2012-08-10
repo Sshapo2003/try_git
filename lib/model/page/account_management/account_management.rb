@@ -37,11 +37,11 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   end
   
   def manage_accounts
-    Model::Page::AccountManagement::ManageAccounts.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5ManageAccounts.new : Model::Page::AccountManagement::ManageAccounts.new
   end
   
   def edit_subscription
-    Model::Page::AccountManagement::EditSubscription.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5EditSubscription.new : Model::Page::AccountManagement::EditSubscription.new
   end
   
   def create_company
