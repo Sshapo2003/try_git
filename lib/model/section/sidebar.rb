@@ -39,6 +39,11 @@ class Model::Section::Sidebar < SitePrism::Section
     applications_panel.send(app).click
   end
   
+  def switch_company(name)
+    show_switchboard
+    switchboard_panel.switch_company(name)
+  end
+  
   private
   
   def panels

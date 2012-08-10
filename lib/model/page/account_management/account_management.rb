@@ -1,11 +1,9 @@
 class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
-  include ::Wildfire::Header
+  uitk5? ? section(:sidebar, Model::Section::Sidebar, '#sidebar') : include(::Wildfire::Header)
   include Helpers::ModalHelper
   
   set_url(Helpers::Config['wildfire_site_root']) #TODO - The site root should really be www and we should have a spearate site for account
   set_url_matcher /#{Regexp.escape(url)}/
-  
-  section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
   
   def your_properties
     uitk5? ? Model::Page::AccountManagement::Uitk5YourProperties.new : Model::Page::AccountManagement::YourProperties.new
