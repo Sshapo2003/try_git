@@ -7,9 +7,5 @@ module SitePrism
     def uitk5?
       %w{am-test staging}.include? ENV['CONFIG']
     end
-    
-    def self.uitk5?
-      %w{am-test staging}.include? ENV['CONFIG']
-    end
   end
 end

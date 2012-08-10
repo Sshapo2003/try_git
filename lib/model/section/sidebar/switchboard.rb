@@ -30,4 +30,8 @@ class Model::Section::Sidebar::Switchboard < SitePrism::Section
   def manage_account(name)
     accounts.detect { |a| a.text.strip == name }.first('a').click
   end
+  
+  def create_new_company
+    first('li', :text => 'Create New Company').first('a').click
+  end
 end

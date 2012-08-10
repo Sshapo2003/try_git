@@ -1,5 +1,5 @@
 class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
-  uitk5? ? section(:sidebar, Model::Section::Sidebar, '#sidebar') : include(::Wildfire::Header)
+  include ::Wildfire::Header
   include Helpers::ModalHelper
   
   set_url(Helpers::Config['wildfire_site_root']) #TODO - The site root should really be www and we should have a spearate site for account

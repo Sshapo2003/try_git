@@ -16,4 +16,12 @@ class Model::Page::AccountManagement::Uitk5EditSubscription < SitePrism::Page
     end
     wait_until() { !has_modal? }
   end
+  
+  def set_company_limit(limit)
+    within_modal do
+      fill_in('Company Limit', :with => limit)
+      click_on 'Save'
+    end
+    wait_until() { !has_modal? }
+  end
 end

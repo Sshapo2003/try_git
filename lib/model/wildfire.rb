@@ -57,7 +57,7 @@ class Model::Wildfire
     Model::Page::Monitor::WildfireappMonitor.new
   end
   def account_management
-    Model::Page::AccountManagement::AccountManagement.new
+    uitk5? ? Model::Page::AccountManagement::Uitk5AccountManagement.new : Model::Page::AccountManagement::AccountManagement.new
   end
   def your_properties
     Model::Page::AccountManagement::YourProperties.new
@@ -70,5 +70,9 @@ class Model::Wildfire
   end
   def comparison
     Model::Page::Monitor::Comparison.new
+  end
+  
+  def uitk5?
+    %w{am-test staging}.include? ENV['CONFIG']
   end
 end
