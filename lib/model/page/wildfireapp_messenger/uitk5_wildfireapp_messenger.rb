@@ -5,6 +5,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   element :messages_div_header, '.span8'
   element :new_message_button, '.btn-primary'
   element :sticky_header_text, '.flashes .flash'
+  element :notifications_trigger, '#notifications_trigger'
   element :unflag_message_button, 'a[href="Unflag"]'
 
   section :sidebar, Model::Section::Messenger::Uitk5WildfireappMessengerSidebar, '.the-hero > #sidebar #messenger-nav'
@@ -19,7 +20,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
 
   section :create_filter_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerCreateFilterFormDialog, '#new_message_filter'
   section :assign_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerUserAssignmentFormDialog, '#message_assignment_dialog #message_assignment_dialog'
-
+  sections :notifications, Model::Section::Generic::Uitk5WildfireappNotification, '.notification'
 
   def click_tab(tab)
     case tab

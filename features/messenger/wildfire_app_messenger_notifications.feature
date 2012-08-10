@@ -3,6 +3,7 @@ Feature: Notifications
 
   Background:
     Given I am logged in to Wildfire as the default user
+    And I navigate to the wildfire app messenger page
 
   @complete @production @staging @amtest
   Scenario: Displaying of Notifications
