@@ -1,4 +1,4 @@
-@messenger @production @staging @amtest
+@messenger
 Feature: Scheduled Messages
 
   Background:
@@ -6,7 +6,8 @@ Feature: Scheduled Messages
     And I navigate to the wildfire app messenger page
     And I click the "Scheduled" tab on the left navigation menu on wildfire app messenger page
 
-  @complete
+  # Setting this to not_started because uitk5 resulted in a big change to how paging appears
+  @not_started @production @staging @amtest
   Scenario: Scheduled Panel Paging
     Given I have more than 25 scheduled messages
     Then 25 messages should be displayed in the Scheduled Panel

@@ -1,7 +1,7 @@
 class Model::Section::Messenger::WildfireappMessengerMessagesPanel < SitePrism::Section
   elements :pagination_totals, 'div.pagination strong'
-  element :enabled_next_page_button, 'a.next'
-  element :enabled_previous_page_button, 'a.prev'
+  element :enabled_next_page_button, '.next'
+  element :enabled_previous_page_button, '.prev'
   element :actions_menu, 'div.wf_prompt_button_wpr a'
   element :clear_deleted_messages_button, 'a.delete_all_messages'
   root_element :actions_menu_options, 'ol#message_action'

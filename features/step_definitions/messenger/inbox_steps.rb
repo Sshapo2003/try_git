@@ -1,8 +1,7 @@
 When /^I view the replies for the twitter message$/ do
   Timeout.timeout_and_raise(180, "Timed out while waiting for tweet #{@tweet_content} to appear in the messenger inbox.") do
     while @wildfire.wildfireapp_messenger.messages_panel.messages.select {|m| m.body.text.include? @tweet_content }.count < 1 do
-      sleep 5.0
-      page.driver.refresh
+      @wildfire.wildfireapp_messenger.messages_panel.enabled_next_page_button.click
     end
   end
   @message = @wildfire.wildfireapp_messenger.messages_panel.messages.select {|m| m.body.text.include? @tweet_content}.first
@@ -40,7 +39,7 @@ Then /^the character count should become a negative value$/ do
 end
 
 Then /^the Tweet button should be disabled$/ do
-  @message.replies[0].post_reply_button[:disabled].should eql 'true'
+  @message.should have_disabled_post_reply_button
 end
 
 When /^I enter a message with a valid number of characters$/ do
@@ -59,9 +58,9 @@ end
 When /^I send the reply to the twitter message$/ do
   @message.replies[0].post_reply_button.click
   msg = 'Time Out occured waiting for "Reply sent!" to appear.'
-  Timeout.timeout(30, msg) {sleep 0.1 while not @message.replies[0].reply_form.text.include? 'Reply sent!' }
+  Timeout.timeout(30, msg) {sleep 0.1 while not @message.reply_sent_div.text.include? 'Reply sent!' }
 end
 
 Then /^I should be informed that the reply has been sent$/ do
-  @message.replies[0].reply_form.text.should include 'Reply sent!'
+  @message.reply_sent_div.text.should include 'Reply sent!'
 end
