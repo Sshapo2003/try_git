@@ -3,6 +3,9 @@ class Model::Section::Sidebar < SitePrism::Section
   section :applications_panel, Model::Section::Sidebar::ApplicationsPanel, '#panel-applications'
   section :company_settings_panel, Model::Section::Sidebar::CompanySettings, '#company-settings'
   section :promotions_panel, Model::Section::Sidebar::PromotionsPanel, '#panel-promotions'
+  section :messenger_panel, Model::Section::Sidebar::MessengerPanel, '#messenger-nav'
+  section :analytics_panel, Model::Section::Sidebar::AnalyticsPanel, '#dashboard_nav'
+  section :pages_panel, Model::Section::Sidebar::PagesPanel, '#panel-main'
   section :account_settings_panel, Model::Section::Sidebar::AccountSettingsPanel, '#account-settings'
   
   def accounts
@@ -16,6 +19,7 @@ class Model::Section::Sidebar < SitePrism::Section
   end
   
   def current_company
+    show_applications_panel
     applications_panel.menu_header.text.strip
   end
   
@@ -25,6 +29,11 @@ class Model::Section::Sidebar < SitePrism::Section
   
   def show_switchboard
     while !switchboard_panel.active? do active_panel.back_button.click end
+  end
+  
+  def show_applications_panel
+    visit(current_url) if active_panel == switchboard_panel
+    while !applications_panel.active? do active_panel.back_button.click end
   end
   
   def manage_account(account_name = accounts.first)
@@ -47,7 +56,7 @@ class Model::Section::Sidebar < SitePrism::Section
   private
   
   def panels
-    [:switchboard_panel, :applications_panel, :company_settings_panel, :promotions_panel, :account_settings_panel]
+    [:switchboard_panel, :applications_panel, :company_settings_panel, :promotions_panel, :account_settings_panel, :messenger_panel, :analytics_panel, :pages_panel]
   end
   
   def applications
