@@ -10,7 +10,7 @@ class Model::Wildfire
     end
   end
   def signup
-    Model::Page::Signup.new
+    account_management.signup
   end
   def dashboard
     Model::Page::Dashboard.new

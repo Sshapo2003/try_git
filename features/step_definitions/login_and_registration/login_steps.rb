@@ -37,7 +37,6 @@ Then /^the login page should display the message "(.*)"$/ do |message|
 end
 
 Then /^the login page should be loaded$/ do
-  @wildfire.login.wait_for_login_user_credentials_form
   @wildfire.login.is_loaded?.should be_true
 end
 
