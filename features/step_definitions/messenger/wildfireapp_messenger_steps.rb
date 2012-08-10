@@ -158,16 +158,12 @@ Then /^the remaining messages should be displayed$/ do
   messages_displayed.should eql expected_messages_displayed
 end
 
-Then /^the actions drop down on the "(.*)" panel contains Assign, Delete and Unflag$/ do |panel|
-  @wildfire.wildfireapp_messenger.messages_panel.actions_menu.click
-  menu_items = @wildfire.wildfireapp_messenger.messages_panel.actions_menu_options
-  ["Assign", "Delete", "Unflag"].each {|i| menu_items.text.should include i }
-end
-
-Then /^there should be no drop actions drop down on the "Deleted Messages" panel$/ do
-  @wildfire.wildfireapp_messenger.messages_panel.has_actions_menu?.should be_false
+Then /^the actions on the "(.*)" panel are Assign, Delete and Unflag$/ do |panel|
+  @wildfire.wildfireapp_messenger.messages_panel.should have_assign_button
+  @wildfire.wildfireapp_messenger.messages_panel.should have_delete_button
+  @wildfire.wildfireapp_messenger.messages_panel.should have_unflag_button
 end
 
 Then /^there should be a "Clear Deleted Messages" button on the "Deleted Messages" panel$/ do
-  @wildfire.wildfireapp_messenger.messages_panel.has_clear_deleted_messages_button?.should be_true
+  @wildfire.wildfireapp_messenger.messages_panel.should have_clear_deleted_messages_button
 end

@@ -1,4 +1,4 @@
-class Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel < Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel 
+class Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel < Model::Section::Messenger::Uitk5WildfireappMessengerMessagesPanel 
   sections :messages, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessage, 'table.messages tr'
 
   def assigned_messages
