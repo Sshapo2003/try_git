@@ -8,7 +8,6 @@ Given /^I have a valid draft message$/ do
   unless @wildfire.wildfireapp_messenger.draft_messages_panel.messages.size > 0 then raise "No draft messages could be found in the messenger inbox" end
 
   @draft_message = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.first
-  @draft_message_content = @draft_message.body.text
 end
 
 Given /^I have a valid unique draft message$/ do
@@ -17,9 +16,7 @@ Given /^I have a valid unique draft message$/ do
   step 'I click the "Drafts" tab on the left navigation menu on wildfire app messenger page'
   
   unless @wildfire.wildfireapp_messenger.draft_messages_panel.messages.size > 0 then raise "No draft messages could be found in the messenger inbox" end
-
   @draft_message = @wildfire.wildfireapp_messenger.draft_messages_panel.messages.first
-  @draft_message_content = @draft_message.body.text
 end
 
 When /^I delete the draft message$/ do
@@ -27,7 +24,7 @@ When /^I delete the draft message$/ do
 end
 
 When /^I edit the draft$/ do
-  @message_body = @draft_message.edit_first_draft
+  @message_body = @draft_message.edit_draft
 end
 
 When /^I send the draft message$/ do
@@ -41,7 +38,7 @@ end
 
 Then /^the message should not be visible in the drafts folder$/ do
   @wildfire.wildfireapp_messenger.click_tab 'Drafts'
-  @wildfire.wildfireapp_messenger.draft_messages_panel.messages.select {|m| m.body.text.include? @draft_message_content }.count.should eql 0
+  @wildfire.wildfireapp_messenger.draft_messages_panel.messages.select {|m| m.body.text.include? @message_body }.count.should eql 0
 end
 
 Given /^I have more than (\d+) draft messages$/ do |number_of_messages|

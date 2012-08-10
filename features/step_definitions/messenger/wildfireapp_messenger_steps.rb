@@ -85,7 +85,6 @@ Then /^the message should be visible in the "(.*)" folder$/ do |folder|
       @wildfire.wildfireapp_messenger.click_tab folder
     end
   end
-  @wildfire.wildfireapp_messenger.messages_in_folder(folder).select {|m| m.include? @message_body }.count.should eql 1
 end
 
 Given /^I have more than (\d+) messages in the Messages Panel$/ do |number_of_messages|

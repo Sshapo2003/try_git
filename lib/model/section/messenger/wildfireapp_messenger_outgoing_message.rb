@@ -12,7 +12,7 @@ class Model::Section::Messenger::WildfireappMessengerOutgoingMessage < SitePrism
     page.driver.browser.switch_to.alert.accept
   end
 
-  def edit_first_draft
+  def edit_draft
     message_body = body.text
     visit edit_draft_link[:href]
     message_body

@@ -2,8 +2,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   set_url "#{Helpers::Config['wildfire_messenger_root']}/"
   set_url_matcher /messenger/
   
-  element :drafts_div_header, '.span8'
-  element :scheduled_div_header, '.span8'
+  element :messages_div_header, '.span8'
   element :new_message_button, '.btn-primary'
   element :sticky_header_text, '.flashes .flash'
 
@@ -12,7 +11,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   section :compose_message_panel, Model::Section::Messenger::Uitk5WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
   section :draft_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerOutgoingMessagesPanel, 'div#draft_messages'
   section :scheduled_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerScheduledMessagesPanel, '.main_container'
-
+  section :sent_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerSentMessagesPanel, '.main_container'
 
   def click_tab(tab)
     case tab
@@ -29,9 +28,9 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
     when "Sent" 
       load_panel(sidebar.sent_messages_link, Proc.new { messages_div_header.text == 'Sent Messages' })
     when "Drafts" 
-      load_panel(sidebar.drafts_link, Proc.new { drafts_div_header.text == 'Drafts' })
+      load_panel(sidebar.drafts_link, Proc.new { messages_div_header.text == 'Drafts' })
     when "Scheduled" 
-      load_panel(sidebar.scheduled_link, Proc.new { scheduled_div_header.text == 'Scheduled Messages' })
+      load_panel(sidebar.scheduled_link, Proc.new { messages_div_header.text == 'Scheduled Messages' })
     when "Filters" 
       load_panel(sidebar.filters_link, Proc.new { messages_div_header.text == 'Keyword Filters' })
     else raise "Unknown tab #{tab}"
