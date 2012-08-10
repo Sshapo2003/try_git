@@ -6,7 +6,6 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   element :compose_message_div_header, 'div#messenger_form h2'
   element :sticky_header_text, 'span.flash_contents'
   element :notifications_trigger, 'a#notifications_trigger'
-
   element :actions_menu, '.wf_prompt_button_wpr a'
   element :action_menu_action_item, "ol#message_action a[href='Assign']"
 

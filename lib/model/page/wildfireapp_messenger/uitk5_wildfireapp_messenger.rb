@@ -12,6 +12,8 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   section :draft_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerOutgoingMessagesPanel, 'div#draft_messages'
   section :scheduled_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerScheduledMessagesPanel, '.main_container'
   section :sent_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerSentMessagesPanel, '.main_container'
+  section :filters_panel, Model::Section::Messenger::Uitk5WildfireappMessengerFiltersPanel, '.main_container'
+  section :create_filter_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerCreateFilterFormDialog, '#new_message_filter'
 
   def click_tab(tab)
     case tab
@@ -58,5 +60,13 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
     else
       messages_panel.messages.collect {|m| m.body.text }
     end
+  end
+
+  def create_a_filter
+    filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
+    filters_panel.create_new_filter_button.click
+    create_filter_dialog.name.set filter_name
+    create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
+    return filter_name
   end
 end
