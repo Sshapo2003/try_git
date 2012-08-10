@@ -8,13 +8,18 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   element :unflag_message_button, 'a[href="Unflag"]'
 
   section :sidebar, Model::Section::Messenger::Uitk5WildfireappMessengerSidebar, '.the-hero > #sidebar #messenger-nav'
+  
   section :messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
   section :compose_message_panel, Model::Section::Messenger::Uitk5WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
   section :draft_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerOutgoingMessagesPanel, 'div#draft_messages'
   section :scheduled_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerScheduledMessagesPanel, '.main_container'
   section :sent_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerSentMessagesPanel, '.main_container'
+  section :assigned_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel, '.main_container'
   section :filters_panel, Model::Section::Messenger::Uitk5WildfireappMessengerFiltersPanel, '.main_container'
+
   section :create_filter_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerCreateFilterFormDialog, '#new_message_filter'
+  section :assign_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerUserAssignmentFormDialog, '#message_assignment_dialog #message_assignment_dialog'
+
 
   def click_tab(tab)
     case tab
@@ -75,5 +80,13 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
     message.select
     unflag_message_button.click
     Timeout.timeout(30) { sleep 0.1 while not sticky_header_text.text.include? "Flagged Message has been cleared." }
+  end
+
+  def assign_message_to_me(message)
+    message.select
+    messages_panel.assign_button.click
+    wait_for_assign_dialog(30)
+    assign_dialog.select_me
+    assign_dialog.save_button.click
   end
 end
