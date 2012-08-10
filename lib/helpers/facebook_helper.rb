@@ -7,6 +7,7 @@ class Helpers::FacebookHelper
 
     def login
       creds = { :username => Helpers::Config['default_facebook_poster_username'], :password => Helpers::Config['default_facebook_poster_password'] }
+      @facebook = Model::Facebook.new
       @facebook.timeline.visit_my_timeline(creds)
     end
   end

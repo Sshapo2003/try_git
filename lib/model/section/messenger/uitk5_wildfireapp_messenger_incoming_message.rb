@@ -4,10 +4,16 @@ class Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessage < Mode
   element :facebook_icon, '.facebook'
   element :twitter_icon, '.twitter'
   element :add_comment_button, "input[value='Add Comment']"
+  element :flagged, '.flagged_message_icon'
+  element :body, 'div.body'
   root_element :assigned_to_bubbletip, '.popover'
 
   def is_assigned?
     has_assigned_to?
+  end
+
+  def is_flagged?
+    has_flagged?
   end
 
   def is_facebook_message?

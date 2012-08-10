@@ -5,6 +5,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   element :messages_div_header, '.span8'
   element :new_message_button, '.btn-primary'
   element :sticky_header_text, '.flashes .flash'
+  element :unflag_message_button, 'a[href="Unflag"]'
 
   section :sidebar, Model::Section::Messenger::Uitk5WildfireappMessengerSidebar, '.the-hero > #sidebar #messenger-nav'
   section :messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
@@ -68,5 +69,11 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
     create_filter_dialog.name.set filter_name
     create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
     return filter_name
+  end
+
+  def unflag_message(message)
+    message.select
+    unflag_message_button.click
+    Timeout.timeout(30) { sleep 0.1 while not sticky_header_text.text.include? "Flagged Message has been cleared." }
   end
 end
