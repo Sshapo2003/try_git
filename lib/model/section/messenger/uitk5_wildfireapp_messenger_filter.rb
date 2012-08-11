@@ -2,6 +2,7 @@ class Model::Section::Messenger::Uitk5WildfireappMessengerFilter < SitePrism::Se
 
   elements :table_cells, 'td'
   element :edit_link, '.edit_filter'
+  element :delete_link, '.delete'
 
   def name
     table_cells[0]

@@ -16,7 +16,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   section :sent_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerSentMessagesPanel, '.main_container'
   section :assigned_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel, '.main_container'
   section :filters_panel, Model::Section::Messenger::Uitk5WildfireappMessengerFiltersPanel, '.main_container'
-  section :create_filter_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerCreateFilterFormDialog, '#new_message_filter'
+  section :create_filter_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerCreateFilterFormDialog, '#message_filter_form'
   section :assign_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerUserAssignmentFormDialog, '#message_assignment_dialog #message_assignment_dialog'
   sections :notifications, Model::Section::Generic::Uitk5WildfireappNotification, '.notification'
   section :edit_filter_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerCreateFilterFormDialog, '#message_filter_form'
