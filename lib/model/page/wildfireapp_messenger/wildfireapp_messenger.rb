@@ -37,10 +37,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   end
 
   def create_and_save_a_valid_filter
-    filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
-    filters_panel.create_new_filter_button.click
-    create_filter_dialog.name.set filter_name
-    create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
+    filter_name = create_a_filter
     create_filter_dialog.save_button.click
     Timeout.timeout_and_raise(180, 'Filter not found') do
       found = false
