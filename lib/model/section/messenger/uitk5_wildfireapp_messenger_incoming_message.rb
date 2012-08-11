@@ -1,8 +1,6 @@
 class Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessage < Model::Section::Messenger::WildfireappMessengerIncomingMessage
   element :assigned_to,                '.assigned_to'
   element :assigned_avatar,            '.status_icons .assigned_to a img'
-  element :facebook_icon,              '.facebook'
-  element :twitter_icon,               '.twitter'
   element :add_comment_button,         "input[value='Add Comment']"
   element :flagged,                    '.flagged_message_icon'
   element :body,                       'div.body'
@@ -22,11 +20,11 @@ class Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessage < Mode
   end
 
   def is_facebook_message?
-    has_facebook_icon?
+    root_element[:class].include? 'facebook_page'
   end
 
   def is_twitter_message?
-    has_twitter_icon?
+    root_element[:class].include? 'twitter_account'
   end
 
   def hover_over_assigned_to
