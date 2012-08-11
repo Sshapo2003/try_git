@@ -1,6 +1,7 @@
 class Model::Section::Messenger::Uitk5WildfireappMessengerFilter < SitePrism::Section
 
   elements :table_cells, 'td'
+  element :edit_link, '.edit_filter'
 
   def name
     table_cells[0]

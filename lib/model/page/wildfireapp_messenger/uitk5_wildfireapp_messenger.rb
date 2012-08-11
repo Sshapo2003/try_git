@@ -19,6 +19,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   section :create_filter_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerCreateFilterFormDialog, '#new_message_filter'
   section :assign_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerUserAssignmentFormDialog, '#message_assignment_dialog #message_assignment_dialog'
   sections :notifications, Model::Section::Generic::Uitk5WildfireappNotification, '.notification'
+  section :edit_filter_dialog, Model::Section::Messenger::Uitk5WildfireappMessengerCreateFilterFormDialog, '#message_filter_form'
 
   def click_tab(tab)
     case tab
@@ -87,5 +88,11 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
     wait_for_assign_dialog(30)
     assign_dialog.select_me
     assign_dialog.save_button.click
+  end
+
+  def assign_filter_to_my_company filter_name
+    filters_panel.filter_by_name(filter_name).edit
+    edit_filter_dialog.wait_for_save_button 30
+    edit_filter_dialog.add_property Helpers::Config['facebook_property_name']
   end
 end
