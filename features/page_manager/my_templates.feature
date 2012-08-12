@@ -1,5 +1,5 @@
 @page_manager
-Feature: My Templates
+Feature: Templates General Functionality
 
   Background:
     Given I am logged in to Wildfire as the template user
