@@ -3,7 +3,7 @@ class Model::Wildfire
     Model::Page::WildfireFrontPage.new
   end
   def login
-    if ENV['CONFIG'] == 'am-test'
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
       Model::Page::AccountManagement::Uitk5Login.new
     else
       Model::Page::Login.new
@@ -16,7 +16,7 @@ class Model::Wildfire
     Model::Page::Dashboard.new
   end
   def wildfireapp_messenger
-    if ENV['CONFIG'] == 'am-test'
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
       Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger.new
     else
       Model::Page::WildfireappMessenger::WildfireappMessenger.new
@@ -26,7 +26,7 @@ class Model::Wildfire
     Model::Page::WildfireappAnalytics.new
   end
   def page_manager
-    if ENV['CONFIG'] == 'am-test'
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
       Model::Page::PageManager::Uitk5PageManager.new
     else
       Model::Page::PageManager::PageManager.new

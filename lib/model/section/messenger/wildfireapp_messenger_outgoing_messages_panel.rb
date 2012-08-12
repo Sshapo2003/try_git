@@ -12,6 +12,6 @@ class Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel < Mod
   end
 
   def has_message? message
-    messages.select {|m| m.body.text.include? message }.count < 1
+    messages.select {|m| m.body.text.include? message }.count > 0
   end
 end

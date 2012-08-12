@@ -71,11 +71,11 @@ end
 
 When /^I set the Messenger message date in the past$/ do
   @wildfire.wildfireapp_messenger.compose_message_panel.later_button.click
-  @wildfire.wildfireapp_messenger.compose_message_panel.date_field.set Chronic.parse('yesterday').strftime("%m/%d/%y")
+  @wildfire.wildfireapp_messenger.compose_message_panel.date_field.set Chronic.parse('3 days ago').strftime("%m/%d/%Y")
 end
 
 Then /^the "(.*?)" button should be displayed on wildfire app messenger page$/ do |button_label|
-  if ENV['CONFIG'] == 'am-test'
+  if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
     @wildfire.wildfireapp_messenger.compose_message_panel.send_button[:value].should include button_label
   else
     @wildfire.wildfireapp_messenger.compose_message_panel.send_button.text.should include button_label

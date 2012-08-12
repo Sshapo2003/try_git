@@ -1,7 +1,8 @@
-@messenger @amtest @staging @production
+@messenger
 Feature: Twitter Replies
 
-  @complete @no-ci
+  # Currently not running on Production until Uitk5 changes applied
+  @complete @no-ci @amtest @staging
   Scenario: Should be able to see replies to a twitter message
     Given I have a twitter message with multiple replies from another user
     When I view the wildfire app messenger page as the default user
@@ -20,7 +21,7 @@ Feature: Twitter Replies
     Then I should be informed that the reply has been sent
     And the message should be visible on my twitter page
 
-  @complete @no-ci
+  @complete @no-ci @amtest @staging @production
   Scenario: View a tweet with no replies
     Given I have a tweet with no replies
     When I view the wildfire app messenger page as the default user
