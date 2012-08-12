@@ -21,7 +21,7 @@ Feature: Draft Pages
 
   @complete
   Scenario: Archive and Unarchive a Page
-    When I archive a Page
+    When I archive a page
     Then there should be one less page in Drafts
     And the page should be listed in Archived
     When I unarchive the archived page

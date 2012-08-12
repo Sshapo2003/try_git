@@ -31,6 +31,6 @@ end
 
 Then /^the page should be listed in Drafts$/ do
   step 'I view "Drafts" in the left hand nav bar of Page Manager'
-  @wildfire.page_manager.content_div.wait_for_pages(180)
-  @wildfire.page_manager.content_div.pages.first.title_div.text.should eql @page_name
+  @wildfire.page_manager.draft_pages_panel.wait_for_pages(180)
+  @wildfire.page_manager.draft_pages_panel.pages.first.name.text.should eql @page_name
 end
