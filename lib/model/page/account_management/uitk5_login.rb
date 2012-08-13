@@ -1,5 +1,5 @@
 class Model::Page::AccountManagement::Uitk5Login < SitePrism::Page
-  set_url 'https://account.am-test.wfhack.com/sso_sign_on/'
+  set_url "#{Helpers::Config['wildfire_site_root']}/sso_sign_on/"
 
   element :email_field,          '#email'
   element :password_field,       '#password'
