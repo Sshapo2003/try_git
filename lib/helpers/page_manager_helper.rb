@@ -123,13 +123,11 @@ class Helpers::PageManagerHelper
       template = my_templates_panel.get_template_by_title name
       template.wait_for_drop_down_menu(30)
       template.drop_down_menu.click
-      link = template.drop_down_menu_options.select {|o| o.text == "Delete Template" }.first[:href]
-      my_templates_panel.page.execute_script %{ $('body > ol li a[href="#{link}"]').click() }
-
+      template.delete_template_menu_option.click
       my_templates_panel.page.driver.browser.switch_to.alert.accept
 
       msg = "Unable to delete template. Sticky Message = #{wildfire.page_manager.sticky_label.text}"
-      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.page_manager.sticky_label.text != 'You have successfully deleted the template.' }
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until wildfire.page_manager.sticky_label.text.include? 'You have successfully deleted the template.' }
     end
 
     def upload_new_template
