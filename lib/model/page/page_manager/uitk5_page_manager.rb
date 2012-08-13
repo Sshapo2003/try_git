@@ -6,7 +6,7 @@ class Model::Page::PageManager::Uitk5PageManager < Model::Page::PageManager::Pag
   elements :sidebar_links, '#sidebar #panel-main a'
 
   section :my_templates_panel, Model::Section::PageManager::Uitk5MyTemplatesPanel,      '.outer .container'
-  section :published_pages_panel, Model::Section::PageManager::PublishedTemplatesPanel, '.outer .container'
+  section :published_pages_panel, Model::Section::PageManager::Uitk5PublishedTemplatesPanel, '.outer .container'
   section :draft_pages_panel, Model::Section::PageManager::Uitk5DraftPagesPanel,        '.outer .container'
   section :archived_pages_panel, Model::Section::PageManager::Uitk5ArchivedPagesPanel,  '.outer .container'
   section :upload_a_template_panel, Model::Section::PageManager::PagesPanel,            '.outer .container'

@@ -14,4 +14,14 @@ class Model::Page::PageManager::Uitk5TemplateBuilder < SitePrism::Page
   def click_tab tab_name
     tabs.select { |t| t.text.include? tab_name }.first.click
   end
+
+  def update_default_liquid liquid_content
+    edit_default_liquid_link.click
+    Timeout.timeout(30) { sleep 0.1 while not page.evaluate_script("editor.isFocused()") }
+    page.execute_script("editor.removeLines()")
+    page.execute_script(%{$(".ace_line_group .ace_line")[0].click()})
+    page.execute_script("editor.insert('#{liquid_content}')")
+    sleep 1
+    edit_liquid_dialog_save_button.click
+  end
 end

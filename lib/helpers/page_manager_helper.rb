@@ -3,15 +3,11 @@ class Helpers::PageManagerHelper
     def update_template_with_valid_liquid_content template
       wildfire = Model::Wildfire.new
       edit_template_design(template.title_div.text)
-      wildfire.template_builder.edit_default_liquid_link.click
       liquid_content = "Hello World #{String.random}"
-
-      Timeout.timeout(30 ) { sleep 0.1 while not wildfire.template_builder.page.evaluate_script("editor.isFocused()") }
-
-      wildfire.template_builder.page.execute_script("editor.removeLines()")
-      wildfire.template_builder.page.execute_script("editor.insert('#{liquid_content}')")
-      wildfire.template_builder.edit_liquid_dialog_save_button.click
-      wildfire.template_builder.wait_for_and_click_publish_template_changes_button(30)
+      wildfire.template_builder.update_default_liquid liquid_content
+      sleep 2
+      wildfire.template_builder.publish_template_changes_button.click
+      sleep 2
       wildfire.template_builder.wait_for_and_click_publish_changes_model_publish_template_changes_button
 
       msg = "Time out occured while waiting for template to be published."
