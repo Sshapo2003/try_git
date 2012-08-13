@@ -15,7 +15,7 @@ class Helpers::PageManagerHelper
       wildfire.template_builder.wait_for_and_click_publish_changes_model_publish_template_changes_button
 
       msg = "Time out occured while waiting for template to be published."
-      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while not wildfire.template_builder.sticky_label.text.include?("You've successfully created a new Template version!") }
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until wildfire.template_builder.sticky_label.text.include? "You've successfully created a new Template version!" }
 
       liquid_content
     end
@@ -142,7 +142,7 @@ class Helpers::PageManagerHelper
       wildfire.upload_template.submit_button.click
 
       msg = "Unable to upload template. Sticky Message = #{wildfire.page_manager.sticky_label.text}"
-      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.page_manager.sticky_label.text != "You've successfully uploaded a Template!" }
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until wildfire.page_manager.sticky_label.text.include?  "You've successfully uploaded a Template!" }
 
       template_name
     end
@@ -161,7 +161,7 @@ class Helpers::PageManagerHelper
       wildfire.page_manager.wait_for_sticky_label(30)
 
       msg = "Unable to upload template. Sticky Message = #{wildfire.page_manager.sticky_label.text}"
-      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.page_manager.sticky_label.text != "You have successfully added another version." }
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until wildfire.page_manager.sticky_label.text.include? "You have successfully added another version." }
     end
 
     def template_download_link template_name

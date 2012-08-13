@@ -60,7 +60,11 @@ class Model::Wildfire
     end
   end
   def upload_template
-    Model::Page::PageManager::UploadTemplate.new
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+      Model::Page::PageManager::Uitk5UploadTemplate.new
+    else
+      Model::Page::PageManager::UploadTemplate.new
+    end
   end
   def wildfireapp_promotion_builder
     Model::Page::PromotionBuilder::WildfireappPromotionBuilder.new
