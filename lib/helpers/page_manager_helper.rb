@@ -6,19 +6,13 @@ class Helpers::PageManagerHelper
       wildfire.template_builder.edit_default_liquid_link.click
       liquid_content = "Hello World #{String.random}"
 
-
       Timeout.timeout(30 ) { sleep 0.1 while not wildfire.template_builder.page.evaluate_script("editor.isFocused()") }
 
       wildfire.template_builder.page.execute_script("editor.removeLines()")
       wildfire.template_builder.page.execute_script("editor.insert('#{liquid_content}')")
       wildfire.template_builder.edit_liquid_dialog_save_button.click
-     
-      sleep 1.0
-      wildfire.template_builder.wait_for_publish_template_changes_button(30)
-      wildfire.template_builder.page.execute_script("$('a.publish_template').click()")
-
-      sleep 1.0
-      wildfire.template_builder.page.execute_script(%{$('button[value="Publish"]').click()})
+      wildfire.template_builder.wait_for_and_click_publish_template_changes_button(30)
+      wildfire.template_builder.wait_for_and_click_publish_changes_model_publish_template_changes_button
 
       msg = "Time out occured while waiting for template to be published."
       Timeout.timeout_and_raise(30, msg) { sleep 0.1 while not wildfire.template_builder.sticky_label.text.include?("You've successfully created a new Template version!") }
