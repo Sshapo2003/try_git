@@ -1,7 +1,7 @@
 class Model::Section::PageManager::Uitk5Template < SitePrism::Section
   element :title_div, '.title'
   element :edit_link, 'div.edit a span'
-  element :create_page_link, 'div.edit a span'
+  element :create_page_link, '.btn-group > a'
   element :drop_down_menu, '.dropdown-toggle'
   elements :drop_down_menu_options, '.dropdown-menu li a'
 

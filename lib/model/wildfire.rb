@@ -33,7 +33,11 @@ class Model::Wildfire
     end
   end
   def page_manager_edit_mode
-    Model::Page::PageManager::PageManagerEditMode.new
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+      Model::Page::PageManager::Uitk5PageManagerEditMode.new
+    else
+      Model::Page::PageManager::PageManagerEditMode.new
+    end
   end
   def wildfireapp_countdown_template_edit_header
     Model::Page::WildfireappCountdownTemplateEditHeader.new

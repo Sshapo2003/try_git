@@ -2,6 +2,7 @@ class Model::Page::PageManager::Uitk5PageManager < Model::Page::PageManager::Pag
   set_url "#{Helpers::Config['wildfire_page_manager_root']}/"
   set_url_matcher /pages\/states\/published/
 
+  element :sticky_label, '.flashes'
   elements :sidebar_links, '#sidebar #panel-main a'
 
   section :my_templates_panel, Model::Section::PageManager::Uitk5MyTemplatesPanel,      '.outer .container'
