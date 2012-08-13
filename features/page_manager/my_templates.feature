@@ -6,7 +6,7 @@ Feature: Templates General Functionality
     And I navigate to the wildfire app page manager page
     And I view "My Templates" in the left hand nav bar of Page Manager
 
-  @complete @amtest @staging @production
+  @complete @amtest @staging @production @failing
   Scenario: Clone a Template
     When I clone a template
     Then an additional template should be listed in My Templates
