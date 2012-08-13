@@ -4,14 +4,14 @@ When /^I create a page in Drafts$/ do
 end
 
 When /^I view the menu for a draft page$/ do
-  @wildfire.page_manager.content_div.wait_for_pages(180)
-  @wildfire.page_manager.content_div.pages.first.drop_down_menu.click
+  @wildfire.page_manager.draft_pages_panel.wait_for_pages(180)
+  @wildfire.page_manager.draft_pages_panel.pages.first.actions_drop_down.click
 end
 
 Then /^the following menu options should be available for the draft page$/ do |table|
   # table is a Cucumber::Ast::Table
   expected = table.raw.flatten
-  actual = @wildfire.page_manager.content_div.page_menu_options.map {|o| o.text}
+  actual = @wildfire.page_manager.draft_pages_panel.pages.first.actions_drop_down_options.map {|o| o.text}
   actual.should eql expected
 end
 

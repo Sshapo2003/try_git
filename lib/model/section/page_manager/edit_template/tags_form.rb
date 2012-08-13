@@ -1,8 +1,13 @@
 class Model::Section::PageManager::EditTemplate::TagsForm  < SitePrism::Section
   element :tags_input_field, 'input.default'
-  element :save_and_continue_button, "button[value='Save & Continue']"
+  element :save_and_continue_button, "input[value='Save & Continue']"
   element :chosen_tags, '.chzn-choices'
   elements :tags_select_list, 'ul.chzn-results li'
+  root_element :form_in_active_state, '#wizard_tags_section.in'
+
+  def is_visible?
+    has_form_in_active_state?
+  end
 
   def choose_tag tag
     tags_input_field.set tag

@@ -42,10 +42,18 @@ class Model::Wildfire
     Model::Page::WildfireappTemplates.new
   end
   def template_builder
-    Model::Page::PageManager::TemplateBuilder.new
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+      Model::Page::PageManager::Uitk5TemplateBuilder.new
+    else
+      Model::Page::PageManager::TemplateBuilder.new
+    end
   end
-  def template_editor
-    Model::Page::PageManager::TemplateEditor.new
+  def template_content_editor
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+      Model::Page::PageManager::Uitk5TemplateEditor.new
+    else
+      Model::Page::PageManager::TemplateEditor.new
+    end
   end
   def upload_template
     Model::Page::PageManager::UploadTemplate.new

@@ -3,9 +3,33 @@ class Model::Section::PageManager::Uitk5Template < SitePrism::Section
   element :edit_link, 'div.edit a span'
   element :create_page_link, 'div.edit a span'
   element :drop_down_menu, '.dropdown-toggle'
-  elements :drop_down_menu_options, '.dropdown-menu li'
+  elements :drop_down_menu_options, '.dropdown-menu li a'
 
   root_element :archive_menu_option, 'body > ol[data-visible="true"] .archive_link'
+
+  def edit_template_design_menu_option
+    drop_down_menu_options[0]
+  end
+
+  def edit_default_content_menu_option
+    drop_down_menu_options[1]
+  end
+  
+  def download_template_menu_option
+    drop_down_menu_options[2]
+  end
+  
+  def upload_new_version_menu_option
+    drop_down_menu_options[3]
+  end
+  
+  def clone_template_menu_option
+    drop_down_menu_options[4]
+  end
+  
+  def delete_template_menu_option
+    drop_down_menu_options[5]
+  end
 
   def name
     title_div.text
@@ -27,9 +51,5 @@ class Model::Section::PageManager::Uitk5Template < SitePrism::Section
 
   def delete_menu_option
     drop_down_menu_options.select {|o| o[:delete] == 'delete'}.first.click
-  end
-
-  def archive_menu_option
-
   end
 end

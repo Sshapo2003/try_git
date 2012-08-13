@@ -1,5 +1,6 @@
-class Model::Section::PageManager::Uitk5WildfireappPageManagerContentDiv < SitePrism::Section
-  element :templetes_drop_down_menu, 'h2 div.wf_menu_button_wpr a.wf_menu_button'
+class Model::Section::PageManager::Uitk5MyTemplatesPanel < SitePrism::Section
+  element :templetes_drop_down_menu, '.btn-primary.dropdown-toggle'
+  element :create_blank_template_option, 'a[href="/page_templates/blank"]'
   element :more_templates_link, 'a.more_templates'
   element :upload_new_template_link, "a[href='/page_templates/new']"
   root_elements :template_menu_options, 'body > ol li'
@@ -14,10 +15,6 @@ class Model::Section::PageManager::Uitk5WildfireappPageManagerContentDiv < SiteP
         
     unless templates.count > 0 then raise "Couldnt find page #{title}. Pages = #{templates}" end
     templates.first 
-  end
-
-  def click_templates_menu_create_blank_template_option
-    page.execute_script '$(\'body > ol.wf_menu a[title="New Template"]\').click()'
   end
 
   def show_all_templates

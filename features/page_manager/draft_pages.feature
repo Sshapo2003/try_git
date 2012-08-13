@@ -30,7 +30,7 @@ Feature: Draft Pages
 
   @complete
   Scenario: Archived Page Menu Options
-    When I view the menu for a Draft Page
+    When I view the menu for a draft page
     Then the following menu options should be available for the draft page
     | Archive               |
     | Clone                 |

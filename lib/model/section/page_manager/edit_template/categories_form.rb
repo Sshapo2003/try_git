@@ -2,6 +2,11 @@ class Model::Section::PageManager::EditTemplate::CategoriesForm  < SitePrism::Se
   element :select_button, '.select_button'
   root_elements :categories_options, 'body > ol a'
   root_element :save_and_continue_button, ".categories_form button[value='Save & Continue']"
+  root_element :form_in_active_state, '#wizard_categories_section.in'
+
+  def is_visible?
+    has_form_in_active_state?
+  end
 
   def choose_category category
     # 
