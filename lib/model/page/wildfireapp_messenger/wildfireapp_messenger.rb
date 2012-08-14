@@ -6,7 +6,6 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   element :compose_message_div_header, 'div#messenger_form h2'
   element :sticky_header_text, 'span.flash_contents'
   element :notifications_trigger, 'a#notifications_trigger'
-
   element :actions_menu, '.wf_prompt_button_wpr a'
   element :action_menu_action_item, "ol#message_action a[href='Assign']"
 
@@ -38,10 +37,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   end
 
   def create_and_save_a_valid_filter
-    filter_name = "test filter #{String.random} #{Time.hours_mins_seconds}"
-    filters_panel.create_new_filter_button.click
-    create_filter_dialog.name.set filter_name
-    create_filter_dialog.keywords.set "hawtdog, #{String.random}, #{String.random} "
+    filter_name = create_a_filter
     create_filter_dialog.save_button.click
     Timeout.timeout_and_raise(180, 'Filter not found') do
       found = false

@@ -3,25 +3,15 @@ class Helpers::PageManagerHelper
     def update_template_with_valid_liquid_content template
       wildfire = Model::Wildfire.new
       edit_template_design(template.title_div.text)
-      wildfire.template_builder.edit_default_liquid_link.click
       liquid_content = "Hello World #{String.random}"
-
-
-      Timeout.timeout(30 ) { sleep 0.1 while not wildfire.template_builder.page.evaluate_script("editor.isFocused()") }
-
-      wildfire.template_builder.page.execute_script("editor.removeLines()")
-      wildfire.template_builder.page.execute_script("editor.insert('#{liquid_content}')")
-      wildfire.template_builder.edit_liquid_dialog_save_button.click
-     
-      sleep 1.0
-      wildfire.template_builder.wait_for_publish_template_changes_button(30)
-      wildfire.template_builder.page.execute_script("$('a.publish_template').click()")
-
-      sleep 1.0
-      wildfire.template_builder.page.execute_script(%{$('button[value="Publish"]').click()})
+      wildfire.template_builder.update_default_liquid liquid_content
+      sleep 2
+      wildfire.template_builder.publish_template_changes_button.click
+      sleep 2
+      wildfire.template_builder.wait_for_and_click_publish_changes_model_publish_template_changes_button
 
       msg = "Time out occured while waiting for template to be published."
-      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while not wildfire.template_builder.sticky_label.text.include?("You've successfully created a new Template version!") }
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until wildfire.template_builder.sticky_label.text.include? "You've successfully created a new Template version!" }
 
       liquid_content
     end
@@ -29,8 +19,8 @@ class Helpers::PageManagerHelper
     def update_template_title(template, title)
       wildfire = Model::Wildfire.new
       edit_default_content(template.title_div.text)
-      wildfire.template_editor.set_template_name title
-      wildfire.template_editor.go_back_button.click
+      wildfire.template_content_editor.set_template_name title
+      wildfire.template_content_editor.go_back_button.click
     end
 
     def make_a_change_to_countdown_app
@@ -38,8 +28,8 @@ class Helpers::PageManagerHelper
 
       wildfire = Model::Wildfire.new
 
-      wildfire.page_manager.wait_for_content_div(30)
-      wildfire.page_manager.content_div.get_template_by_title('Countdown Timer').wait_for_and_click_edit_link
+      wildfire.page_manager.wait_for_my_templates_panel(30)
+      wildfire.page_manager.my_templates_panel.get_template_by_title('Countdown Timer').wait_for_and_click_edit_link
       wildfire.page_manager_edit_mode.sidebar.content_menu.wait_for_and_click_header_text_edit_link
       wildfire.wildfireapp_countdown_template_edit_header.body_text(updated_countdown_app_title)
       wildfire.wildfireapp_countdown_template_edit_header.save_button.click
@@ -51,7 +41,7 @@ class Helpers::PageManagerHelper
       wildfire = Model::Wildfire.new
 
       wildfire.page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_link(30)
-      wildfire.page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_publish_to_facebook_link(30)
+      wildfire.page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_publish_to_facebook(30)
 
       wildfire.page_manager_edit_mode.publish_to_facebook_modal.wait_for_cancel_button(30)
 
@@ -68,15 +58,15 @@ class Helpers::PageManagerHelper
 
     def get_template_menu_options
       wildfire = Model::Wildfire.new
-      wildfire.page_manager.content_div.templates[0].wait_for_drop_down_menu(30)
-      wildfire.page_manager.content_div.templates[0].drop_down_menu.click
-      wildfire.page_manager.content_div.template_menu_options.collect {|o| o.text}
+      wildfire.page_manager.my_templates_panel.templates[0].wait_for_drop_down_menu(30)
+      wildfire.page_manager.my_templates_panel.templates[0].drop_down_menu.click
+      wildfire.page_manager.my_templates_panel.drop_down_menu_options.collect {|o| o.text}
     end
 
     def create_template
       wildfire = Model::Wildfire.new
-      wildfire.page_manager.content_div.templetes_drop_down_menu.click
-      wildfire.page_manager.content_div.click_templates_menu_create_blank_template_option
+      wildfire.page_manager.my_templates_panel.templetes_drop_down_menu.click
+      wildfire.page_manager.my_templates_panel.create_blank_template_option.click
 
       name = %{TestTemplate#{String.random}}
       wildfire.page_manager.new_template_dialog.wait_for_save_button(30)
@@ -84,30 +74,29 @@ class Helpers::PageManagerHelper
       wildfire.page_manager.new_template_dialog.save_button.click
 
       wildfire.template_builder.wait_for_and_click_back_to_templates_button(30)
-      wildfire.page_manager.content_div.wait_for_templates(30)
+      wildfire.page_manager.my_templates_panel.wait_for_templates(30)
       return name
     end
 
     def clone_template(name='TestTemplate')
       wildfire = Model::Wildfire.new
-      content_div = wildfire.page_manager.content_div
-      template = content_div.get_template_by_title name
+      my_templates_panel = wildfire.page_manager.my_templates_panel
+      template = my_templates_panel.get_template_by_title name
       template.wait_for_drop_down_menu(30)
       template.drop_down_menu.click
-      link = template.template_menu_options.select {|o| o.text == "Clone Template" }.first[:href]
-      content_div.page.execute_script %{ $('body > ol li a[href="#{link}"]').click() }
+      template.clone_template_menu_option.click
       wildfire.page_manager.wait_for_sticky_label(30)
-      msg = "Unable to clone template. Sticky Message = #{wildfire.page_manager.sticky_label.text}"
-      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.page_manager.sticky_label.text != 'You have successfully cloned the template.' }
+      msg = "Time out occurred waiting for alert message 'You have successfully cloned the template.' to appear."
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until wildfire.page_manager.sticky_label.text.include? 'You have successfully cloned the template.' }
     end
 
     def edit_template_design(name='TestTemplate')
       wildfire = Model::Wildfire.new
-      content_div = wildfire.page_manager.content_div
-      template = content_div.get_template_by_title name
+      my_templates_panel = wildfire.page_manager.my_templates_panel
+      template = my_templates_panel.get_template_by_title name
       template.wait_for_drop_down_menu(30)
       template.drop_down_menu.click
-      link = template.template_menu_options.select {|o| o.text == "Edit Template Design" }.first[:href]
+      link = template.drop_down_menu_options.select {|o| o.text == "Edit Template Design" }.first[:href]
       template.visit link
 
       wildfire.template_builder.wait_for_back_to_templates_button(30)
@@ -115,35 +104,31 @@ class Helpers::PageManagerHelper
 
     def edit_default_content(name='TestTemplate')
       wildfire = Model::Wildfire.new
-      wildfire.page_manager.wait_for_content_div(30)
-      content_div = wildfire.page_manager.content_div
-      template = content_div.get_template_by_title name
+      wildfire.page_manager.wait_for_my_templates_panel(30)
+      template = wildfire.page_manager.my_templates_panel.get_template_by_title name
       template.wait_for_drop_down_menu(30)
       template.drop_down_menu.click
-      link = template.template_menu_options.select {|o| o.text == "Edit Default Content" }.first[:href]
-      template.visit link
-
-      wildfire.template_editor.wait_for_go_back_button(30)
+      template.wait_for_drop_down_menu_options(30)
+      template.edit_default_content_menu_option.click
+      wildfire.template_content_editor.wait_for_go_back_button(30)
     end
     
     def delete_template(name='TestTemplate')
       wildfire = Model::Wildfire.new
-      content_div = wildfire.page_manager.content_div
-      template = content_div.get_template_by_title name
+      my_templates_panel = wildfire.page_manager.my_templates_panel
+      template = my_templates_panel.get_template_by_title name
       template.wait_for_drop_down_menu(30)
       template.drop_down_menu.click
-      link = template.template_menu_options.select {|o| o.text == "Delete Template" }.first[:href]
-      content_div.page.execute_script %{ $('body > ol li a[href="#{link}"]').click() }
-
-      content_div.page.driver.browser.switch_to.alert.accept
+      template.delete_template_menu_option.click
+      my_templates_panel.page.driver.browser.switch_to.alert.accept
 
       msg = "Unable to delete template. Sticky Message = #{wildfire.page_manager.sticky_label.text}"
-      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.page_manager.sticky_label.text != 'You have successfully deleted the template.' }
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until wildfire.page_manager.sticky_label.text.include? 'You have successfully deleted the template.' }
     end
 
     def upload_new_template
       wildfire = Model::Wildfire.new
-      wildfire.page_manager.content_div.upload_new_template_link.click
+      wildfire.page_manager.my_templates_panel.upload_new_template_link.click
       wildfire.upload_template.wait_for_template_name_textbox(30)
 
       template_name = "Uploaded Template #{String.random}"
@@ -153,18 +138,18 @@ class Helpers::PageManagerHelper
       wildfire.upload_template.submit_button.click
 
       msg = "Unable to upload template. Sticky Message = #{wildfire.page_manager.sticky_label.text}"
-      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.page_manager.sticky_label.text != "You've successfully uploaded a Template!" }
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until wildfire.page_manager.sticky_label.text.include?  "You've successfully uploaded a Template!" }
 
       template_name
     end
 
     def upload_new_version_of_template template_name
       wildfire = Model::Wildfire.new
-      content_div = wildfire.page_manager.content_div
-      template = content_div.get_template_by_title template_name
+      my_templates_panel = wildfire.page_manager.my_templates_panel
+      template = my_templates_panel.get_template_by_title template_name
       template.wait_for_drop_down_menu(30)
       template.drop_down_menu.click
-      link = template.template_menu_options.select {|o| o.text == "Upload New Version" }.first[:href]
+      link = template.drop_down_menu_options.select {|o| o.text == "Upload New Version" }.first[:href]
       template.visit link
 
       wildfire.upload_template.upload_a_template 'templates/updated_test_template_for_upload.zip'
@@ -172,16 +157,16 @@ class Helpers::PageManagerHelper
       wildfire.page_manager.wait_for_sticky_label(30)
 
       msg = "Unable to upload template. Sticky Message = #{wildfire.page_manager.sticky_label.text}"
-      Timeout.timeout_and_raise(30, msg) { sleep 0.1 while wildfire.page_manager.sticky_label.text != "You have successfully added another version." }
+      Timeout.timeout_and_raise(30, msg) { sleep 0.1 until wildfire.page_manager.sticky_label.text.include? "You have successfully added another version." }
     end
 
     def template_download_link template_name
       wildfire = Model::Wildfire.new
-      content_div = wildfire.page_manager.content_div
-      template = content_div.get_template_by_title template_name
+      my_templates_panel = wildfire.page_manager.my_templates_panel
+      template = my_templates_panel.get_template_by_title template_name
       template.wait_for_drop_down_menu(30)
       template.drop_down_menu.click
-      link = template.template_menu_options.select {|o| o.text == "Download Template" }.first[:href]
+      link = template.drop_down_menu_options.select {|o| o.text == "Download Template" }.first[:href]
     end
   end
 end

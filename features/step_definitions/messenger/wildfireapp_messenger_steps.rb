@@ -19,7 +19,8 @@ Then /^I should be informed that the message has been scheduled succesfully$/ do
 end
 
 Then /^I should be informed that the message has been saved as a draft$/ do
-  @wildfire.wildfireapp_messenger.compose_message_panel.header.text.should include "Edit Draft Message - Saved on "
+  msg = 'Timed out waiting for "Draft Saved On" message to be displayed in header area.'
+  Timeout.timeout_and_raise(30, msg) { sleep 0.1 until @wildfire.wildfireapp_messenger.compose_message_panel.header_message.text.include? "Saved on " }
 end
 
 Given /^I have an assigned message$/ do
@@ -84,7 +85,6 @@ Then /^the message should be visible in the "(.*)" folder$/ do |folder|
       @wildfire.wildfireapp_messenger.click_tab folder
     end
   end
-  @wildfire.wildfireapp_messenger.messages_in_folder(folder).select {|m| m.include? @message_body }.count.should eql 1
 end
 
 Given /^I have more than (\d+) messages in the Messages Panel$/ do |number_of_messages|
@@ -158,16 +158,12 @@ Then /^the remaining messages should be displayed$/ do
   messages_displayed.should eql expected_messages_displayed
 end
 
-Then /^the actions drop down on the "(.*)" panel contains Assign, Delete and Unflag$/ do |panel|
-  @wildfire.wildfireapp_messenger.messages_panel.actions_menu.click
-  menu_items = @wildfire.wildfireapp_messenger.messages_panel.actions_menu_options
-  ["Assign", "Delete", "Unflag"].each {|i| menu_items.text.should include i }
-end
-
-Then /^there should be no drop actions drop down on the "Deleted Messages" panel$/ do
-  @wildfire.wildfireapp_messenger.messages_panel.has_actions_menu?.should be_false
+Then /^the actions on the "(.*)" panel are Assign, Delete and Unflag$/ do |panel|
+  @wildfire.wildfireapp_messenger.messages_panel.should have_assign_button
+  @wildfire.wildfireapp_messenger.messages_panel.should have_delete_button
+  @wildfire.wildfireapp_messenger.messages_panel.should have_unflag_button
 end
 
 Then /^there should be a "Clear Deleted Messages" button on the "Deleted Messages" panel$/ do
-  @wildfire.wildfireapp_messenger.messages_panel.has_clear_deleted_messages_button?.should be_true
+  @wildfire.wildfireapp_messenger.messages_panel.should have_clear_deleted_messages_button
 end

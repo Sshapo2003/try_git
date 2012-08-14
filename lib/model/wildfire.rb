@@ -3,7 +3,7 @@ class Model::Wildfire
     Model::Page::WildfireFrontPage.new
   end
   def login
-    if ENV['CONFIG'] == 'am-test'
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
       Model::Page::AccountManagement::Uitk5Login.new
     else
       Model::Page::Login.new
@@ -16,7 +16,7 @@ class Model::Wildfire
     Model::Page::Dashboard.new
   end
   def wildfireapp_messenger
-    if ENV['CONFIG'] == 'am-test'
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
       Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger.new
     else
       Model::Page::WildfireappMessenger::WildfireappMessenger.new
@@ -26,14 +26,18 @@ class Model::Wildfire
     Model::Page::WildfireappAnalytics.new
   end
   def page_manager
-    if ENV['CONFIG'] == 'am-test'
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
       Model::Page::PageManager::Uitk5PageManager.new
     else
       Model::Page::PageManager::PageManager.new
     end
   end
   def page_manager_edit_mode
-    Model::Page::PageManager::PageManagerEditMode.new
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+      Model::Page::PageManager::Uitk5PageManagerEditMode.new
+    else
+      Model::Page::PageManager::PageManagerEditMode.new
+    end
   end
   def wildfireapp_countdown_template_edit_header
     Model::Page::WildfireappCountdownTemplateEditHeader.new
@@ -42,13 +46,25 @@ class Model::Wildfire
     Model::Page::WildfireappTemplates.new
   end
   def template_builder
-    Model::Page::PageManager::TemplateBuilder.new
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+      Model::Page::PageManager::Uitk5TemplateBuilder.new
+    else
+      Model::Page::PageManager::TemplateBuilder.new
+    end
   end
-  def template_editor
-    Model::Page::PageManager::TemplateEditor.new
+  def template_content_editor
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+      Model::Page::PageManager::Uitk5TemplateEditor.new
+    else
+      Model::Page::PageManager::TemplateEditor.new
+    end
   end
   def upload_template
-    Model::Page::PageManager::UploadTemplate.new
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+      Model::Page::PageManager::Uitk5UploadTemplate.new
+    else
+      Model::Page::PageManager::UploadTemplate.new
+    end
   end
   def wildfireapp_promotion_builder
     Model::Page::PromotionBuilder::WildfireappPromotionBuilder.new

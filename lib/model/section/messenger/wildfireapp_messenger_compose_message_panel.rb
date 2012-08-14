@@ -6,7 +6,7 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
   element :recepients_error, 'div#recipients p.inline_error'
   element :date_error, 'li#when_to_send p.inline_error'
   element :message_error, 'div#message_container p.inline_error'
-  element :header, 'h2'
+  element :header_message, 'h2'
   element :recepient_input, 'li.search-field'
   element :later_button, 'span.later a'
   element :date_field, 'input#message_send_at_date'

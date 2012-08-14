@@ -22,7 +22,8 @@ Feature: Draft Messages
     Then I should be informed that the draft has been deleted
     And the message should not be visible in the drafts folder
 
-  @complete
+  # Set to not_started because uitk5 redesign has changed this functionality
+  @not_started
   Scenario: Drafts Panel Paging
     Given I have more than 25 draft messages
     Then 25 drafts should be displayed in the Drafts Panel

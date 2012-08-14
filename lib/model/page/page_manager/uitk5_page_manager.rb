@@ -3,20 +3,29 @@ class Model::Page::PageManager::Uitk5PageManager < Model::Page::PageManager::Pag
   set_url_matcher /pages\/states\/published/
 
   element :unlock_button, '#unlock'
-  elements :sidebar_links, '.span3 .nav-list li a'
+  element :sticky_label, '.flashes'
+  elements :sidebar_links, '#sidebar #panel-main a'
 
-  section :content_div, Model::Section::PageManager::WildfireappPageManagerContentDiv, '.screenshots'
+  section :my_templates_panel, Model::Section::PageManager::Uitk5MyTemplatesPanel,      '.outer .container'
+  section :published_pages_panel, Model::Section::PageManager::Uitk5PublishedTemplatesPanel, '.outer .container'
+  section :draft_pages_panel, Model::Section::PageManager::Uitk5DraftPagesPanel,        '.outer .container'
+  section :archived_pages_panel, Model::Section::PageManager::Uitk5ArchivedPagesPanel,  '.outer .container'
+  section :upload_a_template_panel, Model::Section::PageManager::PagesPanel,            '.outer .container'
+  section :new_template_dialog, Model::Section::PageManager::Uitk5NewTemplateDialog,    '#new_page_template'
 
-  section :published_pages_panel, Model::Section::PageManager::PublishedTemplatesPanel, '.span9'
-  section :draft_pages_panel, Model::Section::PageManager::DraftTemplatesPanel, '.span9'
-  section :archived_pages_panel, Model::Section::PageManager::ArchivedTemplatesPanel, '.span9'
-  section :upload_a_template_panel, Model::Section::PageManager::PagesPanel, '.span9'
-  
   def active?
     has_sidebar_links?
   end
-  
+
   def locked?
     has_unlock_button?
+  end
+
+  def templates
+    my_templates_panel.templates
+  end
+
+  def wait_for_templates(num_seconds=30)
+    content_div.wait_for_templates num_seconds
   end
 end

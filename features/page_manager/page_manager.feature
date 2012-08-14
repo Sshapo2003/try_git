@@ -1,12 +1,12 @@
 @page_manager @amtest @staging @production
-Feature: My Templates
+Feature: Page Manager General Functionality
 
   Background:
     Given I am logged in to Wildfire as the template user
     And I navigate to the wildfire app page manager page
 
   @complete @slow
-  Scenario: View Each Tab
+  Scenario: View Each Page Manager Tab
     When I view the Page Managers "Published" tab
     Then the header in the panel should be "Published"
     When I view the Page Managers "Drafts" tab

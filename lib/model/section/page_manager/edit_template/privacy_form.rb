@@ -1,7 +1,12 @@
 class Model::Section::PageManager::EditTemplate::PrivacyForm  < SitePrism::Section
-  element :save_and_continue_button, "button[value='Save & Continue']"
+  element :save_and_continue_button, "input[value='Save & Continue']"
   element :public_radio_button, "input[name='page_template[privacy]'][value='public']"
-  element :private_radio_button, "input[name='page_template[privacy]'][value='private']"
+  element :private_radio_button, "input[name='page_template[privacy]'][value='public']"
+  root_element :form_in_active_state, '#wizard_privacy_section.in'
+
+  def is_visible?
+    has_form_in_active_state?
+  end
 
   def set_privacy privacy
     case privacy

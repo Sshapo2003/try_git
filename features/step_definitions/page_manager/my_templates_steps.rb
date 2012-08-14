@@ -1,7 +1,7 @@
 When /^I have (a valid|at least one) template$/ do |unused|
-  @wildfire.page_manager.content_div.wait_for_templates(30)
-  @wildfire.page_manager.content_div.templates.count.should > 0
-  @template = @wildfire.page_manager.content_div.templates.first
+  @wildfire.page_manager.my_templates_panel.wait_for_templates(30)
+  @wildfire.page_manager.my_templates_panel.templates.count.should > 0
+  @template = @wildfire.page_manager.my_templates_panel.templates.first
 end
 
 When /^I create a page with the template$/ do
@@ -33,17 +33,17 @@ end
 Given /^I have created a valid template$/ do
   step 'I create a Blank Template'
   step 'the template should be listed in My Templates'
-  @template = @wildfire.page_manager.content_div.templates.select {|t| t.title_div.text.include? @template_name}.first
+  @template = @wildfire.page_manager.my_templates_panel.templates.select {|t| t.title_div.text.include? @template_name}.first
 end
 
 When /^I create a Blank Template$/ do
-  @wildfire.page_manager.content_div.wait_for_templates(30)
-  @num_templates_before = @wildfire.page_manager.content_div.templates.count
+  @wildfire.page_manager.my_templates_panel.wait_for_templates(30)
+  @num_templates_before = @wildfire.page_manager.my_templates_panel.templates.count
   @template_name = Helpers::PageManagerHelper.create_template
 end
 
 When /^I clone a template$/ do
-  div = @wildfire.page_manager.content_div
+  div = @wildfire.page_manager.my_templates_panel
   div.show_all_templates
   @num_templates_before = div.templates.count
   Helpers::PageManagerHelper.clone_template
@@ -55,12 +55,12 @@ When /^I delete the template$/ do
 end
 
 Then /^the template should be listed in My Templates$/ do
-  div = @wildfire.page_manager.content_div
+  div = @wildfire.page_manager.my_templates_panel
   div.get_template_by_title(@template_name).title_div.text.should include @template_name
 end
 
 Then /^an additional template should be listed in My Templates$/ do
-  div = @wildfire.page_manager.content_div
+  div = @wildfire.page_manager.my_templates_panel
   div.show_all_templates
   div.templates.count.should == (@num_templates_before += 1)
 end
@@ -70,7 +70,7 @@ When /^I publish the template$/ do
 end
 
 Then /^the template should be removed My Templates$/ do
-  @wildfire.page_manager.content_div.templates.select {|t| t.title_div.text == @template_name}.count.should == 0
+  @wildfire.page_manager.my_templates_panel.templates.select {|t| t.title_div.text == @template_name}.count.should == 0
 end
 
 When /^I upload a new template$/ do
@@ -78,8 +78,8 @@ When /^I upload a new template$/ do
 end
 
 Given /^I have a valid uploaded template$/ do
-  @wildfire.page_manager.content_div.wait_for_templates(30)
-  @template = @wildfire.page_manager.content_div.templates.select {|t| t.title_div.text.include? 'Uploaded Template'}.first
+  @wildfire.page_manager.my_templates_panel.wait_for_templates(30)
+  @template = @wildfire.page_manager.my_templates_panel.templates.select {|t| t.title_div.text.include? 'Uploaded Template'}.first
   @template_name = @template.title_div.text
 end
 
@@ -89,7 +89,7 @@ When /^I upload a new version of the template$/ do
 end
 
 Then /^the template should be available for selection in My Templates$/ do
-  @wildfire.page_manager.content_div.get_template_by_title(@template_name).title_div.text.should include @template_name
+  @wildfire.page_manager.my_templates_panel.get_template_by_title(@template_name).title_div.text.should include @template_name
 end
 
 Then /^the template should have a valid download option$/ do

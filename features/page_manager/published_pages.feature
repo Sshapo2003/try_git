@@ -1,5 +1,5 @@
 @page_manager @amtest @staging @production
-Feature: Published Templates
+Feature: Published Pages
 
   Background:
     Given I am logged in to Wildfire as the template user

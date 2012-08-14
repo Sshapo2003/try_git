@@ -32,7 +32,6 @@ amtestslow: <%= common %> -t @complete -t @slow -t @amtest CONFIG=live
 pm: <%= common %> -t @messenger -t @production CONFIG=live
 pam: <%= common %> -t @account_management -t @production CONFIG=live
 pa: <%= common %> -t @analytics -t @production CONFIG=live
-pma: <%= common %> -t @messenger_admin -t @production CONFIG=live
 ppm: <%= common %> -t @page_manager -t @production CONFIG=live
 pg: <%= common %> -t @gallery -t @production CONFIG=live
 
@@ -41,7 +40,6 @@ pg: <%= common %> -t @gallery -t @production CONFIG=live
 sm: <%= common %> -t @messenger -t @staging CONFIG=staging
 sam: <%= common %> -t @account_management -t @staging CONFIG=staging
 sa: <%= common %> -t @analytics -t @staging CONFIG=staging
-sma: <%= common %> -t @messenger_admin -t @staging CONFIG=staging
 spm: <%= common %> -t @page_manager -t @staging CONFIG=staging
 sg: <%= common %> -t @gallery -t @staging CONFIG=staging
 
@@ -50,7 +48,6 @@ sg: <%= common %> -t @gallery -t @staging CONFIG=staging
 am: <%= common %> -t @messenger -t @amtest CONFIG=am-test
 aam: <%= common %> -t @account_management -t @amtest CONFIG=am-test
 aa: <%= common %> -t @analytics -t @amtest CONFIG=am-test
-ama: <%= common %> -t @messenger_admin -t @amtest CONFIG=am-test
 apm: <%= common %> -t @page_manager -t @amtest CONFIG=am-test
 ag: <%= common %> -t @gallery -t @amtest CONFIG=am-test
 
@@ -73,7 +70,6 @@ jenkinsamtestslow: <%= common %> -t @amtest CONFIG=am-test <%= junit %> <%= cucu
 jpm: <%= common %> -t @messenger -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jpam: <%= common %> -t @account_management -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jpa: <%= common %> -t @analytics -t @production CONFIG=live <%= junit %> <%= cucumber %>
-jpma: <%= common %> -t @messenger_admin -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jppm: <%= common %> -t @page_manager -t @production CONFIG=live <%= junit %> <%= cucumber %>
 jpg: <%= common %> -t @gallery -t @production CONFIG=live <%= junit %> <%= cucumber %>
 
@@ -82,7 +78,6 @@ jpg: <%= common %> -t @gallery -t @production CONFIG=live <%= junit %> <%= cucum
 jsm: <%= common %> -t @messenger -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
 jsam: <%= common %> -t @account_management -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
 jsa: <%= common %> -t @analytics -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
-jsma: <%= common %> -t @messenger_admin -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
 jspm: <%= common %> -t @page_manager -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
 jsg: <%= common %> -t @gallery -t @staging CONFIG=staging <%= junit %> <%= cucumber %>
 
@@ -91,6 +86,5 @@ jsg: <%= common %> -t @gallery -t @staging CONFIG=staging <%= junit %> <%= cucum
 jam: <%= common %> -t @messenger -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
 jaam: <%= common %> -t @account_management -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
 jaa: <%= common %> -t @analytics -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
-jama: <%= common %> -t @messenger_admin -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
 japm: <%= common %> -t @page_manager -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>
 jag: <%= common %> -t @gallery -t @amtest CONFIG=am-test <%= junit %> <%= cucumber %>

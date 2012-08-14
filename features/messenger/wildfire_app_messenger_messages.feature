@@ -1,17 +1,17 @@
-@messenger @production @staging @amtest
+@messenger
 Feature: Messages
 
   Background:
     Given I am logged in to Wildfire as the default user
     And I navigate to the wildfire app messenger page
     
-  @complete
+  @complete @production @staging @amtest
   Scenario: Assign a message
     Given I have an unassigned message
     When I assign that message to myself
     Then the message should be in my Assigned Messages
 
-  @complete @slow
+  @complete @slow @production @staging @amtest
   Scenario: Messages Panel Paging
     Given I have more than 25 messages in the Messages Panel
     Then 25 messages should be displayed in the Messages Panel
@@ -26,7 +26,8 @@ Feature: Messages
     Then the right paging icon should be disabled in the Messages Panel
     And the left paging icon should be enabled in the Messages Panel
 
-  @complete
+  # This is temporarily set to not_started because th uitk5 changes requires a complete rewrite
+  @not_started @production @staging @amtest
   Scenario: Messages Panel Paging via URL
     Given I have more than 500 messages in the Messages Panel
     When I navigate to the last page of of messages in the Messages Panel via the URL
