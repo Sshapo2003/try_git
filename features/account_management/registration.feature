@@ -31,7 +31,7 @@ Feature: Register with Wildfire
     When I complete the registration form
     But I leave the companyname value blank
     When I submit the signup form
-    Then the registration page should display the validation error message "Company can't be blank"
+    Then the registration page should display the validation error message "Company name can't be blank"
 
   @complete
   Scenario: Blank Email Address
