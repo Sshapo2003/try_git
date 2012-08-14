@@ -56,6 +56,7 @@ Then /^the Tweet button should be enabled$/ do
 end
 
 When /^I send the reply to the twitter message$/ do
+  sleep 2
   @message.replies[0].post_reply_button.click
   msg = 'Time Out occured waiting for "Reply sent!" to appear.'
   Timeout.timeout(30, msg) {sleep 0.1 while not @message.reply_sent_div.text.include? 'Reply sent!' }
