@@ -25,7 +25,7 @@ class Model::Page::AccountManagement::SocialApps < SitePrism::Page
   end
   
   def new_social_app
-    @new_social_app ||= Model::Page::AccountManagement::NewSocialApp.new
+    Model::Page::AccountManagement::NewSocialApp.new
   end
   
   def add_fb_page_to_app(page_name, app_name)

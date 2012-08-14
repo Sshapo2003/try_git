@@ -26,6 +26,7 @@ Then /^I should see Twitter account "([^"]*)" in Your Properties$/ do |twitter_n
 end
 
 Then /^I should see Facebook page "([^"]*)" in Your Properties$/ do |page_name|
+  @wildfire.account_management.load_section('Your Properties')
   @wildfire.account_management.your_properties.should have_facebook_property(page_name)
 end
 

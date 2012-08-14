@@ -21,7 +21,7 @@ class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
   end
   
   def load_section(name)
-    load unless loaded?
+    load
     sidebar.company_settings_panel.send(name.downcase.parameterize('_').to_sym).click
   end
   
@@ -54,7 +54,7 @@ class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
   end
   
   def social_apps
-    Model::Page::AccountManagement::SocialApps.new
+    Model::Page::AccountManagement::Uitk5SocialApps.new
   end
   
   def signup

@@ -1,7 +1,9 @@
 Given /^I am logged in to Facebook as a page administrator$/ do
+  previous_url = current_url
   credentials = {:username => 'alistair.hutchison@wildfireapp.com', :password => 'w1ldf1r3'}
   @facebook.home.load
   @facebook.home.login(credentials)
+  visit(previous_url)
 end
 
 When /^I view the "(.*)" app page$/ do |app_name|
