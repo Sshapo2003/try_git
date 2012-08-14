@@ -1,5 +1,5 @@
 class Model::Section::PageManager::Uitk5PublishedTemplatesPanel < SitePrism::Section
-  element :header, 'h2'
+  element :header, 'h1'
   element :create_page_button, '.btn-primary'
 
   def create_page

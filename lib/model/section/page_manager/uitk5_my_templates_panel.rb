@@ -1,4 +1,5 @@
 class Model::Section::PageManager::Uitk5MyTemplatesPanel < SitePrism::Section
+  element :header, 'h1'
   element :templetes_drop_down_menu, '.btn-primary.dropdown-toggle'
   element :create_blank_template_option, 'a[href="/page_templates/blank"]'
   element :more_templates_link, 'a.more_templates'

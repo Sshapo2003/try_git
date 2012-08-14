@@ -61,8 +61,8 @@ When /^I send a facebook message which matches a "(.*)" filter$/ do |filter_type
   when "Delete" then filter_keyword = Helpers::Config['default_delete_filter_keyword']
   else raise "Unknown filter type #{filter_type}"
   end
-
-  @flagged_message_content = "#{String.random} #{filter_keyword}"
+  @flagged_message_random_part = String.random
+  @flagged_message_content = "#{@flagged_message_random_part} #{filter_keyword}"
 
   creds = { :username => Helpers::Config['default_facebook_poster_username'], :password => Helpers::Config['default_facebook_poster_password'] }
   

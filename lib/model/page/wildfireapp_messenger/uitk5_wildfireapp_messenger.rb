@@ -9,6 +9,9 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   element :unflag_message_button, 'a[href="Unflag"]'
 
   section :sidebar, Model::Section::Messenger::Uitk5WildfireappMessengerSidebar, '.the-hero > #sidebar #messenger-nav'
+  section :flagged_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
+  section :assigned_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
+  section :deleted_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
   section :messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
   section :compose_message_panel, Model::Section::Messenger::Uitk5WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
   section :draft_messages_panel, Model::Section::Messenger::Uitk5WildfireappMessengerOutgoingMessagesPanel, 'div#draft_messages'

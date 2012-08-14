@@ -24,23 +24,7 @@ class Model::Section::Messenger::WildfireappMessengerMessagesPanel < SitePrism::
     visit("#{Helpers::Config['wildfire_messenger_root']}/scheduled_messages?page=#{total_pages}")
   end
 
-  # When using chrome the click on the next page button is not registered if it's not currently in view
-  # Retrying the click should ensure that it is registered the second time
   def click_enabled_next_page_button
-    paging_message_before = pagination_current_page_indicator_text
     enabled_next_page_button.click
-    msg = 'Timed out while waiting for the next page of messages to be displayed'
-    Timeout.timeout_and_raise(120, msg) do
-      while true
-        (1..50).each do
-          if paging_message_before == pagination_current_page_indicator_text
-            sleep 0.1
-          else
-            return
-          end
-        end
-        enabled_next_page_button.click
-      end
-    end
   end
 end

@@ -87,9 +87,9 @@ Then /^the message should be visible in the "(.*)" folder$/ do |folder|
   end
 end
 
-Given /^I have more than (\d+) messages in the Messages Panel$/ do |number_of_messages|
-  Timeout.timeout_and_raise(600, "Timed out while waiting for #{number_of_messages} messages to be available.") do
-    while @wildfire.wildfireapp_messenger.messages_panel.pagination_message_total_text.to_i <= number_of_messages.to_i do
+Given /^I have more than one page of messages in the Messages Panel$/ do
+  Timeout.timeout_and_raise(600, "Timed out while waiting for more than one page of messages to be available.") do
+    while not @wildfire.wildfireapp_messenger.messages_panel.has_enabled_next_page_button? do
       step 'I compose and send a valid message'
       step 'I navigate to the wildfire app messenger page'
     end
@@ -101,11 +101,6 @@ Then /^(\d+) messages should be displayed in the Messages Panel$/ do |number_of_
   @messages.count.should eql number_of_messages.to_i
 end
 
-Then /^the Messages Panel paging message should include "(.*?)"$/ do |paging_message|
-  @wildfire.wildfireapp_messenger.messages_panel.wait_for_pagination_totals(30)
-  @wildfire.wildfireapp_messenger.messages_panel.pagination_current_page_indicator_text.should include paging_message
-end
-
 When /^I click the right paging icon in the Messages Panel$/ do
   @wildfire.wildfireapp_messenger.messages_panel.click_enabled_next_page_button
 end
@@ -115,17 +110,17 @@ Then /^the (.*) paging icon should be (.*) in the Messages Panel$/ do |direction
   case direction.downcase
   when "left"
     if state == 'disabled'
-      panel.should_not have_enabled_previous_page_button
+      panel.should have_disabled_previous_page_button
     elsif state == 'enabled'
-      panel.should have_enabled_previous_page_button
+      panel.should_not have_disabled_previous_page_button
     else 
       raise "Unknown state: #{state}"
     end
   when "right"
     if state == 'disabled'
-      panel.should_not have_enabled_next_page_button
+      panel.should have_disabled_next_page_button
     elsif state == 'enabled'
-      panel.should have_enabled_next_page_button
+      panel.should_not have_disabled_next_page_button
     else
       raise "Unknown state: #{state}"
     end
@@ -140,9 +135,7 @@ Then /^more messages should be displayed in the Messages Panel$/ do
 end
 
 When /^I go to the last page of messages in the Messages Panel$/ do
-  while @wildfire.wildfireapp_messenger.messages_panel.has_enabled_next_page_button? do
-    @wildfire.wildfireapp_messenger.messages_panel.click_enabled_next_page_button
-  end
+  @wildfire.wildfireapp_messenger.messages_panel.go_to_last_page
 end
 
 When /^I navigate to the last page of of messages in the Messages Panel via the URL$/ do

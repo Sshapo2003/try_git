@@ -20,11 +20,11 @@ productionslow: <%= common %> -t @complete -t @slow -t @production CONFIG=live
 stagingwip: <%= common %> -t @wip -t @staging CONFIG=staging
 stagingcomplete: <%= common %> -t @complete -t ~@slow -t ~@not_implemented -t @staging -t ~@failing CONFIG=staging
 stagingfailing: <%= common %> -t @complete -t @failing -t @staging CONFIG=staging
-stagingslow: <%= common %> -t @complete -t @slow -t @staging CONFIG=live
+stagingslow: <%= common %> -t @complete -t @slow -t @staging CONFIG=staging
 amtestwip: <%= common %> -t @wip -t @amtest CONFIG=am-test
 amtestcomplete: <%= common %> -t @complete -t ~@slow -t ~@not_implemented -t ~@failing -t @amtest CONFIG=am-test
 amtestfailing: <%= common %> -t @complete -t @failing -t @amtest CONFIG=am-test
-amtestslow: <%= common %> -t @complete -t @slow -t @amtest CONFIG=live
+amtestslow: <%= common %> -t @complete -t @slow -t @amtest CONFIG=am-test
 
 # Product Group Specific
 # Production
