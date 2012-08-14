@@ -29,7 +29,7 @@ Feature: Your Properties
   Scenario: Add a new Twitter property to Wildfire
     Given I am logged in to Wildfire as a new user
     When I add the twitter account "alistairwf3" to Wildfire
-    Then I should see Twitter account "Alistairwf3" in Your Properties
+    Then I should see Twitter account "alistairwf3" in Your Properties
     
   @complete @staging @amtest @no-chrome
   Scenario: Prevent the same Twitter property from being added multiple times

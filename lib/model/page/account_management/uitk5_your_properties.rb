@@ -68,6 +68,10 @@ class Model::Page::AccountManagement::Uitk5YourProperties < SitePrism::Page
     first('div.alert-error').try(:text)
   end
   
+  def has_property?(name, type)
+    social_properties.include?(name)
+  end
+  
   private
   
   def add_fb_property_with_javascript(fb_page_name)
