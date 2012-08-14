@@ -34,7 +34,7 @@ class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
   end
   
   def tracked_properties
-    Model::Page::AccountManagement::TrackedProperties.new
+    Model::Page::AccountManagement::Uitk5TrackedProperties.new
   end
   
   def demo_page
