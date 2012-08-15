@@ -20,6 +20,7 @@ class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
     sidebar.load_application(:company_settings)
   end
   
+  # TODO: Deprecate this method in favour of calling #load on actual page models
   def load_section(name)
     load
     sidebar.company_settings_panel.send(name.downcase.parameterize('_').to_sym).click
