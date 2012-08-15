@@ -23,7 +23,11 @@ class Model::Wildfire
     end
   end
   def wildfireapp_analytics
-    Model::Page::WildfireappAnalytics.new
+    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+      Model::Page::Uitk5WildfireappAnalytics.new
+    else
+      Model::Page::WildfireappAnalytics.new
+    end
   end
   def page_manager
     if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'

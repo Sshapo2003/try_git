@@ -30,11 +30,11 @@ Then /^the "(.*)" panel should be visible in the main page area on wildfire app 
     element = 'audience_panel'
   when "Industry Benchmarks" 
     element = 'industry_benchmarks_panel'
-  when "Tabs"
+  when "Overview of all Tabs"
     element = 'tabs_panel'
-  when "Pages"
+  when "Pages Overview"
     element = 'pages_panel'
-  when "Posts" 
+  when "Posts Overview" 
     element = 'posts_panel'
   when "Referral Sources"
     element = 'referral_sources_panel'
