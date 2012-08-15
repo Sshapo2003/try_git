@@ -2,7 +2,7 @@ Given /^I am logged in to Wildfire as ((?!a new user).*)$/ do |user|
   credentials = Helpers::WildfireAccountsHelper.get_credentials_for(user)
   raise "No credentials found for #{user} on environment #{ENV['CONFIG']}. Please add them to config/wildfire_users.yml." if credentials.blank?
   @wildfire.login.load
-  if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+  if true
     @wildfire.login.login(credentials['email'], credentials['password'])
   else
     @wildfire.login.login_user_credentials_form.login_with_credentials(credentials['email'], credentials['password'])
@@ -46,6 +46,6 @@ end
 
 Then /^I should be successfully logged in as "(.*)"$/ do |company_name|
   #TODO: Pull the current company name from the sidebar
-  @wildfire.account_management.load_section('Basic Info')
+  @wildfire.account_management.basic_info.load
   @wildfire.account_management.basic_info.company_name.should eql company_name
 end

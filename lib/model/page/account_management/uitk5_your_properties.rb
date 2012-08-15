@@ -36,7 +36,7 @@ class Model::Page::AccountManagement::Uitk5YourProperties < SitePrism::Page
     rescue Capybara::TimeoutError => e
       add_fb_property_with_javascript(fb_page_name)
     end
-    wait_until { !has_modal? }
+    wait_until(60) { !has_modal? }
   end
   
   def add_twitter_property(twitter_name)

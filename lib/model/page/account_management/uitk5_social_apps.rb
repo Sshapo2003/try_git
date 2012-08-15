@@ -1,8 +1,21 @@
 class Model::Page::AccountManagement::Uitk5SocialApps < SitePrism::Page
   include Helpers::Uitk5ModalHelper
   
+  section :sidebar, Model::Section::Sidebar, '#sidebar'
   element :new_company_button, '#button_new_company_social_app'
+  section :default_application, Model::Section::AccountManagement::SocialApp, "tr:contains('Default Application')"
   sections :custom_applications, Model::Section::AccountManagement::SocialApp, "tr:contains('Custom Application')"
+  
+  def load
+    return if loaded?
+    sidebar.load_application(:company_settings)
+    sidebar.company_settings_panel.applications.click
+    wait_until { loaded? }
+  end
+  
+  def loaded?
+    has_custom_applications? || has_default_application? && has_sidebar?
+  end
   
   def add_application(remote_id, secret)
     show_add_application_modal

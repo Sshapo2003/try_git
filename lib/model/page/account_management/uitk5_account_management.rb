@@ -20,12 +20,6 @@ class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
     sidebar.load_application(:company_settings)
   end
   
-  # TODO: Deprecate this method in favour of calling #load on actual page models
-  def load_section(name)
-    load
-    sidebar.company_settings_panel.send(name.downcase.parameterize('_').to_sym).click
-  end
-  
   def locations
     Model::Page::AccountManagement::Uitk5Locations.new
   end
@@ -57,9 +51,14 @@ class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
   def social_apps
     Model::Page::AccountManagement::Uitk5SocialApps.new
   end
+  alias :applications :social_apps
   
   def signup
     Model::Page::AccountManagement::Uitk5Signup.new
+  end
+  
+  def services
+    Model::Page::AccountManagement::Uitk5Services.new
   end
   
   #TODO: rename this method once UITK5 is live everywhere

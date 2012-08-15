@@ -4,7 +4,7 @@ Given /^I have added the twitter account "([^"]*)" to Wildfire$/ do |twitter_nam
 end
 
 When /^I (?:add|have added) the Facebook page "([^"]*)" to (?:Wildfire|Your Properties)$/ do |fb_page_name|
-  @wildfire.account_management.load_section('Your Properties')
+  @wildfire.account_management.your_properties.load
   @wildfire.account_management.your_properties.add_facebook_property(fb_page_name)
 end
 
