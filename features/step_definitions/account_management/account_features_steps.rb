@@ -10,7 +10,11 @@ end
 
 Then /^I (should|should not) have access to Page Manager$/ do |expectation|
   @wildfire.page_manager.load
-  @wildfire.page_manager.send(expectation.parameterize.underscore, be_active)
+  if expectation == 'should'
+    @wildfire.page_manager.should_not be_locked
+  else
+    @wildfire.page_manager.should be_locked
+  end
 end
 
 Then /^I (should|should not) have access to Promotion Builder$/ do |expectation|

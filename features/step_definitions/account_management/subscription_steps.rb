@@ -51,13 +51,14 @@ end
 Then /^I should not be able to add more than (\d+) Twitter Properties$/ do |count|
   (1..count.to_i).each do |i|
     property_name = "alistairwf#{i.to_s}"
+    @wildfire.account_management.load_section('Your Properties')
     @wildfire.account_management.your_properties.add_twitter_property(property_name)
-    @wildfire.account_management.your_properties.should have_twitter_property(property_name.capitalize)
+    @wildfire.account_management.your_properties.should have_twitter_property(property_name)
   end
   @wildfire.account_management.your_properties.add_twitter_property("alistairwf#{count.to_i + 1}")
   @wildfire.account_management.your_properties.social_properties.count.should == count.to_i
 end
 
 Then /^I should see the Twitter Properties limit exceeded message$/ do
-  @wildfire.account_management.your_properties.flash_message.should == TWITTER_LIMIT_EXCEEDED
+  @wildfire.account_management.your_properties.flash_message.should include(TWITTER_LIMIT_EXCEEDED)
 end

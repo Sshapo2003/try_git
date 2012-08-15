@@ -41,8 +41,7 @@ Feature: Social Applications
     And I have added the Facebook application "My Funky App" to my custom applications
     
     When I add the page "Wildfire Test Automation" to the application "My Funky App"
-    Then I should see the message "Facebook page information has been updated"
-    And "Wildfire Test Automation" should be listed under "My Funky App" in applications
+    Then "Wildfire Test Automation" should be listed under "My Funky App" in applications
   
   @complete @firefox_facebook_profile
   Scenario: Remove a page from a Facebook application
@@ -51,7 +50,7 @@ Feature: Social Applications
     And I have added the Facebook application "My Funky App" to my custom applications
     And I have added the page "Wildfire Test Automation" to the application "My Funky App"
   
-    When I remove the "Widlfire Test Automation" page from the app "My Funky App"
+    When I remove the "Wildfire Test Automation" page from the app "My Funky App"
     Then I should see the message "Facebook property has been removed from your custom application."
     And "Wildfire Test Automation" should not be listed under "My Funky App" in applications
     But I should see Facebook page "Wildfire Test Automation" in Your Properties

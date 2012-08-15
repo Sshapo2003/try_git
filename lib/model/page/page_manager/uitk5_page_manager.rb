@@ -2,6 +2,7 @@ class Model::Page::PageManager::Uitk5PageManager < Model::Page::PageManager::Pag
   set_url "#{Helpers::Config['wildfire_page_manager_root']}/"
   set_url_matcher /pages\/states\/published/
 
+  element :unlock_button, '#unlock'
   element :sticky_label, '.flashes'
   elements :sidebar_links, '#sidebar #panel-main a'
 
@@ -14,6 +15,10 @@ class Model::Page::PageManager::Uitk5PageManager < Model::Page::PageManager::Pag
 
   def active?
     has_sidebar_links?
+  end
+
+  def locked?
+    has_unlock_button?
   end
 
   def templates

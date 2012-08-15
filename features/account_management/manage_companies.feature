@@ -36,7 +36,7 @@ Feature: Manage Companies
     Given I am logged in to Wildfire as a new user
     And my subscription allows multiple Companies
     When I attempt to create a new company using the current company name
-    Then I should see the message "Name has already been taken" inside the create company modal
+    Then I should see the message "has already been taken"
   
   @complete @amtest @staging
   Scenario: Create a new company under a new Account

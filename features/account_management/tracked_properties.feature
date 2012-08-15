@@ -14,7 +14,7 @@ Feature: Tracked Properties
   Scenario: Add a Twitter profile to Tracked Properties
     Given I am logged in to Wildfire as a new user
     When I add the Twitter profile "wildfireapp" to Tracked Properties
-    Then I should see the Twitter profile "Wildfireapp" in Tracked Properties
+    Then I should see the Twitter profile "wildfireapp" in Tracked Properties
   
   @complete @amtest
   Scenario: Remove a tracked Facebook property

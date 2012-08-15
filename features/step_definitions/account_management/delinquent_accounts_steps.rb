@@ -2,7 +2,7 @@ DELINQUENT_FLASH_MESSAGE = "Access to your account has been suspended due to non
 REQUEST_PAYMENT_MESSAGE = "Access to your account has been suspended due to non payment. Please contact us at 650-352-3248 or billing@wildfireapp.com"
 
 When /^I switch to a non\-delinquent account$/ do
-  @wildfire.account_management.switch_company('Enabled Company')
+  @wildfire.account_management.uitk5? ? @wildfire.account_management.sidebar.switch_company('Enabled Company') : @wildfire.account_management.switch_company('Enabled Company')
 end
 
 When /^I switch to a delinquent account$/ do

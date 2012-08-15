@@ -10,7 +10,7 @@ require 'active_support/dependencies'
 require 'timeout'
 require 'time'
 require 'json'
-#require 'ruby-debug'
+require 'ruby-debug'
 require 'chronic'
 
 #setting 'lib' to be the root of active support's autoloader
