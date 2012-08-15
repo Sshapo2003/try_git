@@ -24,7 +24,11 @@ class Model::Section::Sidebar < SitePrism::Section
   end
   
   def active_panel
-    send panels.detect { |p| send("has_#{p}?".to_sym) && send(p).active? }
+    begin
+      send panels.detect { |p| send("has_#{p}?".to_sym) && send(p).active? }
+    rescue Selenium::WebDriver::Error::StaleElementReferenceError => e
+      false
+    end
   end
   
   def show_switchboard
