@@ -4,7 +4,7 @@ Feature: Track Your Competitors Autocompletion
   Background:
     Given I navigate to the wildfire app track your competitors page
 
-  @complete @staging
+  @complete @production @staging @amtest
   Scenario: Search for Wildfire in Facebook Search Field
     When I type "wildfire" in the facebook searchbox
     Then the first row should be 'Compare using "wildfire" OR choose a suggestion below'

@@ -3,7 +3,7 @@ class Model::Wildfire
     Model::Page::WildfireFrontPage.new
   end
   def login
-    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+    if true
       Model::Page::AccountManagement::Uitk5Login.new
     else
       Model::Page::Login.new
@@ -16,28 +16,28 @@ class Model::Wildfire
     Model::Page::Dashboard.new
   end
   def wildfireapp_messenger
-    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+    if true
       Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger.new
     else
       Model::Page::WildfireappMessenger::WildfireappMessenger.new
     end
   end
   def wildfireapp_analytics
-    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+    if true
       Model::Page::Uitk5WildfireappAnalytics.new
     else
       Model::Page::WildfireappAnalytics.new
     end
   end
   def page_manager
-    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+    if true
       Model::Page::PageManager::Uitk5PageManager.new
     else
       Model::Page::PageManager::PageManager.new
     end
   end
   def page_manager_edit_mode
-    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+    if true
       Model::Page::PageManager::Uitk5PageManagerEditMode.new
     else
       Model::Page::PageManager::PageManagerEditMode.new
@@ -50,21 +50,21 @@ class Model::Wildfire
     Model::Page::WildfireappTemplates.new
   end
   def template_builder
-    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+    if true
       Model::Page::PageManager::Uitk5TemplateBuilder.new
     else
       Model::Page::PageManager::TemplateBuilder.new
     end
   end
   def template_content_editor
-    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+    if true
       Model::Page::PageManager::Uitk5TemplateEditor.new
     else
       Model::Page::PageManager::TemplateEditor.new
     end
   end
   def upload_template
-    if ENV['CONFIG'] == 'am-test' or ENV['CONFIG'] == 'staging'
+    if true
       Model::Page::PageManager::Uitk5UploadTemplate.new
     else
       Model::Page::PageManager::UploadTemplate.new
