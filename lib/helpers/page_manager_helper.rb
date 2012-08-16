@@ -25,11 +25,9 @@ class Helpers::PageManagerHelper
 
     def make_a_change_to_countdown_app
       updated_countdown_app_title = "Countdown #{String.random} #{DateTime.now.strftime("%Y-%m-%d %H:%M:%S")}"
-
       wildfire = Model::Wildfire.new
-
-      wildfire.page_manager.wait_for_my_templates_panel(30)
-      wildfire.page_manager.my_templates_panel.get_template_by_title('Countdown Timer').wait_for_and_click_edit_link
+      wildfire.page_manager.wait_for_published_pages_panel(30)
+      page = wildfire.page_manager.published_pages_panel.get_page_by_title('Countdown Timer').edit_link.click
       wildfire.page_manager_edit_mode.sidebar.content_menu.wait_for_and_click_header_text_edit_link
       wildfire.wildfireapp_countdown_template_edit_header.body_text(updated_countdown_app_title)
       wildfire.wildfireapp_countdown_template_edit_header.save_button.click

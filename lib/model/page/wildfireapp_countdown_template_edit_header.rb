@@ -1,5 +1,5 @@
 class Model::Page::WildfireappCountdownTemplateEditHeader < SitePrism::Page
-  element :save_button, "button[value='Save']"
+  element :save_button, ".btn-primary"
 
   def body_text(text)
     script_executed = false
@@ -7,10 +7,10 @@ class Model::Page::WildfireappCountdownTemplateEditHeader < SitePrism::Page
     while !script_executed && attempts < 30
       attempts = attempts + 1
       begin
-        page.execute_script "tinymce.get('internal_widget_body').setContent('#{text}')"
-        script_executed = true
+        page.execute_script %{editor.setValue("#{text}")}
+        if page.evaluate_script %{editor.getValue()} == text then script_executed = true end
       rescue
-        # page not rendered yet - wait a while
+        # maybe page not rendered yet - wait a while
         sleep 0.5
       end
     end

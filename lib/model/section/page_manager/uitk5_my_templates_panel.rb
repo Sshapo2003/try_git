@@ -27,6 +27,7 @@ class Model::Section::PageManager::Uitk5MyTemplatesPanel < SitePrism::Section
   private
 
   def get_templates_by_title(title)
+    templates.each {|t| puts t.title_div.text}
     found_templates = templates.select {|page| page.title_div.text == title}
     template_names = templates.collect {|p| p.title_div.text}
     found_templates
