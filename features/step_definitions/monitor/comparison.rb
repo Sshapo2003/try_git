@@ -19,7 +19,7 @@ Then /^the monitor page should be loaded with these Twitter properties$/ do |tab
   expected_properties = table.raw.flatten
   Timeout.timeout(30) { sleep 0.1 until @wildfire.comparison.twitter_comparison_item_names.select {|n| n.text == "" }.count == 0 }
   twitter_comparison_item_names_text = @wildfire.comparison.twitter_comparison_item_names.collect {|n| n.text}
-  expected_properties.should eql twitter_comparison_item_names_text
+  twitter_comparison_item_names_text.should eql expected_properties
 end
 
 Then /^the facebook chart should be loaded$/ do
