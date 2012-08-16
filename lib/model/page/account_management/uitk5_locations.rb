@@ -4,10 +4,16 @@ class Model::Page::AccountManagement::Uitk5Locations < SitePrism::Page
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   element :add_new_location_button, '#btn_new_address'
   elements :addresses, 'td.address'
+  element :no_locations_alert, "div:contains('No locations have been added for this company')"
   
   def load
     sidebar.load_application(:company_settings) unless sidebar.active_panel == sidebar.company_settings_panel
     sidebar.company_settings_panel.locations.click
+    wait_until { loaded? }
+  end
+  
+  def loaded?
+    has_addresses? || has_no_locations_alert?
   end
   
   def add_new_location(address=default_address)

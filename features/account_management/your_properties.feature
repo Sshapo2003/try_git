@@ -10,7 +10,7 @@ Feature: Your Properties
     When I view "Your Properties" in Account Management
     Then I should see the following social properties:
      | Name       | Type            |
-     | Alistairwf | Twitter Account |
+     | alistairwf | Twitter Account |
      | MyTestPage | Facebook Page   |
 
   @not-started

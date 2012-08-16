@@ -3,11 +3,25 @@ class Model::Page::AccountManagement::Uitk5YourProperties < SitePrism::Page
   
   set_url_matcher /social_networks$/
   
+  section :sidebar, Model::Section::Sidebar, '#sidebar'
+  
   element :add_property_button, "a:contains('Add')"
   element :fb_oauth_link, '#button_fb_oauth_add'
   element :add_twitter_link, '.btn_twitter_oauth'
   elements :fb_properties, 'td.property'
+  element :no_properties_message, 'p.unavailable'
   elements :twitter_properties, "tr[id^='twitter_token']"
+  
+  def load
+    return if loaded?
+    sidebar.load_application(:company_settings)
+    sidebar.company_settings_panel.your_properties.click
+    wait_until { loaded? }
+  end
+  
+  def loaded?
+    has_no_properties_message? || has_fb_properties? || has_twitter_properties? && has_sidebar?
+  end
   
   def add_facebook_property(fb_page_name)
     show_facebook_properties_modal
@@ -22,7 +36,7 @@ class Model::Page::AccountManagement::Uitk5YourProperties < SitePrism::Page
     rescue Capybara::TimeoutError => e
       add_fb_property_with_javascript(fb_page_name)
     end
-    wait_until { !has_modal? }
+    wait_until(60) { !has_modal? }
   end
   
   def add_twitter_property(twitter_name)

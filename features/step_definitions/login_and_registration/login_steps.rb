@@ -46,6 +46,6 @@ end
 
 Then /^I should be successfully logged in as "(.*)"$/ do |company_name|
   #TODO: Pull the current company name from the sidebar
-  @wildfire.account_management.load_section('Basic Info')
+  @wildfire.account_management.basic_info.load
   @wildfire.account_management.basic_info.company_name.should eql company_name
 end

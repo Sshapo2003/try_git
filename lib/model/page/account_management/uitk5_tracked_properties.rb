@@ -4,6 +4,19 @@ class Model::Page::AccountManagement::Uitk5TrackedProperties < SitePrism::Page
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   element :add_facebook_link, '#add_fan_page_link'
   element :add_twitter_link, '#add_twitter_account_link'
+  element :no_properties_message, 'p.unavailable'
+  elements :tracked_properties, '#tracked_properties table tbody tr'
+  
+  def load
+    return if loaded?
+    sidebar.load_application(:company_settings)
+    sidebar.company_settings_panel.tracked_properties.click
+    wait_until { loaded? }
+  end
+  
+  def loaded?
+    has_no_properties_message? || has_tracked_properties? && has_sidebar? 
+  end
   
   def add_facebook_page(page_url)
     add_facebook_link.click
@@ -29,7 +42,7 @@ class Model::Page::AccountManagement::Uitk5TrackedProperties < SitePrism::Page
   end
   
   def has_properties?
-    using_wait_time(0.5) { has_content?("You haven't added any properties yet") ? false : true }
+    !has_no_properties_message?
   end
   
   def tracked_properties

@@ -33,6 +33,5 @@ Given /^I am in the "([^"]*)" application$/ do |application|
 end
 
 When /^I view "([^"]*)" in Account Management$/ do |section|
-  @wildfire.account_management.load
-  @wildfire.account_management.load_section(section)
+  @wildfire.account_management.send(section.downcase.gsub(' ', '_').to_sym).load
 end
