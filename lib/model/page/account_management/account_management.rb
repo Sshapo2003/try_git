@@ -6,7 +6,7 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   set_url_matcher /#{Regexp.escape(url)}/
   
   def your_properties
-    uitk5? ? Model::Page::AccountManagement::Uitk5YourProperties.new : Model::Page::AccountManagement::YourProperties.new
+    Model::Page::AccountManagement::YourProperties.new
   end
   
   def load_section(name)
@@ -19,11 +19,11 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   end
   
   def locations
-    uitk5? ? Model::Page::AccountManagement::Uitk5Locations.new : Model::Page::AccountManagement::Locations.new
+    Model::Page::AccountManagement::Locations.new
   end
   
   def basic_info
-    uitk5? ? Model::Page::AccountManagement::Uitk5BasicInfo.new : Model::Page::AccountManagement::BasicInfo.new
+    Model::Page::AccountManagement::BasicInfo.new
   end
   
   def tracked_properties
@@ -35,11 +35,11 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   end
   
   def manage_accounts
-    uitk5? ? Model::Page::AccountManagement::Uitk5ManageAccounts.new : Model::Page::AccountManagement::ManageAccounts.new
+    Model::Page::AccountManagement::ManageAccounts.new
   end
   
   def edit_subscription
-    uitk5? ? Model::Page::AccountManagement::Uitk5EditSubscription.new : Model::Page::AccountManagement::EditSubscription.new
+    Model::Page::AccountManagement::EditSubscription.new
   end
   
   def create_company
@@ -51,7 +51,7 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   end
   
   def signup
-    uitk5? ? Model::Page::AccountManagement::Uitk5Signup.new : Model::Page::Signup.new
+    Model::Page::Signup.new
   end
   
   def flash_message

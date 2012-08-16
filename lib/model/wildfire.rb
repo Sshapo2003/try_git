@@ -3,11 +3,7 @@ class Model::Wildfire
     Model::Page::WildfireFrontPage.new
   end
   def login
-    if true
-      Model::Page::AccountManagement::Uitk5Login.new
-    else
-      Model::Page::Login.new
-    end
+    Model::Page::AccountManagement::Uitk5Login.new
   end
   def signup
     account_management.signup
@@ -77,10 +73,10 @@ class Model::Wildfire
     Model::Page::Monitor::WildfireappMonitor.new
   end
   def account_management
-    uitk5? ? Model::Page::AccountManagement::Uitk5AccountManagement.new : Model::Page::AccountManagement::AccountManagement.new
+    Model::Page::AccountManagement::Uitk5AccountManagement.new
   end
   def your_properties
-    Model::Page::AccountManagement::YourProperties.new
+    Model::Page::AccountManagement::Uitk5YourProperties.new
   end
   def monitor
     Model::Page::Monitor::WildfireappMonitor.new
@@ -90,9 +86,5 @@ class Model::Wildfire
   end
   def comparison
     Model::Page::Monitor::Comparison.new
-  end
-  
-  def uitk5?
-    %w{am-test staging}.include? ENV['CONFIG']
   end
 end
