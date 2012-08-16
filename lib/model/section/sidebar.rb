@@ -7,6 +7,7 @@ class Model::Section::Sidebar < SitePrism::Section
   section :analytics_panel, Model::Section::Sidebar::AnalyticsPanel, '#dashboard_nav'
   section :pages_panel, Model::Section::Sidebar::PagesPanel, '#panel-main'
   section :account_settings_panel, Model::Section::Sidebar::AccountSettingsPanel, '#account-settings'
+  section :monitor_panel, Model::Section::Sidebar::MonitorPanel, '#monitor_nav'
   
   def accounts
     show_switchboard
@@ -60,7 +61,7 @@ class Model::Section::Sidebar < SitePrism::Section
   private
   
   def panels
-    [:switchboard_panel, :applications_panel, :company_settings_panel, :promotions_panel, :account_settings_panel, :messenger_panel, :analytics_panel, :pages_panel]
+    [:switchboard_panel, :applications_panel, :company_settings_panel, :promotions_panel, :account_settings_panel, :messenger_panel, :analytics_panel, :pages_panel, :monitor_panel]
   end
   
   def applications
