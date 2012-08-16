@@ -1,5 +1,5 @@
-class Model::Page::AccountManagement::Uitk5Locations < SitePrism::Page
-  include Helpers::Uitk5ModalHelper
+class Model::Page::AccountManagement::Locations < SitePrism::Page
+  include Helpers::ModalHelper
   
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   element :add_new_location_button, '#btn_new_address'

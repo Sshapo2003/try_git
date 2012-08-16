@@ -3,7 +3,7 @@ class Model::Wildfire
     Model::Page::WildfireFrontPage.new
   end
   def login
-    Model::Page::AccountManagement::Uitk5Login.new
+    Model::Page::AccountManagement::Login.new
   end
   def signup
     account_management.signup
@@ -73,10 +73,10 @@ class Model::Wildfire
     Model::Page::Monitor::WildfireappMonitor.new
   end
   def account_management
-    Model::Page::AccountManagement::Uitk5AccountManagement.new
+    Model::Page::AccountManagement::AccountManagement.new
   end
   def your_properties
-    Model::Page::AccountManagement::Uitk5YourProperties.new
+    Model::Page::AccountManagement::YourProperties.new
   end
   def monitor
     Model::Page::Monitor::WildfireappMonitor.new

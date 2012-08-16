@@ -1,5 +1,5 @@
-class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
-  include Helpers::Uitk5ModalHelper
+class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
+  include Helpers::ModalHelper
   
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   
@@ -9,7 +9,7 @@ class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
   delegate :current_company, :companies, :accounts, :switch_company, :to => :sidebar
   
   def your_properties
-    Model::Page::AccountManagement::Uitk5YourProperties.new
+    Model::Page::AccountManagement::YourProperties.new
   end
   
   def loaded?
@@ -21,15 +21,15 @@ class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
   end
   
   def locations
-    Model::Page::AccountManagement::Uitk5Locations.new
+    Model::Page::AccountManagement::Locations.new
   end
   
   def basic_info
-    Model::Page::AccountManagement::Uitk5BasicInfo.new
+    Model::Page::AccountManagement::BasicInfo.new
   end
   
   def tracked_properties
-    Model::Page::AccountManagement::Uitk5TrackedProperties.new
+    Model::Page::AccountManagement::TrackedProperties.new
   end
   
   def demo_page
@@ -37,32 +37,32 @@ class Model::Page::AccountManagement::Uitk5AccountManagement < SitePrism::Page
   end
   
   def manage_accounts
-    Model::Page::AccountManagement::Uitk5ManageAccounts.new
+    Model::Page::AccountManagement::ManageAccounts.new
   end
   
   def edit_subscription
-    Model::Page::AccountManagement::Uitk5EditSubscription.new
+    Model::Page::AccountManagement::EditSubscription.new
   end
   
   def create_company
-    Model::Page::AccountManagement::Uitk5CreateCompany.new
+    Model::Page::AccountManagement::CreateCompany.new
   end
   
   def social_apps
-    Model::Page::AccountManagement::Uitk5SocialApps.new
+    Model::Page::AccountManagement::SocialApps.new
   end
   alias :applications :social_apps
   
   def signup
-    Model::Page::AccountManagement::Uitk5Signup.new
+    Model::Page::AccountManagement::Signup.new
   end
   
   def services
-    Model::Page::AccountManagement::Uitk5Services.new
+    Model::Page::AccountManagement::Services.new
   end
   
   #TODO: rename this method once UITK5 is live everywhere
   def show_create_company_modal
-    Model::Page::AccountManagement::Uitk5CreateCompany.new.load
+    Model::Page::AccountManagement::CreateCompany.new.load
   end
 end

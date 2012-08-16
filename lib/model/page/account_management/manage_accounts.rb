@@ -1,4 +1,4 @@
-class Model::Page::AccountManagement::Uitk5ManageAccounts < SitePrism::Page
+class Model::Page::AccountManagement::ManageAccounts < SitePrism::Page
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   
   def load
@@ -11,6 +11,6 @@ class Model::Page::AccountManagement::Uitk5ManageAccounts < SitePrism::Page
   
   def members
     sidebar.account_settings_panel.members.click
-    Model::Page::AccountManagement::Uitk5Members.new
+    Model::Page::AccountManagement::Members.new
   end
 end

@@ -1,4 +1,4 @@
-class Model::Page::AccountManagement::Uitk5Members < SitePrism::Page
+class Model::Page::AccountManagement::Members < SitePrism::Page
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   
   element :invite_new_members_button, "a:contains('Invite New Members')"

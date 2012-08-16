@@ -1,5 +1,5 @@
 module Helpers
-  module Uitk5ModalHelper
+  module ModalHelper
     def has_modal?
       begin
         first('div.modal') ? true : false

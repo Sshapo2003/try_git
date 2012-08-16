@@ -1,5 +1,5 @@
-class Model::Page::AccountManagement::Uitk5YourProperties < SitePrism::Page
-  include Helpers::Uitk5ModalHelper
+class Model::Page::AccountManagement::YourProperties < SitePrism::Page
+  include Helpers::ModalHelper
   
   set_url_matcher /social_networks$/
   

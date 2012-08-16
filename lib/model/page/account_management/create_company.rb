@@ -1,4 +1,4 @@
-class Model::Page::AccountManagement::Uitk5CreateCompany < SitePrism::Page
+class Model::Page::AccountManagement::CreateCompany < SitePrism::Page
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   
   def load

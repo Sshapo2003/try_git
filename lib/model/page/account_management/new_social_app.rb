@@ -1,5 +1,5 @@
-class Model::Page::AccountManagement::Uitk5NewSocialApp < SitePrism::Page
-  include Helpers::Uitk5ModalHelper
+class Model::Page::AccountManagement::NewSocialApp < SitePrism::Page
+  include Helpers::ModalHelper
   
   element :remote_id_field, '#fb_app_remote_id'
   element :secret_field,    '#fb_app_secret'

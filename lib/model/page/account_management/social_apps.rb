@@ -1,5 +1,5 @@
-class Model::Page::AccountManagement::Uitk5SocialApps < SitePrism::Page
-  include Helpers::Uitk5ModalHelper
+class Model::Page::AccountManagement::SocialApps < SitePrism::Page
+  include Helpers::ModalHelper
   
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   element :new_company_button, '#button_new_company_social_app'
@@ -24,7 +24,7 @@ class Model::Page::AccountManagement::Uitk5SocialApps < SitePrism::Page
   end
   
   def new_social_app
-    Model::Page::AccountManagement::Uitk5NewSocialApp.new
+    Model::Page::AccountManagement::NewSocialApp.new
   end
   
   def remove_app(app_name)

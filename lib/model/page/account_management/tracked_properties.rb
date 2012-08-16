@@ -1,5 +1,5 @@
-class Model::Page::AccountManagement::Uitk5TrackedProperties < SitePrism::Page
-  include Helpers::Uitk5ModalHelper
+class Model::Page::AccountManagement::TrackedProperties < SitePrism::Page
+  include Helpers::ModalHelper
   
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   element :add_facebook_link, '#add_fan_page_link'

@@ -1,5 +1,5 @@
-class Model::Page::AccountManagement::Uitk5EditSubscription < SitePrism::Page
-  include Helpers::Uitk5ModalHelper
+class Model::Page::AccountManagement::EditSubscription < SitePrism::Page
+  include Helpers::ModalHelper
   
   def enable_application(application)
     within_modal do

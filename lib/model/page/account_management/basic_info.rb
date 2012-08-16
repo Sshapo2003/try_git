@@ -1,4 +1,4 @@
-class Model::Page::AccountManagement::Uitk5BasicInfo < SitePrism::Page
+class Model::Page::AccountManagement::BasicInfo < SitePrism::Page
   section :sidebar, Model::Section::Sidebar, '#sidebar'
   section :company_form, Model::Section::AccountManagement::CompanyForm, '#company_form'
   section :company_logo_form, Model::Section::AccountManagement::Uitk5CompanyLogoForm, '#upload_form'
