@@ -11,7 +11,7 @@ Then /^the monitor page should be loaded with these Facebook properties$/ do |ta
   expected_properties = table.raw.flatten
   Timeout.timeout(30) { sleep 0.1 until @wildfire.comparison.facebook_comparison_item_names.select {|n| n.text == "" }.count == 0 }
   facebook_comparison_item_names_text = @wildfire.comparison.facebook_comparison_item_names.collect {|n| n.text}
-  expected_properties.should eql facebook_comparison_item_names_text
+  facebook_comparison_item_names_text.should eql expected_properties
 end
 
 Then /^the monitor page should be loaded with these Twitter properties$/ do |table|
