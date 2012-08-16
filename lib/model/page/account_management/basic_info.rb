@@ -1,59 +1,35 @@
 class Model::Page::AccountManagement::BasicInfo < SitePrism::Page
-  section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
-  section :company_form, Model::Section::AccountManagement::CompanyForm, 'form#company_form'
-  section :company_logo_form, Model::Section::AccountManagement::CompanyLogoForm, 'form#upload_form'
+  section :sidebar, Model::Section::Sidebar, '#sidebar'
+  section :company_form, Model::Section::AccountManagement::CompanyForm, '#company_form'
+  section :company_logo_form, Model::Section::AccountManagement::Uitk5CompanyLogoForm, '#upload_form'
   
-  def update_company_name(name)
-    company_form.update_company_name(name)
+  element :delete_company_button, '#delete_company'
+  
+  company_form_methods = [:update_company_name, :update_company_industry, :update_timezone, :update_website_url, :update_description, :update_company_email, :update_reply_email]
+  delegate *company_form_methods, :to => :company_form
+  delegate :upload_logo, :remove_logo, :to => :company_logo_form
+  
+  def load
+    return if loaded?
+    sidebar.load_application(:company_settings)
+    sidebar.company_settings_panel.basic_info.click
+    wait_until { loaded? }
   end
   
-  def update_company_industry(industry)
-    company_form.update_company_industry(industry)
-  end
-  
-  def update_timezone(timezone)
-    company_form.update_timezone(timezone)
-  end
-  
-  def update_website_url(url)
-    company_form.update_website_url(url)
-  end
-  
-  def update_description(description)
-    company_form.update_description(description)
-  end
-  
-  def update_company_email(email)
-    company_form.update_company_email(email)
-  end
-  
-  def update_reply_email(email)
-    company_form.update_reply_email(email)
-  end
-  
-  def delete_company
-    click_on('Delete Company')
-    page.accept_alert
-  end
-  
-  def upload_logo(filename)
-    company_logo_form.upload_logo(filename)
-  end
-  
-  def remove_logo
-    company_logo_form.remove_logo
+  def loaded?
+    has_company_form? && has_company_logo_form? && has_sidebar? 
   end
   
   def company_name
     find_field('Company Name').value
   end
   
-  def industry
-    find_field('Industry').find('option[selected]').text
-  end
-  
   def timezone
     find_field('Timezone').find('option[selected]').text
+  end
+  
+  def industry
+    find_field('Industry').find('option[selected]').text
   end
   
   def website_url
@@ -73,6 +49,11 @@ class Model::Page::AccountManagement::BasicInfo < SitePrism::Page
   end
   
   def has_no_logo?
-    first("img[alt='Nologo']") ? true : false
+    first("img[alt='Nologo']") || has_content?("You haven't uploaded a logo.") ? true : false
+  end
+  
+  def delete_company
+    delete_company_button.click
+    page.accept_alert
   end
 end

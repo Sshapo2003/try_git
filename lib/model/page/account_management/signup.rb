@@ -1,4 +1,4 @@
-class Model::Page::AccountManagement::Uitk5Signup < SitePrism::Page
+class Model::Page::AccountManagement::Signup < SitePrism::Page
   set_url "#{Helpers::Config['wildfire_site_root']}/signup/"
   
   element :firstname_field,       '#user_first_name'

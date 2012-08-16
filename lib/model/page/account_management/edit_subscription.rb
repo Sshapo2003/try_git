@@ -1,10 +1,6 @@
 class Model::Page::AccountManagement::EditSubscription < SitePrism::Page
   include Helpers::ModalHelper
   
-  def subscription_details
-    within_modal { extract_subscription_details }
-  end
-  
   def enable_application(application)
     within_modal do
       check application
@@ -35,6 +31,10 @@ class Model::Page::AccountManagement::EditSubscription < SitePrism::Page
       click_on 'Save'
     end
     wait_until() { !has_modal? }
+  end
+  
+  def subscription_details
+    within_modal { extract_subscription_details }
   end
   
   def update_subscription(values)

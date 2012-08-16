@@ -1,5 +1,5 @@
 class Model::Section::AccountManagement::SocialApp < SitePrism::Section
-  include Helpers::Uitk5ModalHelper
+  include Helpers::ModalHelper
   
   element :name_link,                 'a.social_app'
   element :actions_button,            "a:contains('Actions')"

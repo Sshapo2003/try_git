@@ -3,8 +3,8 @@ class Model::Page::AccountManagement::NewSocialApp < SitePrism::Page
   
   element :remote_id_field, '#fb_app_remote_id'
   element :secret_field,    '#fb_app_secret'
-  element :cancel_button,   '.btn_cancel'
-  element :save_button,     '.btn_save'
+  element :cancel_button,   "input[value='close']"
+  element :save_button,     '.btn-primary'
   
   def add_application(remote_id, secret)
     within_modal do
@@ -15,7 +15,7 @@ class Model::Page::AccountManagement::NewSocialApp < SitePrism::Page
   end
   
   def errors
-    within_modal() { all('div.warning').map { |e| e.text } }
+    within_modal() { all('.help-inline').map { |e| e.text } }
   end
   
   def has_errors?
