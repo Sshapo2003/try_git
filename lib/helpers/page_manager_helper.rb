@@ -38,20 +38,16 @@ class Helpers::PageManagerHelper
     def publish_completed_page
       wildfire = Model::Wildfire.new
 
-      wildfire.page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_link(30)
+      wildfire.page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_publish_accordian_link(30)
       wildfire.page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_publish_to_facebook(30)
 
-      wildfire.page_manager_edit_mode.publish_to_facebook_modal.wait_for_cancel_button(30)
+      publish_modal = wildfire.page_manager_edit_mode.publish_to_facebook_modal
+      publish_modal.select_property(Helpers::Config['facebook_property_name'])
+      publish_modal.select_application(Helpers::Config['create_template_property_name'])
+      publish_modal.overwrite_content
 
-      wildfire.page_manager_edit_mode.publish_to_facebook_modal.select_property(Helpers::Config['facebook_property_name'])
-      wildfire.page_manager_edit_mode.publish_to_facebook_modal.select_application(Helpers::Config['create_template_property_name'])
-
-      if !wildfire.page_manager_edit_mode.publish_to_facebook_modal.overwrite_prior_content_checkbox.checked?
-        wildfire.page_manager_edit_mode.publish_to_facebook_modal.check_overwrite_previous_content_checkbox
-      end
-
-      wildfire.page_manager_edit_mode.publish_to_facebook_modal.update_button.click
-      wildfire.page_manager_edit_mode.publish_to_facebook_modal.wait_for_publish_success_postit(30)
+      publish_modal.update_button.click
+      publish_modal.wait_for_publish_success_postit(30)
     end
 
     def get_template_menu_options
