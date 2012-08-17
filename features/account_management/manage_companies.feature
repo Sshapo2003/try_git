@@ -60,7 +60,7 @@ Feature: Manage Companies
     | Analytics         |
     | Page Manager      |
     | Promotion Builder |
-#   | Monitor           | needs updating for UITK5
+    | Monitor           |
 
   @complete @production
   Scenario Outline: List Companies in a single Account

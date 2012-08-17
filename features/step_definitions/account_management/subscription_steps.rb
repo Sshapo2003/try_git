@@ -51,7 +51,7 @@ end
 Then /^I should not be able to add more than (\d+) Twitter Properties$/ do |count|
   (1..count.to_i).each do |i|
     property_name = "alistairwf#{i.to_s}"
-    @wildfire.account_management.load_section('Your Properties')
+    @wildfire.account_management.your_properties.load
     @wildfire.account_management.your_properties.add_twitter_property(property_name)
     @wildfire.account_management.your_properties.should have_twitter_property(property_name)
   end

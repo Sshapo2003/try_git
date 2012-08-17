@@ -1,51 +1,54 @@
 class Model::Page::AccountManagement::TrackedProperties < SitePrism::Page
-  section :sidebar, Model::Section::AccountManagement::Sidebar, 'div.sidebar'
-  section :tracked_properties_form, Model::Section::AccountManagement::TrackedPropertiesForm, 'form#tracked_properties'
+  include Helpers::ModalHelper
   
-  element :add_facebook_page_link, "a#add_fan_page_link"
-  element :add_twitter_account_link, "a#add_twitter_account_link"
+  section :sidebar, Model::Section::Sidebar, '#sidebar'
+  element :add_facebook_link, '#add_fan_page_link'
+  element :add_twitter_link, '#add_twitter_account_link'
+  element :no_properties_message, 'p.unavailable'
+  elements :tracked_properties, '#tracked_properties table tbody tr'
   
   def load
-    sidebar.navigate_to('Tracked Properties')
+    return if loaded?
+    sidebar.load_application(:company_settings)
+    sidebar.company_settings_panel.tracked_properties.click
+    wait_until { loaded? }
+  end
+  
+  def loaded?
+    has_no_properties_message? || has_tracked_properties? && has_sidebar? 
   end
   
   def add_facebook_page(page_url)
-    add_facebook_page_link.click
-    within_facebook_page_modal do
+    add_facebook_link.click
+    within_modal do
       fill_in('URL', :with => page_url)
       click_on('Save')
     end
-    wait_until(5) { tracked_properties_form.has_properties? }
+    wait_until(5) { has_properties? }
   end
   
   def add_twitter_account(account_name)
-    add_twitter_account_link.click
-    within_twitter_modal do
+    add_twitter_link.click
+    within_modal do
       fill_in('Username', :with => account_name)
       click_on('Save')
     end
-    wait_until(5) { tracked_properties_form.has_properties? }
+    wait_until(5) { has_properties? }
   end
   
   def remove_property(index=0)
-    all('div.integration div.actions a')[index].click
+    all("tbody tr a:contains('Remove')")[index].click
     page.accept_alert
   end
   
-  def tracked_properties
-    tracked_properties_form.tracked_properties
-  end
-  
   def has_properties?
-    tracked_properties_form.has_properties?
+    !has_no_properties_message?
   end
   
-  private
-  def within_facebook_page_modal(&block)
-    within_frame(first("iframe[src*='fan_pages/new']")[:id]) { yield }
-  end
-  
-  def within_twitter_modal(&block)
-    within_frame(first("iframe[src*='twitter/accounts']")[:id]) { yield }
+  def tracked_properties
+    return [] unless has_properties?
+    all('tbody tr').collect do |row|
+      {:name => row.first('td a').text, :property_type => row.first("img[alt='Facebook']") ? 'Facebook Account' : 'Twitter Account' }
+    end
   end
 end

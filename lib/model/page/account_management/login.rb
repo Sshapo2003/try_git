@@ -1,4 +1,4 @@
-class Model::Page::AccountManagement::Uitk5Login < SitePrism::Page
+class Model::Page::AccountManagement::Login < SitePrism::Page
   set_url "#{Helpers::Config['wildfire_site_root']}/sso_sign_on/"
 
   element :email_field,          '#email'

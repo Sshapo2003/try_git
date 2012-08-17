@@ -39,7 +39,7 @@ When /^I delete the second Company$/ do
 end
 
 When /^I delete the current company$/ do
-  @wildfire.account_management.load_section('Basic Info')
+  @wildfire.account_management.basic_info.load
   @wildfire.account_management.basic_info.delete_company
 end
 
