@@ -34,6 +34,7 @@ pam: <%= common %> -t @account_management -t @production CONFIG=live
 pa: <%= common %> -t @analytics -t @production CONFIG=live
 ppm: <%= common %> -t @page_manager -t @production CONFIG=live
 pg: <%= common %> -t @gallery -t @production CONFIG=live
+pt: <%= common %> -t @templates -t @production CONFIG=live
 
 # Product Group Specific
 # Staging
