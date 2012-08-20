@@ -17,7 +17,7 @@ Feature: Template Gallery
   @complete
   Scenario: Search for a template
     When I search for "tile" in the template search
-    Then the "Tile Gallery" template should be displayed in the tile gallery
+    Then the "Tile Gallery 2.0" template should be displayed in the tile gallery
 
   @complete
   Scenario: Filter templates by Results

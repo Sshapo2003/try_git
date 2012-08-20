@@ -15,6 +15,10 @@ Then /^the updates to the "(.*)" app should be visible$/ do |page|
 end
 
 Then /^the published template should be visible on my facebook page$/ do
+  step %{the published template should be visible on my facebook page with the title "#{@template_name}"}
+end
+
+Then /^the published template should be visible on my facebook page with the title "(.*)"$/ do |page_title|
   page.driver.browser.close
   page.driver.new_browser
 
@@ -23,11 +27,11 @@ Then /^the published template should be visible on my facebook page$/ do
 
   Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.displayed? != true }
   Timeout.timeout(30) { sleep 0.1 while @facebook.wildfire_app_page.has_iframe? != true }
-  Timeout.timeout_and_raise(30, "Timed out while waiting for iframe to contain #{@template_name}. Page Body: #{@facebook.wildfire_app_page.iframe_body}") do 
-    sleep 0.1 while @facebook.wildfire_app_page.iframe_body.include?(@template_name) != true
+  Timeout.timeout_and_raise(30, "Timed out while waiting for iframe to contain #{page_title}. Page Body: #{@facebook.wildfire_app_page.iframe_body}") do 
+    sleep 0.1 while @facebook.wildfire_app_page.iframe_body.include?(page_title) != true
   end
-  @facebook.wildfire_app_page.iframe_body.should include @template_name
 end
+
 
 Then /^the message should be visible on my facebook page$/ do
   @facebook.timeline.visit_my_timeline

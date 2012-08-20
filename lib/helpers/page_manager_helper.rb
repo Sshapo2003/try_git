@@ -38,8 +38,14 @@ class Helpers::PageManagerHelper
     def publish_completed_page
       wildfire = Model::Wildfire.new
 
-      wildfire.page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_publish_accordian_link(30)
-      wildfire.page_manager_edit_mode.sidebar.publish_menu.wait_for_and_click_publish_to_facebook(30)
+      Timeout.timeout(30) do
+        while wildfire.page_manager_edit_mode.sidebar.has_inactive_publish_menu_div? do
+          wildfire.page_manager_edit_mode.sidebar.publish_menu.publish_accordian_link.click
+          sleep 1
+        end
+      end
+      
+      wildfire.page_manager_edit_mode.sidebar.publish_menu.click_publish_to_facebook
 
       publish_modal = wildfire.page_manager_edit_mode.publish_to_facebook_modal
       publish_modal.select_property(Helpers::Config['facebook_property_name'])

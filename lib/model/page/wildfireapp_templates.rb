@@ -13,8 +13,6 @@ class Model::Page::WildfireappTemplates < SitePrism::Page
   element :filter_bar_div, 'div.filter-bar'
   element :filter_count_text, 'span.filters-count-text'
 
-  elements :template_titles, 'ul.page_templates li h2'
-
   def scroll_to_bottom_of_page
     page.execute_script "window.scrollBy(0,10000)"
     sleep 0.1 #required to allow rendering of additional templates
@@ -30,7 +28,13 @@ class Model::Page::WildfireappTemplates < SitePrism::Page
   end
 
   def all_template_titles
-    page.evaluate_script "$('ul.page_templates li h2').text()"
+    template_titles = []
+    index = 0
+    templates.count.times do
+      template_titles << page.evaluate_script("$('ul.page_templates li h2')[#{index}].textContent").strip
+      index += 1
+    end
+    template_titles
   end
 
   def set_filter(filter_name)
@@ -44,13 +48,26 @@ class Model::Page::WildfireappTemplates < SitePrism::Page
   # therefore cannot be used to identify a section based on its contents
   def select_by_name(template_name)
     index = 0
+    found = false
     while index < templates.count
       queried_template_name = page.evaluate_script "$('ul.page_templates li h2').get(#{index}).textContent"
-      break if queried_template_name == template_name
+      if queried_template_name.strip == template_name.strip then found = true end
+      break if found
       index += 1
-      raise "Couldn't find template #{template_name} in #{all_template_titles}" unless index < templates.count
     end
+    raise "Couldn't find template #{template_name} in #{all_template_titles}" unless found
     templates[index]
+  end
+
+  def named_templates
+    named_tampletes = []
+    index = 0
+    templates.each do |template|
+      queried_template_name = page.evaluate_script "$('ul.page_templates li h2').get(#{index}).textContent"
+      index += 1
+      named_templates << {:name => queried_template_name, :template => template}
+    end
+    named_tampletes
   end
 
   private
