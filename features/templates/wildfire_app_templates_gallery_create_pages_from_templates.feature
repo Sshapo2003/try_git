@@ -342,7 +342,205 @@ Feature: Creating Pages from Templates
     Then the published template should be visible on my facebook page
 
   @complete
-  Scenario:  Scribd Embed
+  Scenario: Scribd Embed
     When I create a page from the "Scribd Embed" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Sleek Product Gallery (5)
+    When I create a page from the "Sleek Product Gallery (5)" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Classic Poll
+    When I create a page from the "Classic Poll" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Classic Blog
+    When I create a page from the "Classic Blog" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Art Video
+    When I create a page from the "Art Video" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Art Poll
+    When I create a page from the "Art Poll" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Art Blog
+    When I create a page from the "Art Blog" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Big Image
+    When I create a page from the "Big Image" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Vintage Video
+    When I create a page from the "Vintage Video" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Gallery + Poll
+    When I create a page from the "Gallery + Poll" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Vintage Poll
+    When I create a page from the "Vintage Poll" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Vintage Blog
+    When I create a page from the "Vintage Blog" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Retro Video
+    When I create a page from the "Retro Video" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Multi-Panel Media
+    When I create a page from the "Multi-Panel Media" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: About Us (with Skins)
+    When I create a page from the "About Us (with Skins)" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Retro Poll
+    When I create a page from the "Retro Poll" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Retro Blog
+    When I create a page from the "Retro Blog" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Grunge Video
+    When I create a page from the "Grunge Video" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Grunge Poll
+    When I create a page from the "Grunge Poll" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Grunge Blog
+    When I create a page from the "Grunge Blog" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Dark Video
+    When I create a page from the "Dark Video" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Dark Poll
+    When I create a page from the "Dark Poll" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Dark Blog
+    When I create a page from the "Dark Blog" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Clean Poll
+    When I create a page from the "Clean Poll" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Questions/Stories
+    When I create a page from the "Questions/Stories" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Clean Video
+    When I create a page from the "Clean Video" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Handbook
+    When I create a page from the "Handbook" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Clean Blog
+    When I create a page from the "Clean Blog" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: RSS Light
+    When I create a page from the "RSS Light" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Text Light
+    When I create a page from the "Text Light" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Twitter Sidebar
+    When I create a page from the "Twitter Sidebar" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Social YouTube Channel
+    When I create a page from the "Social YouTube Channel" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Restaurant Dark
+    When I create a page from the "Restaurant Dark" template
+    And I publish the template
+    Then the published template should be visible on my facebook page
+
+  @complete
+  Scenario: Restaurant Light
+    When I create a page from the "Restaurant Light" template
     And I publish the template
     Then the published template should be visible on my facebook page

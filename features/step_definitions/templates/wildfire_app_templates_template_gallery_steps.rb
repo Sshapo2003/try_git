@@ -59,7 +59,8 @@ When /^I create a page from the "(.*)" template$/ do |template_name|
   until @wildfire.wildfireapp_templates.all_template_titles.include? template_name
     @wildfire.wildfireapp_templates.scroll_to_bottom_of_page
     unless @wildfire.wildfireapp_templates.templates.count < @wildfire.wildfireapp_templates.template_results_count then
-      raise "Could not find #{template_name} in the template gallery. Templates => #{@wildfire.wildfireapp_templates.templates}"
+      template_names = @wildfire.wildfireapp_templates.templates.collect {|t| t.title_div.text}.join(", ")
+      raise "Could not find #{template_name} in the template gallery. Templates => #{template_names}"
     end
   end
   @wildfire.wildfireapp_templates.select_by_name(template_name).start_button.click
