@@ -12,7 +12,7 @@ class Model::Section::Facebook::TimelineNavDiv < SitePrism::Section
     Timeout.timeout_and_raise(120, msg) do
       while get_app_pagelet_by_name(app_name).count == 0
         sleep 2
-        visit(page.driver.current_url)
+        page.driver.refresh
       end
     end
     get_app_pagelet_by_name(app_name).first.visit_app
