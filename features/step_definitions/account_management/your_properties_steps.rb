@@ -14,17 +14,24 @@ When /^I add the twitter account "([^"]*)" to Wildfire$/ do |twitter_name|
 end
 
 When /^I remove the Facebook page "(.*?)" from Your Properties$/ do |page_name|
-  @wildfire.account_management.your_properties.remove_property(page_name)
+  @wildfire.account_management.your_properties.load
+  @wildfire.account_management.your_properties.remove_facebook_property(page_name)
+end
+
+When /^I remove the twitter account "(.*?)" from Wildfire$/ do |name|
+  @wildfire.account_management.your_properties.load
+  @wildfire.account_management.your_properties.remove_twitter_property(name)
 end
 
 Then /^I should see the following social properties:$/ do |table|
   table.hashes.each do |property|
-    @wildfire.account_management.your_properties.should have_property(property['Name'], property['Type'])
+    @wildfire.account_management.your_properties.should have_property(property['Name'])
   end
 end
 
 Then /^I should see Twitter account "([^"]*)" in Your Properties$/ do |twitter_name|
-  @wildfire.account_management.your_properties.should have_property(twitter_name, 'twitter account')
+  @wildfire.account_management.your_properties.load
+  @wildfire.account_management.your_properties.should have_twitter_property(twitter_name)
 end
 
 Then /^I should see Facebook page "([^"]*)" in Your Properties$/ do |page_name|
