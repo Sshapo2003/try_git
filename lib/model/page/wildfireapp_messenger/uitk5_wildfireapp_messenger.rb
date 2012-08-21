@@ -3,7 +3,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
   set_url_matcher /messenger/
   
   element :messages_div_header, '.span8'
-  element :new_message_button, '.btn-primary'
+  element :new_message_button, "a:contains('New Message')"
   element :sticky_header_text, '.flashes .flash'
   element :notifications_trigger, '#notifications_trigger'
   element :unflag_message_button, 'a[href="Unflag"]'
@@ -56,6 +56,7 @@ class Model::Page::WildfireappMessenger::Uitk5WildfireappMessenger < Model::Page
 
   def compose_message
     new_message_button.click
+    wait_until { has_compose_message_panel? }
   end
 
   def messages_in_folder(folder_name)

@@ -36,3 +36,12 @@ Then /^I should have (\d+) social properties$/ do |count|
   @wildfire.account_management.your_properties.load
   @wildfire.account_management.your_properties.social_properties.count.should == count.to_i
 end
+
+Then /^I should be able to compose a message to "(.*?)"$/ do |property_name|
+  wait_until(30) do
+    @wildfire.account_management.sidebar.load_application(:messages)
+    @wildfire.wildfireapp_messenger.has_new_message_button?
+  end
+  @wildfire.wildfireapp_messenger.click_tab('Compose')
+  @wildfire.wildfireapp_messenger.compose_a_valid_message(property_name)
+end

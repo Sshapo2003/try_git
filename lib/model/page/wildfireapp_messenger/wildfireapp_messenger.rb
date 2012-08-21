@@ -106,12 +106,12 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
     compose_message_panel.sidebar.compose_link.click
   end
 
-  def compose_a_valid_message
-    compose_message_panel.compose_a_valid_message
+  def compose_a_valid_message(recipient_name = Helpers::Config['facebook_property_name'])
+    compose_message_panel.compose_a_valid_message(recipient_name)
   end
 
-  def compose_and_send_a_valid_message
-    compose_message_panel.compose_and_send_a_valid_message
+  def compose_and_send_a_valid_message(recipient_name = Helpers::Config['facebook_property_name'])
+    compose_message_panel.compose_and_send_a_valid_message(recipient_name)
   end
 
   def compose_and_send_a_valid_message_to_twitter

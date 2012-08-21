@@ -3,7 +3,7 @@ Given /^I am logged in to Facebook as a page administrator$/ do
   credentials = {:username => 'alistair.hutchison@wildfireapp.com', :password => 'w1ldf1r3'}
   @facebook.home.load
   @facebook.home.login(credentials)
-  visit(previous_url)
+  visit(previous_url) unless previous_url == "about:blank"
 end
 
 When /^I view the "(.*)" app page$/ do |app_name|
