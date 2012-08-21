@@ -4,13 +4,12 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
   set_url_matcher /social_networks$/
   
   section :sidebar, Model::Section::Sidebar, '#sidebar'
+  sections :properties, Model::Section::AccountManagement::SocialProperty, '#social_properties tbody tr'
   
   element :add_property_button, "a:contains('Add')"
   element :fb_oauth_link, '#button_fb_oauth_add'
   element :add_twitter_link, '.btn_twitter_oauth'
-  elements :fb_properties, 'td.property'
   element :no_properties_message, 'p.unavailable'
-  elements :twitter_properties, "tr[id^='twitter_token']"
   
   def load
     return if loaded?
@@ -20,7 +19,7 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
   end
   
   def loaded?
-    has_no_properties_message? || has_fb_properties? || has_twitter_properties? && has_sidebar?
+    has_no_properties_message? || has_properties? && has_sidebar?
   end
   
   def add_facebook_property(fb_page_name)
@@ -49,23 +48,32 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
     end
   end
   
-  def remove_property(name)
-    property_field = first("tr:contains('#{name}')")
-    raise "Could not find property with name #{name} to remove" unless property_field
-    property_field.click_on('Remove')
-    page.accept_alert
+  def remove_facebook_property(name)
+    find_facebook_property(name).remove
+  end
+  
+  def remove_twitter_property(name)
+    find_twitter_property(name).remove
   end
   
   def has_facebook_property?(name)
-    social_properties.include?(name)
+    facebook_properties.include?(name)
   end
   
   def has_twitter_property?(name)
-    social_properties.include?(name)
+    twitter_properties.include?(name)
   end
   
   def social_properties
-    fb_properties.map { |p| p.text } + twitter_properties.map { |p| p.first('a.page_token').text }
+    properties.map { |p| p.name }
+  end
+  
+  def facebook_properties
+    fb_properties.map { |p| p.name }
+  end
+  
+  def twitter_properties
+    tw_properties.map { |p| p.name }
   end
   
   def show_facebook_properties_modal
@@ -82,7 +90,7 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
     first('div.alert-error').try(:text)
   end
   
-  def has_property?(name, type)
+  def has_property?(name)
     social_properties.include?(name)
   end
   
@@ -90,5 +98,21 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
   
   def add_fb_property_with_javascript(fb_page_name)
     page.execute_script(%{$('.modal iframe').contents().find("tr:contains('#{fb_page_name}') input")[0].checked = true; $('.modal iframe').contents().find('.btn-primary').click();})
+  end
+  
+  def fb_properties
+    properties.select { |p| p.platform == 'Facebook' }
+  end
+  
+  def tw_properties
+    properties.select { |p| p.platform == 'Twitter' }
+  end
+  
+  def find_facebook_property(name)
+    fb_properties.detect { |p| p.name == name }
+  end
+  
+  def find_twitter_property(name)
+    tw_properties.detect { |p| p.name == name }
   end
 end

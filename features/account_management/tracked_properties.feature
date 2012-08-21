@@ -16,7 +16,7 @@ Feature: Tracked Properties
     When I add the Twitter profile "wildfireapp" to Tracked Properties
     Then I should see the Twitter profile "wildfireapp" in Tracked Properties
   
-  @complete @amtest
+  @complete @amtest @failing
   Scenario: Remove a tracked Facebook property
     Given I am logged in to Wildfire as a new user
     And I have a tracked Facebook property

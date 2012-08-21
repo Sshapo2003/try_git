@@ -45,7 +45,7 @@ class Model::Page::AccountManagement::SocialApps < SitePrism::Page
     wait_until { facebook_apps.include? app_name }
     app = custom_applications.detect { |a| a.name == app_name }
     app.add_page(page_name)
-    wait_until { pages_for_fb_app(app_name).include? page_name }
+    wait_until { pages_for_fb_app(app_name).try(:include?, page_name) }
   end
   
   def remove_fb_page_from_app(page_name, app_name)
