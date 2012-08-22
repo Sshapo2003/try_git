@@ -5,7 +5,7 @@ Feature: Templates
     Given I am logged in to Wildfire as the default user
     And I navigate to the wildfire app templates page
 
-  @not_started
+  @complete
   Scenario: Available Templates
     Then the following templates should be available
     """
