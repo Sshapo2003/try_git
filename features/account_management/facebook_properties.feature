@@ -6,12 +6,19 @@ Feature: Your Properties
   
   Background:
     Given I am logged in to Facebook as a page administrator
+    And I'm logged in to google as a wildfireapp.com domain user
     And I am logged in to Wildfire as a new user
   
   @complete
   Scenario: Add a new Facebook property to Wildfire
     When I add the Facebook page "Wildfire Test Automation" to Wildfire
     Then I should see Facebook page "Wildfire Test Automation" in Your Properties
+  
+  @complete
+  Scenario: Facebook properties are available in messenger
+    Given I am granted access to Messenger
+    And I have added the Facebook page "Wildfire Test Automation" to Wildfire
+    Then I should be able to compose a message to "Wildfire Test Automation"
     
   @complete
   Scenario: Remove an existing Facebook property
