@@ -1,3 +1,3 @@
 class Model::Section::Generic::WildfireappNotification < SitePrism::Section  
-  element :time, "span"
+  element :time, ".created_at"
 end

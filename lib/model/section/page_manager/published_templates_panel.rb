@@ -1,9 +1,9 @@
-class Model::Section::PageManager::PublishedTemplatesPanel < SitePrism::Section
-  element :header, 'h2'
-  elements :create_page_buttons, 'h2 > a'
+class Model::Section::PageManager::PublishedTemplatesPanel < Model::Section::PageManager::PagesPanel
+  element :header, 'h1'
+  element :create_page_button, '.btn-primary'
+  sections :pages,  Model::Section::PageManager::Page, 'tbody tr'
 
   def create_page
-    # There are 2 create page buttons in the DOM. It's not possible to select only one of them with CSS. We need the first one.
-    create_page_buttons.first.click
+    create_page_button.click
   end
 end

@@ -1,10 +1,15 @@
 class Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSection < SitePrism::Section
+  elements :attach_links, '.attachment_navigation a'
+  element :attach_link_dialog, '#attached_link'
+  element :attach_link_button, '#attach_link .attach_button'
+  element :attachment_preview_div, '#attach_link .preview'
   element :attach_link_link, 'div.attachment_navigation a.link'
-  element :attach_link_dialog, 'div#attach_link input#attached_link'
-  element :attach_link_button, 'div#attach_link a.attach_button'
   element :link_attachment_title, 'div#attach_link div.title'
-  element :attachment_preview_div, 'div#attach_link div.preview'
   section :attachment_preview, Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSectionPreview, "div#attach_link.attachment_details"
+
+  def attach_link_link
+    attach_links[0]
+  end
 
   def attach_to_message(attachment)
     case attachment[:type]

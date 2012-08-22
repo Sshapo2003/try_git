@@ -1,11 +1,11 @@
-class Model::Section::PageManager::Uitk5MyTemplatesPanel < SitePrism::Section
+class Model::Section::PageManager::MyTemplatesPanel < SitePrism::Section
   element :header, 'h1'
   element :templetes_drop_down_menu, '.btn-primary.dropdown-toggle'
   element :create_blank_template_option, 'a[href="/page_templates/blank"]'
   element :more_templates_link, 'a.more_templates'
   element :upload_new_template_link, "a[href='/page_templates/new']"
   root_elements :template_menu_options, 'body > ol li'
-  sections :templates, Model::Section::PageManager::Uitk5Template, '.thumbnail'
+  sections :templates, Model::Section::PageManager::Template, '.thumbnail'
 
   def get_template_by_title(title)
     templates = get_templates_by_title(title)

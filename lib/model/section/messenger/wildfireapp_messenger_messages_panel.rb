@@ -1,9 +1,15 @@
 class Model::Section::Messenger::WildfireappMessengerMessagesPanel < SitePrism::Section
+  element :assign_button,                 'a[href="Assign"]'
+  element :delete_button,                 'a[href="Delete"]'
+  element :unflag_button,                 'a[href="Unflag"]'
+  element :clear_deleted_messages_button, '.delete_all_messages'
+  element :enabled_next_page_button,      '.next a'
+  element :disabled_previous_page_button, 'li.previous_page.disabled'
+  element :disabled_next_page_button,     'li.next_page.disabled'
+  elements :pagination_links,             '.pagination li a'
   elements :pagination_totals, 'div.pagination strong'
-  element :enabled_next_page_button, '.next'
   element :enabled_previous_page_button, '.prev'
   element :actions_menu, 'div.wf_prompt_button_wpr a'
-  element :clear_deleted_messages_button, 'a.delete_all_messages'
   root_element :actions_menu_options, 'ol#message_action'
   
   def pagination_current_page_indicator_text
@@ -26,5 +32,10 @@ class Model::Section::Messenger::WildfireappMessengerMessagesPanel < SitePrism::
 
   def click_enabled_next_page_button
     enabled_next_page_button.click
+  end
+
+  def go_to_last_page
+    pagination_links[(pagination_links.size - 2)].click
+    wait_for_disabled_next_page_button
   end
 end

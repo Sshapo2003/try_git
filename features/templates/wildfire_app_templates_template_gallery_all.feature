@@ -1,4 +1,4 @@
-@allgallerytemplates
+@gallery @templates @production
 Feature: Templates
 
   Background:
@@ -6,8 +6,7 @@ Feature: Templates
     And I navigate to the wildfire app templates page
 
   @not_started
-  Scenario Outline: Available Templates
-    When I view the template gallery
+  Scenario: Available Templates
     Then the following templates should be available
     """
     Voting Tile Gallery
@@ -25,7 +24,8 @@ Feature: Templates
     Stories
     Instagram Feed
     Vote This or That
-    FB Style Sweepstakes Featured Stories
+    FB Style Sweepstakes
+    Featured Stories
     Awesome Sweepstakes
     Big Video and Button Ideal
     Signup to Gallery
@@ -42,6 +42,7 @@ Feature: Templates
     Signup To Gallery
     Quad Video Showcase
     Like Meter & Reveal
+    Countdown Timer
     Countdown to Coupon 2 (Likes)
     Countdown to Coupon (Likes)
     Custom Calendar Reveal

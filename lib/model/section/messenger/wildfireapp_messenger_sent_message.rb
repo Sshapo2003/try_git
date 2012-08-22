@@ -1,4 +1,4 @@
-class Model::Section::Messenger::Uitk5WildfireappMessengerSentMessage < Model::Section::Messenger::WildfireappMessengerOutgoingMessage
+class Model::Section::Messenger::WildfireappMessengerSentMessage < Model::Section::Messenger::WildfireappMessengerOutgoingMessage
   element :body, '.message_body'
   element :edit_draft_link, '.edit'
 

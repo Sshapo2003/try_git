@@ -1,4 +1,4 @@
-class Model::Section::PageManager::Uitk5Page < SitePrism::Section
+class Model::Section::PageManager::Page < SitePrism::Section
   element :name,                       'a.page-title-link'
   element :actions_drop_down,          '.dropdown-toggle'
   elements :actions_drop_down_options, '.dropdown-menu a'

@@ -1,25 +1,26 @@
 class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SitePrism::Section
-  element :message_textbox, 'textarea#message_body'
-  element :send_button, "button.wf_submit[name='commit']"
-  element :send_draft_message_link, 'div.wf_menu_button_wpr a.submit'
-  element :save_draft_button, "button.wf_submit[name='commit_draft']"
-  element :recepients_error, 'div#recipients p.inline_error'
-  element :date_error, 'li#when_to_send p.inline_error'
-  element :message_error, 'div#message_container p.inline_error'
-  element :header_message, 'h2'
+
+  element :message_textbox, 'textarea#outgoing_message_body'
+  element :send_button, "input[name='commit']"
+  element :send_draft_message_link, "input[name='commit']"
+  element :save_draft_button, "input[name='commit_draft']"
+  element :recepients_error, '#recipients .help-inline'
+  element :date_error, '#when_to_send .help-inline'
+  element :message_error, '#message_container .help-inline'
+  element :later_button, '#outgoing_message_when_1'
+  element :date_field, '#outgoing_message_send_at_date'
+  element :hours_select_value, '#outgoing_message_send_at_hour'
+  element :minutes_select_value, '#outgoing_message_send_at_minute'
+  element :link_shortner_field, '#url'
+  element :link_shortner_link, '#shorten_link'
+  elements :recepients, 'ul.chzn-results li'
+  elements :remove_recipient_links, '.search-choice-close'
   element :recepient_input, 'li.search-field'
-  element :later_button, 'span.later a'
-  element :date_field, 'input#message_send_at_date'
-  element :hours_select_value, 'div.hour a.select_button span'
-  element :minutes_select_value, 'div.minute a.select_button span'
-  element :link_shortner_field, 'div#shortener_container input'
-  element :link_shortner_link, 'div#shortener_container a'
   element :invalid_token_for_property_message_div, 'div#invalid_property_warning'
   root_element :reconnect_property_link, 'a.am_link'
-  elements :recepients, 'ul.chzn-results li'
-  elements :remove_recipient_links, 'a.search-choice-close'
+  root_element :header_message, '.page-header'
 
-  section :attachments_section, Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSection, 'ol.attach'
+  section :attachments_section, Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSection, '#attachment'
   sections :recipients, Model::Section::Messenger::WildfireappMessengerRecipient, 'div.recipient'
 
   def select_recipient_by_name(recipient_name=Helpers::Config['facebook_property_name'])

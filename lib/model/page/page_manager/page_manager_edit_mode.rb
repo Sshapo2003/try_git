@@ -1,10 +1,10 @@
 class Model::Page::PageManager::PageManagerEditMode < SitePrism::Page
   set_url_matcher /pages\/.*\/edit/
 
-  element :header_sticky, 'span.flash_contents'
+  element :header_sticky, '.flashes'
 
-  section :sidebar, Model::Section::PageManager::WildfireappPageManagerEditModeSidebar, 'div.sidebar'
-  section :publish_to_facebook_modal, Model::Section::PageManager::EditModePublishToFacebookModal, 'div.ui-dialog'
+  section :sidebar, Model::Section::PageManager::EditModeSidebar, '#accordion.pages'
+  section :publish_to_facebook_modal, Model::Section::PageManager::EditModePublishToFacebookModal, '#publishing'
 
   def page_preview_content
     msg = "Timeout occurred waiting for page preview to have content."

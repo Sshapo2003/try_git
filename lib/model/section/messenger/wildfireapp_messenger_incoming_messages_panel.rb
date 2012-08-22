@@ -1,5 +1,5 @@
-class Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel < Model::Section::Messenger::WildfireappMessengerMessagesPanel  
-  sections :messages, Model::Section::Messenger::WildfireappMessengerIncomingMessage, 'div.incoming_message'
+class Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel < Model::Section::Messenger::WildfireappMessengerMessagesPanel 
+  sections :messages, Model::Section::Messenger::WildfireappMessengerIncomingMessage, 'table.messages tr'
 
   def assigned_messages
     messages.select {|m| m.is_assigned?}

@@ -2,27 +2,29 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   set_url "#{Helpers::Config['wildfire_messenger_root']}/"
   set_url_matcher /messenger/
 
-  element :messages_div_header, 'div.section.header h2'
+  element :messages_div_header,        '.span8'
+  element :new_message_button,         '.btn-primary'
+  element :sticky_header_text,         '.flashes .flash'
+  element :notifications_trigger,      '#notifications_trigger'
+  element :unflag_message_button,      'a[href="Unflag"]'
   element :compose_message_div_header, 'div#messenger_form h2'
-  element :sticky_header_text, 'span.flash_contents'
-  element :notifications_trigger, 'a#notifications_trigger'
-  element :actions_menu, '.wf_prompt_button_wpr a'
-  element :action_menu_action_item, "ol#message_action a[href='Assign']"
+  element :actions_menu,               '.wf_prompt_button_wpr a'
+  element :action_menu_action_item,    "ol#message_action a[href='Assign']"
 
-  section :compose_message_panel, Model::Section::Messenger::WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
-  section :messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
+  section :sidebar, Model::Section::Messenger::WildfireappMessengerSidebar, '.the-hero > #sidebar #messenger-nav'
   section :flagged_messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
   section :assigned_messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
   section :deleted_messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
-  section :sent_messages_panel, Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel, 'div#sent_messages'
+  section :messages_panel, Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel, 'div#incoming_messages'
+  section :compose_message_panel, Model::Section::Messenger::WildfireappMessengerComposeMessagePanel, 'div#messenger_form'
   section :draft_messages_panel, Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel, 'div#draft_messages'
-  section :scheduled_messages_panel, Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel, 'div#scheduled_messages'
-  section :filters_panel, Model::Section::Messenger::WildfireappMessengerFiltersPanel, 'div#message_filters'
-  section :sidebar, Model::Section::Messenger::WildfireappMessengerSidebar, 'div.sidebar'
-  section :assign_dialog, Model::Section::Messenger::WildfireappMessengerUserAssignmentFormDialog, 'form#message_user_assignment_form'
-  section :create_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, 'div.ui-dialog'
-  section :edit_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, 'div.ui-dialog'
-  sections :notifications, Model::Section::Generic::WildfireappNotification, 'div#notifications a div'
+  section :scheduled_messages_panel, Model::Section::Messenger::WildfireappMessengerScheduledMessagesPanel, '.main_container'
+  section :sent_messages_panel, Model::Section::Messenger::WildfireappMessengerSentMessagesPanel, '.main_container'
+  section :filters_panel, Model::Section::Messenger::WildfireappMessengerFiltersPanel, '.main_container'
+  section :create_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, '#message_filter_form'
+  section :assign_dialog, Model::Section::Messenger::WildfireappMessengerUserAssignmentFormDialog, '#message_assignment_dialog #message_assignment_dialog'
+  sections :notifications, Model::Section::Generic::WildfireappNotification, '.notification'
+  section :edit_filter_dialog, Model::Section::Messenger::WildfireappMessengerCreateFilterFormDialog, '#message_filter_form'
 
   def active?
     using_wait_time(1) { page.has_no_content?('This product is locked') }
@@ -103,7 +105,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
   end
 
   def compose_message
-    compose_message_panel.sidebar.compose_link.click
+    new_message_button.click
   end
 
   def compose_a_valid_message
@@ -120,8 +122,7 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
 
   def assign_message_to_me(message)
     message.select
-    actions_menu.click
-    page.execute_script "$('ol#message_action a[href=Assign]').click()"
+    messages_panel.assign_button.click
     wait_for_assign_dialog(30)
     assign_dialog.select_me
     assign_dialog.save_button.click
@@ -129,14 +130,14 @@ class Model::Page::WildfireappMessenger::WildfireappMessenger < SitePrism::Page
 
   def unflag_message(message)
     message.select
-    page.execute_script("$('ol#message_action a[href=\"Unflag\"]').click();")
+    unflag_message_button.click
     Timeout.timeout(30) { sleep 0.1 while not sticky_header_text.text.include? "Flagged Message has been cleared." }
   end
 
   def click_tab(tab)
     case tab
     when "Compose" 
-      load_panel(sidebar.compose_link, Proc.new { compose_message_div_header.text == 'Compose a Message' })
+      compose_message
     when "Messages" 
       load_panel(sidebar.messages_link, Proc.new { messages_div_header.text == 'Messages' })
     when "Flagged Messages" 

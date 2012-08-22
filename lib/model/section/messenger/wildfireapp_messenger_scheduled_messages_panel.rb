@@ -1,4 +1,4 @@
-class Model::Section::Messenger::Uitk5WildfireappMessengerScheduledMessagesPanel < Model::Section::Messenger::Uitk5WildfireappMessengerOutgoingMessagesPanel
+class Model::Section::Messenger::WildfireappMessengerScheduledMessagesPanel < Model::Section::Messenger::WildfireappMessengerOutgoingMessagesPanel
   elements :message_bodies, 'tr .message_body'
   
   def go_to_scheduled_messages_last_page

@@ -8,6 +8,19 @@ Given /^(\d+) templates are displayed$/ do |number_of_templates|
   @templates_visible.should eql number_of_templates.to_i
 end
 
+Then /^(\d+) templates should be displayed$/ do |number_of_templates|
+  @templates_visible = @wildfire.wildfireapp_templates.templates.count
+  @templates_visible.should eql number_of_templates.to_i
+end
+
+Then /^the following templates should be available$/ do |templates|
+  step('I keep scrolling to the bottom of the page until no more templates load')
+  step('all available templates are visible')
+  expected_template_names = templates.lines.collect {|t| t.gsub("\n","")}
+  expected_template_names.count.should eql @wildfire.wildfireapp_templates.template_results_count
+  @wildfire.wildfireapp_templates.all_template_titles.should =~ expected_template_names
+end
+
 When /^I scroll to the bottom of the page$/ do
   @templete_count_before_scrolling = @wildfire.wildfireapp_templates.templates.count
   @wildfire.wildfireapp_templates.scroll_to_bottom_of_page
@@ -15,11 +28,6 @@ end
 
 When /^I wait a little while for more templates to be loaded$/ do
   Timeout.timeout(30) { sleep 0.1 while @templete_count_before_scrolling == @wildfire.wildfireapp_templates.templates.count }
-end
-
-Then /^(\d+) templates should be displayed$/ do |number_of_templates|
-  @templates_visible = @wildfire.wildfireapp_templates.templates.count
-  @templates_visible.should eql number_of_templates.to_i
 end
 
 When /^I keep scrolling to the bottom of the page until no more templates load$/ do

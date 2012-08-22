@@ -204,6 +204,12 @@ Feature: Creating Pages from Templates
     Then the published template should be visible on my facebook page with the title "Like Meter &amp; Reveal"
 
   @complete
+  Scenario: Countdown Timer
+    When I create a page from the "Countdown Timer" template
+    And I publish the template
+    Then the published template should be visible on my facebook page with the title "Like Meter &amp; Reveal"
+
+  @complete
   Scenario: Countdown to Coupon 2 (Likes)
     When I create a page from the "Countdown to Coupon 2 (Likes)" template
     And I publish the template
