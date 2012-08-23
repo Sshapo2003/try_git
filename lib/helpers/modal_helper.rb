@@ -2,7 +2,7 @@ module Helpers
   module ModalHelper
     def has_modal?
       begin
-        first('div.modal') ? true : false
+        !!first('div.modal', :visible => true)
       rescue Selenium::WebDriver::Error::StaleElementReferenceError => e
         retry
       end
