@@ -47,10 +47,11 @@ class Model::Section::Sidebar < SitePrism::Section
   end
   
   def load_application(app)
-    raise "#{app} is not a valid option, valid applications are #{applications}" unless applications.include? app
+    raise "#{app} is not a valid option, valid applications are #{applications}" unless applications.keys.include? app
     visit(current_url) if active_panel == switchboard_panel
     while !applications_panel.active? do active_panel.back_button.click end
     applications_panel.send(app).click
+    wait_until { applications[app].active? }
   end
   
   def switch_company(name)
@@ -65,7 +66,14 @@ class Model::Section::Sidebar < SitePrism::Section
   end
   
   def applications
-    [:analytics, :pages, :messages, :promotions, :monitor, :company_settings]
+    {
+      :analytics => Model::Wildfire.new.analytics,
+      :pages => Model::Wildfire.new.page_manager,
+      :messages => Model::Wildfire.new.wildfireapp_messenger,
+      :promotions => Model::Wildfire.new.promotions,
+      :monitor => Model::Wildfire.new.monitor,
+      :company_settings => Model::Wildfire.new.account_management
+    }
   end
   
   class SidebarNavigationException < StandardError; end
