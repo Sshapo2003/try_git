@@ -23,8 +23,8 @@ Then /^I (should|should not) have access to Promotion Builder$/ do |expectation|
 end
 
 Then /^I (should|should not) have access to Monitor$/ do |expectation|
- @wildfire.wildfireapp_monitor.load
- @wildfire.wildfireapp_monitor.send(expectation.parameterize.underscore, be_active)
+ @wildfire.monitor.load
+ @wildfire.monitor.send(expectation.parameterize.underscore, be_active)
 end
 
 Then /^I should have access to the following applications:$/ do |table|

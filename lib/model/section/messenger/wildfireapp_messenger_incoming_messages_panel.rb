@@ -1,6 +1,5 @@
 class Model::Section::Messenger::WildfireappMessengerIncomingMessagesPanel < Model::Section::Messenger::WildfireappMessengerMessagesPanel 
   sections :messages, Model::Section::Messenger::WildfireappMessengerIncomingMessage, 'table.messages tr'
-  sections :messages, Model::Section::Messenger::Uitk5WildfireappMessengerIncomingMessage, 'table.messages tr'
   element :delete_button, "a:contains('Delete')"
 
   def assigned_messages
