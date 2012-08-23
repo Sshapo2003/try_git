@@ -26,6 +26,9 @@ am-test:
   the template user:
     email: paloaltofoodie@gmail.com
     password: th1sismypassword
+  a user with Analytics permissions:
+    email: alistair.hutchison+analytics_permissions@wildfireapp.com
+    password: password1
 
 live:
   <<: *default_users

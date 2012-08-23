@@ -23,6 +23,7 @@ class Model::Wildfire
   def wildfireapp_analytics
     Model::Page::WildfireappAnalytics.new
   end
+  alias :analytics :wildfireapp_analytics
   def page_manager
     Model::Page::PageManager::PageManager.new
   end
