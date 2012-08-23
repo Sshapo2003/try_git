@@ -11,7 +11,7 @@ module SitePrism::ElementContainer
         find element_locator
       end
     end
-    create_existence_checker element_name, element_locator
+    create_root_existence_checker element_name, element_locator
     create_waiter element_name, element_locator
   end
 
@@ -30,6 +30,21 @@ module SitePrism::ElementContainer
     create_waiter collection_name, collection_locator
   end
   alias :root_collection :root_elements
+  
+  private
+  
+  def create_root_existence_checker(element_name, element_locator)
+    method_name = "has_#{element_name.to_s}?"
+    if element_locator.nil?
+      create_no_locator element_name, method_name
+    else
+      define_method method_name do
+        Capybara.using_wait_time 0 do
+          root_element_exists? element_locator
+        end
+      end
+    end
+  end
 
   def create_waiter element_name, element_locator
     wait_for_method_name = "wait_for_#{element_name.to_s}"
