@@ -1,4 +1,4 @@
-@amtest
+@amtest @account_management
 Feature: User Permissions
   In order to restrict the access of other account users
   As the Account Admin of a Wildfire Account
