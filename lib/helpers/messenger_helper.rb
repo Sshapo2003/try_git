@@ -24,10 +24,7 @@ class Helpers::MessengerHelper
     def comment_on_a_message message
       comment = String.random
       wildfire = Model::Wildfire.new
-      message.view_comments
-      message.wait_for_comment_entry_field
-      message.comment_entry_field.set comment
-      message.add_comment_button.click
+      message.add_comment(comment)
       msg = "Timeout occured waiting for comment '#{comment}' to appear."
       Timeout.timeout(30, msg) {sleep 0.1 while message.comments.select {|m| m.body.text.include? comment}.count == 0}
 

@@ -19,6 +19,7 @@ class Model::Section::Messenger::WildfireappMessengerComposeMessagePanel < SiteP
   element :invalid_token_for_property_message_div, 'div#invalid_property_warning'
   root_element :reconnect_property_link, 'a.am_link'
   root_element :header_message, '.page-header'
+  root_element :permission_denied_popover, "div.popover:contains('Feature not available')"
 
   section :attachments_section, Model::Section::Messenger::WildfireappMessengerComposeMessagePanelAttachmentSection, '#attachment'
   sections :recipients, Model::Section::Messenger::WildfireappMessengerRecipient, 'div.recipient'

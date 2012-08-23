@@ -5,7 +5,8 @@ class Model::Section::PageManager::Page < SitePrism::Section
   element :archive_link,               '.archive_link'
   element :unarchive_link,             '.unarchive_link'
   element :delete_link,                'a[data-method="delete"]'
-  element :edit_link,                  '.edit a'
+  element :edit_link,                  ".edit a:contains('Edit')"
+  element :view_link,                  ".edit a:contains('View')"
 
   def archive_page
     actions_drop_down.click
