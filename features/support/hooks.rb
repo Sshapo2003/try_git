@@ -14,7 +14,6 @@ Before do
   @wildfire = Model::Wildfire.new
   @messengeradmin = Model::Messengeradmin.new
   @facebook = Model::Facebook.new
-  @twitter = Model::Twitter.new
 
   if ENV['TIMINGS'] == 'true'
     @start_time = Time.now
