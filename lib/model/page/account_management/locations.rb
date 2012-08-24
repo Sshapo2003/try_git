@@ -5,15 +5,16 @@ class Model::Page::AccountManagement::Locations < SitePrism::Page
   element :add_new_location_button, '#btn_new_address'
   elements :addresses, 'td.address'
   element :no_locations_alert, "div:contains('No locations have been added for this company')"
+  element :permission_denied_alert, "div:contains('You do not have access to use this feature')"
   
   def load
-    sidebar.load_application(:company_settings) unless sidebar.active_panel == sidebar.company_settings_panel
+    sidebar.load_application(:company_settings)
     sidebar.company_settings_panel.locations.click
     wait_until { loaded? }
   end
   
   def loaded?
-    has_addresses? || has_no_locations_alert?
+    has_addresses? || has_no_locations_alert? || has_permission_denied_alert?
   end
   
   def add_new_location(address=default_address)
@@ -39,6 +40,10 @@ class Model::Page::AccountManagement::Locations < SitePrism::Page
     expected_address = address.values[0..2].join(', ')
     # Don't match on the full address because we can't easily convert state abbreviations to the full text
     addresses.detect { |a| a.text.strip.include? expected_address } ? true : false
+  end
+  
+  def disabled?
+    !has_add_new_location_button?
   end
   
   private

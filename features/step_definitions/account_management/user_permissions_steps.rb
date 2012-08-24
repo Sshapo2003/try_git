@@ -33,3 +33,35 @@ end
 Then /^I (should|should not) be able to Delete Messages$/ do |expectation|
   current_user.send(expectation.gsub(' ', '_').to_sym, be_able_to_delete_messages)
 end
+
+Then /^I (should|should not) be able to Manage Applications$/ do |expectation|
+  current_user.send(expectation.gsub(' ', '_').to_sym, be_able_to_manage_applications)
+end
+
+Then /^I (should|should not) be able to Manage Social Properties$/ do |expectation|
+  current_user.send(expectation.gsub(' ', '_').to_sym, be_able_to_manage_social_properties)
+end
+
+Then /^I (should|should not) be able to Manage Services$/ do |expectation|
+  current_user.send(expectation.gsub(' ', '_').to_sym, be_able_to_manage_services)
+end
+
+Then /^I (should|should not) be able to Manage Locations$/ do |expectation|
+  current_user.send(expectation.gsub(' ', '_').to_sym, be_able_to_manage_locations)
+end
+
+Then /^I (should|should not) be able to Manage Company Information$/ do |expectation|
+  current_user.send(expectation.gsub(' ', '_').to_sym, be_able_to_manage_company_information)
+end
+
+Then /^I (should|should not) be able to Manage Published Promotions$/ do |expectation|
+  current_user.send(expectation.gsub(' ', '_').to_sym, be_able_to_manage_published_promotions)
+end
+
+Then /^I (should|should not) be able to Delete Promotions$/ do |expectation|
+  current_user.send(expectation.gsub(' ', '_').to_sym, be_able_to_delete_promotions)
+end
+
+Then /^I (should|should not) be able to Export Leads$/ do |expectation|
+  current_user.send(expectation.gsub(' ', '_').to_sym, be_able_to_export_leads)
+end

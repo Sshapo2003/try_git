@@ -25,6 +25,20 @@ Feature: User Permissions
     | Post Comments   |
     | Delete Messages |
     
+    Examples: Company Settings
+    | permission                 |
+    | Manage Applications        |
+    | Manage Social Properties   |
+    | Manage Services            |
+    | Manage Locations           |
+    | Manage Company Information |
+    
+    Examples: Promotion Builder
+    | permission                  |
+    | Manage Published Promotions |
+    | Delete Promotions           |
+    | Export Leads                |
+  
   @complete
   Scenario Outline: Existing user with all permissions can access restricted functionality
     Given I am logged in to Wildfire as a user with all permissions
@@ -45,27 +59,18 @@ Feature: User Permissions
     | Post Messages   |
     | Post Comments   |
     | Delete Messages |
-  
-  @not-started 
-  Scenario Outline: Existing user with Settings permissions can access Company Settings functionality
-    Given I am logged in to Wildfire as a user with Settings permissions
-    Then I should be able to <permission>
-
-    Examples:
+    
+    Examples: Company Settings
     | permission                 |
     | Manage Applications        |
     | Manage Social Properties   |
     | Manage Services            |
     | Manage Locations           |
     | Manage Company Information |
-
-  @not-started 
-  Scenario Outline: Existing user with Promotions permissions can access Promotions functionality
-    Given I am logged in to Wildfire as a user with Analytics permissions
-    Then I should be able to <permission>
-
-    Examples:
+    
+    Examples: Promotion Builder
     | permission                  |
     | Manage Published Promotions |
     | Delete Promotions           |
     | Export Leads                |
+

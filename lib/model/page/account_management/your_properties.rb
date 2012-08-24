@@ -11,6 +11,7 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
   element :add_twitter_link, '.btn_twitter_oauth'
   element :no_properties_message, 'p.unavailable'
   element :alert_notice, '.alert-notice'
+  #element :permission_denied_alert, ".alert:contains('You do not have access to use this feature')"
   
   def load
     return if loaded?
@@ -95,6 +96,10 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
     alert_notice.text.strip
   end
   alias :flash_message :alert_message
+  
+  def disabled?
+    !has_fb_oauth_link? && !has_add_twitter_link? &&!has_add_property_button?
+  end
   
   private
   

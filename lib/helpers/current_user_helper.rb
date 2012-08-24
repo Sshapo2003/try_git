@@ -49,6 +49,53 @@ module Helpers::CurrentUserHelper
       !!wildfire.wildfireapp_messenger.sticky_header_text.text.match(/Message was successfully deleted/)
     end
     
+    def able_to_manage_applications?
+      social_apps = wildfire.account_management.social_apps
+      social_apps.load
+      !social_apps.has_permission_denied_alert? && social_apps.has_new_app_button?
+    end
+    
+    def able_to_manage_social_properties?
+      wildfire.account_management.your_properties.load
+      !wildfire.account_management.your_properties.disabled?
+    end
+    
+    def able_to_manage_services?
+      wildfire.account_management.services.load
+      !wildfire.account_management.services.has_permission_denied_alert?
+    end
+    
+    def able_to_manage_locations?
+      wildfire.account_management.locations.load
+      !wildfire.account_management.locations.disabled?
+    end
+    
+    def able_to_manage_company_information?
+      wildfire.account_management.basic_info.load
+      !wildfire.account_management.basic_info.disabled?
+    end
+    
+    def able_to_manage_published_promotions?
+      wildfire.promotions.manage_campaigns.load
+      wildfire.promotions.manage_campaigns.campaigns.first.edit
+      !wildfire.promotions.manage_campaigns.has_permission_denied_alert?
+    end
+    
+    def able_to_delete_promotions?
+      wildfire.promotions.manage_campaigns.load
+      wildfire.promotions.manage_campaigns.create_campaign(:name => String.random) #create a campaign to be deleted
+      wildfire.promotions.manage_campaigns.load
+      wildfire.promotions.manage_campaigns.campaigns.last.delete
+      wildfire.promotions.manage_campaigns.has_delete_success_alert? && !wildfire.promotions.manage_campaigns.has_permission_denied_alert?
+    end
+    
+    def able_to_export_leads?
+      wildfire.promotions.manage_campaigns.load
+      wildfire.promotions.manage_campaigns.campaigns.first.manage_leads
+      wildfire.promotions.entries.export_button.click
+      wildfire.promotions.export.loaded?
+    end
+    
     private
     
     def wildfire
