@@ -4,12 +4,6 @@ Feature: Messages
   Background:
     Given I am logged in to Wildfire as the default user
     And I navigate to the wildfire app messenger page
-    
-  @complete @production @staging @amtest
-  Scenario: Assign a message
-    Given I have an unassigned message
-    When I assign that message to myself
-    Then the message should be in my Assigned Messages
 
   @complete @production @staging @amtest
   Scenario: Messages Panel Paging

@@ -1,4 +1,4 @@
-@gallery @templates @production
+@templates @production
 Feature: Creating Pages from Templates
 
   Background:

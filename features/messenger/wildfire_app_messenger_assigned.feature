@@ -13,6 +13,12 @@ Background:
     Then the assigned icon is displayed
     And the assigned user bubbletip should be displayed
 
+  @complete @production @staging @amtest
+  Scenario: Assign a message
+    Given I have an unassigned message
+    When I assign that message to myself
+    Then the message should be in my Assigned Messages
+
   @not_started
   Scenario: Unassign a message
     Given I have an assigned message

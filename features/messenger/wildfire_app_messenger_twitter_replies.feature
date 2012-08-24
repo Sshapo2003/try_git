@@ -2,7 +2,7 @@
 Feature: Twitter Replies
 
   # Currently not running on Production until Uitk5 changes applied
-  @complete @no-ci @amtest @staging
+  @not_started @no-ci @amtest @staging @production
   Scenario: Should be able to see replies to a twitter message
     Given I have a twitter message with multiple replies from another user
     When I view the wildfire app messenger page as the default user

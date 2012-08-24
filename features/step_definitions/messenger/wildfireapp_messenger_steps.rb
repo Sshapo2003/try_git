@@ -35,7 +35,7 @@ Given /^I have an unassigned message$/ do
   unless @wildfire.wildfireapp_messenger.messages_panel.unassigned_messages.size > 0
     @wildfire.wildfireapp_messenger.click_tab 'Compose'
     @wildfire.wildfireapp_messenger.compose_and_send_a_valid_message
-    @wildfire.wildfireapp_messenger.sidebar.click_tab 'Messages'
+    @wildfire.wildfireapp_messenger.click_tab 'Messages'
     @messengeradmin.refresh_a_social_property.load
     @messengeradmin.refresh_a_social_property.refresh_property Helpers::Config['facebook_property_name']
     @wildfire.wildfireapp_messenger.load
@@ -56,6 +56,7 @@ end
 
 Given /^I have a message with a comment$/ do
   @message = @wildfire.wildfireapp_messenger.messages_panel.messages.reject {|m| m.is_flagged?}.select {|m| m.is_facebook_message?}.reject {|m| m.has_sender_name?}.first
+  if @message == nil then raise 'No Facebook messages found in first page of Messenger panel' end
   @message_body = @message.body.text
   @message_comment_text = Helpers::MessengerHelper.comment_on_a_message @message
 end

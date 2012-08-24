@@ -1,73 +1,46 @@
 class Helpers::TwitterHelper
   class << self
-    def wait_for_message_to_appear_on_my_twitter_page_messages message
-      twitter = Model::Twitter.new
-      go_to_my_page
-      wait_for_message_to_appear message
-      twitter.home.tweets.collect {|t| t.body.text }
+    def user user
+      configure_for user
     end
 
-    def wait_for_message_to_appear_on_posters_twitter_page_messages message
-      twitter = Model::Twitter.new
-      go_to_posters_page
-      wait_for_message_to_appear message
-      twitter.home.tweets.collect {|t| t.body.text }
+    def user_timeline
+      Twitter.user_timeline
     end
 
-    def post_reply_to_message_as_user message_body, creds
-      twitter = Model::Twitter.new
-      login creds
-      go_to_my_page
-      wait_for_message_to_appear message_body
-      tweet = twitter.home.tweets.select {|t| t.body.text.include? message_body }.first
-      tweet.post_reply
+    def user_timeline_for_user user
+      Twitter.user_timeline(user)
     end
 
-    def post_a_tweet_as_user message_body, creds
-      twitter = Model::Twitter.new
-      login creds
-      tweet message_body
+    def update text
+      Twitter.update(text)
     end
 
-    def visit_my_page_as_user creds
-      twitter = Model::Twitter.new
-      login creds
-      go_to_my_page
+    def reply_to_tweet(tweet, reply_text)
+      Twitter.update(reply_text, {"in_reply_to_status_id" => tweet[:id]})
     end
 
     private
 
-    def login creds
-      twitter = Model::Twitter.new
-      twitter.home.login creds
-    end
-
-    def go_to_my_page
-      twitter = Model::Twitter.new
-      twitter.home.visit_my_page
-      twitter.home.wait_for_tweets(60)
-    end
-
-    def go_to_posters_page
-      twitter = Model::Twitter.new
-      twitter.home.visit_twitter_posters_page
-      twitter.home.wait_for_tweets(60)
-    end
-
-    def wait_for_message_to_appear message
-      twitter = Model::Twitter.new
-      msg = "Time out occured waiting for message to appear in twitter. Message => #{message}"
-      Timeout.timeout_and_raise(300, msg) do
-        while twitter.home.tweets.select {|t| t.body.text.include? message }.count == 0 do
-          twitter.home.page.driver.refresh
-          twitter.home.wait_for_tweets(60)
+    def configure_for user
+      case user
+      when 'palo_alto_foodie'
+        Twitter.configure do |config|
+          config.consumer_key = '8FS521Q7Bku7zLmIvpItQ'
+          config.consumer_secret = '5ODBwJTtYJIvvFmDKqIknLuwIpnilvdq6luCb7aveFs'
+          config.oauth_token = '621376472-94XJGWULeeivoEZQbCw79gQJsk9nyAXrXr4QWJpL'
+          config.oauth_token_secret = 'h2QYioOZ7jwwz5Y7cofd39gKZIROm6TYew2R7MHCbc'
         end
+      when 'burger_with_cheez'
+        Twitter.configure do |config|
+          config.consumer_key = '17lLL53uGoF5C2JGt9iAw'
+          config.consumer_secret = '6AgELf5S2ucYzL7tSvMfwGFyQDlZXmdSxIbb1opB4Xw'
+          config.oauth_token = '593440321-58gcBow0hY7TtSm4PaaZvnDBteAGHpwJUYmo5PqJ'
+          config.oauth_token_secret = 'Il1CA3wqG83LITMrxjoAp0ZYYszmxVaCE2ZKiVGNlh4'
+        end
+      else
+        raise "No Twitter API configuration details available for user: #{user}"
       end
-    end
-
-    def tweet tweet
-      twitter = Model::Twitter.new
-      twitter.home.post_tweet tweet
     end
   end
 end

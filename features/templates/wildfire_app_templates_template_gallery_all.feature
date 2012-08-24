@@ -1,4 +1,4 @@
-@gallery @templates @production
+@gallery @production
 Feature: Templates
 
   Background:

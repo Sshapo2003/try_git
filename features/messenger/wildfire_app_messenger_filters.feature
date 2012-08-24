@@ -46,14 +46,14 @@ Feature: Filters
     When I delete the filter
     Then the filter should removed from the list of filters
 
-  @complete
+  @failing
   Scenario: Trigger a flag filter
     When I send a facebook message which matches a "Flag" filter
     And I navigate to the wildfire app messenger page
     And I click the "Flagged Messages" tab on the left navigation menu on wildfire app messenger page
     Then the message should be listed in flagged folder
 
-  @complete
+  @failing
   Scenario: Trigger a delete filter
     When I send a facebook message which matches a "Delete" filter
     And I navigate to the wildfire app messenger page

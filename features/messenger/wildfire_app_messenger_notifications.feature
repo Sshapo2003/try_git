@@ -5,7 +5,7 @@ Feature: Notifications
     Given I am logged in to Wildfire as the default user
     And I navigate to the wildfire app messenger page
 
-  @complete @production @staging @amtest
+  @failing @production @staging @amtest
   Scenario: Displaying of Notifications
     Given I have no current notifications
     When a notification event is triggered
