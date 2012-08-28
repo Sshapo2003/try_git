@@ -82,11 +82,13 @@ module Helpers::CurrentUserHelper
     end
     
     def able_to_delete_promotions?
-      wildfire.promotions.manage_campaigns.load
-      wildfire.promotions.manage_campaigns.create_campaign(:name => String.random) #create a campaign to be deleted
-      wildfire.promotions.manage_campaigns.load
-      wildfire.promotions.manage_campaigns.campaigns.last.delete
-      wildfire.promotions.manage_campaigns.has_delete_success_alert? && !wildfire.promotions.manage_campaigns.has_permission_denied_alert?
+      manage_campaigns = wildfire.promotions.manage_campaigns
+      manage_campaigns.load
+      manage_campaigns.create_campaign(:name => String.random) #create a campaign to be deleted
+      manage_campaigns.load
+      manage_campaigns.campaigns.last.delete
+      manage_campaigns.wait_until { manage_campaigns.has_delete_success_alert? || manage_campaigns.has_permission_denied_alert? }
+      manage_campaigns.has_delete_success_alert? && !manage_campaigns.has_permission_denied_alert?
     end
     
     def able_to_export_leads?
