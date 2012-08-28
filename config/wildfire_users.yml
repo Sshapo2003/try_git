@@ -32,6 +32,12 @@ am-test:
   a user with all permissions:
     email: alistair.hutchison+all_permissions@wildfireapp.com
     password: password1
+  a company admin:
+    email: alistair.hutchison+company_admin@wildfireapp.com
+    password: password1
+  an account admin:
+    email: alistair.hutchison+account_admin@wildfireapp.com
+    password: password1
       
 live:
   <<: *default_users

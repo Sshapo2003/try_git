@@ -73,4 +73,73 @@ Feature: User Permissions
     | Manage Published Promotions |
     | Delete Promotions           |
     | Export Leads                |
-
+    
+  @complete
+  Scenario Outline: Existing Company Admin can access restricted functionality
+    Given I am logged in to Wildfire as a company admin
+    Then I should be able to <permission>
+    
+    Examples: Page Manager
+    | permission             |
+    | Manage Published Pages |
+    | Manage Templates       |
+    | Use Public Templates   |
+    
+    Examples: Analytics
+    | permission              |
+    | Manage Referral Sources |
+    
+    Examples: Messenger
+    | permission      |
+    | Post Messages   |
+    | Post Comments   |
+    | Delete Messages |
+    
+    Examples: Company Settings
+    | permission                 |
+    | Manage Applications        |
+    | Manage Social Properties   |
+    | Manage Services            |
+    | Manage Locations           |
+    | Manage Company Information |
+    
+    Examples: Promotion Builder
+    | permission                  |
+    | Manage Published Promotions |
+    | Delete Promotions           |
+    | Export Leads                |
+    
+  @complete
+  Scenario Outline: Existing Account Admin can access restricted functionality
+    Given I am logged in to Wildfire as an account admin
+    Then I should be able to <permission>
+    
+    Examples: Page Manager
+    | permission             |
+    | Manage Published Pages |
+    | Manage Templates       |
+    | Use Public Templates   |
+    
+    Examples: Analytics
+    | permission              |
+    | Manage Referral Sources |
+    
+    Examples: Messenger
+    | permission      |
+    | Post Messages   |
+    | Post Comments   |
+    | Delete Messages |
+    
+    Examples: Company Settings
+    | permission                 |
+    | Manage Applications        |
+    | Manage Social Properties   |
+    | Manage Services            |
+    | Manage Locations           |
+    | Manage Company Information |
+    
+    Examples: Promotion Builder
+    | permission                  |
+    | Manage Published Promotions |
+    | Delete Promotions           |
+    | Export Leads                |
