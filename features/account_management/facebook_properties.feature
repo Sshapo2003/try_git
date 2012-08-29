@@ -25,7 +25,7 @@ Feature: Your Properties
     Given I have added the Facebook page "Wildfire Test Automation" to Wildfire
     When I remove the Facebook page "Wildfire Test Automation" from Your Properties
     Then I should have 0 social properties
-    And I should see the message "Facebook property has been removed from Wildfire."
+    And I should see the alert "Facebook property has been removed from Wildfire." on the Your Properties page
     
   @not-started
   Scenario: Reconnect a Facebook property with expired or broken connection

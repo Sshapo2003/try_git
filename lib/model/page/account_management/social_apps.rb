@@ -2,7 +2,8 @@ class Model::Page::AccountManagement::SocialApps < SitePrism::Page
   include Helpers::ModalHelper
   
   section :sidebar, Model::Section::Sidebar, '#sidebar'
-  element :new_company_button, '#button_new_company_social_app'
+  element :new_app_button, '#button_new_company_social_app'
+  element :permission_denied_alert, ".alert:contains('You do not have access to use this feature')"
   section :default_application, Model::Section::AccountManagement::SocialApp, "tr:contains('Default Application')"
   sections :custom_applications, Model::Section::AccountManagement::SocialApp, "tr:contains('Custom Application')"
   
@@ -38,7 +39,7 @@ class Model::Page::AccountManagement::SocialApps < SitePrism::Page
   end
   
   def show_add_application_modal
-    new_company_button.click
+    new_app_button.click
   end
   
   def add_fb_page_to_app(page_name, app_name)

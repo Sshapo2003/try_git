@@ -15,6 +15,7 @@ class Model::Page::AccountManagement::AccountManagement < SitePrism::Page
   def loaded?
     current_url.include?(url)
   end
+  alias :active? :loaded?
   
   def load
     sidebar.load_application(:company_settings)

@@ -41,6 +41,10 @@ Feature: Your Properties
   @not-started
   Scenario: Reconnect a Twitter property with expired or broken connection
     
-  @not-started
+  @complete @amtest @staging
   Scenario: Remove an existing Twitter property
-  
+    Given I am logged in to Wildfire as a new user
+    And I have added the twitter account "alistairwf3" to Wildfire
+    When I remove the twitter account "alistairwf3" from Wildfire
+    Then I should have 0 social properties
+    And I should see the alert "Twitter property has been removed from Wildfire." on the Your Properties page

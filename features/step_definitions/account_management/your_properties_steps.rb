@@ -52,3 +52,8 @@ Then /^I should be able to compose a message to "(.*?)"$/ do |property_name|
   @wildfire.wildfireapp_messenger.click_tab('Compose')
   @wildfire.wildfireapp_messenger.compose_a_valid_message(property_name)
 end
+
+Then /^I should see the alert "(.*?)" on the Your Properties page$/ do |msg|
+  @wildfire.account_management.your_properties.should have_alert_notice
+  @wildfire.account_management.your_properties.alert_message.should match msg
+end

@@ -1,11 +1,11 @@
 module Capybara
   class Session
     def accept_alert
-      wait_until() { has_alert? }
+      wait_until() { has_js_alert? }
       driver.browser.switch_to.alert.accept
     end
     
-    def has_alert?
+    def has_js_alert?
       begin
         driver.browser.switch_to.alert
         true

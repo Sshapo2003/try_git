@@ -10,6 +10,8 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
   element :fb_oauth_link, '#button_fb_oauth_add'
   element :add_twitter_link, '.btn_twitter_oauth'
   element :no_properties_message, 'p.unavailable'
+  element :alert_notice, '.alert-notice'
+  #element :permission_denied_alert, ".alert:contains('You do not have access to use this feature')"
   
   def load
     return if loaded?
@@ -42,7 +44,7 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
     show_add_twitter_property_window
     within_window(page.driver.browser.window_handles.last){ Model::Page::TwitterOauth.new.authorise(twitter_name, 'w1ldf1r3')}
     begin
-      wait_until() { has_twitter_property?(twitter_name) || !flash_message.blank? }
+      wait_until() { has_twitter_property?(twitter_name) || has_alert_notice? }
     rescue Capybara::TimeoutError => e
       raise "The expected property did not appear in Your Properties and no error was displayed"
     end
@@ -86,12 +88,17 @@ class Model::Page::AccountManagement::YourProperties < SitePrism::Page
     add_twitter_link.click
   end
   
-  def flash_message
-    first('div.alert-error').try(:text)
-  end
-  
   def has_property?(name)
     social_properties.include?(name)
+  end
+  
+  def alert_message
+    alert_notice.text.strip
+  end
+  alias :flash_message :alert_message
+  
+  def disabled?
+    !has_fb_oauth_link? && !has_add_twitter_link? &&!has_add_property_button?
   end
   
   private

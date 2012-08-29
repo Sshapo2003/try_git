@@ -23,6 +23,7 @@ class Model::Wildfire
   def wildfireapp_analytics
     Model::Page::WildfireappAnalytics.new
   end
+  alias :analytics :wildfireapp_analytics
   def page_manager
     Model::Page::PageManager::PageManager.new
   end
@@ -47,8 +48,12 @@ class Model::Wildfire
   def wildfireapp_promotion_builder
     Model::Page::PromotionBuilder::WildfireappPromotionBuilder.new
   end
-  def wildfireapp_monitor
-    Model::Page::Monitor::WildfireappMonitor.new
+  alias :promotions :wildfireapp_promotion_builder
+  def account_management
+    Model::Page::AccountManagement::AccountManagement.new
+  end
+  def your_properties
+    Model::Page::AccountManagement::YourProperties.new
   end
   def monitor
     Model::Page::Monitor::WildfireappMonitor.new

@@ -4,6 +4,7 @@ class Model::Page::AccountManagement::BasicInfo < SitePrism::Page
   section :company_logo_form, Model::Section::AccountManagement::Uitk5CompanyLogoForm, '#upload_form'
   
   element :delete_company_button, '#delete_company'
+  element :permission_denied_alert, ".alert:contains('You do not have access to use this feature')"
   
   company_form_methods = [:update_company_name, :update_company_industry, :update_timezone, :update_website_url, :update_description, :update_company_email, :update_reply_email]
   delegate *company_form_methods, :to => :company_form
@@ -55,5 +56,9 @@ class Model::Page::AccountManagement::BasicInfo < SitePrism::Page
   def delete_company
     delete_company_button.click
     page.accept_alert
+  end
+  
+  def disabled?
+    has_permission_denied_alert? && !company_form.has_save_button? && !company_logo_form.has_upload_button?
   end
 end

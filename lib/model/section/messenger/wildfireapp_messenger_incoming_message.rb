@@ -15,7 +15,9 @@ class Model::Section::Messenger::WildfireappMessengerIncomingMessage < SitePrism
   element :service,                    '.service'
   element :property_name,              '.property_name'
   element :sender_name,                '.sender_name'
+  element :select_checkbox,                'input.select_message'
   root_element :assigned_to_bubbletip, '.popover'
+  root_element :permission_denied_popover, "div.popover:contains('Feature not available')"
 
   sections :comments, Model::Section::Messenger::MessageComment, '.comment'
   sections :replies, Model::Section::Messenger::MessageReply,    '.twitter_reply'
@@ -63,5 +65,15 @@ class Model::Section::Messenger::WildfireappMessengerIncomingMessage < SitePrism
 
   def wait_for_comment_entry_field
     Timeout.timeout(Capybara.default_wait_time) { sleep 0.1 while has_comment_entry_field? == false }
+  end
+  
+  def add_comment(comment)
+    view_comments
+    comment_entry_field.set comment
+    add_comment_button.click
+  end
+  
+  def select
+    select_checkbox.set(true)
   end
 end

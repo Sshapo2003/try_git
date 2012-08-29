@@ -26,7 +26,19 @@ am-test:
   the template user:
     email: paloaltofoodie@gmail.com
     password: th1sismypassword
-
+  a user with no permissions:
+    email: alistair.hutchison+no_permissions@wildfireapp.com
+    password: password1
+  a user with all permissions:
+    email: alistair.hutchison+all_permissions@wildfireapp.com
+    password: password1
+  a company admin:
+    email: alistair.hutchison+company_admin@wildfireapp.com
+    password: password1
+  an account admin:
+    email: alistair.hutchison+account_admin@wildfireapp.com
+    password: password1
+      
 live:
   <<: *default_users
   the template user:

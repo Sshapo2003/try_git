@@ -1,4 +1,5 @@
 class Model::Section::AccountManagement::CompanyForm < SitePrism::Section
+  element :save_button, "input[value='Save']"
   
   def update_company_name(name)
     within_form { fill_in('Company Name', :with => name) }
